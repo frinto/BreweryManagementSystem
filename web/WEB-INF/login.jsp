@@ -79,7 +79,7 @@
 
                 <div class="panel panel-default" >
                     <div class="panel-heading">
-                        <div class="panel-title text-center">Huy Le Final Project</div>
+                        <div class="panel-title text-center">Village Brewery Management</div>
                     </div>     
 
                     <div class="panel-body" >
@@ -88,12 +88,12 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="user" type="text" class="form-control" name="username" value="" placeholder="Username" required="required">                                        
+                                <input id="user" type="text" class="form-control" name="username" value="${username}" placeholder="Username" required="required">                                        
                             </div>
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="password" type="password" class="form-control" name="password" placeholder="Password" required="required">
+                                <input id="password" type="password" class="form-control" name="password" value="${password}"placeholder="Password" required="required">
                             </div>                                                                  
 
                             <div class="form-group">
@@ -103,7 +103,7 @@
                                 </div><br><br>
 
                                 <div class="col-sm-12 controls">
-                                    <a href="registration?action=registration" class="pull-right need-help">register</a><span class="clearfix"></span>
+                                    <a href="registration?action=resetPassword" class="pull-right need-help">Forgot my password</a><span class="clearfix"></span>
                                     ${errorMsg}
                                 </div>
 
