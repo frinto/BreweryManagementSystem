@@ -27,7 +27,7 @@ DROP SCHEMA IF EXISTS `brewery` ;
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `brewery` DEFAULT CHARACTER SET utf8 ;
 SHOW WARNINGS;
-USE `mydb` ;
+USE `brewery` ;
 
 -- -----------------------------------------------------
 -- Table `Role`
@@ -111,7 +111,7 @@ DROP TABLE IF EXISTS `Production` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `Production` (
-  `prodId` INT NOT NULL,
+  `prodId` INT NOT NULL AUTO_INCREMENT,
   `quantity` INT NOT NULL,
   `date` DATETIME NOT NULL,
   `employeeId` INT NOT NULL,
@@ -189,7 +189,7 @@ DROP TABLE IF EXISTS `Delivery` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `Delivery` (
-  `deliveryId` INT NOT NULL,
+  `deliveryId` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NULL,
   `accountId` INT NOT NULL,
   `empId` INT NOT NULL,
@@ -393,3 +393,5 @@ SHOW WARNINGS;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
