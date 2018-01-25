@@ -1,5 +1,6 @@
 package businesslogic;
 
+import dataaccess.BrewDBException;
 import dataaccess.EmployeeDB;
 import domainmodel.Role;
 import domainmodel.Employee;
@@ -36,52 +37,46 @@ public class EmployeeService {
         return employeeDB.insert(employee);
     }
 
-    public int logicalDelete(User user) throws NotesDBException
+    public int logicalDelete(Employee employee) throws BrewDBException
     {
-        user.setActive(false);
-        return employeeDB.update(user);
+        employee.setIsActive((short)0);
+        return employeeDB.update(employee);
     }
     
-    public List<User> getUsersByCompany(Company company) throws Exception {
-        return employeeDB.getUsersByCompany(company);
-    }
     
-    public User resetPassword(String email, String path, String link, String uuid) {
+    
+    public Employee resetPassword(String email, String path, String link, String uuid) {
 
-        User user = null;
+        Employee employee = null;
 
-        UserDB userDB = new UserDB();
+        EmployeeDB employeeDB = new EmployeeDB();
         try {
-            user = userDB.getByEmail(email);
-        } catch (NotesDBException ex) {
+            
+        } catch (BrewDBException ex) {
             Logger.getLogger(EmployeeService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String username = null;
-        username = user.getUsername();
-        try {
-            user = userDB.getUser(username);
-        } catch (NotesDBException ex) {
-            Logger.getLogger(EmployeeService.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        int empId = 0;
+        empId = employee.getEmpId();
 
         try {
             //WebMailService.sendMail(user.getEmail(), "NotesKeepr Logged in", "<h2>Congrats!  You just loggedin successfully.</h2>" , true);
-            user.setResetPasswordUUID(uuid);
-            userDB.update(user);
+            employee = employeeDB.getByEmail(email);
+            employee.setResetPasswordUUID(uuid);
+            employeeDB.update(employee);
 
             HashMap<String, String> contents = new HashMap<>();
 
-            contents.put("firstname", user.getFirstname());
-            contents.put("lastname", user.getLastname());
-            contents.put("username", user.getUsername());
+            contents.put("firstname", employee.getFirstname());
+            contents.put("lastname", employee.getLastname());
+            contents.put("username", employee.getUsername());
             contents.put("link", link);
 
             String template = path + "/emailtemplates/resetpassword.html";
-            WebMailService.sendMail(user.getEmail(), "NotesKeepr Reset", template, contents);
+            WebMailService.sendMail(employee.getEmail(), "NotesKeepr Reset", template, contents);
 
         } catch (Exception ex) {
             Logger.getLogger(EmployeeService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return user;
+        return employee;
     }
 }
