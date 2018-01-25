@@ -5,10 +5,6 @@
  */
 package servlets;
 
-import businesslogic.UserService;
-import dataaccess.NotesDBException;
-import dataaccess.UserDB;
-import domainmodel.User;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;

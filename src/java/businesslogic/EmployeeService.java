@@ -24,28 +24,16 @@ public class EmployeeService {
         return employeeDB.getAll();
     }
 
-    public int update(String username, String password, String email, boolean active, String firstname, String lastname, int roleID, int companyID) throws Exception {
-        User user = new User(username, password, email, active, firstname, lastname);
-        Company company = new Company(companyID);
-        Role role = new Role(roleID);
-        user.setCompany(company);
-        user.setRole(role);
-        user.setResetPasswordUUID(null);
-        return employeeDB.update(user);
+    public int update(Employee employee) throws Exception {
+        return employeeDB.update(employee);
     }
 
-    public int delete(String username) throws Exception {
-        User deletedUser = employeeDB.getUser(username);
-        return employeeDB.delete(deletedUser);
+    public int delete(Employee employee) throws Exception {
+        return employeeDB.delete(employee);
     }
 
-    public int insert(String username, String password, String email, boolean active, String firstname, String lastname, int roleID,  int companyID) throws Exception {
-        User user = new User(username, password, email, active, firstname, lastname);
-        Company company = new Company(companyID);
-        Role role = new Role(roleID);
-        user.setCompany(company);        
-        user.setRole(role);
-        return employeeDB.insert(user);
+    public int insert(Employee employee) throws Exception {
+        return employeeDB.insert(employee);
     }
 
     public int logicalDelete(User user) throws NotesDBException
