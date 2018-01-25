@@ -88,7 +88,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="user" type="text" class="form-control" name="username" value="${username}" placeholder="Username" required="required">                                        
+                                <input id="empId" type="text" class="form-control" name="empId" value="${empId}" placeholder="Employee ID" required="required">                                        
                             </div>
 
                             <div class="input-group">
@@ -103,7 +103,7 @@
                                 </div><br><br>
 
                                 <div class="col-sm-12 controls">
-                                    <a href="registration?action=resetPassword" class="pull-right need-help">Forgot my password</a><span class="clearfix"></span>
+                                    <a href="reset" class="pull-right need-help">Forgot my password</a><span class="clearfix"></span>
                                     ${errorMsg}
                                 </div>
 

@@ -54,8 +54,10 @@ CREATE TABLE IF NOT EXISTS `Employee` (
   `firstName` VARCHAR(45) NULL,
   `lastName` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
+  `email` VARCHAR(30) NOT NULL UNIQUE,
   `roleId` INT NOT NULL,
   `isActive` TINYINT NOT NULL,
+  `resetPasswordUUID` VARCHAR(50),
   PRIMARY KEY (`empId`))
 ENGINE = InnoDB;
 
