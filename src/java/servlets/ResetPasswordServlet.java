@@ -40,7 +40,7 @@ public class ResetPasswordServlet extends HttpServlet {
         String link = request.getRequestURL().toString() + "?uuid=" + uuid;
         String email = request.getParameter("email");
         String action = request.getParameter("action");
-        UserService us = new UserService();
+        EmployeeService us = new EmployeeService();
         if (action.equals("email")) {
             if (email.isEmpty()) {
                 request.setAttribute("message", "Email field empty");
@@ -61,17 +61,17 @@ public class ResetPasswordServlet extends HttpServlet {
         } else if (action.equals("reset")) {
             String uuidNew = request.getParameter("uuid");
             String newPass = request.getParameter("password");
-            User user = new User();
-            UserDB ud = new UserDB();
+            Employee employee = new Employee();
+            EmployeeDB ud = new EmployeeDB();
             try {
-                user = ud.getUuid(uuidNew);
+                employee = ud.getUuid(uuidNew);
             } catch (NotesDBException ex) {
                 Logger.getLogger(ResetPasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-           //user.setPassword(newPass);
+           //employee.setPassword(newPass);
             try {
-                us.update(user.getUsername(), newPass, user.getEmail(), true, user.getFirstname(), user.getLastname(), user.getRole().getRoleID(), user.getCompany().getCompanyID());
+                us.update(employee.getEmployeename(), newPass, employee.getEmail(), true, employee.getFirstname(), employee.getLastname(), employee.getRole().getRoleID(), employee.getCompany().getCompanyID());
                 request.setAttribute("message", "Password Reset!");
             } catch (Exception ex) {
                 Logger.getLogger(ResetPasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
