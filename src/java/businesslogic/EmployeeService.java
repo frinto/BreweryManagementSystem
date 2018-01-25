@@ -16,8 +16,8 @@ public class EmployeeService {
         employeeDB = new EmployeeDB();
     }
 
-    public Employee get(String username) throws Exception {
-        return employeeDB.getEmployee(username);
+    public Employee get(String empId) throws Exception {
+        return employeeDB.getEmployee(empId);
     }
 
     public List<Employee> getAll() throws Exception {

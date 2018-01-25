@@ -122,7 +122,7 @@ public class EmployeeDB {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Employee employee = em.createNamedQuery("User.findByEmail", Employee.class).setParameter("email", email).getSingleResult();
+            Employee employee = em.createNamedQuery("Employee.findByEmail", Employee.class).setParameter("email", email).getSingleResult();
             return employee;
         } catch (Exception ex) {
             Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
