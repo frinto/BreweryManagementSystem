@@ -103,7 +103,7 @@
                                 </div><br><br>
 
                                 <div class="col-sm-12 controls">
-                                    <a href="registration?action=resetPassword" class="pull-right need-help">Forgot my password</a><span class="clearfix"></span>
+                                    <a href="reset" class="pull-right need-help">Forgot my password</a><span class="clearfix"></span>
                                     ${errorMsg}
                                 </div>
 
