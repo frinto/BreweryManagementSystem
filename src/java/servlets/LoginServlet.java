@@ -22,6 +22,8 @@ public class LoginServlet extends HttpServlet {
         if (request.getAttribute("userId") != null) {
                 String userId = (String) session.getAttribute("userId");
         }
+        
+        getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
     @Override
