@@ -88,7 +88,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="user" type="text" class="form-control" name="username" value="${username}" placeholder="Username" required="required">                                        
+                                <input id="user" type="text" class="form-control" name="empId" value="${empId}" placeholder="Employee ID" required="required">                                        
                             </div>
 
                             <div class="input-group">
