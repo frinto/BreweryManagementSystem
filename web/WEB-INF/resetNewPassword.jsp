@@ -79,7 +79,7 @@
 
                 <div class="panel panel-default" >
                     <div class="panel-heading">
-                        <div class="panel-title text-center">Reset Password</div>
+                        <div class="panel-title text-center">Please enter new password</div>
                     </div>     
 
                     <div class="panel-body" >
