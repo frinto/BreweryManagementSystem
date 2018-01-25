@@ -50,13 +50,6 @@ public class EmployeeService {
         Employee employee = null;
 
         EmployeeDB employeeDB = new EmployeeDB();
-        try {
-            
-        } catch (BrewDBException ex) {
-            Logger.getLogger(EmployeeService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        int empId = 0;
-        empId = employee.getEmpId();
 
         try {
             //WebMailService.sendMail(user.getEmail(), "NotesKeepr Logged in", "<h2>Congrats!  You just loggedin successfully.</h2>" , true);
@@ -66,13 +59,13 @@ public class EmployeeService {
 
             HashMap<String, String> contents = new HashMap<>();
 
-            contents.put("firstname", employee.getFirstname());
-            contents.put("lastname", employee.getLastname());
-            contents.put("username", employee.getUsername());
+            contents.put("firstname", employee.getFirstName());
+            contents.put("lastname", employee.getLastName());
+            contents.put("empId", employee.getEmpId().toString());
             contents.put("link", link);
 
             String template = path + "/emailtemplates/resetpassword.html";
-            WebMailService.sendMail(employee.getEmail(), "NotesKeepr Reset", template, contents);
+            WebMailService.sendMail(employee.getEmail(), "Brewery Reset", template, contents);
 
         } catch (Exception ex) {
             Logger.getLogger(EmployeeService.class.getName()).log(Level.SEVERE, null, ex);
