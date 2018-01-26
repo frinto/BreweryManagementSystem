@@ -84,7 +84,7 @@
 
                     <div class="panel-body" >
 
-                        <form action="reset?action='email'" name="form" id="form" class="form-horizontal" method="POST">
+                        <form action="reset?action=email" name="form" id="form" class="form-horizontal" method="POST">
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -94,13 +94,13 @@
                             <div class="form-group">
                                 <!-- Button -->
                                 <div class="col-sm-12 controls">
-                                    <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Log in</button>                          
+                                    <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i>Submit</button>                          
                                 </div><br><br>
 
                             </div>
 
                         </form>     
-
+                        ${message}
                     </div>                     
                 </div>  
             </div>

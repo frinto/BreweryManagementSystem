@@ -69,6 +69,7 @@ public class EmployeeService {
 
         } catch (Exception ex) {
             Logger.getLogger(EmployeeService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         return employee;
     }

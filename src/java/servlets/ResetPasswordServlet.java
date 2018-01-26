@@ -5,6 +5,10 @@
  */
 package servlets;
 
+import businesslogic.EmployeeService;
+import dataaccess.BrewDBException;
+import dataaccess.EmployeeDB;
+import domainmodel.Employee;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -40,16 +44,16 @@ public class ResetPasswordServlet extends HttpServlet {
         String link = request.getRequestURL().toString() + "?uuid=" + uuid;
         String email = request.getParameter("email");
         String action = request.getParameter("action");
-        EmployeeService us = new EmployeeService();
+        EmployeeService es = new EmployeeService();
         if (action.equals("email")) {
+            
             if (email.isEmpty()) {
                 request.setAttribute("message", "Email field empty");
                 getServletContext().getRequestDispatcher("/WEB-INF/reset.jsp/").forward(request, response);
             }
-
             
             String path = getServletContext().getRealPath("/WEB-INF");
-            if (us.resetPassword(email, path, link, uuid) != null) {
+            if (es.resetPassword(email, path, link, uuid) != null) {
 //                HttpSession session = request.getSession();
 //                session.setAttribute("uuid", uuid);
                 request.setAttribute("message", "Email Sent!");
@@ -65,13 +69,15 @@ public class ResetPasswordServlet extends HttpServlet {
             EmployeeDB ud = new EmployeeDB();
             try {
                 employee = ud.getUuid(uuidNew);
-            } catch (NotesDBException ex) {
+            } catch (BrewDBException ex) {
                 Logger.getLogger(ResetPasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             
            //employee.setPassword(newPass);
             try {
-                us.update(employee.getEmployeename(), newPass, employee.getEmail(), true, employee.getFirstname(), employee.getLastname(), employee.getRole().getRoleID(), employee.getCompany().getCompanyID());
+                employee.setPassword(newPass);
+                employee.setResetPasswordUUID(null);
+                es.update(employee);
                 request.setAttribute("message", "Password Reset!");
             } catch (Exception ex) {
                 Logger.getLogger(ResetPasswordServlet.class.getName()).log(Level.SEVERE, null, ex);

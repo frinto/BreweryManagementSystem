@@ -26,7 +26,7 @@ public class EmployeeDB {
         } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot insert " + employee.toString(), ex);
-            throw new BrewDBException("Error inserting user");
+            throw new BrewDBException("Error inserting employee");
         } finally {
             em.close();
         }
@@ -44,7 +44,7 @@ public class EmployeeDB {
         } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot update " + employee.toString(), ex);
-            throw new BrewDBException("Error updating user");
+            throw new BrewDBException("Error updating employee");
         } finally {
             em.close();
         }
@@ -58,7 +58,7 @@ public class EmployeeDB {
             return employees;
         } catch (Exception ex) {
             Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
-            throw new BrewDBException("Error getting Users");
+            throw new BrewDBException("Error getting Employees");
         } finally {
             em.close();
         }
@@ -78,7 +78,7 @@ public class EmployeeDB {
             return employee;
         } catch (Exception ex) {
             Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
-            throw new BrewDBException("Error getting Users");
+            throw new BrewDBException("Error getting Employee");
         } finally {
             em.close();
         }
@@ -96,7 +96,7 @@ public class EmployeeDB {
         } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot delete " + employee.toString(), ex);
-            throw new BrewDBException("Error deleting user");
+            throw new BrewDBException("Error deleting employee");
         } finally {
             em.close();
         }
@@ -126,7 +126,7 @@ public class EmployeeDB {
             return employee;
         } catch (Exception ex) {
             Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
-            throw new BrewDBException("Error getting Users");
+            throw new BrewDBException("Error getting Employee");
         } finally {
             em.close();
         }
@@ -135,11 +135,11 @@ public class EmployeeDB {
     public Employee getUuid(String resetPasswordUUID) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            Employee employee = em.createNamedQuery("User.findByResetPasswordUUID", Employee.class).setParameter("resetPasswordUUID", resetPasswordUUID).getSingleResult();
+            Employee employee = em.createNamedQuery("Employee.findByResetPasswordUUID", Employee.class).setParameter("resetPasswordUUID", resetPasswordUUID).getSingleResult();
             return employee;
         } catch (Exception ex) {
             Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
-            throw new BrewDBException("Error getting Users");
+            throw new BrewDBException("Error getting Employee");
         } finally {
             em.close();
         }
