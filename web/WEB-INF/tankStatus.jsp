@@ -13,6 +13,9 @@
     </head>
     <body>
         <h1>Tank Status</h1>
+        <h2>SV Tanks</h2>
+        
+        <h2>FV Tanks</h2>
         
     </body>
 </html>

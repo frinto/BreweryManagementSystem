@@ -22,7 +22,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>TankStatusServlet</servlet-name>
-        <url-pattern>/tankStatus/url-pattern>
+        <url-pattern>/tankStatus<url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ResetPasswordServlet</servlet-name>
