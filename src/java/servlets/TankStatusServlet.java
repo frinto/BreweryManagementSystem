@@ -32,8 +32,6 @@ public class TankStatusServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          
-        getServletContext().getRequestDispatcher("/WEB-INF/Status.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/tankStatus.jsp").forward(request, response);
     }
-
-
 }

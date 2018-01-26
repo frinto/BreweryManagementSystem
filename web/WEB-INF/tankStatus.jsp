@@ -12,6 +12,7 @@
         <title>Tank Status</title>
     </head>
     <body>
-        <h1>This is tank status</h1>
+        <h1>Tank Status</h1>
+        
     </body>
 </html>
