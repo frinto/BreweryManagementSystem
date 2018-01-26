@@ -84,7 +84,7 @@
 
                     <div class="panel-body" >
 
-                        <form action="login?action=login" name="form" id="form" class="form-horizontal" method="POST">
+                        <form action="login" name="form" id="form" class="form-horizontal" method="POST">
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
