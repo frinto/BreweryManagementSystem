@@ -24,10 +24,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-/**
- *
- * @author awarsyle
- */
+
 public class WebMailService {
 
     public static void sendMail(String to, String subject, String template, HashMap<String, String> contents) throws MessagingException, NamingException, FileNotFoundException, IOException {
