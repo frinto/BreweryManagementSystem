@@ -16,6 +16,14 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>TankStatusServlet</servlet-name>
+        <servlet-class>servlets.TankStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TankStatusServlet</servlet-name>
+        <url-pattern>/tankStatus<url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ResetPasswordServlet</servlet-name>
         <url-pattern>/reset</url-pattern>
