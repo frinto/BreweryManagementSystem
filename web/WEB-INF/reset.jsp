@@ -84,7 +84,7 @@
 
                     <div class="panel-body" >
 
-                        <form action="reset?action='email'" name="form" id="form" class="form-horizontal" method="POST">
+                        <form action="reset?action=email" name="form" id="form" class="form-horizontal" method="POST">
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -100,7 +100,7 @@
                             </div>
 
                         </form>     
-
+                        ${message}
                     </div>                     
                 </div>  
             </div>

@@ -46,11 +46,11 @@ public class ResetPasswordServlet extends HttpServlet {
         String action = request.getParameter("action");
         EmployeeService es = new EmployeeService();
         if (action.equals("email")) {
+            
             if (email.isEmpty()) {
                 request.setAttribute("message", "Email field empty");
                 getServletContext().getRequestDispatcher("/WEB-INF/reset.jsp/").forward(request, response);
             }
-
             
             String path = getServletContext().getRealPath("/WEB-INF");
             if (es.resetPassword(email, path, link, uuid) != null) {
