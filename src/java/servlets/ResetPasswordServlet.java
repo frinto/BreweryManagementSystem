@@ -76,6 +76,7 @@ public class ResetPasswordServlet extends HttpServlet {
            //employee.setPassword(newPass);
             try {
                 employee.setPassword(newPass);
+                employee.setResetPasswordUUID(null);
                 es.update(employee);
                 request.setAttribute("message", "Password Reset!");
             } catch (Exception ex) {

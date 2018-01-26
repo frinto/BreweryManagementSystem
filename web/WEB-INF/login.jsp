@@ -105,6 +105,7 @@
                                 <div class="col-sm-12 controls">
                                     <a href="reset" class="pull-right need-help">Forgot my password</a><span class="clearfix"></span>
                                     ${errorMsg}
+                                    ${message}
                                 </div>
 
                             </div>
