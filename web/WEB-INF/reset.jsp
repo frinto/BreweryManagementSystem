@@ -94,7 +94,7 @@
                             <div class="form-group">
                                 <!-- Button -->
                                 <div class="col-sm-12 controls">
-                                    <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Log in</button>                          
+                                    <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i>Submit</button>                          
                                 </div><br><br>
 
                             </div>
