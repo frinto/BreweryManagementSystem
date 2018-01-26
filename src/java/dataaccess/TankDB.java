@@ -120,7 +120,7 @@ public class TankDB {
         }
     }
     
-    public Fv getFV(String fvId) throws BrewDBException {
+    public Fv getFV(Integer fvId) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
             Fv fv = em.find(Fv.class, fvId);
@@ -132,63 +132,51 @@ public class TankDB {
             em.close();
         }
     }
+    
+    public Sv getSV(Integer svId) throws BrewDBException {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            Sv sv = em.find(Sv.class, svId);
+            return sv;
+        } catch (Exception ex) {
+            Logger.getLogger(TankDB.class.getName()).log(Level.SEVERE, "Cannot read sv", ex);
+            throw new BrewDBException("Error getting sv");
+        } finally {
+            em.close();
+        }
+    }
 
-    public int delete(Employee employee) throws BrewDBException {
+    public int deleteFV(Fv fv) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
         try {
             trans.begin();
-            em.remove(em.merge(employee));
+            em.remove(em.merge(fv));
             trans.commit();
             return 1;
         } catch (Exception ex) {
             trans.rollback();
-            Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot delete " + employee.toString(), ex);
-            throw new BrewDBException("Error deleting employee");
+            Logger.getLogger(TankDB.class.getName()).log(Level.SEVERE, "Cannot delete " + fv.toString(), ex);
+            throw new BrewDBException("Error deleting fv");
         } finally {
             em.close();
         }
     }
-
-    //Leftover from NotesDB project, may be useful as future example
     
-//    public List<User> getUsersByCompany(Company company) throws BrewDBException {
-//        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-//        
-//        try {
-//            List<User> users = em.createNamedQuery("User.findByCompany", User.class).setParameter("company", company).getResultList();
-//            return users;
-//        } catch (Exception ex) {
-//            Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
-//            throw new BrewDBException("Error getting Users");
-//        } finally {
-//            em.close();
-//        }
-//    }
-    
-    public Employee getByEmail(String email) throws BrewDBException {
+    public int deleteSV(Sv sv) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
         
         try {
-            Employee employee = em.createNamedQuery("Employee.findByEmail", Employee.class).setParameter("email", email).getSingleResult();
-            return employee;
+            trans.begin();
+            em.remove(em.merge(sv));
+            trans.commit();
+            return 1;
         } catch (Exception ex) {
-            Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
-            throw new BrewDBException("Error getting Employee");
-        } finally {
-            em.close();
-        }
-    }
-    
-    public Employee getUuid(String resetPasswordUUID) throws BrewDBException {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        try {
-            Employee employee = em.createNamedQuery("Employee.findByResetPasswordUUID", Employee.class).setParameter("resetPasswordUUID", resetPasswordUUID).getSingleResult();
-            return employee;
-        } catch (Exception ex) {
-            Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
-            throw new BrewDBException("Error getting Employee");
+            trans.rollback();
+            Logger.getLogger(TankDB.class.getName()).log(Level.SEVERE, "Cannot delete " + sv.toString(), ex);
+            throw new BrewDBException("Error deleting sv");
         } finally {
             em.close();
         }
