@@ -84,19 +84,20 @@
 
                     <div class="panel-body" >
 
-                        <form action="reset?action=reset" name="form" id="form" class="form-horizontal" method="POST">
+                        <form action="reset" name="form" id="form" class="form-horizontal" method="POST">
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="password" type="password" class="form-control" name="password" value="${password}" placeholder="Password" required="required">                                        
-                            </div>    
+                                <input id="password" type="password" class="form-control" name="password" value="${password}" placeholder="Password" required="required">
+                                <input type="hidden" name="action" value="reset">
+                                <input type="hidden" name="uuid" value=${uuid}>
+                            </div>  
 
                             <div class="form-group">
                                 <!-- Button -->
                                 <div class="col-sm-12 controls">
                                     <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i>Submit</button>                          
                                 </div><br><br>
-
                             </div>
 
                         </form>     
