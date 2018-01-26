@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,6 +30,19 @@
             </c:forEach>
         </table>
         <h2>FV Tanks</h2>
-        
+        <table>
+            <tr>
+                <th>FV ID</th>
+                <th>Volume</th>
+                <th>Status</th>
+            </tr>
+            <c:forEach var="fv" items="${fvs}">
+                <tr>
+                    <td>${fv.fvId}</td>
+                    <td>${fv.volume}</td>
+                    <td>${fv.status}</td>
+                </tr>
+            </c:forEach>
+        </table>
     </body>
 </html>
