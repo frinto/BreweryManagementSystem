@@ -49,7 +49,7 @@ public class ResetPasswordServlet extends HttpServlet {
             
             if (email.isEmpty()) {
                 request.setAttribute("message", "Email field empty");
-                getServletContext().getRequestDispatcher("/WEB-INF/reset.jsp/").forward(request, response);
+                getServletContext().getRequestDispatcher("/WEB-INF/reset.jsp").forward(request, response);
             }
             
             String path = getServletContext().getRealPath("/WEB-INF");
@@ -60,7 +60,7 @@ public class ResetPasswordServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/WEB-INF/reset.jsp").forward(request, response);
             } else {
                 request.setAttribute("message", "Email does not exist");
-                getServletContext().getRequestDispatcher("/WEB-INF/reset.jsp/").forward(request, response);
+                getServletContext().getRequestDispatcher("/WEB-INF/reset.jsp").forward(request, response);
             }
         } else if (action.equals("reset")) {
             String uuidNew = request.getParameter("uuid");
