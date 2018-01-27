@@ -74,7 +74,7 @@ public class EmployeeDB {
     public Employee getEmployee(String empId) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            Employee employee = em.find(Employee.class, empId);
+            Employee employee = em.find(Employee.class, Integer.parseInt(empId));
             return employee;
         } catch (Exception ex) {
             Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);

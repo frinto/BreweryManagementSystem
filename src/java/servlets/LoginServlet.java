@@ -24,6 +24,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
+        request.setAttribute("message", "");
         //Checks if the user is already logged in
         if (request.getAttribute("userId") != null) {
             try {
@@ -32,7 +33,7 @@ public class LoginServlet extends HttpServlet {
                 Employee employee = empDB.getEmployee(userId);
                 //If employee is inactive it is displayed by 0 and active is displayed by 1
                 if (employee.getIsActive() == 0) {
-                    request.setAttribute("loginMessage", "Account is inactive");
+                    request.setAttribute("message", "Account is inactive");
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                     
                 }
@@ -45,7 +46,7 @@ public class LoginServlet extends HttpServlet {
         if (request.getParameter("logout") != null) {
                 session = request.getSession();
                 session.invalidate();
-                request.setAttribute("loginMessage", "Logged out");
+                request.setAttribute("message", "Logged out");
             }
         
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
@@ -64,7 +65,7 @@ public class LoginServlet extends HttpServlet {
             
             // validatation for the user id and password
             if (userId == null || password == null || userId.isEmpty() || password.isEmpty()) {
-                request.setAttribute("loginMessage", "Invalid.  Please try again.");
+                request.setAttribute("message", "Invalid.  Please try again.");
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 return;
             }
@@ -72,12 +73,16 @@ public class LoginServlet extends HttpServlet {
             //If the employee id mataches the password then the employee will be logged in.
             Employee employee = empDB.getEmployee(userId);
             if (employee.getPassword().equals(password)) {
+                if(employee.getIsActive() == 0) {
+                    request.setAttribute("message", "Invalid. Please try again.");
+                    getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+                }
                 session.setAttribute("empId", userId);
                 response.sendRedirect("tankStatus");
             }
             //If the userId does not match the password, it will show that it was invalid and tell the user to try again
             else {
-                request.setAttribute("loginMessage", "Invalid.  Please try again.");                    
+                request.setAttribute("message", "Invalid.  Please try again.");                    
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             }
         } catch (BrewDBException ex) {
