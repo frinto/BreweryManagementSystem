@@ -21,7 +21,7 @@
             }
 
             #loginbox {
-                margin-top: 30%;
+                margin-top: 10%;
             }
 
             #loginbox > div:first-child {        
