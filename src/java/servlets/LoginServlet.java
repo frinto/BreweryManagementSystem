@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
             //Gets the employee by the employee id and compares it to the password in the database.
             //If the employee id mataches the password then the employee will be logged in.
             Employee employee = empDB.getEmployee(userId);
-            if (employee.getPassword().equals(password)) {
+            if (employee != null && employee.getPassword().equals(password)) {
                 if(employee.getIsActive() == 0) {
                     request.setAttribute("message", "Invalid. Please try again.");
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
