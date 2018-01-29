@@ -15,8 +15,7 @@ import javax.persistence.Persistence;
 
 public class DBUtil {
 
-    private static final EntityManagerFactory emf
-            = Persistence.createEntityManagerFactory("BreweryManagementSystemPU");
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("BreweryManagementSystemPU");
 
     public static EntityManagerFactory getEmFactory() {
         return emf;

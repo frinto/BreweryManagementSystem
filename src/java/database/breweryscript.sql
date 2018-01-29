@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `Employee` (
   `roleId` INT NOT NULL,
   `isActive` TINYINT NOT NULL,
   `resetPasswordUUID` VARCHAR(50),
+    
   PRIMARY KEY (`empId`))
 ENGINE = InnoDB;
 
