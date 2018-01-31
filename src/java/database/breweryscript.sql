@@ -100,7 +100,7 @@ DROP TABLE IF EXISTS `ProductionMaterial` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `ProductionMaterial` (
-  `name` VARCHAR2(40) NOT NULL,
+  `name` VARCHAR(40) NOT NULL,
   `qty` INT NULL,
   PRIMARY KEY (`Name`))
 ENGINE = InnoDB;
