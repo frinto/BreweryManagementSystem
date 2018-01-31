@@ -21,7 +21,9 @@
 
     <body>
         <div class="wrapper">
+
             <div class="sidebar" data-image="../assets/img/sidebar-5.jpg" data-color="red">
+
                 <!--
             Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
     
@@ -122,6 +124,7 @@
     <script type="text/javascript">
                         $(document).ready(function () {
                             // Javascript method's body can be found in assets/js/demos.js
+
                         });
     </script>
 
