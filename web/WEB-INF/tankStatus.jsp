@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8" />
         <title>BMS</title> 
-        <c:import url="/includes/header.html"/>
+        <c:import url="/WEB-INF/includes/sidebar.html"/>
                 <h1>Tank Status</h1>
         <h2>SV Tanks</h2>
         <table>
