@@ -92,14 +92,15 @@
                     </div>
                 </nav>
                 <!-- End Navbar -->
-               
-<!--                <p class="copyright text-center">
-                    ©
-                    <script>
-                        document.write(new Date().getFullYear())
-                    </script>
-                    <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                </p>-->
+
+                <!--                <p class="copyright text-center">
+                                    ©
+                                    <script>
+                                        document.write(new Date().getFullYear())
+                                    </script>
+                                    <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                                </p>-->
+
             </div>
         </div>
     </body>
@@ -120,13 +121,13 @@
     <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
     <script src="assets/js/demo.js"></script>
     <script type="text/javascript">
-                        $(document).ready(function () {
-                            // Javascript method's body can be found in assets/js/demos.js
+        $(document).ready(function () {
+            // Javascript method's body can be found in assets/js/demos.js
 
 
 
 
-                        });
+        });
     </script>
 
 </html>
