@@ -21,7 +21,7 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+        <div class="sidebar" data-image="assets/img/sidebar-5.jpg" data-color ="red">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -144,8 +144,7 @@
 <script src="assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
 <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
-<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-<script src="assets/js/demo.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
