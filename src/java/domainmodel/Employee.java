@@ -7,46 +7,56 @@ package domainmodel;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 727525
+ * @author root
  */
 @Entity
+@Table(name = "employee")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
-    , @NamedQuery(name = "Employee.findByEmpId", query = "SELECT e FROM Employee e WHERE e.empId = :empId")
-    , @NamedQuery(name = "Employee.findByFirstName", query = "SELECT e FROM Employee e WHERE e.firstName = :firstName")
-    , @NamedQuery(name = "Employee.findByLastName", query = "SELECT e FROM Employee e WHERE e.lastName = :lastName")
-    , @NamedQuery(name = "Employee.findByPassword", query = "SELECT e FROM Employee e WHERE e.password = :password")
-    , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")
-    , @NamedQuery(name = "Employee.findByRoleId", query = "SELECT e FROM Employee e WHERE e.roleId = :roleId")
-    , @NamedQuery(name = "Employee.findByIsActive", query = "SELECT e FROM Employee e WHERE e.isActive = :isActive")
-    , @NamedQuery(name = "Employee.findByResetPasswordUUID", query = "SELECT e FROM Employee e WHERE e.resetPasswordUUID = :resetPasswordUUID")})
+    @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e"),
+    @NamedQuery(name = "Employee.findByEmpId", query = "SELECT e FROM Employee e WHERE e.empId = :empId"),
+    @NamedQuery(name = "Employee.findByFirstName", query = "SELECT e FROM Employee e WHERE e.firstName = :firstName"),
+    @NamedQuery(name = "Employee.findByLastName", query = "SELECT e FROM Employee e WHERE e.lastName = :lastName"),
+    @NamedQuery(name = "Employee.findByPassword", query = "SELECT e FROM Employee e WHERE e.password = :password"),
+    @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email"),
+    @NamedQuery(name = "Employee.findByRoleId", query = "SELECT e FROM Employee e WHERE e.roleId = :roleId"),
+    @NamedQuery(name = "Employee.findByIsActive", query = "SELECT e FROM Employee e WHERE e.isActive = :isActive"),
+    @NamedQuery(name = "Employee.findByResetPasswordUUID", query = "SELECT e FROM Employee e WHERE e.resetPasswordUUID = :resetPasswordUUID")})
 public class Employee implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @Column(name = "empId")
     private Integer empId;
+    @Column(name = "firstName")
     private String firstName;
+    @Column(name = "lastName")
     private String lastName;
+    @Column(name = "password")
     private String password;
     @Basic(optional = false)
+    @Column(name = "email")
     private String email;
     @Basic(optional = false)
+    @Column(name = "roleId")
     private int roleId;
     @Basic(optional = false)
+    @Column(name = "isActive")
     private short isActive;
+    @Column(name = "resetPasswordUUID")
     private String resetPasswordUUID;
 
     public Employee() {

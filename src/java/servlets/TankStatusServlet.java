@@ -41,14 +41,15 @@ public class TankStatusServlet extends HttpServlet {
             request.setAttribute("svs", svs);
             request.setAttribute("fvs", fvs);
             
+            
         } catch (BrewDBException ex) {
             Logger.getLogger(TankStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("message", "error retrieving tank lists(fv and sv) from database");
                      
         }
         
-        
         getServletContext().getRequestDispatcher("/WEB-INF/tankStatus.jsp").forward(request, response);
+        
     }
     
     @Override
