@@ -37,37 +37,37 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./user.html?pageName='Production'">
+                            <a class="nav-link" href="production?pageName='Production'">
                                 <img src="assets/img/barrel.png" class="barrelIcon" alt="Norway">
                                 <p style ="padding-left:5px">Production</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./table.html?pageName='Brew'">
+                            <a class="nav-link" href="brew?pageName='Brew'">
                                 <i class="nc-icon nc-notes"></i>
                                 <p>Brew</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./typography.html?pageName='Finished Inventory'">
+                            <a class="nav-link" href="finishedInventory?pageName='Finished Inventory'">
                                 <i class="nc-icon nc-paper-2"></i>
                                 <p>Finished Inventory</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./icons.html?pageName='Raw Goods Inventory'">
+                            <a class="nav-link" href="rawGoodsInventory?pageName='Raw Goods Inventory'">
                                 <i class="nc-icon nc-atom"></i>
                                 <p>Raw Goods Inventory</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./maps.html?pageName='Recipies'">
+                            <a class="nav-link" href="recipes?pageName='Recipies'">
                                 <i class="nc-icon nc-pin-3"></i>
                                 <p>Recipes</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./notifications.html?pageName='Delivery'">
+                            <a class="nav-link" href="delivery?pageName='Delivery'">
                                 <i class="nc-icon nc-bell-55"></i>
                                 <p>Delivery</p>
                             </a>
