@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,7 +97,7 @@
                 <!-- End Navbar -->
 
                 <!--                <p class="copyright text-center">
-                                    ©
+                                    ?
                                     <script>
                                         document.write(new Date().getFullYear())
                                     </script>
@@ -104,6 +105,7 @@
                                 </p>-->
                 
                 <h1>Tank Status</h1>
+                <div class="left-table">
         <h2>SV Tanks</h2>
         <table>
             <tr>
@@ -119,6 +121,8 @@
                 </tr>
             </c:forEach>
         </table>
+        </div>
+                <div class="right-table">
         <h2>FV Tanks</h2>
         <table>
             <tr>
@@ -134,6 +138,7 @@
                 </tr>
             </c:forEach>
         </table>
+        </div>
         ${message}
 
             </div>
