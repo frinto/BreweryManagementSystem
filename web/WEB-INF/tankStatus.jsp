@@ -36,19 +36,20 @@
                         </a>
                     </div>
                     <ul class="nav">
-                        <li class="nav-item active">
+                        <li>
                             <a class="nav-link" href="tankStatus">
                                 <img src="assets/img/tank.png" class="tankfarmIcon" alt="Norway">
                                 <p style ="padding-left:5px">Tank Farm</p>
                             </a>
                         </li>
                         <li>
+                        <li>    
                             <a class="nav-link" href="./user.html">
                                 <img src="assets/img/barrel.png" class="barrelIcon" alt="Norway">
                                 <p style ="padding-left:5px">Production</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="nav-item active">
                             <a class="nav-link" href="./table.html">
                                 <i class="nc-icon nc-notes"></i>
                                 <p>Brew</p>
@@ -85,7 +86,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand" href="#pablo"> Tank Farm </a>
+                        <a class="navbar-brand" href="#pablo"> Brew </a>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -103,38 +104,7 @@
                                     <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                                 </p>-->
                 
-                <h1>Tank Status</h1>
-        <h2>SV Tanks</h2>
-        <table>
-            <tr>
-                <th>SV ID</th>
-                <th>Volume</th>
-                <th>Status</th>
-            </tr>
-            <c:forEach var="sv" items="${svs}">
-                <tr>
-                    <td>${sv.svId}</td>
-                    <td>${sv.volume}</td>
-                    <td>${sv.status}</td>
-                </tr>
-            </c:forEach>
-        </table>
-        <h2>FV Tanks</h2>
-        <table>
-            <tr>
-                <th>FV ID</th>
-                <th>Volume</th>
-                <th>Status</th>
-            </tr>
-            <c:forEach var="fv" items="${fvs}">
-                <tr>
-                    <td>${fv.fvId}</td>
-                    <td>${fv.volume}</td>
-                    <td>${fv.status}</td>
-                </tr>
-            </c:forEach>
-        </table>
-        ${message}
+ 
 
             </div>
         </div>
