@@ -17,17 +17,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 553817
+ * @author root
  */
 @Entity
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
-    , @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name")
-    , @NamedQuery(name = "Product.findByFinishedProductId", query = "SELECT p FROM Product p WHERE p.finishedProductId = :finishedProductId")})
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+    @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
+    @NamedQuery(name = "Product.findByFinishedProductId", query = "SELECT p FROM Product p WHERE p.finishedProductId = :finishedProductId")})
 public class Product implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Column(name = "name")
     private String name;

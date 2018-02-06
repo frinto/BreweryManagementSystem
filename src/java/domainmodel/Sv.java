@@ -17,18 +17,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 553817
+ * @author root
  */
 @Entity
-@Table(name = "sv")
+@Table(name = "sV")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Sv.findAll", query = "SELECT s FROM Sv s")
-    , @NamedQuery(name = "Sv.findBySvId", query = "SELECT s FROM Sv s WHERE s.svId = :svId")
-    , @NamedQuery(name = "Sv.findByVolume", query = "SELECT s FROM Sv s WHERE s.volume = :volume")
-    , @NamedQuery(name = "Sv.findByStatus", query = "SELECT s FROM Sv s WHERE s.status = :status")})
+    @NamedQuery(name = "Sv.findAll", query = "SELECT s FROM Sv s"),
+    @NamedQuery(name = "Sv.findBySvId", query = "SELECT s FROM Sv s WHERE s.svId = :svId"),
+    @NamedQuery(name = "Sv.findByVolume", query = "SELECT s FROM Sv s WHERE s.volume = :volume"),
+    @NamedQuery(name = "Sv.findByStatus", query = "SELECT s FROM Sv s WHERE s.status = :status")})
 public class Sv implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
