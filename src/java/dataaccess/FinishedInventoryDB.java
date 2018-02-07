@@ -17,11 +17,11 @@ import javax.persistence.EntityTransaction;
  * @author root
  */
 public class FinishedInventoryDB {
-    
+
     public int insertInventory(FinishedProduct finishedProduct) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
             trans.begin();
             em.persist(finishedProduct);
@@ -35,10 +35,10 @@ public class FinishedInventoryDB {
             em.close();
         }
     }
-    
+
     public List<FinishedProduct> getAllInventory() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
             List<FinishedProduct> finishedProducts = em.createNamedQuery("FinishedProduct.findAll", FinishedProduct.class).getResultList();
             return finishedProducts;
@@ -49,5 +49,5 @@ public class FinishedInventoryDB {
             em.close();
         }
     }
-    
+
 }

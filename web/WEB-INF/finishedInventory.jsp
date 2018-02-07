@@ -105,6 +105,22 @@
 
                 <h1>Inventory</h1>
 
+                <div class="left-table">
+                    <h2>Inventory</h2>
+
+                    <table>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                        <c:forEach var="productName" items="${finishedProducts}">
+                            <tr>
+                                <td>${productName.productName}</td>
+                                <td>${productName.qty}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
 
                 ${message}
 
