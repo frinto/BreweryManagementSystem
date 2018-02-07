@@ -7,10 +7,22 @@
         <meta charset="utf-8" />
         <title>BMS</title> 
         <c:import url="/WEB-INF/includes/sidebar.html"/>
-       
-
-    <h1>FV to SV Tank Transfer</h1>
-
+    
+        <!-- start main panel and top header text-->    
+    <div class="main-panel">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                    <div class=" container-fluid  ">
+                        <a class="navbar-brand" href="#pablo">FV to SV Tank Transfer</a>
+                        <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                        </button>
+                    </div>
+                </nav>
+                
+    <!-- start page functionality -->
     <div>
         <form action="tankTransfer?action=add" method="POST">
             <button type="submit">Add a Transfer</button>
