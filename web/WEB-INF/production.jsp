@@ -37,13 +37,13 @@
                     </div>
                     <ul class="nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="tankStatus">
+                            <a class="nav-link" href="dashboard.html">
                                 <img src="assets/img/tank.png" class="tankfarmIcon" alt="Norway">
                                 <p style ="padding-left:5px">Tank Farm</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="production">
+                            <a class="nav-link" href="./user.html">
                                 <img src="assets/img/barrel.png" class="barrelIcon" alt="Norway">
                                 <p style ="padding-left:5px">Production</p>
                             </a>
@@ -102,64 +102,13 @@
                                     </script>
                                     <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                                 </p>-->
-                
-                <h1>Tank Status</h1>
-                <div class="left-table">
-        <h2>SV Tanks</h2>
-        <table>
-            <tr>
-                <th>SV ID</th>
-                <th>Volume</th>
-                <th>Capacity</th>
-                <th>Brew 1</th>
-                <th>Brew 2</th>
-                <th>Brew 3</th>
-                <th>Brand</th>
-                <th>Status</th>
-            </tr>
-            <c:forEach var="sv" items="${svs}">
-                <tr>
-                    <td>${sv.svId}</td>
-                    <td>${sv.volume}</td>
-                    <td>${sv.capacity}</td>
-                    <td>${sv.brew1}</td>
-                    <td>${sv.brew2}</td>
-                    <td>${sv.brew3}</td>
-                    <td>${sv.brand}</td>
-                    <td>${sv.status}</td>
-                </tr>
-            </c:forEach>
-        </table>
-        </div>
-                <div class="right-table">
-        <h2>FV Tanks</h2>
-        <table>
-            <tr>
-                <th>FV ID</th>
-                <th>Volume</th>
-                <th>Capacity</th>
-                <th>Brew 1</th>
-                <th>Brew 2</th>
-                <th>Brew 3</th>
-                <th>Brand</th>
-                <th>Status</th>
-            </tr>
-            <c:forEach var="fv" items="${fvs}">
-                <tr>
-                    <td>${fv.fvId}</td>
-                    <td>${fv.volume}</td>
-                    <td>${sv.capacity}</td>
-                    <td>${sv.brew1}</td>
-                    <td>${sv.brew2}</td>
-                    <td>${sv.brew3}</td>
-                    <td>${sv.brand}</td>
-                    <td>${sv.status}</td>
-                </tr>
-            </c:forEach>
-        </table>
-        </div>
-        ${message}
 
+                <h1>Production</h1>
+                <div class="left-table">
+
+                    ${message}
+
+                </div>
             </div>
         </div>
     </body>

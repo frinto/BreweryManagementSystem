@@ -21,6 +21,10 @@
         <servlet-class>servlets.BrewServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ProductionServlet</servlet-name>
+        <servlet-class>servlets.ProductionServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>TankTransferServlet</servlet-name>
         <servlet-class>servlets.TankTransferServlet</servlet-class>
     </servlet>
@@ -41,6 +45,10 @@
         <url-pattern>/brew</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ProductionServlet</servlet-name>
+        <url-pattern>/production</url-pattern>
+    </servlet-mapping>   
+    <servlet-mapping> 
         <servlet-name>TankTransferServlet</servlet-name>
         <url-pattern>/tankTransfer</url-pattern>
     </servlet-mapping>
