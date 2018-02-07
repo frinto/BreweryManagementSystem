@@ -103,20 +103,41 @@
                                     <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                                 </p>-->
                 
-                <h1>Tank Status</h1>
-                <div class="left-table">
+        <h1>Tank Status</h1>
+        
+        <form action="tankStatus?action=add" method="POST">
+            <button type="submit">Add a Tank</button>
+        </form>
+        
+        <div class="left-table">
         <h2>SV Tanks</h2>
+        
         <table>
             <tr>
                 <th>SV ID</th>
                 <th>Volume</th>
+                <th>Capacity</th>
+                <th>Brew 1</th>
+                <th>Brew 2</th>
+                <th>Brew 3</th>
+                <th>Brand</th>
                 <th>Status</th>
             </tr>
             <c:forEach var="sv" items="${svs}">
                 <tr>
                     <td>${sv.svId}</td>
                     <td>${sv.volume}</td>
+                    <td>${sv.capacity}</td>
+                    <td>${sv.brew1}</td>
+                    <td>${sv.brew2}</td>
+                    <td>${sv.brew3}</td>
+                    <td>${sv.brand}</td>
                     <td>${sv.status}</td>
+                    <td>
+                        <form action="tankStatus?action=editSv" method="POST">
+                            <button type="submit">Edit</button>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
@@ -127,13 +148,28 @@
             <tr>
                 <th>FV ID</th>
                 <th>Volume</th>
+                <th>Capacity</th>
+                <th>Brew 1</th>
+                <th>Brew 2</th>
+                <th>Brew 3</th>
+                <th>Brand</th>
                 <th>Status</th>
             </tr>
             <c:forEach var="fv" items="${fvs}">
                 <tr>
                     <td>${fv.fvId}</td>
                     <td>${fv.volume}</td>
+                    <td>${fv.capacity}</td>
+                    <td>${fv.brew1}</td>
+                    <td>${fv.brew2}</td>
+                    <td>${fv.brew3}</td>
+                    <td>${fv.brand}</td>
                     <td>${fv.status}</td>
+                    <td>
+                        <form action="tankStatus?action=editFv" method="POST">
+                            <button type="submit">Edit</button>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

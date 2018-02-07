@@ -43,7 +43,12 @@ public class TankTransferServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        getServletContext().getRequestDispatcher("/WEB-INF/tankTransfer.jsp").forward(request, response);
+        String action = request.getParameter("action");
+        if (action!=null && action.equals("add")) {
+            //maybe a pop-up form for adding tank transfer
+            response.sendRedirect("tankTransfer");
+        }
+//        getServletContext().getRequestDispatcher("/WEB-INF/tankTransfer.jsp").forward(request, response);
     }
 
 

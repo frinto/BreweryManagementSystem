@@ -55,7 +55,7 @@ public class TankStatusServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         
-        getServletContext().getRequestDispatcher("/WEB-INF/tankStatus.jsp").forward(request, response);
+         response.sendRedirect("tankStatus");
+//        getServletContext().getRequestDispatcher("/WEB-INF/tankStatus.jsp").forward(request, response);
     }
 }

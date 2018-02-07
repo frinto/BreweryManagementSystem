@@ -11,7 +11,7 @@
         <h1>FV to SV Tank Transfer</h1>
         
         <div>
-            <form action="addTransfer" method="POST">
+            <form action="tankTransfer?action=add" method="POST">
                 <button type="submit">Add a Transfer</button>
             </form>
         </div>
