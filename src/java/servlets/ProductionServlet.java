@@ -5,8 +5,14 @@
  */
 package servlets;
 
+import dataaccess.BrewDBException;
+import dataaccess.ProductionDB;
+import domainmodel.Production;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +27,17 @@ public class ProductionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
+        try {
+            ProductionDB prodDB = new ProductionDB();
+            
+            List<Production> prodList = prodDB.getAllProduction();
+            
+            request.setAttribute("prod", prodList);
+            
+            getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
+        } catch (BrewDBException ex) {
+            Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
