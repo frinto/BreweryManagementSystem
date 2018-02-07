@@ -22,20 +22,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 727525
+ * @author root
  */
 @Entity
 @Table(name = "delivery")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Delivery.findAll", query = "SELECT d FROM Delivery d")
-    , @NamedQuery(name = "Delivery.findByDeliveryId", query = "SELECT d FROM Delivery d WHERE d.deliveryId = :deliveryId")
-    , @NamedQuery(name = "Delivery.findByDate", query = "SELECT d FROM Delivery d WHERE d.date = :date")
-    , @NamedQuery(name = "Delivery.findByAccountId", query = "SELECT d FROM Delivery d WHERE d.accountId = :accountId")
-    , @NamedQuery(name = "Delivery.findByEmpId", query = "SELECT d FROM Delivery d WHERE d.empId = :empId")
-    , @NamedQuery(name = "Delivery.findByFinishedProductId", query = "SELECT d FROM Delivery d WHERE d.finishedProductId = :finishedProductId")})
+    @NamedQuery(name = "Delivery.findAll", query = "SELECT d FROM Delivery d"),
+    @NamedQuery(name = "Delivery.findByDeliveryId", query = "SELECT d FROM Delivery d WHERE d.deliveryId = :deliveryId"),
+    @NamedQuery(name = "Delivery.findByDate", query = "SELECT d FROM Delivery d WHERE d.date = :date"),
+    @NamedQuery(name = "Delivery.findByAccountId", query = "SELECT d FROM Delivery d WHERE d.accountId = :accountId"),
+    @NamedQuery(name = "Delivery.findByEmpId", query = "SELECT d FROM Delivery d WHERE d.empId = :empId"),
+    @NamedQuery(name = "Delivery.findByFinishedProductId", query = "SELECT d FROM Delivery d WHERE d.finishedProductId = :finishedProductId")})
 public class Delivery implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

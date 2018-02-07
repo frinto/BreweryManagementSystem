@@ -7,7 +7,7 @@ package servlets;
 
 import dataaccess.BrewDBException;
 import dataaccess.FinishedInventoryDB;
-import domainmodel.FinishedProduct;
+import domainmodel.Finishedproduct;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -33,10 +33,37 @@ public class FinishedInventoryServlet extends HttpServlet {
         FinishedInventoryDB finishedDatabase = new FinishedInventoryDB();
 
         try {
-            List<FinishedProduct> finishedProducts = finishedDatabase.getAllInventory();
+            List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
 
             request.setAttribute("finishedProducts", finishedProducts);
-            request.setAttribute("message", "it works!");
+
+            for (int i = 0; i < finishedProducts.size(); i++) {
+                
+                request.setAttribute("updateCount", finishedProducts.get(i).getQty());
+            }
+
+            getServletContext().getRequestDispatcher("/WEB-INF/finishedInventory.jsp").forward(request, response);
+
+        } catch (BrewDBException ex) {
+            Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("message", "error retrieving finished product list from database");
+
+        }
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = request.getParameter("action");
+
+        FinishedInventoryDB finishedDatabase = new FinishedInventoryDB();
+
+        try {
+            List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
+
+            request.setAttribute("finishedProducts", finishedProducts);
 
         } catch (BrewDBException ex) {
             Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,11 +72,5 @@ public class FinishedInventoryServlet extends HttpServlet {
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/finishedInventory.jsp").forward(request, response);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
     }
 }

@@ -17,57 +17,56 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 727525
+ * @author root
  */
 @Entity
 @Table(name = "recipe")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Recipe.findAll", query = "SELECT r FROM Recipe r")
-    , @NamedQuery(name = "Recipe.findByRecipeName", query = "SELECT r FROM Recipe r WHERE r.recipeName = :recipeName")
-    , @NamedQuery(name = "Recipe.findByMashInTemp", query = "SELECT r FROM Recipe r WHERE r.mashInTemp = :mashInTemp")
-    , @NamedQuery(name = "Recipe.findByMashInTime", query = "SELECT r FROM Recipe r WHERE r.mashInTime = :mashInTime")
-    , @NamedQuery(name = "Recipe.findByMashWaterVolume", query = "SELECT r FROM Recipe r WHERE r.mashWaterVolume = :mashWaterVolume")
-    , @NamedQuery(name = "Recipe.findByRestTime", query = "SELECT r FROM Recipe r WHERE r.restTime = :restTime")
-    , @NamedQuery(name = "Recipe.findByRaiseToTemp", query = "SELECT r FROM Recipe r WHERE r.raiseToTemp = :raiseToTemp")
-    , @NamedQuery(name = "Recipe.findByInTime", query = "SELECT r FROM Recipe r WHERE r.inTime = :inTime")
-    , @NamedQuery(name = "Recipe.findByTotalMashTime", query = "SELECT r FROM Recipe r WHERE r.totalMashTime = :totalMashTime")
-    , @NamedQuery(name = "Recipe.findByUnderletLitres", query = "SELECT r FROM Recipe r WHERE r.underletLitres = :underletLitres")
-    , @NamedQuery(name = "Recipe.findByRest", query = "SELECT r FROM Recipe r WHERE r.rest = :rest")
-    , @NamedQuery(name = "Recipe.findByVorlaufTime", query = "SELECT r FROM Recipe r WHERE r.vorlaufTime = :vorlaufTime")
-    , @NamedQuery(name = "Recipe.findByFirstWortGrav", query = "SELECT r FROM Recipe r WHERE r.firstWortGrav = :firstWortGrav")
-    , @NamedQuery(name = "Recipe.findByRunOffTime", query = "SELECT r FROM Recipe r WHERE r.runOffTime = :runOffTime")
-    , @NamedQuery(name = "Recipe.findBySpargVol", query = "SELECT r FROM Recipe r WHERE r.spargVol = :spargVol")
-    , @NamedQuery(name = "Recipe.findBySpargTemp", query = "SELECT r FROM Recipe r WHERE r.spargTemp = :spargTemp")
-    , @NamedQuery(name = "Recipe.findByLastRunningsGrav", query = "SELECT r FROM Recipe r WHERE r.lastRunningsGrav = :lastRunningsGrav")
-    , @NamedQuery(name = "Recipe.findByKettleFullVol", query = "SELECT r FROM Recipe r WHERE r.kettleFullVol = :kettleFullVol")
-    , @NamedQuery(name = "Recipe.findByKettleFullGrav", query = "SELECT r FROM Recipe r WHERE r.kettleFullGrav = :kettleFullGrav")
-    , @NamedQuery(name = "Recipe.findByBoilTime", query = "SELECT r FROM Recipe r WHERE r.boilTime = :boilTime")
-    , @NamedQuery(name = "Recipe.findByStrikeOutVol", query = "SELECT r FROM Recipe r WHERE r.strikeOutVol = :strikeOutVol")
-    , @NamedQuery(name = "Recipe.findByStrikeOutGrav", query = "SELECT r FROM Recipe r WHERE r.strikeOutGrav = :strikeOutGrav")
-    , @NamedQuery(name = "Recipe.findByWhirlPoolTime", query = "SELECT r FROM Recipe r WHERE r.whirlPoolTime = :whirlPoolTime")
-    , @NamedQuery(name = "Recipe.findByCoolInTemp", query = "SELECT r FROM Recipe r WHERE r.coolInTemp = :coolInTemp")
-    , @NamedQuery(name = "Recipe.findByOxygenRate", query = "SELECT r FROM Recipe r WHERE r.oxygenRate = :oxygenRate")
-    , @NamedQuery(name = "Recipe.findByGypsumAmt", query = "SELECT r FROM Recipe r WHERE r.gypsumAmt = :gypsumAmt")
-    , @NamedQuery(name = "Recipe.findByCalciumChlorideAmt", query = "SELECT r FROM Recipe r WHERE r.calciumChlorideAmt = :calciumChlorideAmt")
-    , @NamedQuery(name = "Recipe.findBySodiumChlorideAmt", query = "SELECT r FROM Recipe r WHERE r.sodiumChlorideAmt = :sodiumChlorideAmt")
-    , @NamedQuery(name = "Recipe.findByPhosphAcidAmt", query = "SELECT r FROM Recipe r WHERE r.phosphAcidAmt = :phosphAcidAmt")
-    , @NamedQuery(name = "Recipe.findByFirstHop", query = "SELECT r FROM Recipe r WHERE r.firstHop = :firstHop")
-    , @NamedQuery(name = "Recipe.findByFirstHopAmt", query = "SELECT r FROM Recipe r WHERE r.firstHopAmt = :firstHopAmt")
-    , @NamedQuery(name = "Recipe.findBySecondHop", query = "SELECT r FROM Recipe r WHERE r.secondHop = :secondHop")
-    , @NamedQuery(name = "Recipe.findBySecondHopAmt", query = "SELECT r FROM Recipe r WHERE r.secondHopAmt = :secondHopAmt")
-    , @NamedQuery(name = "Recipe.findByThirdHop", query = "SELECT r FROM Recipe r WHERE r.thirdHop = :thirdHop")
-    , @NamedQuery(name = "Recipe.findByThirdHopAmt", query = "SELECT r FROM Recipe r WHERE r.thirdHopAmt = :thirdHopAmt")
-    , @NamedQuery(name = "Recipe.findByBaseMalt", query = "SELECT r FROM Recipe r WHERE r.baseMalt = :baseMalt")
-    , @NamedQuery(name = "Recipe.findByBaseMaltAmt", query = "SELECT r FROM Recipe r WHERE r.baseMaltAmt = :baseMaltAmt")
-    , @NamedQuery(name = "Recipe.findBySecondMalt", query = "SELECT r FROM Recipe r WHERE r.secondMalt = :secondMalt")
-    , @NamedQuery(name = "Recipe.findBySecondMaltAmt", query = "SELECT r FROM Recipe r WHERE r.secondMaltAmt = :secondMaltAmt")
-    , @NamedQuery(name = "Recipe.findByThirdMalt", query = "SELECT r FROM Recipe r WHERE r.thirdMalt = :thirdMalt")
-    , @NamedQuery(name = "Recipe.findByThirdMaltAmt", query = "SELECT r FROM Recipe r WHERE r.thirdMaltAmt = :thirdMaltAmt")
-    , @NamedQuery(name = "Recipe.findByFourthMalt", query = "SELECT r FROM Recipe r WHERE r.fourthMalt = :fourthMalt")
-    , @NamedQuery(name = "Recipe.findByFourthMaltAmt", query = "SELECT r FROM Recipe r WHERE r.fourthMaltAmt = :fourthMaltAmt")})
+    @NamedQuery(name = "Recipe.findAll", query = "SELECT r FROM Recipe r"),
+    @NamedQuery(name = "Recipe.findByRecipeName", query = "SELECT r FROM Recipe r WHERE r.recipeName = :recipeName"),
+    @NamedQuery(name = "Recipe.findByMashInTemp", query = "SELECT r FROM Recipe r WHERE r.mashInTemp = :mashInTemp"),
+    @NamedQuery(name = "Recipe.findByMashInTime", query = "SELECT r FROM Recipe r WHERE r.mashInTime = :mashInTime"),
+    @NamedQuery(name = "Recipe.findByMashWaterVolume", query = "SELECT r FROM Recipe r WHERE r.mashWaterVolume = :mashWaterVolume"),
+    @NamedQuery(name = "Recipe.findByRestTime", query = "SELECT r FROM Recipe r WHERE r.restTime = :restTime"),
+    @NamedQuery(name = "Recipe.findByRaiseToTemp", query = "SELECT r FROM Recipe r WHERE r.raiseToTemp = :raiseToTemp"),
+    @NamedQuery(name = "Recipe.findByInTime", query = "SELECT r FROM Recipe r WHERE r.inTime = :inTime"),
+    @NamedQuery(name = "Recipe.findByTotalMashTime", query = "SELECT r FROM Recipe r WHERE r.totalMashTime = :totalMashTime"),
+    @NamedQuery(name = "Recipe.findByUnderletLitres", query = "SELECT r FROM Recipe r WHERE r.underletLitres = :underletLitres"),
+    @NamedQuery(name = "Recipe.findByRest", query = "SELECT r FROM Recipe r WHERE r.rest = :rest"),
+    @NamedQuery(name = "Recipe.findByVorlaufTime", query = "SELECT r FROM Recipe r WHERE r.vorlaufTime = :vorlaufTime"),
+    @NamedQuery(name = "Recipe.findByFirstWortGrav", query = "SELECT r FROM Recipe r WHERE r.firstWortGrav = :firstWortGrav"),
+    @NamedQuery(name = "Recipe.findByRunOffTime", query = "SELECT r FROM Recipe r WHERE r.runOffTime = :runOffTime"),
+    @NamedQuery(name = "Recipe.findBySpargVol", query = "SELECT r FROM Recipe r WHERE r.spargVol = :spargVol"),
+    @NamedQuery(name = "Recipe.findBySpargTemp", query = "SELECT r FROM Recipe r WHERE r.spargTemp = :spargTemp"),
+    @NamedQuery(name = "Recipe.findByLastRunningsGrav", query = "SELECT r FROM Recipe r WHERE r.lastRunningsGrav = :lastRunningsGrav"),
+    @NamedQuery(name = "Recipe.findByKettleFullVol", query = "SELECT r FROM Recipe r WHERE r.kettleFullVol = :kettleFullVol"),
+    @NamedQuery(name = "Recipe.findByKettleFullGrav", query = "SELECT r FROM Recipe r WHERE r.kettleFullGrav = :kettleFullGrav"),
+    @NamedQuery(name = "Recipe.findByBoilTime", query = "SELECT r FROM Recipe r WHERE r.boilTime = :boilTime"),
+    @NamedQuery(name = "Recipe.findByStrikeOutVol", query = "SELECT r FROM Recipe r WHERE r.strikeOutVol = :strikeOutVol"),
+    @NamedQuery(name = "Recipe.findByStrikeOutGrav", query = "SELECT r FROM Recipe r WHERE r.strikeOutGrav = :strikeOutGrav"),
+    @NamedQuery(name = "Recipe.findByWhirlPoolTime", query = "SELECT r FROM Recipe r WHERE r.whirlPoolTime = :whirlPoolTime"),
+    @NamedQuery(name = "Recipe.findByCoolInTemp", query = "SELECT r FROM Recipe r WHERE r.coolInTemp = :coolInTemp"),
+    @NamedQuery(name = "Recipe.findByOxygenRate", query = "SELECT r FROM Recipe r WHERE r.oxygenRate = :oxygenRate"),
+    @NamedQuery(name = "Recipe.findByGypsumAmt", query = "SELECT r FROM Recipe r WHERE r.gypsumAmt = :gypsumAmt"),
+    @NamedQuery(name = "Recipe.findByCalciumChlorideAmt", query = "SELECT r FROM Recipe r WHERE r.calciumChlorideAmt = :calciumChlorideAmt"),
+    @NamedQuery(name = "Recipe.findBySodiumChlorideAmt", query = "SELECT r FROM Recipe r WHERE r.sodiumChlorideAmt = :sodiumChlorideAmt"),
+    @NamedQuery(name = "Recipe.findByPhosphAcidAmt", query = "SELECT r FROM Recipe r WHERE r.phosphAcidAmt = :phosphAcidAmt"),
+    @NamedQuery(name = "Recipe.findByFirstHop", query = "SELECT r FROM Recipe r WHERE r.firstHop = :firstHop"),
+    @NamedQuery(name = "Recipe.findByFirstHopAmt", query = "SELECT r FROM Recipe r WHERE r.firstHopAmt = :firstHopAmt"),
+    @NamedQuery(name = "Recipe.findBySecondHop", query = "SELECT r FROM Recipe r WHERE r.secondHop = :secondHop"),
+    @NamedQuery(name = "Recipe.findBySecondHopAmt", query = "SELECT r FROM Recipe r WHERE r.secondHopAmt = :secondHopAmt"),
+    @NamedQuery(name = "Recipe.findByThirdHop", query = "SELECT r FROM Recipe r WHERE r.thirdHop = :thirdHop"),
+    @NamedQuery(name = "Recipe.findByThirdHopAmt", query = "SELECT r FROM Recipe r WHERE r.thirdHopAmt = :thirdHopAmt"),
+    @NamedQuery(name = "Recipe.findByBaseMalt", query = "SELECT r FROM Recipe r WHERE r.baseMalt = :baseMalt"),
+    @NamedQuery(name = "Recipe.findByBaseMaltAmt", query = "SELECT r FROM Recipe r WHERE r.baseMaltAmt = :baseMaltAmt"),
+    @NamedQuery(name = "Recipe.findBySecondMalt", query = "SELECT r FROM Recipe r WHERE r.secondMalt = :secondMalt"),
+    @NamedQuery(name = "Recipe.findBySecondMaltAmt", query = "SELECT r FROM Recipe r WHERE r.secondMaltAmt = :secondMaltAmt"),
+    @NamedQuery(name = "Recipe.findByThirdMalt", query = "SELECT r FROM Recipe r WHERE r.thirdMalt = :thirdMalt"),
+    @NamedQuery(name = "Recipe.findByThirdMaltAmt", query = "SELECT r FROM Recipe r WHERE r.thirdMaltAmt = :thirdMaltAmt"),
+    @NamedQuery(name = "Recipe.findByFourthMalt", query = "SELECT r FROM Recipe r WHERE r.fourthMalt = :fourthMalt"),
+    @NamedQuery(name = "Recipe.findByFourthMaltAmt", query = "SELECT r FROM Recipe r WHERE r.fourthMaltAmt = :fourthMaltAmt")})
 public class Recipe implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

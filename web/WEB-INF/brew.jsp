@@ -25,7 +25,7 @@
         <div class="wrapper">
 
             <!--Nav bar----------------------------------------------------------------------------->
-            
+
             <div class="sidebar" data-image="../assets/img/sidebar-5.jpg" data-color="red">
 
                 <div class="sidebar-wrapper">
@@ -92,50 +92,131 @@
                         </button>
                     </div>
                 </nav>
-                
+
                 <!--End nav bar-------------------------------------------------------------------------->
 
-                <c:if test="${newBrew == null}">
-                
-                <div class = "brews">
-                    <form class ="datepicker">
-                        View Brews by Date:
-                        <input type="date" name="bdaytime">
-                    </form>
+
+                <!--------------------------------------Brew Selector------------------------------------------->
+
+                <c:if test="${recipe==null}">
+
+                    <c:if test="${newBrew != null}">
 
 
-                    <table class="table">
-                        <thead class="thead-dark">
+                        <div class ="selectBrew">
+                            <h3>Select Brew:</h3>
+
+                            <form action ="brew" method ="GET">
+                                <select name="recipeList" class="custom-select">
+                                    <c:forEach items="${recipes}" var="recipe">
+
+                                        <option value="${recipe.recipeName}" selected ="selected">
+                                            ${recipe.recipeName} 
+                                        </option>
+
+                                    </c:forEach>
+                                </select>
+                                <br>
+                                <br>
+                                <button type="submit" class="btn btn-primary btn-lg">Start Brew!</button>
+                            </form>
+                            <br>
+                            <br>
+
+                        </div>
+
+
+
+                    </c:if>
+
+                    <!-------------------------------------- End Brew Selector------------------------------------------->
+
+
+
+
+
+                    <!--------------------------------------Start  New Brew------------------------------------------->
+
+
+
+
+                    <div class = "brews">
+                        <form class ="datepicker">
+                            View Brews by Date:
+                            <input type="date" name="bdaytime">
+                        </form>
+
+
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Brew #</th>
+                                    <th scope="col">Brand</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Blonde</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Blacksmith</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <form action="brew" method ="GET" class ="brewButton">
+                            <button type="submit" class="btn btn-success" name="newBrew">Add a Brew</button>
+                        </form>
+
+                    </div>
+
+                </c:if>
+
+                <!----------------------------------------------BrewSheetForm-------------------------------------------->
+                <c:if test="${recipe!=null}">
+
+                    <h1>Now Brewing: ${recipe.recipeName}</h1>
+                    <hr>
+                    <table class="table table-sm">
+                        <thead>
                             <tr>
-                                <th scope="col">Brew #</th>
-                                <th scope="col">Brand</th>
+                                <th scope="col">Ingredient</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Amount</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Blonde</td>
+                                <th scope="row">First Hop Addition</th>
+                                <td>${recipe.firstHop}</td>
+                                <td>${recipe.firstHopAmt} kg</td>
                             </tr>
                             <tr>
-                                <th scope="row">2</th>
-                                <td>Blacksmith</td>
+                                <th scope="row">Second Hop Addition</th>
+                                <td>${recipe.secondHop}</td>
+                                <td>${recipe.secondHopAmt} kg</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Third Hop Addition</th>
+                                <td>${recipe.thirdHop}</td>
+                                <td colspan="2">${recipe.thirdHopAmt} kg</td>
+                               
                             </tr>
                         </tbody>
                     </table>
-                    <form action="brew" method ="POST" class ="brewButton">
-                        <button type="submit" class="btn btn-success" name="newBrew">Add a Brew</button>
-                    </form>
 
-                </div>
+
                 </c:if>
 
-
+                <!--------------------------------------End Start New Brew------------------------------------------->
 
 
 
             </div>
         </div>
     </body>
+
     <!--   Core JS Files   -->
     <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
     <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
