@@ -22,21 +22,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author root
+ * @author 727525
  */
 @Entity
 @Table(name = "production")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Production.findAll", query = "SELECT p FROM Production p"),
-    @NamedQuery(name = "Production.findByProdId", query = "SELECT p FROM Production p WHERE p.prodId = :prodId"),
-    @NamedQuery(name = "Production.findByQuantity", query = "SELECT p FROM Production p WHERE p.quantity = :quantity"),
-    @NamedQuery(name = "Production.findByDate", query = "SELECT p FROM Production p WHERE p.date = :date"),
-    @NamedQuery(name = "Production.findByEmployeeId", query = "SELECT p FROM Production p WHERE p.employeeId = :employeeId"),
-    @NamedQuery(name = "Production.findByBrandId", query = "SELECT p FROM Production p WHERE p.brandId = :brandId"),
-    @NamedQuery(name = "Production.findBySvNum", query = "SELECT p FROM Production p WHERE p.svNum = :svNum"),
-    @NamedQuery(name = "Production.findByProductionType", query = "SELECT p FROM Production p WHERE p.productionType = :productionType")})
+    @NamedQuery(name = "Production.findAll", query = "SELECT p FROM Production p")
+    , @NamedQuery(name = "Production.findByProdId", query = "SELECT p FROM Production p WHERE p.prodId = :prodId")
+    , @NamedQuery(name = "Production.findByQuantity", query = "SELECT p FROM Production p WHERE p.quantity = :quantity")
+    , @NamedQuery(name = "Production.findByDate", query = "SELECT p FROM Production p WHERE p.date = :date")
+    , @NamedQuery(name = "Production.findByEmployeeId", query = "SELECT p FROM Production p WHERE p.employeeId = :employeeId")
+    , @NamedQuery(name = "Production.findBySvNum", query = "SELECT p FROM Production p WHERE p.svNum = :svNum")
+    , @NamedQuery(name = "Production.findByProductionType", query = "SELECT p FROM Production p WHERE p.productionType = :productionType")})
 public class Production implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,9 +54,6 @@ public class Production implements Serializable {
     @Column(name = "employeeId")
     private int employeeId;
     @Basic(optional = false)
-    @Column(name = "brandId")
-    private int brandId;
-    @Basic(optional = false)
     @Column(name = "svNum")
     private int svNum;
     @Basic(optional = false)
@@ -70,12 +67,11 @@ public class Production implements Serializable {
         this.prodId = prodId;
     }
 
-    public Production(Integer prodId, int quantity, Date date, int employeeId, int brandId, int svNum, String productionType) {
+    public Production(Integer prodId, int quantity, Date date, int employeeId, int svNum, String productionType) {
         this.prodId = prodId;
         this.quantity = quantity;
         this.date = date;
         this.employeeId = employeeId;
-        this.brandId = brandId;
         this.svNum = svNum;
         this.productionType = productionType;
     }
@@ -110,14 +106,6 @@ public class Production implements Serializable {
 
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
-    }
-
-    public int getBrandId() {
-        return brandId;
-    }
-
-    public void setBrandId(int brandId) {
-        this.brandId = brandId;
     }
 
     public int getSvNum() {
