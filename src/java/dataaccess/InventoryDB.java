@@ -30,7 +30,7 @@ public class InventoryDB {
         } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(TransferDB.class.getName()).log(Level.SEVERE, "Cannot insert " + finishedProduct.toString(), ex);
-            throw new BrewDBException("Error inserting transfer");
+            throw new BrewDBException("Error inserting finished product");
         } finally {
             em.close();
         }
