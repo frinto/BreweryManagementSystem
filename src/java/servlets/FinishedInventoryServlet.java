@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author root
  */
-@WebServlet(name = "InventoryServlet", urlPatterns = {"/InventoryServlet"})
-public class InventoryServlet extends HttpServlet {
+@WebServlet(name = "FinishedInventoryServlet", urlPatterns = {"/FinishedInventoryServlet"})
+public class FinishedInventoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,7 +26,7 @@ public class InventoryServlet extends HttpServlet {
         
         request.setAttribute("message", "it works!");
         
-        getServletContext().getRequestDispatcher("/WEB-INF/inventory.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/finishedInventory.jsp").forward(request, response);
         
     }
     
