@@ -110,12 +110,22 @@
             <tr>
                 <th>SV ID</th>
                 <th>Volume</th>
+                <th>Capacity</th>
+                <th>Brew 1</th>
+                <th>Brew 2</th>
+                <th>Brew 3</th>
+                <th>Brand</th>
                 <th>Status</th>
             </tr>
             <c:forEach var="sv" items="${svs}">
                 <tr>
                     <td>${sv.svId}</td>
                     <td>${sv.volume}</td>
+                    <td>${sv.capacity}</td>
+                    <td>${sv.brew1}</td>
+                    <td>${sv.brew2}</td>
+                    <td>${sv.brew3}</td>
+                    <td>${sv.brand}</td>
                     <td>${sv.status}</td>
                 </tr>
             </c:forEach>
@@ -127,13 +137,23 @@
             <tr>
                 <th>FV ID</th>
                 <th>Volume</th>
+                <th>Capacity</th>
+                <th>Brew 1</th>
+                <th>Brew 2</th>
+                <th>Brew 3</th>
+                <th>Brand</th>
                 <th>Status</th>
             </tr>
             <c:forEach var="fv" items="${fvs}">
                 <tr>
                     <td>${fv.fvId}</td>
                     <td>${fv.volume}</td>
-                    <td>${fv.status}</td>
+                    <td>${sv.capacity}</td>
+                    <td>${sv.brew1}</td>
+                    <td>${sv.brew2}</td>
+                    <td>${sv.brew3}</td>
+                    <td>${sv.brand}</td>
+                    <td>${sv.status}</td>
                 </tr>
             </c:forEach>
         </table>
