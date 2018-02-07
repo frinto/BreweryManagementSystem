@@ -37,12 +37,12 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>InventoryServlet</servlet-name>
-        <servlet-class>servlets.InventoryServlet</servlet-class>
+        <servlet-name>FinishedInventoryServlet</servlet-name>
+        <servlet-class>servlets.FinishedInventoryServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>InventoryServlet</servlet-name>
-        <url-pattern>/inventory</url-pattern>
+        <servlet-name>FinishedInventoryServlet</servlet-name>
+        <url-pattern>/finishedInventory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TankStatusServlet</servlet-name>

@@ -16,7 +16,7 @@ import javax.persistence.EntityTransaction;
  *
  * @author root
  */
-public class InventoryDB {
+public class FinishedInventoryDB {
     
     public int insertInventory(FinishedProduct finishedProduct) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -43,7 +43,7 @@ public class InventoryDB {
             List<FinishedProduct> finishedProducts = em.createNamedQuery("FinishedProduct.findAll", FinishedProduct.class).getResultList();
             return finishedProducts;
         } catch (Exception ex) {
-            Logger.getLogger(InventoryDB.class.getName()).log(Level.SEVERE, "Cannot read finished products", ex);
+            Logger.getLogger(FinishedInventoryDB.class.getName()).log(Level.SEVERE, "Cannot read finished products", ex);
             throw new BrewDBException("Error getting finished product");
         } finally {
             em.close();

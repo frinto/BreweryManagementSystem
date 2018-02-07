@@ -17,27 +17,34 @@
         </div>
         
         <div>
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Brand</th>
-                    <th>FV</th>
-                    <th>SV</th>
-                    <th>Volume</th>
-                    <th>Correction</th>
-                </tr>
-                <c:forEach var="transfer" items="${transfers}">
+            <table class="table">
+                <thead class="thead-dark">
                     <tr>
-                        <td>${transfer.date}</td>
-                        <td>brand</td>
-                        <td>${transfer.fromFv}</td>
-                        <td>${transfer.toSv}</td>
-                        <td>${transfer.volume}</td>
-                        <td>correction</td>
+                        <th>Date</th>
+                        <th>Brand</th>
+                        <th>FV</th>
+                        <th>SV</th>
+                        <th>Volume</th>
+                        <th>Correction</th>
                     </tr>
-                </c:forEach>
+                </thead>
+                </tbody>
+                    <c:forEach var="transfer" items="${transfers}">
+                        <tr>
+                            <td>${transfer.date}</td>
+                            <td>brand</td>
+                            <td>${transfer.fromFv}</td>
+                            <td>${transfer.toSv}</td>
+                            <td>${transfer.volume}</td>
+                            <td>correction</td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </table>
         </div>
+        
         ${message}
+    </div>
+    </div>
     </body>
     <c:import url="includes/footer.html"/>
