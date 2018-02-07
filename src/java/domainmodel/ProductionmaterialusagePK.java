@@ -15,7 +15,7 @@ import javax.persistence.Embeddable;
  * @author root
  */
 @Embeddable
-public class ProductionMaterialUsagePK implements Serializable {
+public class ProductionmaterialusagePK implements Serializable {
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
@@ -23,10 +23,10 @@ public class ProductionMaterialUsagePK implements Serializable {
     @Column(name = "usage")
     private String usage;
 
-    public ProductionMaterialUsagePK() {
+    public ProductionmaterialusagePK() {
     }
 
-    public ProductionMaterialUsagePK(String name, String usage) {
+    public ProductionmaterialusagePK(String name, String usage) {
         this.name = name;
         this.usage = usage;
     }
@@ -58,10 +58,10 @@ public class ProductionMaterialUsagePK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProductionMaterialUsagePK)) {
+        if (!(object instanceof ProductionmaterialusagePK)) {
             return false;
         }
-        ProductionMaterialUsagePK other = (ProductionMaterialUsagePK) object;
+        ProductionmaterialusagePK other = (ProductionmaterialusagePK) object;
         if ((this.name == null && other.name != null) || (this.name != null && !this.name.equals(other.name))) {
             return false;
         }
@@ -73,7 +73,7 @@ public class ProductionMaterialUsagePK implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.ProductionMaterialUsagePK[ name=" + name + ", usage=" + usage + " ]";
+        return "domainmodel.ProductionmaterialusagePK[ name=" + name + ", usage=" + usage + " ]";
     }
     
 }

@@ -23,17 +23,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author root
  */
 @Entity
-@Table(name = "productionSchedule")
+@Table(name = "productionschedule")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ProductionSchedule.findAll", query = "SELECT p FROM ProductionSchedule p"),
-    @NamedQuery(name = "ProductionSchedule.findByDate", query = "SELECT p FROM ProductionSchedule p WHERE p.date = :date"),
-    @NamedQuery(name = "ProductionSchedule.findByBrew1", query = "SELECT p FROM ProductionSchedule p WHERE p.brew1 = :brew1"),
-    @NamedQuery(name = "ProductionSchedule.findByBrew2", query = "SELECT p FROM ProductionSchedule p WHERE p.brew2 = :brew2"),
-    @NamedQuery(name = "ProductionSchedule.findByBrew3", query = "SELECT p FROM ProductionSchedule p WHERE p.brew3 = :brew3"),
-    @NamedQuery(name = "ProductionSchedule.findByTransfer", query = "SELECT p FROM ProductionSchedule p WHERE p.transfer = :transfer"),
-    @NamedQuery(name = "ProductionSchedule.findByProductionDetail", query = "SELECT p FROM ProductionSchedule p WHERE p.productionDetail = :productionDetail")})
-public class ProductionSchedule implements Serializable {
+    @NamedQuery(name = "Productionschedule.findAll", query = "SELECT p FROM Productionschedule p"),
+    @NamedQuery(name = "Productionschedule.findByDate", query = "SELECT p FROM Productionschedule p WHERE p.date = :date"),
+    @NamedQuery(name = "Productionschedule.findByBrew1", query = "SELECT p FROM Productionschedule p WHERE p.brew1 = :brew1"),
+    @NamedQuery(name = "Productionschedule.findByBrew2", query = "SELECT p FROM Productionschedule p WHERE p.brew2 = :brew2"),
+    @NamedQuery(name = "Productionschedule.findByBrew3", query = "SELECT p FROM Productionschedule p WHERE p.brew3 = :brew3"),
+    @NamedQuery(name = "Productionschedule.findByTransfer", query = "SELECT p FROM Productionschedule p WHERE p.transfer = :transfer"),
+    @NamedQuery(name = "Productionschedule.findByProductionDetail", query = "SELECT p FROM Productionschedule p WHERE p.productionDetail = :productionDetail")})
+public class Productionschedule implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -51,10 +51,10 @@ public class ProductionSchedule implements Serializable {
     @Column(name = "productionDetail")
     private String productionDetail;
 
-    public ProductionSchedule() {
+    public Productionschedule() {
     }
 
-    public ProductionSchedule(Date date) {
+    public Productionschedule(Date date) {
         this.date = date;
     }
 
@@ -116,10 +116,10 @@ public class ProductionSchedule implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProductionSchedule)) {
+        if (!(object instanceof Productionschedule)) {
             return false;
         }
-        ProductionSchedule other = (ProductionSchedule) object;
+        Productionschedule other = (Productionschedule) object;
         if ((this.date == null && other.date != null) || (this.date != null && !this.date.equals(other.date))) {
             return false;
         }
@@ -128,7 +128,7 @@ public class ProductionSchedule implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.ProductionSchedule[ date=" + date + " ]";
+        return "domainmodel.Productionschedule[ date=" + date + " ]";
     }
     
 }

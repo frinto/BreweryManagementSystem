@@ -7,7 +7,7 @@ package servlets;
 
 import dataaccess.BrewDBException;
 import dataaccess.FinishedInventoryDB;
-import domainmodel.FinishedProduct;
+import domainmodel.Finishedproduct;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -33,7 +33,7 @@ public class FinishedInventoryServlet extends HttpServlet {
         FinishedInventoryDB finishedDatabase = new FinishedInventoryDB();
 
         try {
-            List<FinishedProduct> finishedProducts = finishedDatabase.getAllInventory();
+            List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
 
             request.setAttribute("finishedProducts", finishedProducts);
             request.setAttribute("message", "it works!");
