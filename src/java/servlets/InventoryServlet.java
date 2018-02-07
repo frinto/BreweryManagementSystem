@@ -24,6 +24,8 @@ public class InventoryServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        request.setAttribute("message", "it works!");
+        
         getServletContext().getRequestDispatcher("/WEB-INF/inventory.jsp").forward(request, response);
         
     }
