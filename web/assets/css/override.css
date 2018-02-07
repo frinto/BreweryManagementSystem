@@ -38,3 +38,27 @@
     margin-left: 30%;
     
 }
+
+/*----------------------------------DropDown Menu CSS------------------------------*/
+
+.custom-select{
+    
+    width: 300px;
+    
+    
+}
+
+.selectBrew{
+    
+    margin-left:35%;
+    margin-right:35%;
+    margin-top:10%;
+}
+
+.btn-primary {
+    border-color: green;
+    color: green;
+}
+
+
+/*---------------------------------------------------------------------------------------*/
