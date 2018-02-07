@@ -15,20 +15,27 @@
                 <tr>
                     <th>Product Name</th>
                     <th>Quantity</th>
+                    <th>Update</th>
                 </tr>
             </thead>
             </tbody>
-            <c:forEach var="productName" items="${finishedProducts}">
-                <tr>
-                    <td>${productName.productName}</td>
-                    <td>${productName.qty}</td>
-                </tr>
-            </c:forEach>
+            <form action="finishedInventory?action=update" method="post">
+                <c:forEach var="productName" items="${finishedProducts}" varStatus="status">
+                    <tr>
+                        <td>${productName.productName}</td>
+                        <td>${productName.qty}</td>
+                        <td>
+                            <input type="number" id="${status.index}" value="${updatedCount}">
+                        </td>
+                    </tr>
+                </c:forEach>
         </table>
-    </table>
-</div>
+        <input type="submit" value="Update">
+        </form>
 
-${message}
+
+
+    </div>
 </div>
 </div>
 </body>
