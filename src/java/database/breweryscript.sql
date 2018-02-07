@@ -64,19 +64,7 @@ ENGINE = InnoDB;
 
 SHOW WARNINGS;
 
--- -----------------------------------------------------
--- Table `Brand`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Brand` ;
 
-SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `Brand` (
-  `brandId` INT NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`brandId`))
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `SV`
@@ -86,7 +74,12 @@ DROP TABLE IF EXISTS `SV` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `SV` (
   `svId` INT NOT NULL,
+  `capacity` INT NOT NULL,
   `volume` DOUBLE NULL,
+    `brew1` INT NULL,
+    `brew2` INT NULL,
+    `brew3` INT NULL,
+    `brand` VARCHAR(15) NULL,
   `status` CHAR NULL,
   PRIMARY KEY (`svId`))
 ENGINE = InnoDB;
@@ -100,7 +93,7 @@ DROP TABLE IF EXISTS `ProductionMaterial` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `ProductionMaterial` (
-  `name` VARCHAR2(40) NOT NULL,
+  `name` VARCHAR(40) NOT NULL,
   `qty` INT NULL,
   PRIMARY KEY (`Name`))
 ENGINE = InnoDB;
@@ -118,7 +111,6 @@ CREATE TABLE IF NOT EXISTS `Production` (
   `quantity` INT NOT NULL,
   `date` DATETIME NOT NULL,
   `employeeId` INT NOT NULL,
-  `brandId` INT NOT NULL,
   `svNum` INT NOT NULL,
   `productionType` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`prodId`))
@@ -210,7 +202,12 @@ DROP TABLE IF EXISTS `FV` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `FV` (
   `fvId` INT NOT NULL,
+  `capacity` INT NOT NULL,
   `volume` DOUBLE NULL,
+    `brew1` INT NULL,
+    `brew2` INT NULL,
+    `brew3` INT NULL,
+    `brand` VARCHAR(15) NULL,
   `status` CHAR NULL,
   PRIMARY KEY (`fvId`))
 ENGINE = InnoDB;
@@ -224,7 +221,7 @@ DROP TABLE IF EXISTS `Recipe` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `Recipe` (
-  `recipeId` INT NOT NULL,
+  `recipeName` VARCHAR(25) NOT NULL,
   `mashInTemp` FLOAT NULL,
   `mashInTime` FLOAT NULL,
   `mashWaterVolume` INT NULL,
@@ -253,14 +250,20 @@ CREATE TABLE IF NOT EXISTS `Recipe` (
   `sodiumChlorideAmt` FLOAT NULL,
   `phosphAcidAmt` FLOAT NULL,
   `firstHop` VARCHAR(20) NULL,
+  `firstHopAmt` VARCHAR(20) NULL,
   `secondHop` VARCHAR(20) NULL,
+  `secondHopAmt` VARCHAR(20) NULL,
   `thirdHop` VARCHAR(20) NULL,
+  `thirdHopAmt` VARCHAR(20) NULL,
   `baseMalt` VARCHAR(20) NULL,
+  `baseMaltAmt` VARCHAR(20) NULL,
   `secondMalt` VARCHAR(20) NULL,
+  `secondMaltAmt` VARCHAR(20) NULL,
   `thirdMalt` VARCHAR(20) NULL,
+  `thirdMaltAmt` VARCHAR(20) NULL,
   `fourthMalt` VARCHAR(20) NULL,
-  `brandId` INT NOT NULL,
-  PRIMARY KEY (`recipeId`))
+  `fourthMaltAmt` VARCHAR(20) NULL,
+  PRIMARY KEY (`recipeName`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
@@ -335,9 +338,10 @@ DROP TABLE IF EXISTS `BrewMaterials` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `BrewMaterials` (
-  `name` VARCHAR(15) NOT NULL,
+  `name` VARCHAR(25) NOT NULL,
   `qty` INT NULL,
   `units` VARCHAR(5) NULL,
+  `type`  VARCHAR(10) NULL,
   PRIMARY KEY (`Name`))
 ENGINE = InnoDB;
 

@@ -1,12 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
         <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
         <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>BMS</title>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
         <!--     Fonts and icons     -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -37,43 +31,43 @@
                     </div>
                     <ul class="nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="dashboard.html">
+                            <a class="nav-link" href="tankStatus?pageName='Tank Status'">
                                 <img src="assets/img/tank.png" class="tankfarmIcon" alt="Norway">
                                 <p style ="padding-left:5px">Tank Farm</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./user.html">
+                            <a class="nav-link" href="production?pageName='Production'">
                                 <img src="assets/img/barrel.png" class="barrelIcon" alt="Norway">
                                 <p style ="padding-left:5px">Production</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./table.html">
+                            <a class="nav-link" href="brew?pageName='Brew'">
                                 <i class="nc-icon nc-notes"></i>
                                 <p>Brew</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./typography.html">
+                            <a class="nav-link" href="finishedInventory?pageName='Finished Inventory'">
                                 <i class="nc-icon nc-paper-2"></i>
                                 <p>Finished Inventory</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./icons.html">
+                            <a class="nav-link" href="rawGoodsInventory?pageName='Raw Goods Inventory'">
                                 <i class="nc-icon nc-atom"></i>
                                 <p>Raw Goods Inventory</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./maps.html">
+                            <a class="nav-link" href="recipes?pageName='Recipies'">
                                 <i class="nc-icon nc-pin-3"></i>
                                 <p>Recipes</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./notifications.html">
+                            <a class="nav-link" href="delivery?pageName='Delivery'">
                                 <i class="nc-icon nc-bell-55"></i>
                                 <p>Delivery</p>
                             </a>
@@ -85,7 +79,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand" href="#pablo"> Tank Farm </a>
+                        <a class="navbar-brand" href="#pablo"> ${pageName} </a>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -96,51 +90,9 @@
                 <!-- End Navbar -->
 
                 <!--                <p class="copyright text-center">
-                                    ?
+                                    ©
                                     <script>
                                         document.write(new Date().getFullYear())
                                     </script>
                                     <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                                 </p>-->
-                
-                <h1>Tank Status</h1>
-                <div class="left-table">
-        <h2>SV Tanks</h2>
-        <table>
-            <tr>
-                <th>SV ID</th>
-                <th>Volume</th>
-                <th>Status</th>
-            </tr>
-            <c:forEach var="sv" items="${svs}">
-                <tr>
-                    <td>${sv.svId}</td>
-                    <td>${sv.volume}</td>
-                    <td>${sv.status}</td>
-                </tr>
-            </c:forEach>
-        </table>
-        </div>
-                <div class="right-table">
-        <h2>FV Tanks</h2>
-        <table>
-            <tr>
-                <th>FV ID</th>
-                <th>Volume</th>
-                <th>Status</th>
-            </tr>
-            <c:forEach var="fv" items="${fvs}">
-                <tr>
-                    <td>${fv.fvId}</td>
-                    <td>${fv.volume}</td>
-                    <td>${fv.status}</td>
-                </tr>
-            </c:forEach>
-        </table>
-        </div>
-        ${message}
-
-            </div>
-        </div>
-    </body>
-    <c:import url="includes/footer.html"/>

@@ -16,6 +16,10 @@
         <servlet-name>TankStatusServlet</servlet-name>
         <servlet-class>servlets.TankStatusServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BrewServlet</servlet-name>
+        <servlet-class>servlets.BrewServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>ResetPasswordServlet</servlet-name>
         <url-pattern>/reset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BrewServlet</servlet-name>
+        <url-pattern>/brew</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
