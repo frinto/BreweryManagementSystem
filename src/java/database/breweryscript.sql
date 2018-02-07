@@ -32,10 +32,10 @@ USE `brewery` ;
 -- -----------------------------------------------------
 -- Table `Role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Role` ;
+DROP TABLE IF EXISTS `role` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `Role` (
+CREATE TABLE IF NOT EXISTS `role` (
   `roleId` INT NOT NULL,
   `description` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`roleId`))
@@ -46,10 +46,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `Employee`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Employee` ;
+DROP TABLE IF EXISTS `employee` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `Employee` (
+CREATE TABLE IF NOT EXISTS `employee` (
   `empId` INT NOT NULL AUTO_INCREMENT,
   `firstName` VARCHAR(45) NULL,
   `lastName` VARCHAR(45) NULL,
@@ -69,10 +69,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `SV`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `SV` ;
+DROP TABLE IF EXISTS `sv` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `SV` (
+CREATE TABLE IF NOT EXISTS `sv` (
   `svId` INT NOT NULL,
   `capacity` INT NOT NULL,
   `volume` DOUBLE NULL,
@@ -89,10 +89,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `ProductionMaterial`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ProductionMaterial` ;
+DROP TABLE IF EXISTS `productionmaterial` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `ProductionMaterial` (
+CREATE TABLE IF NOT EXISTS `productionmaterial` (
   `name` VARCHAR(40) NOT NULL,
   `qty` INT NULL,
   PRIMARY KEY (`Name`))
@@ -103,10 +103,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `Production`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Production` ;
+DROP TABLE IF EXISTS `production` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `Production` (
+CREATE TABLE IF NOT EXISTS `production` (
   `prodId` INT NOT NULL AUTO_INCREMENT,
   `quantity` INT NOT NULL,
   `date` DATETIME NOT NULL,
@@ -121,10 +121,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `ProductionMaterialUsage`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ProductionMaterialUsage` ;
+DROP TABLE IF EXISTS `productionmaterialusage` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `ProductionMaterialUsage` (
+CREATE TABLE IF NOT EXISTS `productionmaterialusage` (
   `materialQty` DOUBLE NULL,
   `name` VARCHAR(20) NOT NULL,
   `usage` VARCHAR(20) NOT NULL,
@@ -136,10 +136,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `Account`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Account` ;
+DROP TABLE IF EXISTS `account` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `Account` (
+CREATE TABLE IF NOT EXISTS `account` (
   `accountId` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `phoneNumber` VARCHAR(45) NULL,
@@ -152,10 +152,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `FinishedProduct`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `FinishedProduct` ;
+DROP TABLE IF EXISTS `finishedproduct` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `FinishedProduct` (
+CREATE TABLE IF NOT EXISTS `finishedproduct` (
   `productName` VARCHAR(40) NOT NULL,
   `qty` INT NULL,
   PRIMARY KEY (`productName`))
@@ -166,10 +166,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `Product`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Product` ;
+DROP TABLE IF EXISTS `product` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `Product` (
+CREATE TABLE IF NOT EXISTS `product` (
   `name` VARCHAR(45) NULL,
   `finishedProductId` INT NOT NULL,
   PRIMARY KEY (`finishedProductId`))
@@ -180,10 +180,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `Delivery`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Delivery` ;
+DROP TABLE IF EXISTS `delivery` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `Delivery` (
+CREATE TABLE IF NOT EXISTS `delivery` (
   `deliveryId` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NULL,
   `accountId` INT NOT NULL,
@@ -197,10 +197,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `FV`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `FV` ;
+DROP TABLE IF EXISTS `fv` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `FV` (
+CREATE TABLE IF NOT EXISTS `fv` (
   `fvId` INT NOT NULL,
   `capacity` INT NOT NULL,
   `volume` DOUBLE NULL,
@@ -217,10 +217,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `Recipe`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Recipe` ;
+DROP TABLE IF EXISTS `recipe` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `Recipe` (
+CREATE TABLE IF NOT EXISTS `recipe` (
   `recipeName` VARCHAR(25) NOT NULL,
   `mashInTemp` FLOAT NULL,
   `mashInTime` FLOAT NULL,
@@ -271,10 +271,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `Brew`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Brew` ;
+DROP TABLE IF EXISTS `brew` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `Brew` (
+CREATE TABLE IF NOT EXISTS `brew` (
   `brewId` INT NOT NULL,
   `mashInTime` INT NULL,
   `restTime` INT NULL,
@@ -300,10 +300,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `Supplier`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Supplier` ;
+DROP TABLE IF EXISTS `supplier` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `Supplier` (
+CREATE TABLE IF NOT EXISTS `supplier` (
   `supplierId` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `phoneNumber` VARCHAR(45) NULL,
@@ -316,10 +316,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `PurchaseOrder`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `PurchaseOrder` ;
+DROP TABLE IF EXISTS `purchaseorder` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `PurchaseOrder` (
+CREATE TABLE IF NOT EXISTS `purchaseorder` (
   `purchaseOrderId` INT NOT NULL,
   `materialId` INT NULL,
   `qty` INT NULL,
@@ -334,10 +334,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `BrewMaterials`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BrewMaterials` ;
+DROP TABLE IF EXISTS `brewmaterials` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `BrewMaterials` (
+CREATE TABLE IF NOT EXISTS `brewmaterials` (
   `name` VARCHAR(25) NOT NULL,
   `qty` INT NULL,
   `units` VARCHAR(5) NULL,
@@ -350,10 +350,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `RecipeMaterials`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `RecipeMaterials` ;
+DROP TABLE IF EXISTS `recipematerials` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `RecipeMaterials` (
+CREATE TABLE IF NOT EXISTS `recipematerials` (
   `qty` INT NULL,
   `recipeId` INT NOT NULL,
   `brewMaterialsName` VARCHAR(15) NOT NULL)
@@ -364,10 +364,10 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `Transfer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Transfer` ;
+DROP TABLE IF EXISTS `transfer` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `Transfer` (
+CREATE TABLE IF NOT EXISTS `transfer` (
   `transferId` INT NOT NULL,
   `date` DATE NULL,
   `volume` DECIMAL NULL,
@@ -382,10 +382,10 @@ USE `brewery` ;
 -- -----------------------------------------------------
 -- Table `ProductionSchedule`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ProductionSchedule` ;
+DROP TABLE IF EXISTS `productionschedule` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `ProductionSchedule` (
+CREATE TABLE IF NOT EXISTS `productionschedule` (
   `date` DATE NOT NULL,
   `brew1` VARCHAR(45) NULL,
   `brew2` VARCHAR(45) NULL,

@@ -16,4 +16,25 @@
     
     
 }
-.data-color="purple
+.table{
+    width: 98%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    margin-left: 10px;
+    margin-top: 5%;
+    
+}
+
+.brewButton{
+    
+    margin-left:10%;
+    
+}
+
+.datepicker{
+    
+    margin-top:5%;
+    margin-left: 30%;
+    
+}

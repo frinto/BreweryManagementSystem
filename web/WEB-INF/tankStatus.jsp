@@ -49,7 +49,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./table.html">
+                            <a class="nav-link" href="brew?brew">
                                 <i class="nc-icon nc-notes"></i>
                                 <p>Brew</p>
                             </a>
