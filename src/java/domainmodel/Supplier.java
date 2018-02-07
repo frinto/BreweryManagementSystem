@@ -17,19 +17,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 727525
+ * @author root
  */
 @Entity
 @Table(name = "supplier")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Supplier.findAll", query = "SELECT s FROM Supplier s")
-    , @NamedQuery(name = "Supplier.findBySupplierId", query = "SELECT s FROM Supplier s WHERE s.supplierId = :supplierId")
-    , @NamedQuery(name = "Supplier.findByName", query = "SELECT s FROM Supplier s WHERE s.name = :name")
-    , @NamedQuery(name = "Supplier.findByPhoneNumber", query = "SELECT s FROM Supplier s WHERE s.phoneNumber = :phoneNumber")
-    , @NamedQuery(name = "Supplier.findByAddress", query = "SELECT s FROM Supplier s WHERE s.address = :address")})
+    @NamedQuery(name = "Supplier.findAll", query = "SELECT s FROM Supplier s"),
+    @NamedQuery(name = "Supplier.findBySupplierId", query = "SELECT s FROM Supplier s WHERE s.supplierId = :supplierId"),
+    @NamedQuery(name = "Supplier.findByName", query = "SELECT s FROM Supplier s WHERE s.name = :name"),
+    @NamedQuery(name = "Supplier.findByPhoneNumber", query = "SELECT s FROM Supplier s WHERE s.phoneNumber = :phoneNumber"),
+    @NamedQuery(name = "Supplier.findByAddress", query = "SELECT s FROM Supplier s WHERE s.address = :address")})
 public class Supplier implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

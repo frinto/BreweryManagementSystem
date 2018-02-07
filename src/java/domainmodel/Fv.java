@@ -17,23 +17,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 727525
+ * @author root
  */
 @Entity
 @Table(name = "fv")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Fv.findAll", query = "SELECT f FROM Fv f")
-    , @NamedQuery(name = "Fv.findByFvId", query = "SELECT f FROM Fv f WHERE f.fvId = :fvId")
-    , @NamedQuery(name = "Fv.findByCapacity", query = "SELECT f FROM Fv f WHERE f.capacity = :capacity")
-    , @NamedQuery(name = "Fv.findByVolume", query = "SELECT f FROM Fv f WHERE f.volume = :volume")
-    , @NamedQuery(name = "Fv.findByBrew1", query = "SELECT f FROM Fv f WHERE f.brew1 = :brew1")
-    , @NamedQuery(name = "Fv.findByBrew2", query = "SELECT f FROM Fv f WHERE f.brew2 = :brew2")
-    , @NamedQuery(name = "Fv.findByBrew3", query = "SELECT f FROM Fv f WHERE f.brew3 = :brew3")
-    , @NamedQuery(name = "Fv.findByBrand", query = "SELECT f FROM Fv f WHERE f.brand = :brand")
-    , @NamedQuery(name = "Fv.findByStatus", query = "SELECT f FROM Fv f WHERE f.status = :status")})
+    @NamedQuery(name = "Fv.findAll", query = "SELECT f FROM Fv f"),
+    @NamedQuery(name = "Fv.findByFvId", query = "SELECT f FROM Fv f WHERE f.fvId = :fvId"),
+    @NamedQuery(name = "Fv.findByCapacity", query = "SELECT f FROM Fv f WHERE f.capacity = :capacity"),
+    @NamedQuery(name = "Fv.findByVolume", query = "SELECT f FROM Fv f WHERE f.volume = :volume"),
+    @NamedQuery(name = "Fv.findByBrew1", query = "SELECT f FROM Fv f WHERE f.brew1 = :brew1"),
+    @NamedQuery(name = "Fv.findByBrew2", query = "SELECT f FROM Fv f WHERE f.brew2 = :brew2"),
+    @NamedQuery(name = "Fv.findByBrew3", query = "SELECT f FROM Fv f WHERE f.brew3 = :brew3"),
+    @NamedQuery(name = "Fv.findByBrand", query = "SELECT f FROM Fv f WHERE f.brand = :brand"),
+    @NamedQuery(name = "Fv.findByStatus", query = "SELECT f FROM Fv f WHERE f.status = :status")})
 public class Fv implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

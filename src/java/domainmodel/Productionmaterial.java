@@ -20,14 +20,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author root
  */
 @Entity
-@Table(name = "brewMaterials")
+@Table(name = "productionmaterial")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "BrewMaterials.findAll", query = "SELECT b FROM BrewMaterials b"),
-    @NamedQuery(name = "BrewMaterials.findByName", query = "SELECT b FROM BrewMaterials b WHERE b.name = :name"),
-    @NamedQuery(name = "BrewMaterials.findByQty", query = "SELECT b FROM BrewMaterials b WHERE b.qty = :qty"),
-    @NamedQuery(name = "BrewMaterials.findByUnits", query = "SELECT b FROM BrewMaterials b WHERE b.units = :units")})
-public class BrewMaterials implements Serializable {
+    @NamedQuery(name = "Productionmaterial.findAll", query = "SELECT p FROM Productionmaterial p"),
+    @NamedQuery(name = "Productionmaterial.findByName", query = "SELECT p FROM Productionmaterial p WHERE p.name = :name"),
+    @NamedQuery(name = "Productionmaterial.findByQty", query = "SELECT p FROM Productionmaterial p WHERE p.qty = :qty")})
+public class Productionmaterial implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -35,13 +34,11 @@ public class BrewMaterials implements Serializable {
     private String name;
     @Column(name = "qty")
     private Integer qty;
-    @Column(name = "units")
-    private String units;
 
-    public BrewMaterials() {
+    public Productionmaterial() {
     }
 
-    public BrewMaterials(String name) {
+    public Productionmaterial(String name) {
         this.name = name;
     }
 
@@ -61,14 +58,6 @@ public class BrewMaterials implements Serializable {
         this.qty = qty;
     }
 
-    public String getUnits() {
-        return units;
-    }
-
-    public void setUnits(String units) {
-        this.units = units;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -79,10 +68,10 @@ public class BrewMaterials implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BrewMaterials)) {
+        if (!(object instanceof Productionmaterial)) {
             return false;
         }
-        BrewMaterials other = (BrewMaterials) object;
+        Productionmaterial other = (Productionmaterial) object;
         if ((this.name == null && other.name != null) || (this.name != null && !this.name.equals(other.name))) {
             return false;
         }
@@ -91,7 +80,7 @@ public class BrewMaterials implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.BrewMaterials[ name=" + name + " ]";
+        return "domainmodel.Productionmaterial[ name=" + name + " ]";
     }
     
 }

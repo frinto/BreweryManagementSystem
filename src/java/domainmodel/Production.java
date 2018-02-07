@@ -22,21 +22,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 727525
+ * @author root
  */
 @Entity
 @Table(name = "production")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Production.findAll", query = "SELECT p FROM Production p")
-    , @NamedQuery(name = "Production.findByProdId", query = "SELECT p FROM Production p WHERE p.prodId = :prodId")
-    , @NamedQuery(name = "Production.findByQuantity", query = "SELECT p FROM Production p WHERE p.quantity = :quantity")
-    , @NamedQuery(name = "Production.findByDate", query = "SELECT p FROM Production p WHERE p.date = :date")
-    , @NamedQuery(name = "Production.findByEmployeeId", query = "SELECT p FROM Production p WHERE p.employeeId = :employeeId")
-    , @NamedQuery(name = "Production.findBySvNum", query = "SELECT p FROM Production p WHERE p.svNum = :svNum")
-    , @NamedQuery(name = "Production.findByProductionType", query = "SELECT p FROM Production p WHERE p.productionType = :productionType")})
+    @NamedQuery(name = "Production.findAll", query = "SELECT p FROM Production p"),
+    @NamedQuery(name = "Production.findByProdId", query = "SELECT p FROM Production p WHERE p.prodId = :prodId"),
+    @NamedQuery(name = "Production.findByQuantity", query = "SELECT p FROM Production p WHERE p.quantity = :quantity"),
+    @NamedQuery(name = "Production.findByDate", query = "SELECT p FROM Production p WHERE p.date = :date"),
+    @NamedQuery(name = "Production.findByEmployeeId", query = "SELECT p FROM Production p WHERE p.employeeId = :employeeId"),
+    @NamedQuery(name = "Production.findBySvNum", query = "SELECT p FROM Production p WHERE p.svNum = :svNum"),
+    @NamedQuery(name = "Production.findByProductionType", query = "SELECT p FROM Production p WHERE p.productionType = :productionType")})
 public class Production implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

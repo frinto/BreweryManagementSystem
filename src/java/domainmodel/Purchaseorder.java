@@ -23,17 +23,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author root
  */
 @Entity
-@Table(name = "purchaseOrder")
+@Table(name = "purchaseorder")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PurchaseOrder.findAll", query = "SELECT p FROM PurchaseOrder p"),
-    @NamedQuery(name = "PurchaseOrder.findByPurchaseOrderId", query = "SELECT p FROM PurchaseOrder p WHERE p.purchaseOrderId = :purchaseOrderId"),
-    @NamedQuery(name = "PurchaseOrder.findByMaterialId", query = "SELECT p FROM PurchaseOrder p WHERE p.materialId = :materialId"),
-    @NamedQuery(name = "PurchaseOrder.findByQty", query = "SELECT p FROM PurchaseOrder p WHERE p.qty = :qty"),
-    @NamedQuery(name = "PurchaseOrder.findByEmpId", query = "SELECT p FROM PurchaseOrder p WHERE p.empId = :empId"),
-    @NamedQuery(name = "PurchaseOrder.findBySupplierId", query = "SELECT p FROM PurchaseOrder p WHERE p.supplierId = :supplierId"),
-    @NamedQuery(name = "PurchaseOrder.findByDateArrived", query = "SELECT p FROM PurchaseOrder p WHERE p.dateArrived = :dateArrived")})
-public class PurchaseOrder implements Serializable {
+    @NamedQuery(name = "Purchaseorder.findAll", query = "SELECT p FROM Purchaseorder p"),
+    @NamedQuery(name = "Purchaseorder.findByPurchaseOrderId", query = "SELECT p FROM Purchaseorder p WHERE p.purchaseOrderId = :purchaseOrderId"),
+    @NamedQuery(name = "Purchaseorder.findByMaterialId", query = "SELECT p FROM Purchaseorder p WHERE p.materialId = :materialId"),
+    @NamedQuery(name = "Purchaseorder.findByQty", query = "SELECT p FROM Purchaseorder p WHERE p.qty = :qty"),
+    @NamedQuery(name = "Purchaseorder.findByEmpId", query = "SELECT p FROM Purchaseorder p WHERE p.empId = :empId"),
+    @NamedQuery(name = "Purchaseorder.findBySupplierId", query = "SELECT p FROM Purchaseorder p WHERE p.supplierId = :supplierId"),
+    @NamedQuery(name = "Purchaseorder.findByDateArrived", query = "SELECT p FROM Purchaseorder p WHERE p.dateArrived = :dateArrived")})
+public class Purchaseorder implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -53,14 +53,14 @@ public class PurchaseOrder implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dateArrived;
 
-    public PurchaseOrder() {
+    public Purchaseorder() {
     }
 
-    public PurchaseOrder(Integer purchaseOrderId) {
+    public Purchaseorder(Integer purchaseOrderId) {
         this.purchaseOrderId = purchaseOrderId;
     }
 
-    public PurchaseOrder(Integer purchaseOrderId, int empId, int supplierId) {
+    public Purchaseorder(Integer purchaseOrderId, int empId, int supplierId) {
         this.purchaseOrderId = purchaseOrderId;
         this.empId = empId;
         this.supplierId = supplierId;
@@ -124,10 +124,10 @@ public class PurchaseOrder implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PurchaseOrder)) {
+        if (!(object instanceof Purchaseorder)) {
             return false;
         }
-        PurchaseOrder other = (PurchaseOrder) object;
+        Purchaseorder other = (Purchaseorder) object;
         if ((this.purchaseOrderId == null && other.purchaseOrderId != null) || (this.purchaseOrderId != null && !this.purchaseOrderId.equals(other.purchaseOrderId))) {
             return false;
         }
@@ -136,7 +136,7 @@ public class PurchaseOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.PurchaseOrder[ purchaseOrderId=" + purchaseOrderId + " ]";
+        return "domainmodel.Purchaseorder[ purchaseOrderId=" + purchaseOrderId + " ]";
     }
     
 }

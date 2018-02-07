@@ -20,13 +20,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author root
  */
 @Entity
-@Table(name = "finishedProduct")
+@Table(name = "finishedproduct")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "FinishedProduct.findAll", query = "SELECT f FROM FinishedProduct f"),
-    @NamedQuery(name = "FinishedProduct.findByProductName", query = "SELECT f FROM FinishedProduct f WHERE f.productName = :productName"),
-    @NamedQuery(name = "FinishedProduct.findByQty", query = "SELECT f FROM FinishedProduct f WHERE f.qty = :qty")})
-public class FinishedProduct implements Serializable {
+    @NamedQuery(name = "Finishedproduct.findAll", query = "SELECT f FROM Finishedproduct f"),
+    @NamedQuery(name = "Finishedproduct.findByProductName", query = "SELECT f FROM Finishedproduct f WHERE f.productName = :productName"),
+    @NamedQuery(name = "Finishedproduct.findByQty", query = "SELECT f FROM Finishedproduct f WHERE f.qty = :qty")})
+public class Finishedproduct implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -35,10 +35,10 @@ public class FinishedProduct implements Serializable {
     @Column(name = "qty")
     private Integer qty;
 
-    public FinishedProduct() {
+    public Finishedproduct() {
     }
 
-    public FinishedProduct(String productName) {
+    public Finishedproduct(String productName) {
         this.productName = productName;
     }
 
@@ -68,10 +68,10 @@ public class FinishedProduct implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof FinishedProduct)) {
+        if (!(object instanceof Finishedproduct)) {
             return false;
         }
-        FinishedProduct other = (FinishedProduct) object;
+        Finishedproduct other = (Finishedproduct) object;
         if ((this.productName == null && other.productName != null) || (this.productName != null && !this.productName.equals(other.productName))) {
             return false;
         }
@@ -80,7 +80,7 @@ public class FinishedProduct implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.FinishedProduct[ productName=" + productName + " ]";
+        return "domainmodel.Finishedproduct[ productName=" + productName + " ]";
     }
     
 }

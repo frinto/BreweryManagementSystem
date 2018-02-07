@@ -5,7 +5,7 @@
  */
 package dataaccess;
 
-import domainmodel.FinishedProduct;
+import domainmodel.Finishedproduct;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,11 +17,11 @@ import javax.persistence.EntityTransaction;
  * @author root
  */
 public class FinishedInventoryDB {
-    
-    public int insertInventory(FinishedProduct finishedProduct) throws BrewDBException {
+
+    public int insertInventory(Finishedproduct finishedProduct) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
             trans.begin();
             em.persist(finishedProduct);
@@ -35,12 +35,12 @@ public class FinishedInventoryDB {
             em.close();
         }
     }
-    
-    public List<FinishedProduct> getAllInventory() throws BrewDBException {
+
+    public List<Finishedproduct> getAllInventory() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
-            List<FinishedProduct> finishedProducts = em.createNamedQuery("FinishedProduct.findAll", FinishedProduct.class).getResultList();
+            List<Finishedproduct> finishedProducts = em.createNamedQuery("Finishedproduct.findAll", Finishedproduct.class).getResultList();
             return finishedProducts;
         } catch (Exception ex) {
             Logger.getLogger(FinishedInventoryDB.class.getName()).log(Level.SEVERE, "Cannot read finished products", ex);
@@ -49,5 +49,5 @@ public class FinishedInventoryDB {
             em.close();
         }
     }
-    
+
 }
