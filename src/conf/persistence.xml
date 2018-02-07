@@ -27,6 +27,12 @@
     <class>domainmodel.SV</class>
     <class>domainmodel.BrewMaterials</class>
     <class>domainmodel.ProductionMaterialUsage</class>
+    <class>domainmodel.Productionmaterialusage_1</class>
+    <class>domainmodel.Purchaseorder_1</class>
+    <class>domainmodel.Productionschedule_1</class>
+    <class>domainmodel.Brewmaterials_1</class>
+    <class>domainmodel.Sv_1</class>
+    <class>domainmodel.Finishedproduct_1</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/brewery?zeroDateTimeBehavior=convertToNull"/>

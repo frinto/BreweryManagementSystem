@@ -17,55 +17,62 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author root
+ * @author 727525
  */
 @Entity
 @Table(name = "recipe")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Recipe.findAll", query = "SELECT r FROM Recipe r"),
-    @NamedQuery(name = "Recipe.findByRecipeId", query = "SELECT r FROM Recipe r WHERE r.recipeId = :recipeId"),
-    @NamedQuery(name = "Recipe.findByMashInTemp", query = "SELECT r FROM Recipe r WHERE r.mashInTemp = :mashInTemp"),
-    @NamedQuery(name = "Recipe.findByMashInTime", query = "SELECT r FROM Recipe r WHERE r.mashInTime = :mashInTime"),
-    @NamedQuery(name = "Recipe.findByMashWaterVolume", query = "SELECT r FROM Recipe r WHERE r.mashWaterVolume = :mashWaterVolume"),
-    @NamedQuery(name = "Recipe.findByRestTime", query = "SELECT r FROM Recipe r WHERE r.restTime = :restTime"),
-    @NamedQuery(name = "Recipe.findByRaiseToTemp", query = "SELECT r FROM Recipe r WHERE r.raiseToTemp = :raiseToTemp"),
-    @NamedQuery(name = "Recipe.findByInTime", query = "SELECT r FROM Recipe r WHERE r.inTime = :inTime"),
-    @NamedQuery(name = "Recipe.findByTotalMashTime", query = "SELECT r FROM Recipe r WHERE r.totalMashTime = :totalMashTime"),
-    @NamedQuery(name = "Recipe.findByUnderletLitres", query = "SELECT r FROM Recipe r WHERE r.underletLitres = :underletLitres"),
-    @NamedQuery(name = "Recipe.findByRest", query = "SELECT r FROM Recipe r WHERE r.rest = :rest"),
-    @NamedQuery(name = "Recipe.findByVorlaufTime", query = "SELECT r FROM Recipe r WHERE r.vorlaufTime = :vorlaufTime"),
-    @NamedQuery(name = "Recipe.findByFirstWortGrav", query = "SELECT r FROM Recipe r WHERE r.firstWortGrav = :firstWortGrav"),
-    @NamedQuery(name = "Recipe.findByRunOffTime", query = "SELECT r FROM Recipe r WHERE r.runOffTime = :runOffTime"),
-    @NamedQuery(name = "Recipe.findBySpargVol", query = "SELECT r FROM Recipe r WHERE r.spargVol = :spargVol"),
-    @NamedQuery(name = "Recipe.findBySpargTemp", query = "SELECT r FROM Recipe r WHERE r.spargTemp = :spargTemp"),
-    @NamedQuery(name = "Recipe.findByLastRunningsGrav", query = "SELECT r FROM Recipe r WHERE r.lastRunningsGrav = :lastRunningsGrav"),
-    @NamedQuery(name = "Recipe.findByKettleFullVol", query = "SELECT r FROM Recipe r WHERE r.kettleFullVol = :kettleFullVol"),
-    @NamedQuery(name = "Recipe.findByKettleFullGrav", query = "SELECT r FROM Recipe r WHERE r.kettleFullGrav = :kettleFullGrav"),
-    @NamedQuery(name = "Recipe.findByBoilTime", query = "SELECT r FROM Recipe r WHERE r.boilTime = :boilTime"),
-    @NamedQuery(name = "Recipe.findByStrikeOutVol", query = "SELECT r FROM Recipe r WHERE r.strikeOutVol = :strikeOutVol"),
-    @NamedQuery(name = "Recipe.findByStrikeOutGrav", query = "SELECT r FROM Recipe r WHERE r.strikeOutGrav = :strikeOutGrav"),
-    @NamedQuery(name = "Recipe.findByWhirlPoolTime", query = "SELECT r FROM Recipe r WHERE r.whirlPoolTime = :whirlPoolTime"),
-    @NamedQuery(name = "Recipe.findByCoolInTemp", query = "SELECT r FROM Recipe r WHERE r.coolInTemp = :coolInTemp"),
-    @NamedQuery(name = "Recipe.findByOxygenRate", query = "SELECT r FROM Recipe r WHERE r.oxygenRate = :oxygenRate"),
-    @NamedQuery(name = "Recipe.findByGypsumAmt", query = "SELECT r FROM Recipe r WHERE r.gypsumAmt = :gypsumAmt"),
-    @NamedQuery(name = "Recipe.findByCalciumChlorideAmt", query = "SELECT r FROM Recipe r WHERE r.calciumChlorideAmt = :calciumChlorideAmt"),
-    @NamedQuery(name = "Recipe.findBySodiumChlorideAmt", query = "SELECT r FROM Recipe r WHERE r.sodiumChlorideAmt = :sodiumChlorideAmt"),
-    @NamedQuery(name = "Recipe.findByPhosphAcidAmt", query = "SELECT r FROM Recipe r WHERE r.phosphAcidAmt = :phosphAcidAmt"),
-    @NamedQuery(name = "Recipe.findByFirstHop", query = "SELECT r FROM Recipe r WHERE r.firstHop = :firstHop"),
-    @NamedQuery(name = "Recipe.findBySecondHop", query = "SELECT r FROM Recipe r WHERE r.secondHop = :secondHop"),
-    @NamedQuery(name = "Recipe.findByThirdHop", query = "SELECT r FROM Recipe r WHERE r.thirdHop = :thirdHop"),
-    @NamedQuery(name = "Recipe.findByBaseMalt", query = "SELECT r FROM Recipe r WHERE r.baseMalt = :baseMalt"),
-    @NamedQuery(name = "Recipe.findBySecondMalt", query = "SELECT r FROM Recipe r WHERE r.secondMalt = :secondMalt"),
-    @NamedQuery(name = "Recipe.findByThirdMalt", query = "SELECT r FROM Recipe r WHERE r.thirdMalt = :thirdMalt"),
-    @NamedQuery(name = "Recipe.findByFourthMalt", query = "SELECT r FROM Recipe r WHERE r.fourthMalt = :fourthMalt"),
-    @NamedQuery(name = "Recipe.findByBrandId", query = "SELECT r FROM Recipe r WHERE r.brandId = :brandId")})
+    @NamedQuery(name = "Recipe.findAll", query = "SELECT r FROM Recipe r")
+    , @NamedQuery(name = "Recipe.findByRecipeName", query = "SELECT r FROM Recipe r WHERE r.recipeName = :recipeName")
+    , @NamedQuery(name = "Recipe.findByMashInTemp", query = "SELECT r FROM Recipe r WHERE r.mashInTemp = :mashInTemp")
+    , @NamedQuery(name = "Recipe.findByMashInTime", query = "SELECT r FROM Recipe r WHERE r.mashInTime = :mashInTime")
+    , @NamedQuery(name = "Recipe.findByMashWaterVolume", query = "SELECT r FROM Recipe r WHERE r.mashWaterVolume = :mashWaterVolume")
+    , @NamedQuery(name = "Recipe.findByRestTime", query = "SELECT r FROM Recipe r WHERE r.restTime = :restTime")
+    , @NamedQuery(name = "Recipe.findByRaiseToTemp", query = "SELECT r FROM Recipe r WHERE r.raiseToTemp = :raiseToTemp")
+    , @NamedQuery(name = "Recipe.findByInTime", query = "SELECT r FROM Recipe r WHERE r.inTime = :inTime")
+    , @NamedQuery(name = "Recipe.findByTotalMashTime", query = "SELECT r FROM Recipe r WHERE r.totalMashTime = :totalMashTime")
+    , @NamedQuery(name = "Recipe.findByUnderletLitres", query = "SELECT r FROM Recipe r WHERE r.underletLitres = :underletLitres")
+    , @NamedQuery(name = "Recipe.findByRest", query = "SELECT r FROM Recipe r WHERE r.rest = :rest")
+    , @NamedQuery(name = "Recipe.findByVorlaufTime", query = "SELECT r FROM Recipe r WHERE r.vorlaufTime = :vorlaufTime")
+    , @NamedQuery(name = "Recipe.findByFirstWortGrav", query = "SELECT r FROM Recipe r WHERE r.firstWortGrav = :firstWortGrav")
+    , @NamedQuery(name = "Recipe.findByRunOffTime", query = "SELECT r FROM Recipe r WHERE r.runOffTime = :runOffTime")
+    , @NamedQuery(name = "Recipe.findBySpargVol", query = "SELECT r FROM Recipe r WHERE r.spargVol = :spargVol")
+    , @NamedQuery(name = "Recipe.findBySpargTemp", query = "SELECT r FROM Recipe r WHERE r.spargTemp = :spargTemp")
+    , @NamedQuery(name = "Recipe.findByLastRunningsGrav", query = "SELECT r FROM Recipe r WHERE r.lastRunningsGrav = :lastRunningsGrav")
+    , @NamedQuery(name = "Recipe.findByKettleFullVol", query = "SELECT r FROM Recipe r WHERE r.kettleFullVol = :kettleFullVol")
+    , @NamedQuery(name = "Recipe.findByKettleFullGrav", query = "SELECT r FROM Recipe r WHERE r.kettleFullGrav = :kettleFullGrav")
+    , @NamedQuery(name = "Recipe.findByBoilTime", query = "SELECT r FROM Recipe r WHERE r.boilTime = :boilTime")
+    , @NamedQuery(name = "Recipe.findByStrikeOutVol", query = "SELECT r FROM Recipe r WHERE r.strikeOutVol = :strikeOutVol")
+    , @NamedQuery(name = "Recipe.findByStrikeOutGrav", query = "SELECT r FROM Recipe r WHERE r.strikeOutGrav = :strikeOutGrav")
+    , @NamedQuery(name = "Recipe.findByWhirlPoolTime", query = "SELECT r FROM Recipe r WHERE r.whirlPoolTime = :whirlPoolTime")
+    , @NamedQuery(name = "Recipe.findByCoolInTemp", query = "SELECT r FROM Recipe r WHERE r.coolInTemp = :coolInTemp")
+    , @NamedQuery(name = "Recipe.findByOxygenRate", query = "SELECT r FROM Recipe r WHERE r.oxygenRate = :oxygenRate")
+    , @NamedQuery(name = "Recipe.findByGypsumAmt", query = "SELECT r FROM Recipe r WHERE r.gypsumAmt = :gypsumAmt")
+    , @NamedQuery(name = "Recipe.findByCalciumChlorideAmt", query = "SELECT r FROM Recipe r WHERE r.calciumChlorideAmt = :calciumChlorideAmt")
+    , @NamedQuery(name = "Recipe.findBySodiumChlorideAmt", query = "SELECT r FROM Recipe r WHERE r.sodiumChlorideAmt = :sodiumChlorideAmt")
+    , @NamedQuery(name = "Recipe.findByPhosphAcidAmt", query = "SELECT r FROM Recipe r WHERE r.phosphAcidAmt = :phosphAcidAmt")
+    , @NamedQuery(name = "Recipe.findByFirstHop", query = "SELECT r FROM Recipe r WHERE r.firstHop = :firstHop")
+    , @NamedQuery(name = "Recipe.findByFirstHopAmt", query = "SELECT r FROM Recipe r WHERE r.firstHopAmt = :firstHopAmt")
+    , @NamedQuery(name = "Recipe.findBySecondHop", query = "SELECT r FROM Recipe r WHERE r.secondHop = :secondHop")
+    , @NamedQuery(name = "Recipe.findBySecondHopAmt", query = "SELECT r FROM Recipe r WHERE r.secondHopAmt = :secondHopAmt")
+    , @NamedQuery(name = "Recipe.findByThirdHop", query = "SELECT r FROM Recipe r WHERE r.thirdHop = :thirdHop")
+    , @NamedQuery(name = "Recipe.findByThirdHopAmt", query = "SELECT r FROM Recipe r WHERE r.thirdHopAmt = :thirdHopAmt")
+    , @NamedQuery(name = "Recipe.findByBaseMalt", query = "SELECT r FROM Recipe r WHERE r.baseMalt = :baseMalt")
+    , @NamedQuery(name = "Recipe.findByBaseMaltAmt", query = "SELECT r FROM Recipe r WHERE r.baseMaltAmt = :baseMaltAmt")
+    , @NamedQuery(name = "Recipe.findBySecondMalt", query = "SELECT r FROM Recipe r WHERE r.secondMalt = :secondMalt")
+    , @NamedQuery(name = "Recipe.findBySecondMaltAmt", query = "SELECT r FROM Recipe r WHERE r.secondMaltAmt = :secondMaltAmt")
+    , @NamedQuery(name = "Recipe.findByThirdMalt", query = "SELECT r FROM Recipe r WHERE r.thirdMalt = :thirdMalt")
+    , @NamedQuery(name = "Recipe.findByThirdMaltAmt", query = "SELECT r FROM Recipe r WHERE r.thirdMaltAmt = :thirdMaltAmt")
+    , @NamedQuery(name = "Recipe.findByFourthMalt", query = "SELECT r FROM Recipe r WHERE r.fourthMalt = :fourthMalt")
+    , @NamedQuery(name = "Recipe.findByFourthMaltAmt", query = "SELECT r FROM Recipe r WHERE r.fourthMaltAmt = :fourthMaltAmt")})
 public class Recipe implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "recipeId")
-    private Integer recipeId;
+    @Column(name = "recipeName")
+    private String recipeName;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "mashInTemp")
     private Float mashInTemp;
@@ -123,40 +130,46 @@ public class Recipe implements Serializable {
     private Float phosphAcidAmt;
     @Column(name = "firstHop")
     private String firstHop;
+    @Column(name = "firstHopAmt")
+    private String firstHopAmt;
     @Column(name = "secondHop")
     private String secondHop;
+    @Column(name = "secondHopAmt")
+    private String secondHopAmt;
     @Column(name = "thirdHop")
     private String thirdHop;
+    @Column(name = "thirdHopAmt")
+    private String thirdHopAmt;
     @Column(name = "baseMalt")
     private String baseMalt;
+    @Column(name = "baseMaltAmt")
+    private String baseMaltAmt;
     @Column(name = "secondMalt")
     private String secondMalt;
+    @Column(name = "secondMaltAmt")
+    private String secondMaltAmt;
     @Column(name = "thirdMalt")
     private String thirdMalt;
+    @Column(name = "thirdMaltAmt")
+    private String thirdMaltAmt;
     @Column(name = "fourthMalt")
     private String fourthMalt;
-    @Basic(optional = false)
-    @Column(name = "brandId")
-    private int brandId;
+    @Column(name = "fourthMaltAmt")
+    private String fourthMaltAmt;
 
     public Recipe() {
     }
 
-    public Recipe(Integer recipeId) {
-        this.recipeId = recipeId;
+    public Recipe(String recipeName) {
+        this.recipeName = recipeName;
     }
 
-    public Recipe(Integer recipeId, int brandId) {
-        this.recipeId = recipeId;
-        this.brandId = brandId;
+    public String getRecipeName() {
+        return recipeName;
     }
 
-    public Integer getRecipeId() {
-        return recipeId;
-    }
-
-    public void setRecipeId(Integer recipeId) {
-        this.recipeId = recipeId;
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
     }
 
     public Float getMashInTemp() {
@@ -383,12 +396,28 @@ public class Recipe implements Serializable {
         this.firstHop = firstHop;
     }
 
+    public String getFirstHopAmt() {
+        return firstHopAmt;
+    }
+
+    public void setFirstHopAmt(String firstHopAmt) {
+        this.firstHopAmt = firstHopAmt;
+    }
+
     public String getSecondHop() {
         return secondHop;
     }
 
     public void setSecondHop(String secondHop) {
         this.secondHop = secondHop;
+    }
+
+    public String getSecondHopAmt() {
+        return secondHopAmt;
+    }
+
+    public void setSecondHopAmt(String secondHopAmt) {
+        this.secondHopAmt = secondHopAmt;
     }
 
     public String getThirdHop() {
@@ -399,12 +428,28 @@ public class Recipe implements Serializable {
         this.thirdHop = thirdHop;
     }
 
+    public String getThirdHopAmt() {
+        return thirdHopAmt;
+    }
+
+    public void setThirdHopAmt(String thirdHopAmt) {
+        this.thirdHopAmt = thirdHopAmt;
+    }
+
     public String getBaseMalt() {
         return baseMalt;
     }
 
     public void setBaseMalt(String baseMalt) {
         this.baseMalt = baseMalt;
+    }
+
+    public String getBaseMaltAmt() {
+        return baseMaltAmt;
+    }
+
+    public void setBaseMaltAmt(String baseMaltAmt) {
+        this.baseMaltAmt = baseMaltAmt;
     }
 
     public String getSecondMalt() {
@@ -415,12 +460,28 @@ public class Recipe implements Serializable {
         this.secondMalt = secondMalt;
     }
 
+    public String getSecondMaltAmt() {
+        return secondMaltAmt;
+    }
+
+    public void setSecondMaltAmt(String secondMaltAmt) {
+        this.secondMaltAmt = secondMaltAmt;
+    }
+
     public String getThirdMalt() {
         return thirdMalt;
     }
 
     public void setThirdMalt(String thirdMalt) {
         this.thirdMalt = thirdMalt;
+    }
+
+    public String getThirdMaltAmt() {
+        return thirdMaltAmt;
+    }
+
+    public void setThirdMaltAmt(String thirdMaltAmt) {
+        this.thirdMaltAmt = thirdMaltAmt;
     }
 
     public String getFourthMalt() {
@@ -431,18 +492,18 @@ public class Recipe implements Serializable {
         this.fourthMalt = fourthMalt;
     }
 
-    public int getBrandId() {
-        return brandId;
+    public String getFourthMaltAmt() {
+        return fourthMaltAmt;
     }
 
-    public void setBrandId(int brandId) {
-        this.brandId = brandId;
+    public void setFourthMaltAmt(String fourthMaltAmt) {
+        this.fourthMaltAmt = fourthMaltAmt;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (recipeId != null ? recipeId.hashCode() : 0);
+        hash += (recipeName != null ? recipeName.hashCode() : 0);
         return hash;
     }
 
@@ -453,7 +514,7 @@ public class Recipe implements Serializable {
             return false;
         }
         Recipe other = (Recipe) object;
-        if ((this.recipeId == null && other.recipeId != null) || (this.recipeId != null && !this.recipeId.equals(other.recipeId))) {
+        if ((this.recipeName == null && other.recipeName != null) || (this.recipeName != null && !this.recipeName.equals(other.recipeName))) {
             return false;
         }
         return true;
@@ -461,7 +522,7 @@ public class Recipe implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.Recipe[ recipeId=" + recipeId + " ]";
+        return "domainmodel.Recipe[ recipeName=" + recipeName + " ]";
     }
     
 }
