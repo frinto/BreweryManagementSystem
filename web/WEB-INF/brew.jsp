@@ -180,23 +180,28 @@
                 <c:if test="${recipe!=null}">
 
                     <h1 class="leftSpacingh1">Now Brewing: ${recipe.recipeName}</h1>
-                    
-
-                            <!---------------------------------------------------Tabs------------------------------------------>
-
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Ingredients</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">BrewSheet</a>
-                                </li>
-
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
 
+                    <!---------------------------------------------------Tabs------------------------------------------>
+
+                    <!--These are the tabs from the bootstrap documentation-->
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Ingredients</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">BrewSheet</a>
+                        </li>
+
+                    </ul>
+
+
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+
+                            <!------------------------------------------------------------Ingredients------------------------------------------------------>
 
 
                             <h4 class="leftSpacingh4">Hops:</h4>
@@ -270,9 +275,12 @@
                             </table>
 
                         </div>
+
+                        <!-------------------------------------------------------Brew Sheet----------------------------------------------------------->
+
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-                            
+
                             This is where the brewsheet goes
 
                         </div>
