@@ -9,11 +9,11 @@
         <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-        
+
         <!--     Fonts and icons     -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-        
+
         <!-- CSS Files -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -30,9 +30,9 @@
 
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <a href="http://www.creative-tim.com" class="simple-text">
-                            Brewery Management System
-                        </a>
+
+                        <image src ="assets/img/logo.jpg">
+
                     </div>
                     <ul class="nav">
                         <li>
@@ -62,7 +62,7 @@
                         <li>
                             <a class="nav-link" href="rawinventory">
                                 <i class="nc-icon nc-atom"></i>
-                                <p>Raw Goods Inventory</p>
+                                <p>Raw Inventory</p>
                             </a>
                         </li>
                         <li>
@@ -174,10 +174,23 @@
                 </c:if>
 
                 <!----------------------------------------------BrewSheetForm-------------------------------------------->
-                <c:if test="${recipe!=null}">
+                
 
-                    <h1>Now Brewing: ${recipe.recipeName}</h1>
-                    <hr>
+                    <h1 class="leftSpacingh1">Now Brewing: ${recipe.recipeName}</h1>
+                    
+                    <c:if test="${recipe!=null}">
+
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Brew Sheet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Ingredients</a>
+                        </li>
+                        
+                    </ul>
+                    <h4 class="leftSpacingh4">Hops:</h4>
+
                     <table class="table table-sm">
                         <thead>
                             <tr>
@@ -201,8 +214,48 @@
                                 <th scope="row">Third Hop Addition</th>
                                 <td>${recipe.thirdHop}</td>
                                 <td colspan="2">${recipe.thirdHopAmt} kg</td>
-                               
+
                             </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="leftSpacingh4">Malt:</h4>     
+
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ingredient</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Base Malt</th>
+                                <td>${recipe.baseMalt}</td>
+                                <td>${recipe.baseMaltAmt} kg</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Second Malt</th>
+                                <td>${recipe.secondMalt}</td>
+                                <td>${recipe.secondMaltAmt} kg</td>
+                            </tr>
+                            <c:if test="${recipe.thirdMaltAmt!=0}">
+                                <tr>
+                                    <th scope="row">Third Malt</th>
+                                    <td>${recipe.thirdMalt}</td>
+                                    <td colspan="2">${recipe.thirdMaltAmt} kg</td>
+
+                                </tr>
+                            </c:if>
+                            <c:if test="${recipe.fourthMaltAmt!=0}">
+                                <tr>
+                                    <th scope="row">Third Malt</th>
+                                    <td>${recipe.fourthMalt}</td>
+                                    <td colspan="2">${recipe.fourthMaltAmt} kg</td>
+
+                                </tr>
+                            </c:if>
                         </tbody>
                     </table>
 

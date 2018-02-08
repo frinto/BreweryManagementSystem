@@ -7,6 +7,12 @@
     
 }
 
+.sidebar[data-color="red"]:after,
+body>.navbar-collapse[data-color="red"]:after {
+    background:   #ef7f7f;
+    
+    background-size: 150% 150%;
+}
 .barrelIcon{
     
     height :40px;
@@ -14,6 +20,13 @@
     position: relative;
     right: 5px;
     
+    
+}
+
+.logo img{
+    
+    width:100%;
+    height:100%;
     
 }
 .table{
@@ -24,6 +37,15 @@
     margin-left: 10px;
     margin-top: 5%;
     
+}
+.table-sm{
+    
+    font-size: 80%;
+    margin-top: 2%;
+}
+.table-sm td,th{
+    
+    width:2px;
 }
 
 .brewButton{
@@ -62,3 +84,13 @@
 
 
 /*---------------------------------------------------------------------------------------*/
+
+.leftSpacingh1{
+    
+    margin-left:2%;
+}
+
+.leftSpacingh4{
+    
+    margin-left:5%;
+}
