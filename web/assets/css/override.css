@@ -1,3 +1,6 @@
+
+/*------------------------------------------ICONS/LOGOS--------------------------------------------*/
+
 .tankfarmIcon{
     
     height :50px;
@@ -32,12 +35,16 @@ body>.navbar-collapse[data-color="red"]:after {
     height:98%;
     
 }
+
+/*------------------------------------------------------TABLES-------------------------------------------*/
+
+
 .table{
     width: 98%;
     max-width: 100%;
     margin-bottom: 1rem;
     background-color: transparent;
-    margin-left: 10px;
+    margin-left: 5px;
     margin-top: 5%;
     
 }
@@ -51,44 +58,18 @@ body>.navbar-collapse[data-color="red"]:after {
     width:2px;
 }
 
-.brewButton{
-    
-    margin-left:10%;
-    
-}
-
-.datepicker{
-    
-    margin-top:5%;
-    margin-left: 30%;
-    
-}
-
 /*----------------------------------DropDown Menu CSS------------------------------*/
 
 .custom-select{
     
     width: 300px;
-    
-    
-}
-
-.selectBrew{
-    
-    margin-left:35%;
-    margin-right:35%;
-    margin-top:10%;
-}
-
-.btn-success {
-    width:40%;
-    height:20%;
-    opacity:1;
-    font-weight: 700;
 }
 
 
-/*---------------------------------------------------------------------------------------*/
+
+
+
+/*---------------------------------------HEADER SPACING------------------------------------------------*/
 
 .leftSpacingh1{
     
@@ -110,7 +91,57 @@ body>.navbar-collapse[data-color="red"]:after {
     text-align: center;
 }
 
+
+.fvSelect{
+    
+}
+
+/*------------------------------------------BUTTONS-----------------------------*/
+
 .brewSubmit{
     
     text-align: center;
+}
+
+.btn-danger{
+    
+    margin-left:80%;
+}
+
+.btn-success {
+    width:40%;
+    height:20%;
+    opacity:1;
+    font-weight: 700;
+}
+
+.brewButton{
+    
+    margin-left:10%;
+    
+}
+
+/*---------------------------------------------DROP DOWN MENUS-------------------------------------*/
+
+.fvSelect{
+    
+}
+
+.selectBrew{
+    
+    margin-left:35%;
+    margin-right:35%;
+    margin-top:10%;
+}
+
+.custom-select{
+    
+    width: 300px;
+}
+
+.datepicker{
+    
+    margin-top:5%;
+    margin-left: 30%;
+    
 }
