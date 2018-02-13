@@ -1,4 +1,5 @@
 
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,14 +26,10 @@
         <div class="wrapper">
 
             <!--Nav bar----------------------------------------------------------------------------->
-
             <div class="sidebar" data-image="../assets/img/sidebar-5.jpg" data-color="red">
-
                 <div class="sidebar-wrapper">
                     <div class="logo">
-
                         <image src ="assets/img/logo.jpg">
-
                     </div>
                     <ul class="nav">
                         <li>
@@ -97,24 +94,16 @@
 
 
                 <!--------------------------------------Brew Selector------------------------------------------->
-
-
                 <c:if test="${recipe==null}">
-
                     <c:if test="${newBrew != null}">
-
-
                         <div class ="selectBrew">
                             <h3>Select Brew:</h3>
-
                             <form action ="brew" method ="GET">
                                 <select name="recipeList" class="custom-select">
                                     <c:forEach items="${recipes}" var="recipe">
-
                                         <option value="${recipe.recipeName}" selected ="selected">
                                             ${recipe.recipeName} 
                                         </option>
-
                                     </c:forEach>
                                 </select>
                                 <br>
@@ -123,31 +112,15 @@
                             </form>
                             <br>
                             <br>
-
                         </div>
-
-
-
                     </c:if>
-
                     <!-------------------------------------- End Brew Selector------------------------------------------->
-
-
-
-
-
                     <!--------------------------------------Start  New Brew------------------------------------------->
-
-
-
-
                     <div class = "brews">
                         <form class ="datepicker">
                             View Brews by Date:
                             <input type="date" name="bdaytime">
                         </form>
-
-
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
@@ -169,11 +142,8 @@
                         <form action="brew" method ="GET" class ="brewButton">
                             <button type="submit" class="btn btn-success" name="newBrew">Add a Brew</button>
                         </form>
-
                     </div>
-
                 </c:if>
-
                 <!----------------------------------------------BrewSheetForm-------------------------------------------->
 
 
@@ -204,7 +174,7 @@
                             <!------------------------------------------------------------Ingredients------------------------------------------------------>
 
 
-                            <h4 class="leftSpacingh4">Hops:</h4>
+                            <h4 class="leftSpacingh4">Hop Bill:</h4>
 
                             <table class="table table-sm">
                                 <thead>
@@ -234,7 +204,7 @@
                                 </tbody>
                             </table>
 
-                            <h4 class="leftSpacingh4">Malt:</h4>     
+                            <h4 class="leftSpacingh4">Malt Bill:</h4>     
 
                             <table class="table table-sm">
                                 <thead>
@@ -277,26 +247,228 @@
                         </div>
 
                         <!-------------------------------------------------------Brew Sheet----------------------------------------------------------->
-
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <h3 class ="brewSteps">Mash Tun</h3>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Action</th>
+                                        <th scope="col">Unit</th>
+                                        <th scope="col">Target</th>
+                                        <th scope="col">Actual</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Mash-In Temperature</th>
+                                        <td>oC</td>
+                                        <td colspan="4">${recipe.mashInTemp}</td>
 
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Mash-In Time</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.mashInTime}</td>
+                                        <td><input type="number" name="mashInTime" min="0" max="500"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Mash-In Water</th>
+                                        <td>Litres</td>
+                                        <td>${recipe.mashWaterVolume}</td>
+                                        <td><input type="number" name="mashvolume" min="0" max="500"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Rest Time</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.restTime}</td>
+                                        <td><input type="number" name="restTime" min="0" max="500"></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="4" style ="text-align:center">****DO STARCH TEST****</th>
 
-                            This is where the brewsheet goes
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Raise To Temperature</th>
+                                        <td>oC</td>
+                                        <td colspan="4">${recipe.raiseToTemp}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">In Time</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.inTime}</td>
+                                        <td><input type="number" name="inTime" min="0" max="500"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Total Mash Time</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.totalMashTime}</td>
+                                        <td><input type="number" name="totalMashTime" min="0" max="500"></td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                            <h3 class ="brewSteps">Lauter Tun</h3>
+                            
+                             <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Action</th>
+                                        <th scope="col">Unit</th>
+                                        <th scope="col">Target</th>
+                                        <th scope="col">Actual</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Underlet</th>
+                                        <td>Litres</td>
+                                        <td>${recipe.underletLitres}</td>
+                                        <td><input type="number" name="underletTime" min="0" max="500"></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Rest</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.rest}</td>
+                                        <td><input type="number" name="rest" min="0" max="500"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Vorlauf</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.vorlaufTime}</td>
+                                        <td><input type="number" name="vorlaufTime" min="0" max="500"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">First Wort Gravity</th>
+                                        <td>oP</td>
+                                        <td>${recipe.firstWortGrav}</td>
+                                        <td><input type="number" name="restTime" min="0" max="500"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Run-Off</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.runOffTime}</td>
+                                        <td><input type="number" name="runOffTime" min="0" max="500"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Sparge Volume</th>
+                                        <td>Hectolitres</td>
+                                        <td>${recipe.spargVol}</td>
+                                        <td><input type="number" name="spargeVol" min="0" max="500"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th scope="row">Sparge Temperature</th>
+                                        <td>oC</td>
+                                        <td>${recipe.spargTemp}</td>
+                                        <td><input type="number" name="spargTemp" min="0" max="500"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th scope="row">Last Runnings Gravity</th>
+                                        <td>oP</td>
+                                        <td>${recipe.lastRunningsGrav}</td>
+                                        <td><input type="number" name="lastRunnings" min="0" max="500"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th scope="row">Kettle Full Volume</th>
+                                        <td>Hectolitres</td>
+                                        <td>${recipe.kettleFullVol}</td>
+                                        <td><input type="number" name="kettleFullVol" min="0" max="500"></td>
+                                    </tr>
+                                 
+
+                                </tbody>
+
+                            </table>
+                                        
+                                        <h3 class ="brewSteps">Brew Kettle</h3>
+                            
+                             <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Action</th>
+                                        <th scope="col">Unit</th>
+                                        <th scope="col">Target</th>
+                                        <th scope="col">Actual</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Kettle Full Volume</th>
+                                        <td>Hectolitres</td>
+                                        <td>${recipe.kettleFullVol}</td>
+                                        <td><input type="number" name="kettleFullVol" min="0" max="500"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Kettle Full Gravity</th>
+                                        <td>oP</td>
+                                        <td>${recipe.kettleFullGrav}</td>
+                                        <td><input type="number" name="kettleFullGrav" min="0" max="500"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Boil</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.boilTime}</td>
+                                        
+                                    </tr>
+                                    
+                                    
+                                    <tr>
+                                        <th scope="row">Add First Hop at Kettle Full</th>
+                                        <td>kg</td>
+                                        <td>${recipe.firstHop}</td>
+                                        <td>${recipe.firstHopAmt}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Add Second Hop:30 Min Left</th>
+                                        <td>kg</td>
+                                        <td>${recipe.secondHop}</td>
+                                        <td>${recipe.secondHopAmt}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Add Third Hop: 5 Min Left</th>
+                                        <td>kg</td>
+                                        <td>${recipe.thirdHop}</td>
+                                        <td>${recipe.thirdHopAmt}</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th scope="row">Kettle Strikeout Volume</th>
+                                        <td>Hectolitres</td>
+                                        <td>${recipe.strikeOutVol}</td>
+                                        <td><input type="number" name="strikeOutVol" min="0" max="500"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Kettle Strikeout Gravity</th>
+                                        <td>oP</td>
+                                        <td>${recipe.strikeOutGrav}</td>
+                                        <td><input type="number" name="strikeOutGrav" min="0" max="500"></td>
+                                    </tr>
+                                    
+
+                                </tbody>
+
+                            </table>
+                            
+                            
+
+                           
+
+                            <form action="brew" method ="GET" class ="brewButton">
+                                <button type="submit" class="btn btn-success" name="newBrew">Add a Brew</button>
+                            </form>
 
                         </div>
-
                     </div>
                 </c:if>
-
-
                 <!--------------------------------------End Start New Brew------------------------------------------->
-
-
-
             </div>
         </div>
     </body>
-
     <!--   Core JS Files   -->
     <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
     <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
@@ -315,7 +487,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
             // Javascript method's body can be found in assets/js/demos.js
-
         });
     </script>
 

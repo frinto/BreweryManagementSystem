@@ -96,3 +96,13 @@ body>.navbar-collapse[data-color="red"]:after {
     
     margin-left:5%;
 }
+
+.brewSteps{
+    
+    border-style: hidden;
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc;
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center;
+}
