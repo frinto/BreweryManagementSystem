@@ -279,6 +279,7 @@ CREATE TABLE IF NOT EXISTS `brew` (
   `mashInTime` FLOAT NULL,
   `restTime` FLOAT NULL,
   `inTime` FLOAT NULL,
+  `totalMashTime` FLOAT NULL,  
   `underletTime` FLOAT NULL,
   `lauterRestTime` FLOAT NULL,
   `vorlaufTime` FLOAT NULL,

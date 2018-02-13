@@ -72,6 +72,25 @@ public class BrewServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        
+        double mashInTime = Double.parseDouble(request.getParameter("mashInTime"));
+        double mashvolume = Double.parseDouble(request.getParameter("mashvolume"));
+        double restTime = Double.parseDouble(request.getParameter("restTime"));
+        double inTime = Double.parseDouble(request.getParameter("inTime"));
+        double totalMashTime = Double.parseDouble(request.getParameter("totalMashTime"));
+        double mashInTime = Double.parseDouble(request.getParameter("mashInTime"));
+        double mashInTime = Double.parseDouble(request.getParameter("mashInTime"));
+        double mashInTime = Double.parseDouble(request.getParameter("mashInTime"));
+        double mashInTime = Double.parseDouble(request.getParameter("mashInTime"));
+        double mashInTime = Double.parseDouble(request.getParameter("mashInTime"));
+        double mashInTime = Double.parseDouble(request.getParameter("mashInTime"));
+        double mashInTime = Double.parseDouble(request.getParameter("mashInTime"));
+        double mashInTime = Double.parseDouble(request.getParameter("mashInTime"));
+        
+        
+        
 
      
 

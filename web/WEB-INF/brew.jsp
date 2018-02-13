@@ -293,7 +293,7 @@
                                         <th scope="row">Mash-In Time</th>
                                         <td>Minutes</td>
                                         <td>${recipe.mashInTime}</td>
-                                        <td><input type="number" name="mashInTime" min="0" max="500"></td>
+                                        <td><input type="number" name="mashInTime" id="mashInTime" onkeyup="UpdateInfo()" min="0" max="500"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Mash-In Water</th>
@@ -305,7 +305,7 @@
                                         <th scope="row">Rest Time</th>
                                         <td>Minutes</td>
                                         <td>${recipe.restTime}</td>
-                                        <td><input type="number" name="restTime" min="0" max="500"></td>
+                                        <td><input type="number" name="restTime" id="restTime" onkeyup="UpdateInfo()" min="0" max="500"></td>
                                     </tr>
                                     <tr>
                                         <th colspan="4" style ="text-align:center">****DO STARCH TEST****</th>
@@ -321,13 +321,13 @@
                                         <th scope="row">In Time</th>
                                         <td>Minutes</td>
                                         <td>${recipe.inTime}</td>
-                                        <td><input type="number" name="inTime" min="0" max="500"></td>
+                                        <td><input type="number" name="inTime" id="inTime" min="0" max="500"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Total Mash Time</th>
                                         <td>Minutes</td>
                                         <td>${recipe.totalMashTime}</td>
-                                        <td><input type="number" name="totalMashTime" min="0" max="500"></td>
+                                        <td><input type="number" name="totalMashTime" id="totalMashTime" min="0" max="500" readonly></td>
                                     </tr>
 
                                 </tbody>
