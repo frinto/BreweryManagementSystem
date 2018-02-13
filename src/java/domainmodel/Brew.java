@@ -17,57 +17,58 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author root
+ * @author 553817
  */
 @Entity
 @Table(name = "brew")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Brew.findAll", query = "SELECT b FROM Brew b"),
-    @NamedQuery(name = "Brew.findByBrewId", query = "SELECT b FROM Brew b WHERE b.brewId = :brewId"),
-    @NamedQuery(name = "Brew.findByMashInTime", query = "SELECT b FROM Brew b WHERE b.mashInTime = :mashInTime"),
-    @NamedQuery(name = "Brew.findByRestTime", query = "SELECT b FROM Brew b WHERE b.restTime = :restTime"),
-    @NamedQuery(name = "Brew.findByInTime", query = "SELECT b FROM Brew b WHERE b.inTime = :inTime"),
-    @NamedQuery(name = "Brew.findByUnderletTime", query = "SELECT b FROM Brew b WHERE b.underletTime = :underletTime"),
-    @NamedQuery(name = "Brew.findByLauterRestTime", query = "SELECT b FROM Brew b WHERE b.lauterRestTime = :lauterRestTime"),
-    @NamedQuery(name = "Brew.findByVorlaufTime", query = "SELECT b FROM Brew b WHERE b.vorlaufTime = :vorlaufTime"),
-    @NamedQuery(name = "Brew.findByFirstWortGravity", query = "SELECT b FROM Brew b WHERE b.firstWortGravity = :firstWortGravity"),
-    @NamedQuery(name = "Brew.findByRunOffTime", query = "SELECT b FROM Brew b WHERE b.runOffTime = :runOffTime"),
-    @NamedQuery(name = "Brew.findByLastRunningsGravity", query = "SELECT b FROM Brew b WHERE b.lastRunningsGravity = :lastRunningsGravity"),
-    @NamedQuery(name = "Brew.findByKettleFullVol", query = "SELECT b FROM Brew b WHERE b.kettleFullVol = :kettleFullVol"),
-    @NamedQuery(name = "Brew.findByKettleFullGravity", query = "SELECT b FROM Brew b WHERE b.kettleFullGravity = :kettleFullGravity"),
-    @NamedQuery(name = "Brew.findByKettleStrikeOutVol", query = "SELECT b FROM Brew b WHERE b.kettleStrikeOutVol = :kettleStrikeOutVol"),
-    @NamedQuery(name = "Brew.findByKettleStrikeOutGravity", query = "SELECT b FROM Brew b WHERE b.kettleStrikeOutGravity = :kettleStrikeOutGravity"),
-    @NamedQuery(name = "Brew.findByEmpId", query = "SELECT b FROM Brew b WHERE b.empId = :empId"),
-    @NamedQuery(name = "Brew.findByFvId", query = "SELECT b FROM Brew b WHERE b.fvId = :fvId"),
-    @NamedQuery(name = "Brew.findByRecipeId", query = "SELECT b FROM Brew b WHERE b.recipeId = :recipeId")})
+    @NamedQuery(name = "Brew.findAll", query = "SELECT b FROM Brew b")
+    , @NamedQuery(name = "Brew.findByBrewId", query = "SELECT b FROM Brew b WHERE b.brewId = :brewId")
+    , @NamedQuery(name = "Brew.findByMashInTime", query = "SELECT b FROM Brew b WHERE b.mashInTime = :mashInTime")
+    , @NamedQuery(name = "Brew.findByRestTime", query = "SELECT b FROM Brew b WHERE b.restTime = :restTime")
+    , @NamedQuery(name = "Brew.findByInTime", query = "SELECT b FROM Brew b WHERE b.inTime = :inTime")
+    , @NamedQuery(name = "Brew.findByUnderletTime", query = "SELECT b FROM Brew b WHERE b.underletTime = :underletTime")
+    , @NamedQuery(name = "Brew.findByLauterRestTime", query = "SELECT b FROM Brew b WHERE b.lauterRestTime = :lauterRestTime")
+    , @NamedQuery(name = "Brew.findByVorlaufTime", query = "SELECT b FROM Brew b WHERE b.vorlaufTime = :vorlaufTime")
+    , @NamedQuery(name = "Brew.findByFirstWortGravity", query = "SELECT b FROM Brew b WHERE b.firstWortGravity = :firstWortGravity")
+    , @NamedQuery(name = "Brew.findByRunOffTime", query = "SELECT b FROM Brew b WHERE b.runOffTime = :runOffTime")
+    , @NamedQuery(name = "Brew.findByLastRunningsGravity", query = "SELECT b FROM Brew b WHERE b.lastRunningsGravity = :lastRunningsGravity")
+    , @NamedQuery(name = "Brew.findByKettleFullVol", query = "SELECT b FROM Brew b WHERE b.kettleFullVol = :kettleFullVol")
+    , @NamedQuery(name = "Brew.findByKettleFullGravity", query = "SELECT b FROM Brew b WHERE b.kettleFullGravity = :kettleFullGravity")
+    , @NamedQuery(name = "Brew.findByKettleStrikeOutVol", query = "SELECT b FROM Brew b WHERE b.kettleStrikeOutVol = :kettleStrikeOutVol")
+    , @NamedQuery(name = "Brew.findByKettleStrikeOutGravity", query = "SELECT b FROM Brew b WHERE b.kettleStrikeOutGravity = :kettleStrikeOutGravity")
+    , @NamedQuery(name = "Brew.findByEmpId", query = "SELECT b FROM Brew b WHERE b.empId = :empId")
+    , @NamedQuery(name = "Brew.findByFvId", query = "SELECT b FROM Brew b WHERE b.fvId = :fvId")
+    , @NamedQuery(name = "Brew.findByRecipeName", query = "SELECT b FROM Brew b WHERE b.recipeName = :recipeName")})
 public class Brew implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "brewId")
     private Integer brewId;
-    @Column(name = "mashInTime")
-    private Integer mashInTime;
-    @Column(name = "restTime")
-    private Integer restTime;
-    @Column(name = "inTime")
-    private String inTime;
-    @Column(name = "underletTime")
-    private Integer underletTime;
-    @Column(name = "lauterRestTime")
-    private Integer lauterRestTime;
-    @Column(name = "vorlaufTime")
-    private Integer vorlaufTime;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "mashInTime")
+    private Float mashInTime;
+    @Column(name = "restTime")
+    private Float restTime;
+    @Column(name = "inTime")
+    private Float inTime;
+    @Column(name = "underletTime")
+    private Float underletTime;
+    @Column(name = "lauterRestTime")
+    private Float lauterRestTime;
+    @Column(name = "vorlaufTime")
+    private Float vorlaufTime;
     @Column(name = "firstWortGravity")
     private Float firstWortGravity;
     @Column(name = "runOffTime")
-    private Integer runOffTime;
+    private Float runOffTime;
     @Column(name = "lastRunningsGravity")
     private Float lastRunningsGravity;
     @Column(name = "kettleFullVol")
-    private Integer kettleFullVol;
+    private Float kettleFullVol;
     @Column(name = "kettleFullGravity")
     private Float kettleFullGravity;
     @Column(name = "kettleStrikeOutVol")
@@ -81,8 +82,8 @@ public class Brew implements Serializable {
     @Column(name = "fvId")
     private int fvId;
     @Basic(optional = false)
-    @Column(name = "recipeId")
-    private int recipeId;
+    @Column(name = "recipeName")
+    private String recipeName;
 
     public Brew() {
     }
@@ -91,11 +92,11 @@ public class Brew implements Serializable {
         this.brewId = brewId;
     }
 
-    public Brew(Integer brewId, int empId, int fvId, int recipeId) {
+    public Brew(Integer brewId, int empId, int fvId, String recipeName) {
         this.brewId = brewId;
         this.empId = empId;
         this.fvId = fvId;
-        this.recipeId = recipeId;
+        this.recipeName = recipeName;
     }
 
     public Integer getBrewId() {
@@ -106,51 +107,51 @@ public class Brew implements Serializable {
         this.brewId = brewId;
     }
 
-    public Integer getMashInTime() {
+    public Float getMashInTime() {
         return mashInTime;
     }
 
-    public void setMashInTime(Integer mashInTime) {
+    public void setMashInTime(Float mashInTime) {
         this.mashInTime = mashInTime;
     }
 
-    public Integer getRestTime() {
+    public Float getRestTime() {
         return restTime;
     }
 
-    public void setRestTime(Integer restTime) {
+    public void setRestTime(Float restTime) {
         this.restTime = restTime;
     }
 
-    public String getInTime() {
+    public Float getInTime() {
         return inTime;
     }
 
-    public void setInTime(String inTime) {
+    public void setInTime(Float inTime) {
         this.inTime = inTime;
     }
 
-    public Integer getUnderletTime() {
+    public Float getUnderletTime() {
         return underletTime;
     }
 
-    public void setUnderletTime(Integer underletTime) {
+    public void setUnderletTime(Float underletTime) {
         this.underletTime = underletTime;
     }
 
-    public Integer getLauterRestTime() {
+    public Float getLauterRestTime() {
         return lauterRestTime;
     }
 
-    public void setLauterRestTime(Integer lauterRestTime) {
+    public void setLauterRestTime(Float lauterRestTime) {
         this.lauterRestTime = lauterRestTime;
     }
 
-    public Integer getVorlaufTime() {
+    public Float getVorlaufTime() {
         return vorlaufTime;
     }
 
-    public void setVorlaufTime(Integer vorlaufTime) {
+    public void setVorlaufTime(Float vorlaufTime) {
         this.vorlaufTime = vorlaufTime;
     }
 
@@ -162,11 +163,11 @@ public class Brew implements Serializable {
         this.firstWortGravity = firstWortGravity;
     }
 
-    public Integer getRunOffTime() {
+    public Float getRunOffTime() {
         return runOffTime;
     }
 
-    public void setRunOffTime(Integer runOffTime) {
+    public void setRunOffTime(Float runOffTime) {
         this.runOffTime = runOffTime;
     }
 
@@ -178,11 +179,11 @@ public class Brew implements Serializable {
         this.lastRunningsGravity = lastRunningsGravity;
     }
 
-    public Integer getKettleFullVol() {
+    public Float getKettleFullVol() {
         return kettleFullVol;
     }
 
-    public void setKettleFullVol(Integer kettleFullVol) {
+    public void setKettleFullVol(Float kettleFullVol) {
         this.kettleFullVol = kettleFullVol;
     }
 
@@ -226,12 +227,12 @@ public class Brew implements Serializable {
         this.fvId = fvId;
     }
 
-    public int getRecipeId() {
-        return recipeId;
+    public String getRecipeName() {
+        return recipeName;
     }
 
-    public void setRecipeId(int recipeId) {
-        this.recipeId = recipeId;
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
     }
 
     @Override

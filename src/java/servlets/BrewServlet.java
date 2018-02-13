@@ -7,6 +7,8 @@ package servlets;
 
 import dataaccess.BrewDBException;
 import dataaccess.RecipeDB;
+import dataaccess.TankDB;
+import domainmodel.Fv;
 import domainmodel.Recipe;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,11 +35,17 @@ public class BrewServlet extends HttpServlet {
             //Get list of recipes from database to display in dropdown menu
 
             RecipeDB recipeDB = new RecipeDB();
+            TankDB tankDB = new TankDB();
             HttpSession session = request.getSession();
             session.setAttribute("newBrew", null);
             session.setAttribute("recipes", null);
+            
       
-
+            String cancelBrew = request.getParameter("cancelBrew");
+            if(cancelBrew!=null)
+            {
+                session.setAttribute("recipe",null);
+            }
             String newBrew = request.getParameter("newBrew");
             session.setAttribute("newBrew", newBrew);
 
@@ -56,6 +64,8 @@ public class BrewServlet extends HttpServlet {
                 
                 
             }
+            List<Fv> fvs = tankDB.getAllFV();
+            session.setAttribute("fvs",fvs);
 
             getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
         } catch (BrewDBException ex) {
@@ -67,6 +77,27 @@ public class BrewServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        
+        double mashInTime = Double.parseDouble(request.getParameter("mashInTime"));
+        double mashvolume = Double.parseDouble(request.getParameter("mashvolume"));
+        double restTime = Double.parseDouble(request.getParameter("restTime"));
+        double inTime = Double.parseDouble(request.getParameter("inTime"));
+        double totalMashTime = Double.parseDouble(request.getParameter("totalMashTime"));
+        double underletTime = Double.parseDouble(request.getParameter("underletTime"));
+        double lauterRest = Double.parseDouble(request.getParameter("lauterRest"));
+        double vorlaufTime = Double.parseDouble(request.getParameter("vorlaufTime"));
+        double firstWortGrav = Double.parseDouble(request.getParameter("firstWortGrav"));
+        double runOffTime = Double.parseDouble(request.getParameter("runOffTime"));
+        double lastRunnings = Double.parseDouble(request.getParameter("lastRunnings"));
+        double kettleFullVol = Double.parseDouble(request.getParameter("kettleFullVol"));
+        double strikeOutGrav = Double.parseDouble(request.getParameter("strikeOutGrav"));
+        
+        
+        
+        
+        
 
      
 

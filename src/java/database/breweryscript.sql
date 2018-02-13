@@ -276,22 +276,23 @@ DROP TABLE IF EXISTS `brew` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `brew` (
   `brewId` INT NOT NULL,
-  `mashInTime` INT NULL,
-  `restTime` INT NULL,
-  `inTime` VARCHAR(45) NULL,
-  `underletTime` INT NULL,
-  `lauterRestTime` INT NULL,
-  `vorlaufTime` INT NULL,
+  `mashInTime` FLOAT NULL,
+  `restTime` FLOAT NULL,
+  `inTime` FLOAT NULL,
+  `totalMashTime` FLOAT NULL,  
+  `underletTime` FLOAT NULL,
+  `lauterRestTime` FLOAT NULL,
+  `vorlaufTime` FLOAT NULL,
   `firstWortGravity` FLOAT NULL,
-  `runOffTime` INT NULL,
+  `runOffTime` FLOAT NULL,
   `lastRunningsGravity` FLOAT NULL,
-  `kettleFullVol` INT NULL,
+  `kettleFullVol` FLOAT NULL,
   `kettleFullGravity` FLOAT NULL,
   `kettleStrikeOutVol` FLOAT NULL,
   `kettleStrikeOutGravity` FLOAT NULL,
   `empId` INT NOT NULL,
   `fvId` INT NOT NULL,
-  `recipeId` INT NOT NULL,
+  `recipeName` VARCHAR(25) NOT NULL,
   PRIMARY KEY (`brewId`))
 ENGINE = InnoDB;
 
@@ -355,7 +356,7 @@ DROP TABLE IF EXISTS `recipematerials` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `recipematerials` (
   `qty` INT NULL,
-  `recipeId` INT NOT NULL,
+  `recipeName` VARCHAR(25) NOT NULL,
   `brewMaterialsName` VARCHAR(15) NOT NULL)
 ENGINE = InnoDB;
 
