@@ -80,9 +80,11 @@ body>.navbar-collapse[data-color="red"]:after {
     margin-top:10%;
 }
 
-.btn-primary {
-    border-color: green;
-    color: green;
+.btn-success {
+    width:40%;
+    height:20%;
+    opacity:1;
+    font-weight: 700;
 }
 
 
@@ -105,5 +107,10 @@ body>.navbar-collapse[data-color="red"]:after {
     border: 1px solid #faebcc;
     padding: 10px;
     border-radius: 3px;
+    text-align: center;
+}
+
+.brewSubmit{
+    
     text-align: center;
 }

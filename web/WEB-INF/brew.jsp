@@ -235,7 +235,7 @@
                                         </c:if>
                             </table>
                                         
-                                        <h4 class="leftSpacingh4">Mash Chemistry:</h4>     
+                                        <h4 class="leftSpacingh4">Mash Chemistry</h4>     
 
                             <table class="table table-sm">
                                 <thead>
@@ -271,6 +271,7 @@
 
                         <!-------------------------------------------------------Brew Sheet----------------------------------------------------------->
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <form action="brew" method ="POST" class ="brewButton">
                             <h3 class ="brewSteps">Mash Tun</h3>
                             <table class="table">
                                 <thead class="thead-dark">
@@ -471,19 +472,51 @@
                                         <td>${recipe.strikeOutGrav}</td>
                                         <td><input type="number" name="strikeOutGrav" min="0" max="500"></td>
                                     </tr>
+                                    <tr>
+                                        <th scope="row">Whirlpool Time</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.whirlPoolTime}</td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Oxygen Rate</th>
+                                        <td>Litres Per Minute</td>
+                                        <td>${recipe.oxygenRate}</td>
+                                        
+                                    </tr>
                                     
 
                                 </tbody>
 
                             </table>
+                            <h3 class ="brewSteps">Fermenting Vessel Selection</h3>
+                            <br>
+                            <label for="custom-select">Please Select Destination Fermenter:</label>
+                            <select name="fvList" class="custom-select">
+                                    <c:forEach items="${fvs}" var="fv">
+                                        <option value="${fv.fvId}" selected ="selected">
+                                            ${fv.fvId} 
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
                             
                             
 
                            
 
-                            <form action="brew" method ="GET" class ="brewButton">
-                                <button type="submit" class="btn btn-success" name="newBrew">Add a Brew</button>
+                            
+                                 <div class="brewSubmit">
+                                <button type="submit" class="btn btn-success" name="newBrew" style="text-align: center">SUBMIT BREW</button>
+                                 </div>
                             </form>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        
 
                         </div>
                     </div>

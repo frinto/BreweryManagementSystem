@@ -7,6 +7,8 @@ package servlets;
 
 import dataaccess.BrewDBException;
 import dataaccess.RecipeDB;
+import dataaccess.TankDB;
+import domainmodel.Fv;
 import domainmodel.Recipe;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,6 +35,7 @@ public class BrewServlet extends HttpServlet {
             //Get list of recipes from database to display in dropdown menu
 
             RecipeDB recipeDB = new RecipeDB();
+            TankDB tankDB = new TankDB();
             HttpSession session = request.getSession();
             session.setAttribute("newBrew", null);
             session.setAttribute("recipes", null);
@@ -56,6 +59,8 @@ public class BrewServlet extends HttpServlet {
                 
                 
             }
+            List<Fv> fvs = tankDB.getAllFV();
+            session.setAttribute("fvs",fvs);
 
             getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
         } catch (BrewDBException ex) {
