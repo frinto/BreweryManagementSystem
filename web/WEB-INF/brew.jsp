@@ -232,15 +232,38 @@
                                             <td colspan="2">${recipe.thirdMaltAmt} kg</td>
 
                                         </tr>
-                                    </c:if>
-                                    <c:if test="${recipe.fourthMaltAmt!=0}">
-                                        <tr>
-                                            <th scope="row">Third Malt</th>
-                                            <td>${recipe.fourthMalt}</td>
-                                            <td colspan="2">${recipe.fourthMaltAmt} kg</td>
+                                        </c:if>
+                            </table>
+                                        
+                                        <h4 class="leftSpacingh4">Mash Chemistry:</h4>     
 
-                                        </tr>
-                                    </c:if>
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Ingredient</th>
+                                        
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Gypsum</th>
+                                        <td>${recipe.gypsumAmt} gm</td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Calcium Chloride</th>
+                                        <td>${recipe.calciumChlorideAmt} mg</td>
+                                        
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th scope="row">Phosphoric Acid</th>
+                                        <td>${recipe.phosphAcidAmt} mL</td>
+                                        
+                                    </tr>
+   
+                                    
                                 </tbody>
                             </table>
 
