@@ -10,6 +10,9 @@ import dataaccess.ProductionDB;
 import domainmodel.Production;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +27,7 @@ import javax.servlet.http.HttpSession;
  * @author 579957
  */
 public class ProductionServlet extends HttpServlet {
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,15 +45,42 @@ public class ProductionServlet extends HttpServlet {
         }
         
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         String action = request.getParameter("action");
-        
-        if(action.equals("add")) {
+        String date = request.getParameter("date");
+        String productionType = request.getParameter("productionType");
+        String quantity = request.getParameter("quantity");
+        String svNumber = request.getParameter("svNumber");
+        String employeeId = request.getParameter("employeeId");
+        Production production = new Production();
+        ProductionDB prodDB = new ProductionDB();
+        //navigates to the production form to submit a new production
+        if (action.equals("add")) {
             request.setAttribute("action", action);
+            getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
+        } //Add a new production to the database
+        else if (action.equals("newProduction")) {
+            try {
+                //Production(Integer prodId, int quantity, Date date, int employeeId, int svNum, String productionType)
+                Date formatDate = new SimpleDateFormat("yyyy-mm-dd").parse(date);
+                production = new Production(production.getProdId(), Integer.parseInt(quantity), formatDate, Integer.parseInt(employeeId), Integer.parseInt(svNumber), productionType);
+                prodDB.insertProduction(production);
+                List<Production> prodList = prodDB.getAllProduction();
+                
+                request.setAttribute("prod", prodList);
+                request.setAttribute("message", "Production Submitted");
+                getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
+                
+            } catch (BrewDBException ex) {
+                Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
             getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
         }
     }
