@@ -488,7 +488,7 @@
                                     </tbody>
 
                                 </table>
-                                <h3 class ="brewSteps">Fermenting Vessel Selection</h3>
+                                <h3 class ="brewSteps">Fermenting Vessel and Final Volume</h3>
                                 <br>
                                 <div class="fvSelect">
                                 <label for="custom-select">Please Select Destination Fermenter:</label>
@@ -499,7 +499,12 @@
                                         </option>
                                     </c:forEach>
                                 </select>
+                                <br>
+                                <br>
+                                <label>Final volume for fermenter:</label>
+                                <td><input type="number" name="finalVolume" min="0" max="500" required></td>
                                 </div>
+                                
                                 <br>
                                 <br>
                                 <br>

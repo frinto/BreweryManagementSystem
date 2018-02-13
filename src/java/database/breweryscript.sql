@@ -290,6 +290,7 @@ CREATE TABLE IF NOT EXISTS `brew` (
   `kettleFullGravity` FLOAT NULL,
   `kettleStrikeOutVol` FLOAT NULL,
   `kettleStrikeOutGravity` FLOAT NULL,
+  `allInVolume` FLOAT NULL,  
   `empId` INT NOT NULL,
   `fvId` INT NOT NULL,
   `recipeName` VARCHAR(25) NOT NULL,

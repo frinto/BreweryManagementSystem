@@ -95,7 +95,14 @@ public class BrewServlet extends HttpServlet {
         double strikeOutGrav = Double.parseDouble(request.getParameter("strikeOutGrav"));
         
         
+        int fvSelection = Integer.parseInt(request.getParameter("fvList"));
         
+        Recipe recipe = (Recipe)session.getAttribute("recipe");
+        
+        String recipeName = recipe.getRecipeName();
+        
+        
+                
         
         
 
