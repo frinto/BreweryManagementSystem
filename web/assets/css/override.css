@@ -90,9 +90,16 @@ body>.navbar-collapse[data-color="red"]:after {
     border-radius: 3px;
     text-align: center;
 }
+/*------------------------------Production----------------------------------------------*/
+.productionButton{
+    
+    margin-left:2%;
+    
+}
 
-
-.fvSelect{
+.productionMessage {
+    
+    text-align: center;
     
 }
 

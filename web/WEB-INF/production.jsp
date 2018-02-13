@@ -55,13 +55,13 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="finishedinventory">
+                            <a class="nav-link" href="finishedInventory">
                                 <i class="nc-icon nc-paper-2"></i>
                                 <p>Finished Inventory</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="rawinventory">
+                            <a class="nav-link" href="rawInventory">
                                 <i class="nc-icon nc-atom"></i>
                                 <p>Raw Inventory</p>
                             </a>
@@ -96,63 +96,67 @@
 
                 <!--End nav bar-------------------------------------------------------------------------->
 
-    <h1>Production</h1>
-    ${message}
-    <c:choose>
-        <c:when test="${action == 'add'}">
-            <form action="production?action=newProduction" method="POST">
-                <table>
-                <tr>
-                    <th>Date</th>
-                    <th>ProductionType</th>
-                    <th>Quantity</th>
-                    <th>SVNumber</th>
-                    <th>EmployeeID</th>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="date" name="date">
-                    </td>
-                    <td>
-                        <input type="text" name="productionType">
-                    </td>
-                    <td>
-                        <input type="text" name="quantity">
-                    </td>
-                    <td>
-                        <input type="text" name="svNumber">
-                    </td>
-                    <td>
-                        <input type="text" name="employeeId">
-                    </td>
-                </tr>
-                </table>
-                <button type="submit">Submit</button>
-            </form>
-        </c:when>
-        <c:otherwise>
-            <form action="production?action=add" method="POST">
-                <button type="submit">Add Production</button>
-            </form>
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>ProductionType</th>
-                    <th>Quantity</th>
-                    <th>SVNumber</th>
-                    <th>EmployeeID</th>
-                </tr>
-                <c:forEach var="production" items="${prod}">
-                    <tr>
-                        <td>${production.date}</td>
-                        <td>${production.productionType}</td>
-                        <td>${production.quantity}</td>
-                        <td>${production.svNum}</td>
-                        <td>${production.employeeId}</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </c:otherwise>
-    </c:choose>
-</body>
-<c:import url="includes/footer.html"/>
+                <h1>Production</h1>
+                <c:choose>
+                    <c:when test="${action == 'add'}">
+                        <form action="production?action=newProduction" method="POST">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <th>Date</th>
+                                <th>ProductionType</th>
+                                <th>Quantity</th>
+                                <th>SVNumber</th>
+                                <th>EmployeeID</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="date" name="date">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productionType">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="quantity">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="svNumber">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="employeeId">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <form action="production?action=add" method="POST" class="productionButton">
+                            <button type="submit" class="btn btn-success">Add Production</button>
+                        </form>
+                        <p class="productionMessage">${message}</p>
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <th>Date</th>
+                            <th>ProductionType</th>
+                            <th>Quantity</th>
+                            <th>SVNumber</th>
+                            <th>EmployeeID</th>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="production" items="${prod}">
+                                    <tr>
+                                        <td>${production.date}</td>
+                                        <td>${production.productionType}</td>
+                                        <td>${production.quantity}</td>
+                                        <td>${production.svNum}</td>
+                                        <td>${production.employeeId}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:otherwise>
+                </c:choose>
+                </body>
+                <c:import url="includes/footer.html"/>

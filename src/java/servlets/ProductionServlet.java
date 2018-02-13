@@ -66,7 +66,7 @@ public class ProductionServlet extends HttpServlet {
         else if (action.equals("newProduction")) {
             try {
                 //Production(Integer prodId, int quantity, Date date, int employeeId, int svNum, String productionType)
-                Date formatDate = new SimpleDateFormat("yyyy-mm-dd").parse(date);
+                Date formatDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
                 production = new Production(production.getProdId(), Integer.parseInt(quantity), formatDate, Integer.parseInt(employeeId), Integer.parseInt(svNumber), productionType);
                 prodDB.insertProduction(production);
                 List<Production> prodList = prodDB.getAllProduction();
