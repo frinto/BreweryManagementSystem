@@ -115,7 +115,7 @@
                                 <td>${productName.productName}</td>
                                 <td>${productName.qty}</td>
                                 <td>
-                                    <input type="text" name="${productName.productName}" value="${productName.qty}">
+                                    <input type="number" name="${productName.productName}" value="${productName.qty}">
                                 </td>
                             </tr>
                         </c:forEach>
