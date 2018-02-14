@@ -5,13 +5,16 @@
  */
 package servlets;
 
+import dataaccess.BrewDB;
 import dataaccess.BrewDBException;
 import dataaccess.RecipeDB;
 import dataaccess.TankDB;
+import domainmodel.Brew;
 import domainmodel.Fv;
 import domainmodel.Recipe;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Date;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +39,7 @@ public class BrewServlet extends HttpServlet {
 
             RecipeDB recipeDB = new RecipeDB();
             TankDB tankDB = new TankDB();
+            BrewDB brewDB = new BrewDB();
             HttpSession session = request.getSession();
             session.setAttribute("newBrew", null);
             session.setAttribute("recipes", null);
@@ -66,6 +70,12 @@ public class BrewServlet extends HttpServlet {
             }
             List<Fv> fvs = tankDB.getAllFV();
             session.setAttribute("fvs",fvs);
+            
+            List<Brew> brews = brewDB.getAll();
+            if(brews!=null)
+            {
+            session.setAttribute("brews", brews);
+            }
 
             getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
         } catch (BrewDBException ex) {
@@ -79,27 +89,56 @@ public class BrewServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
+        BrewDB brewDB = new BrewDB();
         
-        double mashInTime = Double.parseDouble(request.getParameter("mashInTime"));
-        double mashvolume = Double.parseDouble(request.getParameter("mashvolume"));
-        double restTime = Double.parseDouble(request.getParameter("restTime"));
-        double inTime = Double.parseDouble(request.getParameter("inTime"));
-        double totalMashTime = Double.parseDouble(request.getParameter("totalMashTime"));
-        double underletTime = Double.parseDouble(request.getParameter("underletTime"));
-        double lauterRest = Double.parseDouble(request.getParameter("lauterRest"));
-        double vorlaufTime = Double.parseDouble(request.getParameter("vorlaufTime"));
-        double firstWortGrav = Double.parseDouble(request.getParameter("firstWortGrav"));
-        double runOffTime = Double.parseDouble(request.getParameter("runOffTime"));
-        double lastRunnings = Double.parseDouble(request.getParameter("lastRunnings"));
-        double kettleFullVol = Double.parseDouble(request.getParameter("kettleFullVol"));
-        double strikeOutGrav = Double.parseDouble(request.getParameter("strikeOutGrav"));
+        float mashInTime = Float.parseFloat(request.getParameter("mashInTime"));
         
+        float restTime = Float.parseFloat(request.getParameter("restTime"));
+        float inTime = Float.parseFloat(request.getParameter("inTime"));
+        float totalMashTime = Float.parseFloat(request.getParameter("totalMashTime"));
+        float underletTime = Float.parseFloat(request.getParameter("underletTime"));
+        float lauterRestTime = Float.parseFloat(request.getParameter("lauterRest"));
+        float vorlaufTime = Float.parseFloat(request.getParameter("vorlaufTime"));
+        float firstWortGrav = Float.parseFloat(request.getParameter("firstWortGrav"));
+        float runOffTime = Float.parseFloat(request.getParameter("runOffTime"));
+        float lastRunnings = Float.parseFloat(request.getParameter("lastRunnings"));
+        float kettleFullVol = Float.parseFloat(request.getParameter("kettleFullVol"));
+        float kettleFullGrav = Float.parseFloat(request.getParameter("kettleFullGrav"));
+        float strikeOutGrav = Float.parseFloat(request.getParameter("strikeOutGrav"));
+        float kettleStrikeOutVol = Float.parseFloat(request.getParameter("strikeOutVol"));
+        float finalVolume = Float.parseFloat(request.getParameter("finalVolume"));
+        
+        String empId = (String)session.getAttribute("empId");
         
         int fvSelection = Integer.parseInt(request.getParameter("fvList"));
+        Date date = new Date();
+        
         
         Recipe recipe = (Recipe)session.getAttribute("recipe");
         
         String recipeName = recipe.getRecipeName();
+        
+        Brew brew = new Brew();
+        
+        brew = new Brew(brew.getBrewId(),date,mashInTime,restTime,inTime,totalMashTime,underletTime,
+        lauterRestTime,vorlaufTime,firstWortGrav,runOffTime,lastRunnings,kettleFullVol,kettleFullGrav,kettleStrikeOutVol,strikeOutGrav,finalVolume,Integer.parseInt(empId),fvSelection,recipeName);
+        
+        
+        try {
+            brewDB.insert(brew);
+            session.setAttribute("recipe", null);
+            List<Brew> brews = brewDB.getAll();
+            session.setAttribute("brews", brews);
+            getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
+            
+        } catch (BrewDBException ex) {
+            Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        
         
         
                 

@@ -125,18 +125,19 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">Brew #</th>
+                                    <th scope="col">Date</th>
                                     <th scope="col">Brand</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Blonde</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Blacksmith</td>
-                                </tr>
+                                
+                                    <c:forEach var="brew" items="${brews}">
+                                    <tr>
+                                        <td>${brew.brewId}</td>
+                                        <td>${brew.date}</td>
+                                        <td>${brew.recipeName}</td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                         <form action="brew" method ="GET" class ="brewButton">
@@ -304,7 +305,7 @@
                                             <th scope="row">Mash-In Water</th>
                                             <td>Litres</td>
                                             <td>${recipe.mashWaterVolume}</td>
-                                            <td><input type="number" name="mashvolume" min="0" max="500" required></td>
+                                            
                                         </tr>
                                         <tr>
                                             <th scope="row">Rest Time</th>
@@ -354,6 +355,7 @@
                                             <th scope="row">Underlet</th>
                                             <td>Litres</td>
                                             <td>${recipe.underletLitres}</td>
+                                            <td><input type="number" name="underletTime" min="0" max="500" required></td>
                                             
 
                                         </tr>
@@ -491,7 +493,12 @@
                                 <h3 class ="brewSteps">Fermenting Vessel and Final Volume</h3>
                                 <br>
                                 <div class="fvSelect">
+                                    <table class="table">
+                                        <tr>
+                                            <td>
                                 <label for="custom-select">Please Select Destination Fermenter:</label>
+                                            </td>
+                                            <td>
                                 <select name="fvList" class="custom-select">
                                     <c:forEach items="${fvs}" var="fv">
                                         <option value="${fv.fvId}" selected ="selected">
@@ -499,10 +506,17 @@
                                         </option>
                                     </c:forEach>
                                 </select>
-                                <br>
-                                <br>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                
                                 <label>Final volume for fermenter:</label>
-                                <td><input type="number" name="finalVolume" min="0" max="500" required></td>
+                                            </td>
+                                            <td>
+                                <input type="number" name="finalVolume" min="0" max="500" required></td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 
                                 <br>

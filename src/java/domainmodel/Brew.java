@@ -6,13 +6,18 @@
 package domainmodel;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -25,9 +30,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Brew.findAll", query = "SELECT b FROM Brew b")
     , @NamedQuery(name = "Brew.findByBrewId", query = "SELECT b FROM Brew b WHERE b.brewId = :brewId")
+    , @NamedQuery(name = "Brew.findByDate", query = "SELECT b FROM Brew b WHERE b.date = :date")
     , @NamedQuery(name = "Brew.findByMashInTime", query = "SELECT b FROM Brew b WHERE b.mashInTime = :mashInTime")
     , @NamedQuery(name = "Brew.findByRestTime", query = "SELECT b FROM Brew b WHERE b.restTime = :restTime")
     , @NamedQuery(name = "Brew.findByInTime", query = "SELECT b FROM Brew b WHERE b.inTime = :inTime")
+    , @NamedQuery(name = "Brew.findByTotalMashTime", query = "SELECT b FROM Brew b WHERE b.totalMashTime = :totalMashTime")
     , @NamedQuery(name = "Brew.findByUnderletTime", query = "SELECT b FROM Brew b WHERE b.underletTime = :underletTime")
     , @NamedQuery(name = "Brew.findByLauterRestTime", query = "SELECT b FROM Brew b WHERE b.lauterRestTime = :lauterRestTime")
     , @NamedQuery(name = "Brew.findByVorlaufTime", query = "SELECT b FROM Brew b WHERE b.vorlaufTime = :vorlaufTime")
@@ -38,6 +45,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Brew.findByKettleFullGravity", query = "SELECT b FROM Brew b WHERE b.kettleFullGravity = :kettleFullGravity")
     , @NamedQuery(name = "Brew.findByKettleStrikeOutVol", query = "SELECT b FROM Brew b WHERE b.kettleStrikeOutVol = :kettleStrikeOutVol")
     , @NamedQuery(name = "Brew.findByKettleStrikeOutGravity", query = "SELECT b FROM Brew b WHERE b.kettleStrikeOutGravity = :kettleStrikeOutGravity")
+    , @NamedQuery(name = "Brew.findByAllInVolume", query = "SELECT b FROM Brew b WHERE b.allInVolume = :allInVolume")
     , @NamedQuery(name = "Brew.findByEmpId", query = "SELECT b FROM Brew b WHERE b.empId = :empId")
     , @NamedQuery(name = "Brew.findByFvId", query = "SELECT b FROM Brew b WHERE b.fvId = :fvId")
     , @NamedQuery(name = "Brew.findByRecipeName", query = "SELECT b FROM Brew b WHERE b.recipeName = :recipeName")})
@@ -45,9 +53,13 @@ public class Brew implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "brewId")
     private Integer brewId;
+    @Column(name = "date")
+    @Temporal(TemporalType.DATE)
+    private Date date;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "mashInTime")
     private Float mashInTime;
@@ -55,6 +67,8 @@ public class Brew implements Serializable {
     private Float restTime;
     @Column(name = "inTime")
     private Float inTime;
+    @Column(name = "totalMashTime")
+    private Float totalMashTime;
     @Column(name = "underletTime")
     private Float underletTime;
     @Column(name = "lauterRestTime")
@@ -75,6 +89,8 @@ public class Brew implements Serializable {
     private Float kettleStrikeOutVol;
     @Column(name = "kettleStrikeOutGravity")
     private Float kettleStrikeOutGravity;
+    @Column(name = "allInVolume")
+    private Float allInVolume;
     @Basic(optional = false)
     @Column(name = "empId")
     private int empId;
@@ -98,6 +114,34 @@ public class Brew implements Serializable {
         this.fvId = fvId;
         this.recipeName = recipeName;
     }
+    
+    public Brew(Integer brewId,Date date, float mashInTime,
+            float restTime, float inTime, float totalMashTime,
+            float underletTime, float lauterRestTime,
+            float vorlaufTime, float firstWortGravity,
+            float runOffTime, float lastRunningsGravity,
+            float kettleFullVol, float kettleFullGravity,
+            float kettleStrikeOutVol,float kettleStrikeOutGravity, float allInVolume,int empId, int fvId, String recipeName) {
+        this.brewId = brewId;
+        this.date = date;
+        this.mashInTime = mashInTime;
+        this.restTime = restTime;
+        this.inTime = inTime;
+        this.totalMashTime = totalMashTime;
+        this.underletTime = underletTime;
+        this.lauterRestTime = lauterRestTime;
+        this.vorlaufTime = vorlaufTime;
+        this.firstWortGravity = firstWortGravity;
+        this.runOffTime = runOffTime;
+        this.lastRunningsGravity = lastRunningsGravity;
+        this.kettleFullVol = kettleFullVol;
+        this.kettleFullGravity = kettleFullGravity;
+        this.kettleStrikeOutVol = kettleStrikeOutVol;
+        this.kettleStrikeOutGravity = kettleStrikeOutGravity;
+        this.allInVolume = allInVolume;
+        this.empId = empId;
+        this.fvId = fvId;
+        this.recipeName = recipeName;    }
 
     public Integer getBrewId() {
         return brewId;
@@ -105,6 +149,14 @@ public class Brew implements Serializable {
 
     public void setBrewId(Integer brewId) {
         this.brewId = brewId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Float getMashInTime() {
@@ -129,6 +181,14 @@ public class Brew implements Serializable {
 
     public void setInTime(Float inTime) {
         this.inTime = inTime;
+    }
+
+    public Float getTotalMashTime() {
+        return totalMashTime;
+    }
+
+    public void setTotalMashTime(Float totalMashTime) {
+        this.totalMashTime = totalMashTime;
     }
 
     public Float getUnderletTime() {
@@ -209,6 +269,14 @@ public class Brew implements Serializable {
 
     public void setKettleStrikeOutGravity(Float kettleStrikeOutGravity) {
         this.kettleStrikeOutGravity = kettleStrikeOutGravity;
+    }
+
+    public Float getAllInVolume() {
+        return allInVolume;
+    }
+
+    public void setAllInVolume(Float allInVolume) {
+        this.allInVolume = allInVolume;
     }
 
     public int getEmpId() {

@@ -275,7 +275,8 @@ DROP TABLE IF EXISTS `brew` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `brew` (
-  `brewId` INT NOT NULL,
+  `brewId` INT NOT NULL AUTO_INCREMENT,
+  `date` DATE,  
   `mashInTime` FLOAT NULL,
   `restTime` FLOAT NULL,
   `inTime` FLOAT NULL,
@@ -341,7 +342,7 @@ DROP TABLE IF EXISTS `brewmaterials` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `brewmaterials` (
   `name` VARCHAR(25) NOT NULL,
-  `qty` INT NULL,
+  `qty` double NULL,
   `units` VARCHAR(5) NULL,
   `type`  VARCHAR(10) NULL,
   PRIMARY KEY (`Name`))
@@ -356,7 +357,7 @@ DROP TABLE IF EXISTS `recipematerials` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `recipematerials` (
-  `qty` INT NULL,
+  `qty` double NULL,
   `recipeName` VARCHAR(25) NOT NULL,
   `brewMaterialsName` VARCHAR(15) NOT NULL)
 ENGINE = InnoDB;
