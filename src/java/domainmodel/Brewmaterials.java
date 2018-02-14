@@ -35,6 +35,7 @@ public class Brewmaterials implements Serializable {
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "qty")
     private Double qty;
     @Column(name = "units")
@@ -90,8 +91,8 @@ public class Brewmaterials implements Serializable {
     
     public void useMaterial(double usage)
     {
-        double qty = this.getQty();
-        double newQty = qty - usage;
+        double quantity = this.getQty();
+        double newQty = quantity - usage;
         this.setQty(newQty);
     }
 
