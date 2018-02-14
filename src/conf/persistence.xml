@@ -4,7 +4,6 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>domainmodel.Purchaseorder</class>
     <class>domainmodel.Role</class>
-    <class>domainmodel.Finishedproduct</class>
     <class>domainmodel.Sv</class>
     <class>domainmodel.Brewmaterials</class>
     <class>domainmodel.Brand</class>
@@ -33,6 +32,7 @@
     <class>domainmodel.Brewmaterials_1</class>
     <class>domainmodel.Sv_1</class>
     <class>domainmodel.Finishedproduct_1</class>
+    <class>domainmodel.Finishedproduct</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/brewery?zeroDateTimeBehavior=convertToNull"/>
