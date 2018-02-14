@@ -9,6 +9,8 @@ import dataaccess.BrewDBException;
 import dataaccess.TransferDB;
 import domainmodel.Transfer;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +29,13 @@ public class TankTransferServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        //set the current date to a variable so the Add A Transfer form has the current date pre-set
+        SimpleDateFormat dateFormat = new SimpleDateFormat("mm-dd-yyyy");
+        
+        String dateToday = dateFormat.format(new Date());
+        request.setAttribute("dateToday", dateToday);
+        
+        //get all transfers
         TransferDB transferDB = new TransferDB();
         
         try {
