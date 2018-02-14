@@ -131,6 +131,7 @@ public class BrewServlet extends HttpServlet {
         try {
             brewDB.insert(brew);
             updateInventory(recipe);
+            updateFV(brew);
             session.setAttribute("recipe", null);
             List<Brew> brews = brewDB.getAll();
             session.setAttribute("brews", brews);
@@ -234,19 +235,48 @@ public class BrewServlet extends HttpServlet {
                 bm_nine.useMaterial(qty_nine);
                 bmDB.update(bm_nine);
             }
-            bm_ten = bmDB.getbrewmaterials("")
+            bm_ten = bmDB.getbrewmaterials("Phosphoric");
+            if(bm_ten!=null)
+            {
+                double qty_ten = recipe.getPhosphAcidAmt();
+                bm_ten.useMaterial(qty_ten);
+                bmDB.update(bm_ten);
+            }
             
-            
- 
+            bm_eleven = bmDB.getbrewmaterials("CalciumChloride");
+            if(bm_eleven!=null)
+            {
+                double qty_eleven = recipe.getCalciumChlorideAmt();
+                bm_eleven.useMaterial(qty_eleven);
+                bmDB.update(bm_eleven);
+            }
 
-            
-            
-            
         } catch (BrewDBException ex) {
             Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
     }
+    
+    
+    private void updateFV(Brew brew)
+    {
+        TankDB tankDB = new TankDB();
+        try {
+            Fv fv = tankDB.getFV(brew.getFvId());
+            fv.updateFermenter(brew.getAllInVolume()*100);
+            tankDB.updateFV(fv);
+            
+        } catch (BrewDBException ex) {
+            Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        
+        
+    }
 
 }
+

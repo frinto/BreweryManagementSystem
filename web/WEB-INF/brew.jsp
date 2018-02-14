@@ -511,10 +511,10 @@
                                         <tr>
                                             <td>
                                 
-                                <label>Final volume for fermenter:</label>
+                                <label>Final volume for fermenter(hectolitres):</label>
                                             </td>
                                             <td>
-                                <input type="number" name="finalVolume" min="0" max="500" required></td>
+                                <input type="number" name="finalVolume" min="0" max="10000" required></td>
                                         </tr>
                                     </table>
                                 </div>

@@ -137,6 +137,12 @@ public class Fv implements Serializable {
         hash += (fvId != null ? fvId.hashCode() : 0);
         return hash;
     }
+    
+    public void updateFermenter(double volume)
+    {
+        double updatedVolume = this.getVolume()+volume;
+        this.setVolume(updatedVolume);
+    }
 
     @Override
     public boolean equals(Object object) {
