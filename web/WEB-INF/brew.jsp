@@ -51,7 +51,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="finishedinventory">
+                            <a class="nav-link" href="finishedInventory">
                                 <i class="nc-icon nc-paper-2"></i>
                                 <p>Finished Inventory</p>
                             </a>

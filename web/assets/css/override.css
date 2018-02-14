@@ -103,6 +103,14 @@ body>.navbar-collapse[data-color="red"]:after {
     
 }
 
+/*-----------------------------Finished Inventory---------------------------------------*/
+.finishedInventoryUpdateButton{
+    
+    margin-left:2%;
+    
+}
+
+
 /*------------------------------------------BUTTONS-----------------------------*/
 
 .brewSubmit{
