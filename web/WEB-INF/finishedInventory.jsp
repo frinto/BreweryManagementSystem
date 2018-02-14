@@ -100,6 +100,7 @@
                 <h1>Finished Inventory</h1>
 
                 <div>
+                    <form action="finishedInventory?action=update" method="post" class="finishedInventoryUpdateButton">
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
@@ -109,18 +110,17 @@
                             </tr>
                         </thead>
                         </tbody>
-                        <c:forEach var="productName" items="${finishedProducts}" varStatus="status">
+                        <c:forEach var="productName" items="${finishedProducts}">
                             <tr>
                                 <td>${productName.productName}</td>
                                 <td>${productName.qty}</td>
                                 <td>
-                                    <input type="number" id="${status.index}" value="${updatedCount}">
+                                    <input type="text" name="${productName.productName}" value="${productName.qty}">
                                 </td>
                             </tr>
                         </c:forEach>
                     </table>
                 </div>
-                <form action="finishedInventory?action=update" method="post" class="finishedInventoryUpdateButton">
                     <button type="submit" class="btn btn-success">Update Inventory</button>
                 </form>
             </div>
