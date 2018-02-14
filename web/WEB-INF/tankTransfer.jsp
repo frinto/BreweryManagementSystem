@@ -33,6 +33,9 @@
         <div class="text-center">
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add A Transfer</button>
         </div>
+        <div>
+            <a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>
+        </div>
 
         <!-- Modal -->
         <div id="myModal" class="modal fade" role="dialog">
@@ -50,11 +53,10 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th>Date</th>
-                                <th>Brand</th>
                                 <th>FV</th>
                                 <th>SV</th>
                                 <th>Volume</th>
-                                <th>Emptying FV?</th>
+                                <th>Emptying FV? <a class="helpInfo" href="#" data-toggle="tooltip" title="If this is the last FV being emptied, then the system well calculate any loss for this brew.">Help</a></th>
                             </tr>
                         </thead>
                         <tbody>

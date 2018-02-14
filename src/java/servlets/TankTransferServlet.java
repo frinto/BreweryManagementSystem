@@ -30,8 +30,8 @@ public class TankTransferServlet extends HttpServlet
             throws ServletException, IOException
     {
         //set the current date to a variable so the Add A Transfer form has the current date pre-set
-        SimpleDateFormat dateFormat = new SimpleDateFormat("mm-dd-yyyy");
-        
+        //this is the required format to enter a date value in a date input field
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateToday = dateFormat.format(new Date());
         request.setAttribute("dateToday", dateToday);
         
