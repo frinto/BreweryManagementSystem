@@ -330,6 +330,7 @@ public class Brew implements Serializable {
         return "domainmodel.Brew[ brewId=" + brewId + " ]";
     }
     
+    
    
     
     
