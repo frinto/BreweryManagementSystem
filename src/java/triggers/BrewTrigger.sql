@@ -1,3 +1,7 @@
+DROP TRIGGER IF EXISTS `brewery`.`brew_BEFORE_INSERT`;
+
+DELIMITER $$
+USE `brewery`$$
 CREATE DEFINER=`root`@`localhost` TRIGGER `brewery`.`brew_BEFORE_INSERT` BEFORE INSERT ON `brew` FOR EACH ROW
 BEGIN
 
@@ -36,4 +40,5 @@ BEGIN
 
   CLOSE cur1;
 
-END
+END$$
+DELIMITER ;
