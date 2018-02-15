@@ -5,6 +5,7 @@
  */
 package domainmodel;
 
+import dataaccess.BrewDBException;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -138,11 +139,7 @@ public class Fv implements Serializable {
         return hash;
     }
     
-    public void updateFermenter(double volume)
-    {
-        double updatedVolume = this.getVolume()+volume;
-        this.setVolume(updatedVolume);
-    }
+    
 
     @Override
     public boolean equals(Object object) {

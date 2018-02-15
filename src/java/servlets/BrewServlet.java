@@ -130,8 +130,46 @@ public class BrewServlet extends HttpServlet {
         
         try {
             brewDB.insert(brew);
-            updateInventory(recipe);
-            updateFV(brew);
+            updateFV(brew,request,response);
+            TankDB tankDB = new TankDB();
+        
+        
+            Fv fv = tankDB.getFV(brew.getFvId());
+            
+            fv.setBrand(brew.getRecipeName());
+            double volume = fv.getVolume();
+            double newVolume = volume + (brew.getAllInVolume()*100);
+            if(newVolume > fv.getCapacity())
+            {
+                request.setAttribute("errorMessage", "Error, fermenter is over capacity. Please redo EVERYTHING");
+                getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
+                return;
+                
+            }
+            fv.setVolume(newVolume);
+            
+            
+            if(fv.getBrew1()==0)
+            {
+                fv.setBrew1(brew.getBrewId());
+            }
+            else if(fv.getBrew1()!=0&&fv.getBrew2()==0)
+            {
+                fv.setBrew2(brew.getBrewId());
+            }
+            else if(fv.getBrew3()==0&&fv.getBrew1()!=0&&fv.getBrew2()!=0)
+                fv.setBrew2(brew.getBrewId());
+            else{
+                request.setAttribute("errorMessage", "Error, fermenter already has 3 brews. Please redo EVERYTHING");
+                getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
+                return;
+            }
+                
+            
+            
+            tankDB.updateFV(fv);
+            
+       
             session.setAttribute("recipe", null);
             List<Brew> brews = brewDB.getAll();
             session.setAttribute("brews", brews);
@@ -149,121 +187,29 @@ public class BrewServlet extends HttpServlet {
     //        -----------------------------------Helper Methods----------------------------------------
     
             
-    private void updateInventory(Recipe recipe)
-    {
-        BrewMaterialsDB bmDB = new BrewMaterialsDB();
-        Brewmaterials bm_one;
-        Brewmaterials bm_two;
-        Brewmaterials bm_three;
-        Brewmaterials bm_four;
-        Brewmaterials bm_five;
-        Brewmaterials bm_six;
-        Brewmaterials bm_seven;
-        Brewmaterials bm_eight;
-        Brewmaterials bm_nine;
-        Brewmaterials bm_ten;
-        Brewmaterials bm_eleven;
- 
-        
-        
-        
-        
-        try {
-            bm_one = bmDB.getbrewmaterials(recipe.getBaseMalt());
-            double qty_one = recipe.getBaseMaltAmt();          
-            bm_one.useMaterial(qty_one);
-            bmDB.update(bm_one);
-            
-            
-            bm_two = bmDB.getbrewmaterials(recipe.getSecondMalt());
-            if(bm_two!=null)
-            {
-                double qty_two = recipe.getSecondMaltAmt();
-                bm_one.useMaterial(qty_two);
-                bmDB.update(bm_two);
-            }
-            
-            bm_three = bmDB.getbrewmaterials(recipe.getThirdMalt());
-            if(bm_three!=null)
-            {
-                double qty_three = recipe.getThirdMaltAmt();
-                bm_three.useMaterial(qty_three);
-                bmDB.update(bm_three);
-            }
-            bm_four = bmDB.getbrewmaterials(recipe.getFourthMalt());
-            if(bm_four!=null)
-            {
-                double qty_four = recipe.getFourthMaltAmt();
-                bm_four.useMaterial(qty_four);
-                bmDB.update(bm_four);
-            }
-            bm_five = bmDB.getbrewmaterials(recipe.getFirstHop());
-            if(bm_five!=null)
-            {
-            double qty_five = recipe.getFirstHopAmt();
-            bm_five.useMaterial(qty_five);
-            bmDB.update(bm_five);
-            }
-            
-            bm_six = bmDB.getbrewmaterials(recipe.getSecondHop());
-            if(bm_six!=null)
-            {
-            double qty_six = recipe.getSecondHopAmt();
-            bm_six.useMaterial(qty_six);
-            bmDB.update(bm_six);
-            }
-            
-            bm_seven = bmDB.getbrewmaterials(recipe.getThirdHop());
-            if(bm_seven!=null)
-            {
-            double qty_seven = recipe.getThirdHopAmt();
-            bm_seven.useMaterial(qty_seven);
-            bmDB.update(bm_seven);
-            }
-            
-            bm_eight = bmDB.getbrewmaterials("Gypsum");
-            if(bm_eight!=null)
-            {
-                double qty_eight = recipe.getGypsumAmt();
-                bm_eight.useMaterial(qty_eight);
-                bmDB.update(bm_eight);
-            }
-            bm_nine = bmDB.getbrewmaterials("SodiumChloride");
-            if(bm_nine!=null)
-            {
-                double qty_nine = recipe.getSodiumChlorideAmt();
-                bm_nine.useMaterial(qty_nine);
-                bmDB.update(bm_nine);
-            }
-            bm_ten = bmDB.getbrewmaterials("Phosphoric");
-            if(bm_ten!=null)
-            {
-                double qty_ten = recipe.getPhosphAcidAmt();
-                bm_ten.useMaterial(qty_ten);
-                bmDB.update(bm_ten);
-            }
-            
-            bm_eleven = bmDB.getbrewmaterials("CalciumChloride");
-            if(bm_eleven!=null)
-            {
-                double qty_eleven = recipe.getCalciumChlorideAmt();
-                bm_eleven.useMaterial(qty_eleven);
-                bmDB.update(bm_eleven);
-            }
-
-        } catch (BrewDBException ex) {
-            Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-    }
     
     
-    private void updateFV(Brew brew)
+    private void updateFV(Brew brew,HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
     {
         TankDB tankDB = new TankDB();
+        
         try {
             Fv fv = tankDB.getFV(brew.getFvId());
+            
+            fv.setBrand(brew.getRecipeName());
+            double volume = fv.getVolume();
+            double newVolume = volume + (brew.getAllInVolume()*100);
+            if(newVolume > fv.getCapacity())
+            {
+                request.setAttribute("errorMessage", "Error, fermenter is over capacity. Please redo EVERYTHING");
+                getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
+                return;
+                
+            }
+            fv.setVolume(newVolume);
+            
+            
             if(fv.getBrew1()==0)
             {
                 fv.setBrew1(brew.getBrewId());
@@ -272,12 +218,15 @@ public class BrewServlet extends HttpServlet {
             {
                 fv.setBrew2(brew.getBrewId());
             }
-            else
+            else if(fv.getBrew3()==0&&fv.getBrew1()!=0&&fv.getBrew2()!=0)
                 fv.setBrew2(brew.getBrewId());
+            else{
+                request.setAttribute("errorMessage", "Error, fermenter already has 3 brews. Please redo EVERYTHING");
+                getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
+            }
+                
             
-            fv.setBrand(brew.getRecipeName());
             
-            fv.updateFermenter(brew.getAllInVolume()*100);
             tankDB.updateFV(fv);
             
         } catch (BrewDBException ex) {

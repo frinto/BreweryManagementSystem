@@ -5,6 +5,7 @@
  */
 package domainmodel;
 
+import dataaccess.TankDB;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -15,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PostPersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -327,5 +329,9 @@ public class Brew implements Serializable {
     public String toString() {
         return "domainmodel.Brew[ brewId=" + brewId + " ]";
     }
+    
+   
+    
+    
     
 }
