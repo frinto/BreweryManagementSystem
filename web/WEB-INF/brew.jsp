@@ -51,7 +51,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="finishedinventory">
+                            <a class="nav-link" href="finishedInventory">
                                 <i class="nc-icon nc-paper-2"></i>
                                 <p>Finished Inventory</p>
                             </a>
@@ -82,6 +82,7 @@
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
                         <a class="navbar-brand" href="#pablo"> Brew </a>
+                        <li><a href="login?logout">Log Out</a></li>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -94,6 +95,7 @@
 
 
                 <!--------------------------------------Brew Selector------------------------------------------->
+                ${errorMessage}
                 <c:if test="${recipe==null}">
                     <c:if test="${newBrew != null}">
                         <div class ="selectBrew">
@@ -107,6 +109,7 @@
                                     </c:forEach>
                                 </select>
                                 <br>
+                                ${errorMessage}
                                 <br>
                                 <button type="submit" class="btn btn-primary btn-lg">Start Brew!</button>
                             </form>
@@ -119,8 +122,9 @@
                     <div class = "brews">
                         <form class ="datepicker">
                             View Brews by Date:
-                            <input type="date" name="bdaytime">
+                            <input type="date" name="brewDate">
                         </form>
+
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
@@ -130,8 +134,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
-                                    <c:forEach var="brew" items="${brews}">
+
+                                <c:forEach var="brew" items="${brews}">
                                     <tr>
                                         <td>${brew.brewId}</td>
                                         <td>${brew.date}</td>
@@ -153,7 +157,7 @@
                     <h1 class="leftSpacingh1">Now Brewing: ${recipe.recipeName}</h1>
                     <div class="cancelButton">
                         <form action ="brew" method ="GET">
-                        <button type="submit" class="btn btn-danger" name="cancelBrew">Cancel Brew</button>
+                            <button type="submit" class="btn btn-danger" name="cancelBrew">Cancel Brew</button>
                         </form>
                     </div>
 
@@ -164,10 +168,13 @@
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Ingredients</a>
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">BrewSheet</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">BrewSheet</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Ingredients</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="fermenter-tab" data-toggle="tab" href="#fermenter" role="tab" aria-controls="fermenter" aria-selected="false">Fermenter Status</a>
                         </li>
 
                     </ul>
@@ -175,108 +182,6 @@
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-
-                            <!------------------------------------------------------------Ingredients------------------------------------------------------>
-
-
-                            <h4 class="leftSpacingh4">Hop Bill:</h4>
-
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Ingredient</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">First Hop Addition</th>
-                                        <td>${recipe.firstHop}</td>
-                                        <td>${recipe.firstHopAmt} kg</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Second Hop Addition</th>
-                                        <td>${recipe.secondHop}</td>
-                                        <td>${recipe.secondHopAmt} kg</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Third Hop Addition</th>
-                                        <td>${recipe.thirdHop}</td>
-                                        <td colspan="2">${recipe.thirdHopAmt} kg</td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <h4 class="leftSpacingh4">Malt Bill:</h4>     
-
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Ingredient</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Base Malt</th>
-                                        <td>${recipe.baseMalt}</td>
-                                        <td>${recipe.baseMaltAmt} kg</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Second Malt</th>
-                                        <td>${recipe.secondMalt}</td>
-                                        <td>${recipe.secondMaltAmt} kg</td>
-                                    </tr>
-                                    <c:if test="${recipe.thirdMaltAmt!=0}">
-                                        <tr>
-                                            <th scope="row">Third Malt</th>
-                                            <td>${recipe.thirdMalt}</td>
-                                            <td colspan="2">${recipe.thirdMaltAmt} kg</td>
-
-                                        </tr>
-                                    </c:if>
-                            </table>
-
-                            <h4 class="leftSpacingh4">Mash Chemistry</h4>     
-
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Ingredient</th>
-
-                                        <th scope="col">Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Gypsum</th>
-                                        <td>${recipe.gypsumAmt} gm</td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Calcium Chloride</th>
-                                        <td>${recipe.calciumChlorideAmt} mg</td>
-
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">Phosphoric Acid</th>
-                                        <td>${recipe.phosphAcidAmt} mL</td>
-
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-
-                        </div>
-
-                        <!-------------------------------------------------------Brew Sheet----------------------------------------------------------->
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <form action="brew" method ="POST">
                                 <h3 class ="brewSteps">Mash Tun</h3>
                                 <table class="table">
@@ -305,7 +210,7 @@
                                             <th scope="row">Mash-In Water</th>
                                             <td>Litres</td>
                                             <td>${recipe.mashWaterVolume}</td>
-                                            
+
                                         </tr>
                                         <tr>
                                             <th scope="row">Rest Time</th>
@@ -356,7 +261,7 @@
                                             <td>Litres</td>
                                             <td>${recipe.underletLitres}</td>
                                             <td><input type="number" name="underletTime" min="0" max="500" required></td>
-                                            
+
 
                                         </tr>
                                         <tr>
@@ -496,29 +401,29 @@
                                     <table class="table">
                                         <tr>
                                             <td>
-                                <label for="custom-select">Please Select Destination Fermenter:</label>
+                                                <label for="custom-select">Please Select Destination Fermenter:</label>
                                             </td>
                                             <td>
-                                <select name="fvList" class="custom-select">
-                                    <c:forEach items="${fvs}" var="fv">
-                                        <option value="${fv.fvId}" selected ="selected">
-                                            ${fv.fvId} 
-                                        </option>
-                                    </c:forEach>
-                                </select>
+                                                <select name="fvList" class="custom-select">
+                                                    <c:forEach items="${fvs}" var="fv">
+                                                        <option value="${fv.fvId}" selected ="selected">
+                                                            ${fv.fvId} 
+                                                        </option>
+                                                    </c:forEach>
+                                                </select>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                
-                                <label>Final volume for fermenter(hectolitres):</label>
+
+                                                <label>Final volume for fermenter(hectolitres):</label>
                                             </td>
                                             <td>
-                                <input type="number" name="finalVolume" min="0" max="10000" required></td>
+                                                <input type="number" name="finalVolume" min="0" max="10000" required></td>
                                         </tr>
                                     </table>
                                 </div>
-                                
+
                                 <br>
                                 <br>
                                 <br>
@@ -537,15 +442,154 @@
                             <br>
                             <br>
 
+                        </div>
+
+                        <!-------------------------------------------------------Brew Sheet----------------------------------------------------------->
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+
+                            <!------------------------------------------------------------Ingredients------------------------------------------------------>
+
+
+                            <h4 class="leftSpacingh4">Hop Bill:</h4>
+
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Ingredient</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">First Hop Addition</th>
+                                        <td>${recipe.firstHop}</td>
+                                        <td>${recipe.firstHopAmt} kg</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Second Hop Addition</th>
+                                        <td>${recipe.secondHop}</td>
+                                        <td>${recipe.secondHopAmt} kg</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Third Hop Addition</th>
+                                        <td>${recipe.thirdHop}</td>
+                                        <td colspan="2">${recipe.thirdHopAmt} kg</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h4 class="leftSpacingh4">Malt Bill:</h4>     
+
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Ingredient</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Base Malt</th>
+                                        <td>${recipe.baseMalt}</td>
+                                        <td>${recipe.baseMaltAmt} kg</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Second Malt</th>
+                                        <td>${recipe.secondMalt}</td>
+                                        <td>${recipe.secondMaltAmt} kg</td>
+                                    </tr>
+                                    <c:if test="${recipe.thirdMaltAmt!=0}">
+                                        <tr>
+                                            <th scope="row">Third Malt</th>
+                                            <td>${recipe.thirdMalt}</td>
+                                            <td colspan="2">${recipe.thirdMaltAmt} kg</td>
+
+                                        </tr>
+                                    </c:if>
+                            </table>
+
+                            <h4 class="leftSpacingh4">Mash Chemistry</h4>     
+
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Ingredient</th>
+
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Gypsum</th>
+                                        <td>${recipe.gypsumAmt} gm</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Calcium Chloride</th>
+                                        <td>${recipe.calciumChlorideAmt} mg</td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Phosphoric Acid</th>
+                                        <td>${recipe.phosphAcidAmt} mL</td>
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+
 
                         </div>
-                    </div>
+                        <div class="tab-pane fade show active" id="fermenter" role="tabpanel" aria-labelledby="fermenter-tab">
 
-                    
-                </c:if>
-                <!--------------------------------------End Start New Brew------------------------------------------->
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Ingredient</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">SV ID</th>
+                                        <th scope="col">Volume</th>
+                                        <th scope="col"> Capacity</th>
+                                        <th scope="col">Brew 1</th>
+                                        <th scope="col">Brew 2</th>
+                                        <th scope="col">Brew 3</th>
+                                        <th scope="col">Brand</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+
+                                <c:forEach var="sv" items="${svs}">
+                                    <tr>
+                                        <td>${sv.svId}</td>
+                                        <td>${sv.volume}</td>
+                                        <td>${sv.capacity}</td>
+                                        <td>${sv.brew1}</td>
+                                        <td>${sv.brew2}</td>
+                                        <td>${sv.brew3}</td>
+                                        <td>${sv.brand}</td>
+                                        <td>${sv.status}</td>
+                                        <td>
+                                            <form action="tankStatus?action=editSv" method="POST">
+                                                <button type="submit">Edit</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                        </div>
+
+
+                    </c:if>
+                    <!--------------------------------------End Start New Brew------------------------------------------->
+                </div>
             </div>
-        </div>
     </body>
     <!--   Core JS Files   -->
     <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -563,9 +607,9 @@
     <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
     <script src="assets/js/brew.js"></script>
     <script type="text/javascript">
-                            $(document).ready(function () {
-                                // Javascript method's body can be found in assets/js/demos.js
-                            });
+                                                $(document).ready(function () {
+                                                    // Javascript method's body can be found in assets/js/demos.js
+                                                });
     </script>
 
 </html>

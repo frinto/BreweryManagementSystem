@@ -59,15 +59,32 @@ public class FinishedInventoryServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         FinishedInventoryDB finishedDatabase = new FinishedInventoryDB();
+        
+        
 
         try {
             List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
-
+            int[] qty = new int[finishedProducts.size()];
+            for(int i = 0; i < finishedProducts.size(); i++)
+            {
+             
+                //name is the product name
+                //productQtyString get the string of the productname from jsp
+                //we then parse the productQtyString to an int quantity
+                String name =finishedProducts.get(i).getProductName();
+                String productQtyString = request.getParameter(name);
+                qty[i] = Integer.parseInt(productQtyString);
+            }
+            for(int i = 0; i < finishedProducts.size(); i++)
+            {
+            finishedProducts.get(i).setQty(qty[i]);
+            finishedDatabase.update(finishedProducts.get(i));
+            }
             request.setAttribute("finishedProducts", finishedProducts);
 
         } catch (BrewDBException ex) {
             Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("message", "error retrieving finished product list from database");
+            request.setAttribute("message", "error updating finished product list from database");
 
         }
 
