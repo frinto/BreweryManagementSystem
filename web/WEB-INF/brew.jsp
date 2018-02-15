@@ -51,7 +51,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="finishedinventory">
+                            <a class="nav-link" href="finishedInventory">
                                 <i class="nc-icon nc-paper-2"></i>
                                 <p>Finished Inventory</p>
                             </a>
@@ -119,7 +119,7 @@
                     <div class = "brews">
                         <form class ="datepicker">
                             View Brews by Date:
-                            <input type="date" name="bdaytime">
+                            <input type="date" name="brewDate">
                         </form>
                         <table class="table">
                             <thead class="thead-dark">
