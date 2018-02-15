@@ -1,0 +1,1 @@
+INSERT INTO `account` VALUES (1,'roosevelt', '403-999-1111', 'address1');
