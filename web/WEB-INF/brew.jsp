@@ -546,14 +546,11 @@
 
 
                         </div>
-                        <div class="tab-pane fade show active" id="fermenter" role="tabpanel" aria-labelledby="fermenter-tab">
+                        <div class="tab-pane fade" id="fermenter" role="tabpanel" aria-labelledby="fermenter-tab">
 
                             <table class="table table-sm">
-                                <thead>
+                                <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col">Ingredient</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Amount</th>
                                         <th scope="col">SV ID</th>
                                         <th scope="col">Volume</th>
                                         <th scope="col"> Capacity</th>
@@ -565,21 +562,16 @@
                                     </tr>
                                 </thead>
 
-                                <c:forEach var="sv" items="${svs}">
+                                <c:forEach var="fv" items="${fvs}">
                                     <tr>
-                                        <td>${sv.svId}</td>
-                                        <td>${sv.volume}</td>
-                                        <td>${sv.capacity}</td>
-                                        <td>${sv.brew1}</td>
-                                        <td>${sv.brew2}</td>
-                                        <td>${sv.brew3}</td>
-                                        <td>${sv.brand}</td>
-                                        <td>${sv.status}</td>
-                                        <td>
-                                            <form action="tankStatus?action=editSv" method="POST">
-                                                <button type="submit">Edit</button>
-                                            </form>
-                                        </td>
+                                        <td>${fv.fvId}</td>
+                                        <td>${fv.volume}</td>
+                                        <td>${fv.capacity}</td>
+                                        <td>${fv.brew1}</td>
+                                        <td>${fv.brew2}</td>
+                                        <td>${fv.brew3}</td>
+                                        <td>${fv.brand}</td>
+                                        <td>${fv.status}</td>
                                     </tr>
                                 </c:forEach>
                             </table>

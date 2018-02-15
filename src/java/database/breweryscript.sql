@@ -127,7 +127,7 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `productionmaterialusage` (
   `materialQty` DOUBLE NULL,
   `name` VARCHAR(20) NOT NULL,
-  `usage` VARCHAR(20) NOT NULL,
+  `usage` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`Usage`, `Name`))
 ENGINE = InnoDB;
 

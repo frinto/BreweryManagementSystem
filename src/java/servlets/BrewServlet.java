@@ -15,6 +15,7 @@ import domainmodel.Brewmaterials;
 import domainmodel.Fv;
 import domainmodel.Recipe;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -46,12 +47,10 @@ public class BrewServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("newBrew", null);
             session.setAttribute("recipes", null);
-            
-      
+
             String cancelBrew = request.getParameter("cancelBrew");
-            if(cancelBrew!=null)
-            {
-                session.setAttribute("recipe",null);
+            if (cancelBrew != null) {
+                session.setAttribute("recipe", null);
             }
             String newBrew = request.getParameter("newBrew");
             session.setAttribute("newBrew", newBrew);
@@ -65,19 +64,17 @@ public class BrewServlet extends HttpServlet {
 
             String selectedRecipe = request.getParameter("recipeList");
             if (selectedRecipe != null) {
-                
+
                 Recipe recipe = recipeDB.getRecipe(selectedRecipe);
                 session.setAttribute("recipe", recipe);
-                
-                
+
             }
             List<Fv> fvs = tankDB.getAllFV();
-            session.setAttribute("fvs",fvs);
-            
+            session.setAttribute("fvs", fvs);
+
             List<Brew> brews = brewDB.getAll();
-            if(brews!=null)
-            {
-            session.setAttribute("brews", brews);
+            if (brews != null) {
+                session.setAttribute("brews", brews);
             }
 
             getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
@@ -90,11 +87,11 @@ public class BrewServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
         BrewDB brewDB = new BrewDB();
-        
-        float mashInTime = Float.parseFloat(request.getParameter("mashInTime"));      
+
+        float mashInTime = Float.parseFloat(request.getParameter("mashInTime"));
         float restTime = Float.parseFloat(request.getParameter("restTime"));
         float inTime = Float.parseFloat(request.getParameter("inTime"));
         float totalMashTime = Float.parseFloat(request.getParameter("totalMashTime"));
@@ -109,136 +106,104 @@ public class BrewServlet extends HttpServlet {
         float strikeOutGrav = Float.parseFloat(request.getParameter("strikeOutGrav"));
         float kettleStrikeOutVol = Float.parseFloat(request.getParameter("strikeOutVol"));
         float finalVolume = Float.parseFloat(request.getParameter("finalVolume"));
-        
-        String empId = (String)session.getAttribute("empId");
-        
+
+        String empId = (String) session.getAttribute("empId");
+
         int fvSelection = Integer.parseInt(request.getParameter("fvList"));
         Date date = new Date();
-        
-        
-        Recipe recipe = (Recipe)session.getAttribute("recipe");
-        
+
+        Recipe recipe = (Recipe) session.getAttribute("recipe");
+
         String recipeName = recipe.getRecipeName();
-        
+
         Brew brew = new Brew();
         //Absurdly long constructor for a brew object
-        
-        brew = new Brew(brew.getBrewId(),date,mashInTime,restTime,inTime,totalMashTime,underletTime,
-        lauterRestTime,vorlaufTime,firstWortGrav,runOffTime,lastRunnings,kettleFullVol,kettleFullGrav,
-                kettleStrikeOutVol,strikeOutGrav,finalVolume,Integer.parseInt(empId),fvSelection,recipeName);
-        
-        
+
+        brew = new Brew(brew.getBrewId(), date, mashInTime, restTime, inTime, totalMashTime, underletTime,
+                lauterRestTime, vorlaufTime, firstWortGrav, runOffTime, lastRunnings, kettleFullVol, kettleFullGrav,
+                kettleStrikeOutVol, strikeOutGrav, finalVolume, Integer.parseInt(empId), fvSelection, recipeName);
+
         try {
             brewDB.insert(brew);
-            updateFV(brew,request,response);
-            TankDB tankDB = new TankDB();
-        
-        
-            Fv fv = tankDB.getFV(brew.getFvId());
             
+            TankDB tankDB = new TankDB();
+
+            Fv fv = tankDB.getFV(brew.getFvId());
+
             fv.setBrand(brew.getRecipeName());
             double volume = fv.getVolume();
-            double newVolume = volume + (brew.getAllInVolume()*100);
-            if(newVolume > fv.getCapacity())
-            {
+            double newVolume = volume + (brew.getAllInVolume() * 100);
+            if (newVolume > fv.getCapacity()) {
                 request.setAttribute("errorMessage", "Error, fermenter is over capacity. Please redo EVERYTHING");
                 getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
                 return;
                 
+
             }
             fv.setVolume(newVolume);
-            
-            
-            if(fv.getBrew1()==0)
-            {
+
+            if (fv.getBrew1() == 0) {
                 fv.setBrew1(brew.getBrewId());
-            }
-            else if(fv.getBrew1()!=0&&fv.getBrew2()==0)
-            {
+            } else if (fv.getBrew1() != 0 && fv.getBrew2() == 0) {
                 fv.setBrew2(brew.getBrewId());
-            }
-            else if(fv.getBrew3()==0&&fv.getBrew1()!=0&&fv.getBrew2()!=0)
+            } else if (fv.getBrew3() == 0 && fv.getBrew1() != 0 && fv.getBrew2() != 0) {
                 fv.setBrew2(brew.getBrewId());
-            else{
+            } else {
                 request.setAttribute("errorMessage", "Error, fermenter already has 3 brews. Please redo EVERYTHING");
                 getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
                 return;
             }
-                
-            
-            
+
             tankDB.updateFV(fv);
-            
-       
+
             session.setAttribute("recipe", null);
             List<Brew> brews = brewDB.getAll();
             session.setAttribute("brews", brews);
-            
+
             getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
-            
+
         } catch (BrewDBException ex) {
             Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-
 
     }
     //        -----------------------------------Helper Methods----------------------------------------
-    
-            
-    
-    
-    private void updateFV(Brew brew,HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+
+    private void updateFV(Brew brew, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         TankDB tankDB = new TankDB();
-        
+
         try {
             Fv fv = tankDB.getFV(brew.getFvId());
-            
+
             fv.setBrand(brew.getRecipeName());
             double volume = fv.getVolume();
-            double newVolume = volume + (brew.getAllInVolume()*100);
-            if(newVolume > fv.getCapacity())
-            {
+            double newVolume = volume + (brew.getAllInVolume() * 100);
+            if (newVolume > fv.getCapacity()) {
                 request.setAttribute("errorMessage", "Error, fermenter is over capacity. Please redo EVERYTHING");
                 getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
                 return;
-                
+
             }
             fv.setVolume(newVolume);
-            
-            
-            if(fv.getBrew1()==0)
-            {
+
+            if (fv.getBrew1() == 0) {
                 fv.setBrew1(brew.getBrewId());
-            }
-            else if(fv.getBrew1()!=0&&fv.getBrew2()==0)
-            {
+            } else if (fv.getBrew1() != 0 && fv.getBrew2() == 0) {
                 fv.setBrew2(brew.getBrewId());
-            }
-            else if(fv.getBrew3()==0&&fv.getBrew1()!=0&&fv.getBrew2()!=0)
+            } else if (fv.getBrew3() == 0 && fv.getBrew1() != 0 && fv.getBrew2() != 0) {
                 fv.setBrew2(brew.getBrewId());
-            else{
+            } else {
                 request.setAttribute("errorMessage", "Error, fermenter already has 3 brews. Please redo EVERYTHING");
                 getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
             }
-                
-            
-            
+
             tankDB.updateFV(fv);
-            
+
         } catch (BrewDBException ex) {
             Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
-        
-        
+
     }
 
 }
-

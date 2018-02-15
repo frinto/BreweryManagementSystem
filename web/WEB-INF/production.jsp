@@ -102,28 +102,28 @@
                         <form action="production?action=newProduction" method="POST">
                             <table class="table">
                                 <thead class="thead-dark">
-                                <th>Date</th>
                                 <th>ProductionType</th>
                                 <th>Quantity</th>
                                 <th>SVNumber</th>
-                                <th>EmployeeID</th>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <input type="date" name="date">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="productionType">
+                                            <select name="productionType">
+                                                <c:forEach var="production" items="${prod}">
+                                                    <option value="${production.productionType}">${production.productionType}</option>
+                                                </c:forEach>
+                                            </select>
                                         </td>
                                         <td>
                                             <input type="text" name="quantity">
                                         </td>
                                         <td>
-                                            <input type="text" name="svNumber">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="employeeId">
+                                            <select name="svNumber">
+                                                <c:forEach var="storageVessel" items="${sv}">
+                                                    <option value="${storageVessel.svId}">${storageVessel.svId}</option>
+                                                </c:forEach>
+                                            </select>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -143,6 +143,7 @@
                             <th>Quantity</th>
                             <th>SVNumber</th>
                             <th>EmployeeID</th>
+                            <th>SV Correction +/-</th>
                             </thead>
                             <tbody>
                                 <c:forEach var="production" items="${prod}">
@@ -152,6 +153,7 @@
                                         <td>${production.quantity}</td>
                                         <td>${production.svNum}</td>
                                         <td>${production.employeeId}</td>
+                                        <td><input type="text" value=""></input></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
