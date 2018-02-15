@@ -50,4 +50,23 @@ public class FinishedInventoryDB {
         }
     }
 
+    
+    public int update(Finishedproduct finishedproduct) throws BrewDBException
+    {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+
+        try {
+            trans.begin();
+            em.merge(finishedproduct);
+            trans.commit();
+            return 1;
+        } catch (Exception ex) {
+            trans.rollback();
+            Logger.getLogger(FinishedInventoryDB.class.getName()).log(Level.SEVERE, "Cannot update ", ex);
+            throw new BrewDBException("Error updating finished product");
+        } finally {
+            em.close();
+        }
+    }
 }
