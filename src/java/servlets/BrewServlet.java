@@ -264,6 +264,19 @@ public class BrewServlet extends HttpServlet {
         TankDB tankDB = new TankDB();
         try {
             Fv fv = tankDB.getFV(brew.getFvId());
+            if(fv.getBrew1()==0)
+            {
+                fv.setBrew1(brew.getBrewId());
+            }
+            else if(fv.getBrew1()!=0&&fv.getBrew2()==0)
+            {
+                fv.setBrew2(brew.getBrewId());
+            }
+            else
+                fv.setBrew2(brew.getBrewId());
+            
+            fv.setBrand(brew.getRecipeName());
+            
             fv.updateFermenter(brew.getAllInVolume()*100);
             tankDB.updateFV(fv);
             
