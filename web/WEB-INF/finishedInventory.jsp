@@ -85,7 +85,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        
+
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -99,8 +99,8 @@
 
                 <h1>Finished Inventory</h1>
 
-                <div>
-                    <form action="finishedInventory?action=update" method="post" class="finishedInventoryUpdateButton">
+
+                <form action="finishedInventory?action=update" method="post" class="finishedInventoryUpdateButton">
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
@@ -120,7 +120,7 @@
                             </tr>
                         </c:forEach>
                     </table>
-                </div>
+
                     <button type="submit" class="btn btn-success">Update Inventory</button>
                 </form>
             </div>
