@@ -79,6 +79,12 @@ public class RawInventoryServlet extends HttpServlet {
                         rawDatabase.updateBrewMaterials(brewMaterials.get(i));
                     }
                     request.setAttribute("brewMaterials", brewMaterials);
+                    
+                    //keep the production materials list
+                    
+                    List<Productionmaterial> productionMaterials = rawDatabase.getAllInventoryProductionMaterial();
+                    
+                    request.setAttribute("productionMaterials", productionMaterials);
 
                 } catch (BrewDBException ex) {
                     Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,6 +113,11 @@ public class RawInventoryServlet extends HttpServlet {
                         rawDatabase.updateProductionMaterials(productionMaterials.get(i));
                     }
                     request.setAttribute("productionMaterials", productionMaterials);
+                    
+                    //keep the brew materials list
+                    
+                    List<Brewmaterials> brewMaterials = rawDatabase.getAllInventoryBrewMaterial();
+                    request.setAttribute("brewMaterials", brewMaterials);
 
                 } catch (BrewDBException ex) {
                     Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
