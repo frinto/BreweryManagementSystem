@@ -115,7 +115,7 @@
                         <h3>Brew Materials</h3>
 
 
-                        <form action="rawInventory?action=update" method="post" class="rawInventoryUpdateButton">
+                        <form action="rawInventory?action=updateBrewMaterials" method="post" class="rawInventoryUpdateButton">
                             <table class="table">
                                 <thead class="thead-dark">
                                     <tr>
