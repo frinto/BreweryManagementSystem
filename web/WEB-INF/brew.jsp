@@ -57,7 +57,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="rawinventory">
+                            <a class="nav-link" href="rawInventory">
                                 <i class="nc-icon nc-atom"></i>
                                 <p>Raw Inventory</p>
                             </a>

@@ -55,13 +55,13 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./typography.html">
+                            <a class="nav-link" href="finishedInventory">
                                 <i class="nc-icon nc-paper-2"></i>
                                 <p>Finished Inventory</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./icons.html">
+                            <a class="nav-link" href="rawInventory">
                                 <i class="nc-icon nc-atom"></i>
                                 <p>Raw Goods Inventory</p>
                             </a>
