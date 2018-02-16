@@ -103,7 +103,7 @@
                     <td>${transfer.fromFv}</td>
                     <td>${transfer.toSv}</td>
                     <td>${transfer.volume}</td>
-                    <td>correction</td>
+                    <td>${transfer.correction}</td>
                 </tr>
             </c:forEach>
             </tbody>

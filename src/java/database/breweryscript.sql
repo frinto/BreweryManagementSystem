@@ -372,10 +372,11 @@ DROP TABLE IF EXISTS `transfer` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `transfer` (
   `transferId` INT NOT NULL AUTO_INCREMENT,
-  `date` DATE NULL,
-  `volume` DECIMAL NULL,
+  `date` DATE NOT NULL,
+  `volume` DECIMAL NOT NULL,
   `fromFv` INT NOT NULL,
   `toSv` INT NOT NULL,
+  `correction` DECIMAL NULL,
   PRIMARY KEY (`transferId`))
 ENGINE = InnoDB;
 

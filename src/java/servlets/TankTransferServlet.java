@@ -61,7 +61,7 @@ public class TankTransferServlet extends HttpServlet
             int toSV;
             int fromFV;
             String dateString;
-            Transfer transfer = new Transfer();
+            Transfer transfer;
             
             try {
                 dateString = request.getParameter("date");
@@ -70,7 +70,7 @@ public class TankTransferServlet extends HttpServlet
                 volume = Long.parseLong(request.getParameter("volume"));
                 date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
                 
-                transfer = new Transfer(transfer.getTransferId(), date, fromFV, toSV, volume);
+                transfer = new Transfer(0, date, fromFV, toSV, volume);
                 transferDB.insertTransfer(transfer);
             } catch (ParseException ex) {
                 request.setAttribute("message", ex);
@@ -82,8 +82,5 @@ public class TankTransferServlet extends HttpServlet
             
             response.sendRedirect("tankTransfer");
         }
-//        getServletContext().getRequestDispatcher("/WEB-INF/tankTransfer.jsp").forward(request, response);
     }
-
-
 }
