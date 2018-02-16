@@ -149,12 +149,33 @@
                     <!--production materials tab-->
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <h3>Production Materials</h3>
+                        
+                        <form action="rawInventory?action=updateProductionMaterials" method="post" class="rawInventoryUpdateButton">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>New Quantity</th>
+                                    </tr>
+                                </thead>
+                                </tbody>
+                                <c:forEach var="prodList" items="${productionMaterials}">
+                                    <tr>
+                                        <td>${prodList.name}</td>
+                                        <td>${prodList.qty}</td>
+                                        <td>
+                                            <input type="number" name="${prodList.name}" value="${prodList.qty}">
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+
+                            <button type="submit" class="btn btn-success">Update Inventory</button>
+                        </form>
                     </div>
                     <!--end production materials tab-->
-
                 </div>
-
-
             </div>
         </div>
     </body>
