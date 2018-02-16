@@ -9,6 +9,7 @@ import dataaccess.BrewDBException;
 import dataaccess.TransferDB;
 import domainmodel.Transfer;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,7 @@ public class TankTransferServlet extends HttpServlet
             throws ServletException, IOException
     {
         //set the current date to a variable so the Add A Transfer form has the current date pre-set
-        //this is the required format to enter a date value in a date input field
+        //this is the required format to pre-set a date value in a date input field
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateToday = dateFormat.format(new Date());
         request.setAttribute("dateToday", dateToday);
@@ -54,7 +55,25 @@ public class TankTransferServlet extends HttpServlet
     {
         String action = request.getParameter("action");
         if (action!=null && action.equals("add")) {
-            //maybe a pop-up form for adding tank transfer
+            Date date;
+            long volume;
+            int toSV;
+            int fromFV;
+            String dateString;
+            
+            try {
+                dateString = request.getParameter("date");
+                fromFV = Integer.parseInt(request.getParameter("fromFV"));
+                toSV = Integer.parseInt(request.getParameter("toSV"));
+                volume = Long.parseLong(request.getParameter("volume"));
+                date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+                
+                
+            } catch (ParseException ex) {
+                request.setAttribute("message", ex);
+                Logger.getLogger(TankTransferServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             response.sendRedirect("tankTransfer");
         }
 //        getServletContext().getRequestDispatcher("/WEB-INF/tankTransfer.jsp").forward(request, response);
