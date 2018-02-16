@@ -85,7 +85,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        
+
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -93,36 +93,21 @@
                         </button>
                     </div>
                 </nav>
-
                 <!--End nav bar-------------------------------------------------------------------------->
+                
+                <h1>Raw Goods Inventory</h1>
+                
+                <!--These are the tabs from the bootstrap documentation-->
 
-
-                <h1>Finished Inventory</h1>
-
-                <div>
-                    <form action="finishedInventory?action=update" method="post" class="finishedInventoryUpdateButton">
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Product Name</th>
-                                <th>Quantity</th>
-                                <th>Update</th>
-                            </tr>
-                        </thead>
-                        </tbody>
-                        <c:forEach var="productName" items="${finishedProducts}">
-                            <tr>
-                                <td>${productName.productName}</td>
-                                <td>${productName.qty}</td>
-                                <td>
-                                    <input type="number" name="${productName.productName}" value="${productName.qty}">
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </table>
-                </div>
-                    <button type="submit" class="btn btn-success">Update Inventory</button>
-                </form>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">BrewMaterials</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ProductionMaterials</a>
+                        </li>
+                    </ul>
+                
             </div>
         </div>
     </body>
