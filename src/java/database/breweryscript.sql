@@ -371,7 +371,7 @@ DROP TABLE IF EXISTS `transfer` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `transfer` (
-  `transferId` INT NOT NULL,
+  `transferId` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NULL,
   `volume` DECIMAL NULL,
   `fromFv` INT NOT NULL,
