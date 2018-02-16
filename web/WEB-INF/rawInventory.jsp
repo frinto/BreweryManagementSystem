@@ -94,20 +94,37 @@
                     </div>
                 </nav>
                 <!--End nav bar-------------------------------------------------------------------------->
-                
+
                 <h1>Raw Goods Inventory</h1>
-                
+
                 <!--These are the tabs from the bootstrap documentation-->
 
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">BrewMaterials</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ProductionMaterials</a>
-                        </li>
-                    </ul>
-                
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">BrewMaterials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ProductionMaterials</a>
+                    </li>
+                </ul>
+
+
+                <div class="tab-content" id="myTabContent">
+                    <!-- brew materials tab-->  
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <p>brew materials</p>
+                    </div>
+                    <!--end brew materials tab-->
+                    
+                    <!--production materials tab-->
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <p>production materials</p>
+                    </div>
+                    <!--end production materials tab-->
+                    
+                </div>
+
+
             </div>
         </div>
     </body>
