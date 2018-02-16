@@ -38,7 +38,7 @@ public class FinishedInventoryServlet extends HttpServlet {
             request.setAttribute("finishedProducts", finishedProducts);
 
             for (int i = 0; i < finishedProducts.size(); i++) {
-                
+
                 request.setAttribute("updateCount", finishedProducts.get(i).getQty());
             }
 
@@ -56,29 +56,23 @@ public class FinishedInventoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String action = request.getParameter("action");
-
         FinishedInventoryDB finishedDatabase = new FinishedInventoryDB();
-        
-        
 
         try {
             List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
             int[] qty = new int[finishedProducts.size()];
-            for(int i = 0; i < finishedProducts.size(); i++)
-            {
-             
+            for (int i = 0; i < finishedProducts.size(); i++) {
+
                 //name is the product name
                 //productQtyString get the string of the productname from jsp
                 //we then parse the productQtyString to an int quantity
-                String name =finishedProducts.get(i).getProductName();
+                String name = finishedProducts.get(i).getProductName();
                 String productQtyString = request.getParameter(name);
                 qty[i] = Integer.parseInt(productQtyString);
             }
-            for(int i = 0; i < finishedProducts.size(); i++)
-            {
-            finishedProducts.get(i).setQty(qty[i]);
-            finishedDatabase.update(finishedProducts.get(i));
+            for (int i = 0; i < finishedProducts.size(); i++) {
+                finishedProducts.get(i).setQty(qty[i]);
+                finishedDatabase.update(finishedProducts.get(i));
             }
             request.setAttribute("finishedProducts", finishedProducts);
 

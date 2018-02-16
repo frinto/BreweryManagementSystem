@@ -112,16 +112,46 @@
                 <div class="tab-content" id="myTabContent">
                     <!-- brew materials tab-->  
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <p>brew materials</p>
+                        <h3>Brew Materials</h3>
+
+
+                        <form action="rawInventory?action=update" method="post" class="rawInventoryUpdateButton">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Units</th>
+                                        <th>Type</th>
+                                        <th>New Quantity</th>
+                                    </tr>
+                                </thead>
+                                </tbody>
+                                <c:forEach var="brewList" items="${brewMaterials}">
+                                    <tr>
+                                        <td>${brewList.name}</td>
+                                        <td>${brewList.qty}</td>
+                                        <td>${brewList.units}</td>
+                                        <td>${brewList.type}</td>
+                                        <td>
+                                            <input type="number" name="${brewList.name}" value="${brewList.qty}">
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+
+                            <button type="submit" class="btn btn-success">Update Inventory</button>
+                        </form>
+
                     </div>
                     <!--end brew materials tab-->
-                    
+
                     <!--production materials tab-->
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <p>production materials</p>
+                        <h3>Production Materials</h3>
                     </div>
                     <!--end production materials tab-->
-                    
+
                 </div>
 
 
