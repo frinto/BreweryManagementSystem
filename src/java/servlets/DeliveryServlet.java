@@ -7,8 +7,10 @@ package servlets;
 
 import dataaccess.BrewDBException;
 import dataaccess.DeliveryDB;
+import dataaccess.FinishedInventoryDB;
 import dataaccess.ProductDB;
 import domainmodel.Delivery;
+import domainmodel.Finishedproduct;
 import domainmodel.Product;
 import domainmodel.ProductPK;
 import java.io.IOException;
@@ -60,30 +62,48 @@ public class DeliveryServlet extends HttpServlet
                 try
                 {
                     //Delivery
-                    /////////////////////////////////////////////////////////////
-                    //FOR TESTING PURPOSESES EMPID IS SET TO 1
-                    ////////////////////////////////////////////////////////////
+                    //Creates a delivery object and puts the products for the delivery into it, this information is taken from the delivery servlet
                     DeliveryDB deliveryDB = new DeliveryDB();
                     String companyName = request.getParameter("companyName");
 //                    HttpSession session = request.getSession();
-//                    int empId = (int) session.getAttribute("userId");
-                    int empId = 1; /////////////////////////////////////////////HERE
+//                    int empId = (int) session.getAttribute("empId");
+//THIS IS HARDCODED SINCE THE LOGIN CURRENTLY DOES NOT WORK FOR SOME REASON THIS CAN BE REMOVED ONCE THE SITE WORKS PROPPERLY TALK TO JESSIE
+                    int empId = 1;
                     String dateS = request.getParameter("date");
                     Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateS);
                     Delivery delivery = new Delivery();
                     delivery = new Delivery(delivery.getDeliveryId(), companyName, empId, date);
                     deliveryDB.insert(delivery);
+                    
+                    
                     //Product
                     ProductDB productDB = new ProductDB();
                     String qty[] = request.getParameterValues("qty");
                     String productName[] = request.getParameterValues("productName");
-                    ArrayList<Product> product = new ArrayList();
                     for (int i = 0; i < qty.length && i < productName.length; i++)
                     {
                         ProductPK pk = new ProductPK(productName[i], delivery.getDeliveryId());
                         Product p = new Product(pk, Integer.parseInt(qty[i]));
                         productDB.insert(p);
 
+                    }
+                    
+                    
+                    //Remove from finished Goods
+                    FinishedInventoryDB finishedInventoryDB = new FinishedInventoryDB();
+                    List<Finishedproduct> finishedProduct = finishedInventoryDB.getAllInventory();
+                    for (int i = 0; i < finishedProduct.size(); i++)
+                    {
+                        for (int x = 0; x < productName.length; x++)
+                        {
+                            String pName1 = productName[x];
+                            String pName2 = finishedProduct.get(i).getProductName();
+                            if(pName1.equals(pName2))
+                            {
+                                finishedProduct.get(i).setQty(finishedProduct.get(i).getQty() - Integer.parseInt(qty[x]));
+                                finishedInventoryDB.update(finishedProduct.get(i));
+                            }
+                        }
                     }
                 } catch (ParseException ex)
                 {
