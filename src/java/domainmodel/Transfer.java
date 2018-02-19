@@ -57,10 +57,12 @@ public class Transfer implements Serializable {
         this.transferId = transferId;
     }
 
-    public Transfer(Integer transferId, int fromFv, int toSv) {
+    public Transfer(Integer transferId, Date date, int fromFv, int toSv, Long volume) {
         this.transferId = transferId;
+        this.date = date;
         this.fromFv = fromFv;
         this.toSv = toSv;
+        this.volume = volume;
     }
 
     public Integer getTransferId() {
