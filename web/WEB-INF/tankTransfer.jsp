@@ -8,7 +8,6 @@
         <meta charset="utf-8" />
         <title>BMS</title> 
         <c:import url="/WEB-INF/includes/sidebar.html"/>
-
         <!-- start main panel and top header text-->    
     <div class="main-panel">
                 <!-- Navbar -->
@@ -33,9 +32,6 @@
         <div class="text-center">
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add A Transfer</button>
         </div>
-        <div>
-            <a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>
-        </div>
 
         <!-- Modal -->
         <div id="myModal" class="modal fade" role="dialog">
@@ -48,26 +44,29 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
-                  <form>
-                      <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Date</th>
-                                <th>FV</th>
-                                <th>SV</th>
-                                <th>Volume</th>
-                                <th>Emptying FV? <a class="helpInfo" href="#" data-toggle="tooltip" title="If this is the last FV being emptied, then the system well calculate any loss for this brew.">Help</a></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <form action="tankTransfer?action=add" method="POST">
-                                    <td><input type="date" name="date" value="${dateToday}"/></td> 
-                                </form>
-                            </tr>
-                        </tbody>
-                      </table>
-                  </form>
+                <form action="tankTransfer?action=add" method="POST">
+                    <table class="table">
+                      <thead class="thead-dark">
+                          <tr>
+                            <th>Date</th>
+                            <th>From FV</th>
+                            <th>To SV</th>
+                            <th>Volume</th>
+                            <th>Emptying FV? <a class="helpInfo" style="font-size:10px" href="#" data-toggle="tooltip" title="If the FV is being emptied, then the system well calculate any loss for this brew.">Help</a></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <td><input type="date" name="date" value="${dateToday}"/></td>
+                            <td><input type="number" name="fromFV" required/></td>
+                            <td><input type="number" name="toSV" required/></td>
+                            <td><input type="number" name="volume" step=".01" required/></td>
+                            <td><input type="checkbox" name="isFvEmpty"/></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
               </div>
               <div class="modal-footer">
               </div>
@@ -104,7 +103,7 @@
                     <td>${transfer.fromFv}</td>
                     <td>${transfer.toSv}</td>
                     <td>${transfer.volume}</td>
-                    <td>correction</td>
+                    <td>${transfer.correction}</td>
                 </tr>
             </c:forEach>
             </tbody>

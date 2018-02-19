@@ -37,6 +37,14 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>RawInventoryServlet</servlet-name>
+        <servlet-class>servlets.RawInventoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RawInventoryServlet</servlet-name>
+        <url-pattern>/rawInventory</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>FinishedInventoryServlet</servlet-name>
         <servlet-class>servlets.FinishedInventoryServlet</servlet-class>
     </servlet>

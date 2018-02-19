@@ -57,7 +57,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="rawinventory">
+                            <a class="nav-link" href="rawInventory">
                                 <i class="nc-icon nc-atom"></i>
                                 <p>Raw Inventory</p>
                             </a>
@@ -120,11 +120,13 @@
                     <!-------------------------------------- End Brew Selector------------------------------------------->
                     <!--------------------------------------Start  New Brew------------------------------------------->
                     <div class = "brews">
-                        <form class ="datepicker">
-                            View Brews by Date:
-                            <input type="date" name="brewDate">
+                        
+                        <form class ="datepicker" action="brew" method="GET">
+                            <h4>View Brews by Date:</h4>
+                            <input type="date" name="brewDate" id="datePicker">
+                            <button type="submit" class="btn btn-outline-primary">Select Date</button>
                         </form>
-
+                        
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
@@ -134,16 +136,20 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                
 
                                 <c:forEach var="brew" items="${brews}">
+                                    <c:if test="${brewDate.equals(brew.date)}">
                                     <tr>
                                         <td>${brew.brewId}</td>
                                         <td>${brew.date}</td>
                                         <td>${brew.recipeName}</td>
                                     </tr>
+                                    </c:if>
                                 </c:forEach>
                             </tbody>
                         </table>
+                        
                         <form action="brew" method ="GET" class ="brewButton">
                             <button type="submit" class="btn btn-success" name="newBrew">Add a Brew</button>
                         </form>
