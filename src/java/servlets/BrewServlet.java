@@ -16,6 +16,8 @@ import domainmodel.Fv;
 import domainmodel.Recipe;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -47,6 +49,29 @@ public class BrewServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("newBrew", null);
             session.setAttribute("recipes", null);
+            String startDateStr = request.getParameter("brewDate");
+            
+            if(startDateStr==null)
+            {
+                
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String startDate = sdf.format(new Date());
+                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+                
+                session.setAttribute("brewDate",date);
+            }
+            if(startDateStr!=null)
+            {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date startDate = sdf.parse(startDateStr);
+                session.setAttribute("brewDate", startDate);
+            } catch (ParseException ex) {
+                Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+            
+            
 
             String cancelBrew = request.getParameter("cancelBrew");
             if (cancelBrew != null) {
@@ -79,6 +104,8 @@ public class BrewServlet extends HttpServlet {
 
             getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
         } catch (BrewDBException ex) {
+            Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -124,7 +151,7 @@ public class BrewServlet extends HttpServlet {
                 kettleStrikeOutVol, strikeOutGrav, finalVolume, Integer.parseInt(empId), fvSelection, recipeName);
 
         try {
-            brewDB.insert(brew);
+            
             
             TankDB tankDB = new TankDB();
 
@@ -155,6 +182,7 @@ public class BrewServlet extends HttpServlet {
             }
 
             tankDB.updateFV(fv);
+            brewDB.insert(brew);
 
             session.setAttribute("recipe", null);
             List<Brew> brews = brewDB.getAll();
