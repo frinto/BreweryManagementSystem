@@ -67,13 +67,13 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./maps.html">
+                            <a class="nav-link" href="recipe">
                                 <i class="nc-icon nc-pin-3"></i>
                                 <p>Recipes</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./notifications.html">
+                            <a class="nav-link" href="delivery">
                                 <i class="nc-icon nc-bell-55"></i>
                                 <p>Delivery</p>
                             </a>
