@@ -128,8 +128,8 @@
                   <form action="delivery?action=add" method="POST">
                       <table>
                           <tr>
-                              <th><h4>Company Name</h4></th>
-                              <th><select name="companyName">
+                              <th style="width:25%"><h4>Company Name</h4></th>
+                              <th style="width:25%"><select style="height:100%; width: 100%" name="companyName">
                                   <c:forEach var="account" items="${accounts}">
                                       <option  value="${account.companyName}">${account.companyName}</option>
                                   </c:forEach>
@@ -137,8 +137,8 @@
                               </th>
                           <!--</tr>-->
                           <!--<tr>-->
-                              <th><h4>Date</h4></th>
-                              <th><input type="date" name="date" id="date" value="${dateToday}"></th>
+                              <th style="width:25%"><h4>Date</h4></th>
+                              <th style="width:25%"><input type="date" name="date" id="date" value="${dateToday}"></th>
                           </tr>
                       </table>
                       <table class="table">
@@ -149,49 +149,57 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <c:forEach var="finishedProduct" items="${finishedProducts}">
                             <tr>
-                                <td><input style="width:100%" type="text" name="productName" id="productName" value="${productName}"></td>
-                                <td><input style="width:100%" min="0" type="number" name="qty" id="qty" value="${qty}" width="99%"></td> 
+                                
+                                    <td><input style="width:100%" name="productName" readonly type="hidden" value="${finishedProduct.productName}">${finishedProduct.productName}</td>
+                                    <td><input style="width:100%" min="0" type="number" name="qty" id="qty" value="${qty}" width="99%"></td>
+                                
                             </tr>
+                            </c:forEach>
                         </tbody>
-<script type="text/javascript">
-function addRow () 
-{
-	var body = document.getElementsByTagName("body")[0];
-	var form = body.getElementsByTagName("form")[0];
-	var tbody = form.getElementsByTagName("tbody")[1];
-	
-	var productName = document.createElement("input");
-	
-	productName.setAttribute("name", "productName");
-	productName.setAttribute("id", "productName");
-	productName.setAttribute("style", "width:99%");
-	productName.setAttribute("value", "${productName}");
-	productName.setAttribute("type", "text");
-	form.appendChild(productName);
-	
-	var qty = document.createElement("input");
-	
-	qty.setAttribute("name", "qty");
-	qty.setAttribute("id", "qty");
-	qty.setAttribute("style", "width:99%");
-        qty.setAttribute("min", "0");
-	qty.setAttribute("value", "${qty}");
-	qty.setAttribute("type", "number");
-	
-	var td1 = document.createElement("td");
-	var td2 = document.createElement("td");
-	var tr = document.createElement("tr");
-	
-	td1.appendChild(productName);
-	td2.appendChild(qty);
-	tr.appendChild(td1);
-	tr.appendChild(td2);
-	tbody.appendChild(tr);
-}
-</script>
+<!--<script type="text/javascript">-->
+<!--//function addRow () 
+//{
+//	var body = document.getElementsByTagName("body")[0];
+//	var form = body.getElementsByTagName("form")[0];
+//	var tbody = form.getElementsByTagName("tbody")[1];
+//	
+//	var productName = document.createElement("select");
+//        var forEach = document.createElement("c:forEach");
+//        var option = document.createElement("option");
+////	
+//	productName.setAttribute("name", "productName");
+//	forEach.setAttribute("var", "finishedProducts");
+//	forEach.setAttribute("items", "${finishedProduct}");
+//	option.setAttribute("value", "${finishedProduct.productName}");
+//	option.innerHTML = ${finishedProduct.productName};
+//	form.appendChild(productName);
+//	
+//	var qty = document.createElement("input");
+//	
+//	qty.setAttribute("name", "qty");
+//	qty.setAttribute("id", "qty");
+//	qty.setAttribute("style", "width:99%");
+//        qty.setAttribute("min", "0");
+//	qty.setAttribute("value", "${qty}");
+//	qty.setAttribute("type", "number");
+//	
+//	var td1 = document.createElement("td");
+//	var td2 = document.createElement("td");
+//	var tr = document.createElement("tr");
+//        
+//	forEach.appendChild(option);
+//        productName.appendChild(forEach);
+//	td1.appendChild(productName);
+//	td2.appendChild(qty);
+//	tr.appendChild(td1);
+//	tr.appendChild(td2);
+//	tbody.appendChild(tr);
+//}
+//</script>-->
                       </table>
-        <table><th><td><button type="button" onclick="addRow();">Add a row</button></td><td><input name="submit" type="submit"</td></th></table>
+        <table><th><td><input name="submit" type="submit"</td></th></table>
                   </form>
               </div>
               <div class="modal-footer">

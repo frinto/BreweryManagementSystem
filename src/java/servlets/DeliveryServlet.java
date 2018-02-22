@@ -52,6 +52,11 @@ public class DeliveryServlet extends HttpServlet
             AccountDB accountDB = new AccountDB();
             List<Account> account = accountDB.getAll();
             request.setAttribute("accounts", account);
+            
+            //get a list of finished goods for the jsp
+            FinishedInventoryDB finishedInventoryDB = new FinishedInventoryDB();
+            List<Finishedproduct> finishedProduct = finishedInventoryDB.getAllInventory();
+            request.setAttribute("finishedProducts", finishedProduct);
         } catch (BrewDBException ex)
         {
             Logger.getLogger(DeliveryServlet.class.getName()).log(Level.SEVERE, null, ex);
