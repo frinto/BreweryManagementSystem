@@ -116,6 +116,7 @@ public class TankTransferServlet extends HttpServlet
                 
                 //Subtract the volume transfered from the FV
                 //This value may be negative if there is a case where Gains are greater than amount left in the FV
+                request.setAttribute("message", "This sets the Fermenting Vessel volume to a negative number but do not be alaramed! That's extra beer gained and there's beer still in there, ya dingus.");
                 double newFvVolume = currentFvVolume - volume;
                 fv.setVolume(newFvVolume);
                 
