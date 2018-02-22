@@ -34,6 +34,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Transfer.findByToSv", query = "SELECT t FROM Transfer t WHERE t.toSv = :toSv")})
 public class Transfer implements Serializable {
 
+    @Column(name = "brand")
+    private String brand;
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "volume")
     private Double volume;
@@ -64,9 +67,10 @@ public class Transfer implements Serializable {
         this.transferId = transferId;
     }
 
-    public Transfer(Integer transferId, Date date, int fromFv, int toSv, Double volume, Double correction) {
+    public Transfer(Integer transferId, Date date, String brand, int fromFv, int toSv, Double volume, Double correction) {
         this.transferId = transferId;
         this.date = date;
+        this.brand = brand;
         this.fromFv = fromFv;
         this.toSv = toSv;
         this.volume = volume;
@@ -146,5 +150,13 @@ public class Transfer implements Serializable {
 
     public void setVolume(Double volume) {
         this.volume = volume;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }

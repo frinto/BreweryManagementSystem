@@ -104,7 +104,7 @@
             <c:forEach var="transfer" items="${transfers}">
                 <tr>
                     <td>${transfer.date}</td>
-                    <td>brand</td>
+                    <td>${transfer.brand}</td>
                     <td>${transfer.fromFv}</td>
                     <td>${transfer.toSv}</td>
                     <td>${transfer.volume}</td>

@@ -49,10 +49,11 @@ public class TankTransferServlet extends HttpServlet
         String action = request.getParameter("action");
         if (action!=null && action.equals("add")) {
             
-            //instantiate variables
+            //create variables
             TransferDB transferDB = new TransferDB();
             TankDB tankDB = new TankDB();
             Date date;
+            String brand;
             double volume;
             int toSV;
             int fromFV;
@@ -70,33 +71,44 @@ public class TankTransferServlet extends HttpServlet
                 date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
                 isEmpty = request.getParameter("isEmpty");
                 
+                
                 //ensure user input is valid
                 Sv sv = tankDB.getSV(toSV);
                 Fv fv = tankDB.getFV(fromFV);
                 double currentSvVolume = sv.getVolume();
                 double currentFvVolume = fv.getVolume();
+                
+                //check that the fv is not empty
+                if (currentFvVolume == 0) {
+                    
+                    //save user input values for page reload
+                    saveUserInput(request, toSV, fromFV, volume, isEmpty);
+                    
+                    request.setAttribute("capacityMessage", "Selected FV is empty.");
+                    throw new BrewDBException("");
+                }
+                
                 int svCapacity = sv.getCapacity();
-                double newVolume = (long)currentSvVolume + volume;
+                double newVolume = currentSvVolume + volume;
+                brand = fv.getBrand();
                 
                 //If the added volume pushes the SV's volume above capacity, display warning/save user input
                 if (newVolume>svCapacity) {
-                    double maxTransfer = svCapacity - currentSvVolume;
-                    request.setAttribute("inputVolume", maxTransfer);
                     
                     //save user input values for page reload
-                    request.setAttribute("inputSV", toSV);
-                    request.setAttribute("inputFV", fromFV);
-                    if (isEmpty != null && isEmpty.equals("on")) {
-                        request.setAttribute("checkedIsEmpty", "checked");
-                    }
-                    request.setAttribute("loadAddTransfer", "notNull");
+                    saveUserInput(request, toSV, fromFV, volume, isEmpty);
+                    
+                    double maxTransfer = svCapacity - currentSvVolume;
+                    request.setAttribute("inputVolume", maxTransfer);
                     request.setAttribute("capacityMessage", "The maximum amount that can be transferred into SV " + toSV + " is " + maxTransfer);
-                    throw new BrewDBException("Invalid Transfer volume: ");
+                    throw new BrewDBException("");
                 }
                 
                 //Add the volume transfered to the SV
                 double newSvVolume = currentSvVolume + volume;
                 sv.setVolume(newSvVolume);
+                sv.setBrand(brand);
+                //Brew# columns are wack so this is just a fill in
                 sv.setBrew1(fv.getBrew1());
                 sv.setBrew2(fv.getBrew2());
                 sv.setBrew3(fv.getBrew3());
@@ -110,16 +122,17 @@ public class TankTransferServlet extends HttpServlet
                 //Determine the possible volume correction, (+) Gain / (-) Loss
                 //Set emptied fv fields to zero
                 if (isEmpty != null && isEmpty.equals("on")) {
-                    correction = volume - (long)currentFvVolume;
+                    correction = volume - currentFvVolume;
                     fv.setVolume(0.0);
                     fv.setBrew1(0);
                     fv.setBrew2(0);
                     fv.setBrew3(0);
+                    fv.setBrand(null);
                 }
                 
                 tankDB.updateFV(fv);
                 
-                transfer = new Transfer(0, date, fromFV, toSV, volume, correction);
+                transfer = new Transfer(0, date, brand, fromFV, toSV, volume, correction);
                 transferDB.insertTransfer(transfer);
                 
             } catch (ParseException ex) {
@@ -157,5 +170,16 @@ public class TankTransferServlet extends HttpServlet
             Logger.getLogger(TankStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("message", "error retrieving transfers from database");
         }
+    }
+
+    private void saveUserInput(HttpServletRequest request, int toSV, int fromFV, double volume, String isEmpty) {
+        request.setAttribute("inputSV", toSV);
+        request.setAttribute("inputFV", fromFV);
+        request.setAttribute("volume", volume);
+        if (isEmpty != null && isEmpty.equals("on")) {
+            request.setAttribute("checkedIsEmpty", "checked");
+        }
+        //causes Modal menu to popup on page load
+        request.setAttribute("loadAddTransfer", "notNull");
     }
 }
