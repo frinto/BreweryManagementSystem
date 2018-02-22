@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Martin Czerwinski
  */
-public class TankTransferServlet extends HttpServlet
+public class TankFarmServlet extends HttpServlet
 {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,10 +36,11 @@ public class TankTransferServlet extends HttpServlet
         //set current date in user input field
         setTodaysDate(request);
         
-        //retrieve all transfers from database
+        //retrieve all transfers and tanks from database. This is for user display
         retrieveAllTransfers(request);
+        retrieveAllTanks(request);
         
-        getServletContext().getRequestDispatcher("/WEB-INF/tankTransfer.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/tankFarm.jsp").forward(request, response);
     }
     
     
@@ -47,7 +48,7 @@ public class TankTransferServlet extends HttpServlet
             throws ServletException, IOException
     {
         String action = request.getParameter("action");
-        if (action!=null && action.equals("add")) {
+        if (action!=null && action.equals("addTransfer")) {
             
             //clear user messages
             request.setAttribute("message", "");
@@ -149,18 +150,19 @@ public class TankTransferServlet extends HttpServlet
                 tankDB.updateSV(sv);
                 tankDB.updateFV(fv);
                 transferDB.insertTransfer(new Transfer(0, date, brand, fromFV, toSV, volume, correction));
+                request.setAttribute("message", "Success!");
                 
             } catch (ParseException ex) {
                 request.setAttribute("message", ex);
-                Logger.getLogger(TankTransferServlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
             } catch (BrewDBException ex) {
-                Logger.getLogger(TankTransferServlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            request.setAttribute("message", "Success!");
             setTodaysDate(request);
             retrieveAllTransfers(request);
-            getServletContext().getRequestDispatcher("/WEB-INF/tankTransfer.jsp").forward(request, response);
+            retrieveAllTanks(request);
+            getServletContext().getRequestDispatcher("/WEB-INF/tankFarm.jsp").forward(request, response);
         }
     }
     
@@ -198,5 +200,20 @@ public class TankTransferServlet extends HttpServlet
         }
         //causes Modal menu to popup on page load
         request.setAttribute("loadAddTransfer", "notNull");
+    }
+
+    private void retrieveAllTanks(HttpServletRequest request) {
+        TankDB tankDB = new TankDB();
+        
+        try {
+            List<Fv> fvs = tankDB.getAllFV();
+            List<Sv> svs = tankDB.getAllSV();
+            
+            request.setAttribute("svs", svs);
+            request.setAttribute("fvs", fvs);            
+        } catch (BrewDBException ex) {
+            Logger.getLogger(TankStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("message", "error retrieving tank lists (fv and sv) from database");
+        }
     }
 }

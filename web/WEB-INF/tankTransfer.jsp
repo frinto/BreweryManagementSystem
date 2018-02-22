@@ -35,9 +35,7 @@
                 -->
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <div class="logo">
-                            <image src ="assets/img/logo.jpg">
-                        </div>
+                        <image src ="assets/img/logo.jpg">
                     </div>
                     <ul class="nav">
                         <li class="nav-item active">
