@@ -50,7 +50,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="brew?brew">
+                            <a class="nav-link" href="brew">
                                 <i class="nc-icon nc-notes"></i>
                                 <p>Brew</p>
                             </a>
@@ -111,80 +111,87 @@
         <!-- Tab Content -->
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="tankStatus" role="tabpanel" aria-labelledby="tankStatus-tab">
-            <h1>Tank Status</h1>
-
+            
             <form action="tankFarm?action=addTank" method="POST">
-                <button type="submit">Add a Tank</button>
+                <button type="submit" class="btn btn-success">Add a Tank</button>
             </form>
 
-            <div class="left-table">
+            <div>
             <h2>SV Tanks</h2>
 
-            <table>
-                <tr>
-                    <th>SV ID</th>
-                    <th>Volume</th>
-                    <th>Capacity</th>
-                    <th>Brew 1</th>
-                    <th>Brew 2</th>
-                    <th>Brew 3</th>
-                    <th>Brand</th>
-                    <th>Status</th>
-                </tr>
-                <c:forEach var="sv" items="${svs}">
-                    <tr>
-                        <td>${sv.svId}</td>
-                        <td>${sv.volume}</td>
-                        <td>${sv.capacity}</td>
-                        <td>${sv.brew1}</td>
-                        <td>${sv.brew2}</td>
-                        <td>${sv.brew3}</td>
-                        <td>${sv.brand}</td>
-                        <td>${sv.status}</td>
-                        <td>
-                            <form action="tankFarm?action=editSv" method="POST">
-                                <button type="submit">Edit</button>
-                            </form>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
+                <table class="table">
+                    <thead class="thead dark">
+                        <tr>
+                            <th>SV ID</th>
+                            <th>Volume</th>
+                            <th>Capacity</th>
+                            <th>Brew 1</th>
+                            <th>Brew 2</th>
+                            <th>Brew 3</th>
+                            <th>Brand</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="sv" items="${svs}">
+                            <tr>
+                                <td>${sv.svId}</td>
+                                <td>${sv.volume}</td>
+                                <td>${sv.capacity}</td>
+                                <td>${sv.brew1}</td>
+                                <td>${sv.brew2}</td>
+                                <td>${sv.brew3}</td>
+                                <td>${sv.brand}</td>
+                                <td>${sv.status}</td>
+                                <td>
+                                    <form action="tankFarm?action=editSv" method="POST">
+                                        <button type="submit">Edit</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
             </div>
-                    <div class="right-table">
+            <div>
             <h2>FV Tanks</h2>
-            <table>
-                <tr>
-                    <th>FV ID</th>
-                    <th>Volume</th>
-                    <th>Capacity</th>
-                    <th>Brew 1</th>
-                    <th>Brew 2</th>
-                    <th>Brew 3</th>
-                    <th>Brand</th>
-                    <th>Status</th>
-                </tr>
-                <c:forEach var="fv" items="${fvs}">
+                <table>
+                    <thead class="thead-dark">
                     <tr>
-                        <td>${fv.fvId}</td>
-                        <td>${fv.volume}</td>
-                        <td>${fv.capacity}</td>
-                        <td>${fv.brew1}</td>
-                        <td>${fv.brew2}</td>
-                        <td>${fv.brew3}</td>
-                        <td>${fv.brand}</td>
-                        <td>${fv.status}</td>
-                        <td>
-                            <form action="tankFarm?action=editFv" method="POST">
-                                <button type="submit">Edit</button>
-                            </form>
-                        </td>
+                        <th>FV ID</th>
+                        <th>Volume</th>
+                        <th>Capacity</th>
+                        <th>Brew 1</th>
+                        <th>Brew 2</th>
+                        <th>Brew 3</th>
+                        <th>Brand</th>
+                        <th>Status</th>
                     </tr>
-                </c:forEach>
-            </table>
+                    
+                    <c:forEach var="fv" items="${fvs}">
+                        <tr>
+                            <td>${fv.fvId}</td>
+                            <td>${fv.volume}</td>
+                            <td>${fv.capacity}</td>
+                            <td>${fv.brew1}</td>
+                            <td>${fv.brew2}</td>
+                            <td>${fv.brew3}</td>
+                            <td>${fv.brand}</td>
+                            <td>${fv.status}</td>
+                            <td>
+                                <form action="tankFarm?action=editFv" method="POST">
+                                    <button type="submit">Edit</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </div>
             ${message}
           </div>
-          <div class="tab-pane fade show active" id="transferLog" role="tabpanel" aria-labelledby="transferLog-tab">
+          
+          <!-- Transfer Tab -->
+          <div class="tab-pane fade" id="transferLog" role="tabpanel" aria-labelledby="transferLog-tab">
                 <!-- 'Add A Transfer' button -->
 
                 <!-- Trigger the modal with a button -->
