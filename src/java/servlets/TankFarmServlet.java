@@ -75,7 +75,7 @@ public class TankFarmServlet extends HttpServlet
                 date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
                 isEmpty = request.getParameter("isEmpty");
                 
-                //show user error if volume is 0
+                //show the user an error if volume is 0
                 if (volume == 0) {
                     saveUserInput(request, toSV, fromFV, volume, isEmpty);
                     request.setAttribute("capacityMessage", "Volume cannot be zero");
@@ -122,13 +122,13 @@ public class TankFarmServlet extends HttpServlet
                 //Add the volume transfered to the SV
                 sv.setVolume(newSvVolume);
                 sv.setBrand(brand);
-                //Brew# columns are wack so this is just a fill in
+                //simply transfer the brew # data from the fv to the sv, overridin what is currently in the sv
                 sv.setBrew1(fv.getBrew1());
                 sv.setBrew2(fv.getBrew2());
                 sv.setBrew3(fv.getBrew3());
                 
                 //Determine the possible volume correction, (+) Gain / (-) Loss
-                //Set emptied fv fields to zero
+                //Set emptied fv's fields to zero
                 if (isEmpty != null && isEmpty.equals("on")) {
                     correction = volume - currentFvVolume;
                     fv.setVolume(0.0);
@@ -141,7 +141,7 @@ public class TankFarmServlet extends HttpServlet
                     //This value may be negative if there is a case where there is a positive correction (gains in beer) and still beer in the tank.
                     double newFvVolume = currentFvVolume - volume;
                     if (newFvVolume<0) {
-                        request.setAttribute("message", "This sets the Fermenting Vessel volume to a negative number but do not be alarmed! That's extra beer gained and there's beer still in there, ya dingus.");
+                        request.setAttribute("message", "Please note that Fermenting Vessel " + fromFV + "'s volume has been set to a negative number. This represents that there has been more beer produced from this tank than anticipated. The negative number indicates the amount of unanticipated extra beer. And there is still more unanticipated beer in the tank!");
                     }
                     fv.setVolume(newFvVolume);
                 }
