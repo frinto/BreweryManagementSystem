@@ -110,6 +110,9 @@
         <div class="text-center">
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add A New Transfer</button>
         </div>
+        
+        <!-- User Feedback Message -->
+        ${message}
 
         <!-- Modal -->
         <div id="myModal" class="modal fade" role="dialog">
@@ -180,7 +183,6 @@
             </tbody>
         </table>
     </div>
-${message}
 </div>
 </div>
 </body>
@@ -205,8 +207,8 @@ ${message}
     <!-- script to open modal if requested from back-end based on loadAddTransfer being set-->
     <c:if test="${loadAddTransfer != null}">
         <script type="text/javascript">
+//            $('#myModal').fadeOut(500,function(){ $('#myModal').modal('hide'); 
             $(window).on('load',function(){
-                $('#myModal').fadeOut(500,function(){ $('#myModal').modal('hide'); 
                 $('#myModal').modal('show');
             });
         </script>
