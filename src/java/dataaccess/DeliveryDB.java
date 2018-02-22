@@ -2,6 +2,7 @@ package dataaccess;
 
 import dataaccess.BrewDBException;
 import domainmodel.Delivery;
+import domainmodel.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 public class DeliveryDB {
 
@@ -60,6 +62,21 @@ public class DeliveryDB {
         } catch (Exception ex) {
             Logger.getLogger(Delivery.class.getName()).log(Level.SEVERE, "Cannot read deliverys", ex);
             throw new BrewDBException("Error getting deliverys");
+        } finally {
+            em.close();
+        }
+    }
+            public List<Delivery> getByDeliveryId(String deliveryId) throws BrewDBException {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Query queryDeliveryById = em.createNamedQuery("Delivery.findByDeliveryId", Delivery.class);
+            queryDeliveryById.setParameter("deliveryId", Integer.parseInt(deliveryId));
+            List delivery = queryDeliveryById.getResultList();
+            return delivery;
+        } catch (Exception ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, "Cannot read products", ex);
+            throw new BrewDBException("Error getting products");
         } finally {
             em.close();
         }

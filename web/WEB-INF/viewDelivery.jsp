@@ -106,12 +106,59 @@
                                     <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                                 </p>-->
 
-                <div class = "brews">
+   <div class = "brews">
+<!--        <form class ="datepicker">
+            View Brews by Date:
+            <input type="date" name="bdaytime">
+        </form>-->
+        <div class="text-center">
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Edit Delivery</button>
+        </div>
 
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog" style="max-width:1000px">
+<!-- Modal content-->
+            <div class="modal-content" style="position:fixed; width:100%">
+                <div class="modal-header" >
+                  <h4 class="modal-title" style="text-align:center;width:100%">Edit Delivery</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <form action="delivery?action=edit" method="POST">
+                      <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="product" items="${products}">
+                                <tr>
+                                    <td>${product.productName}</td>
+                                    <td><input style="width:100%" min="0" type="number" name="qty" id="qty" value="${product.qty}" width="99%"></td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                      </table>
+        <table><th><td><input name="submit" type="submit"</td></th></table>
+                  </form>
+              </div>
+              <div class="modal-footer">
+              </div>
+            </div>
 
+          </div>
+        </div>
+
+                    <!--End modal-->
                     <!--This is a list of all the delivery objects in the future they will become a hrefs with links to the delivery page specific to that delivery-->
                     <table class="table">
                         <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">${companyName}, ${date}</th>
+                            </tr>
                             <tr>
                                 <th scope="col">Product Name</th>
                                 <th scope="col">Qty</th>
