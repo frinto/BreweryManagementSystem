@@ -208,9 +208,9 @@ function addRow ()
              <tbody>
             <c:forEach var="delivery" items="${deliverys}">
                 <tr>
-                    <td> <a href="viewDelivery?deliveryId=${delivery.deliveryId}"> ${delivery.companyName} </a></td>
-                    <td> <a href="viewDelivery?deliveryId=${delivery.deliveryId}"> ${delivery.date}</a></td>
-                    <td> <a href="viewDelivery?deliveryId=${delivery.deliveryId}"> ${delivery.empId}</a></td>
+                    <td> <a href="viewDelivery?deliveryId=${delivery.deliveryId}" style="text-decoration: underline;"> ${delivery.companyName} </a></td>
+                    <td> <a href="viewDelivery?deliveryId=${delivery.deliveryId}" style="text-decoration: underline;"> ${delivery.date}</a></td>
+                    <td> <a href="viewDelivery?deliveryId=${delivery.deliveryId}" style="text-decoration: underline;"> ${delivery.empId}</a></td>
                 </tr>
             </c:forEach>
             </tbody>

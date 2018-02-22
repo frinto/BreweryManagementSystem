@@ -65,7 +65,7 @@ public class DeliveryServlet extends HttpServlet
                     //Creates a delivery object and puts the products for the delivery into it, this information is taken from the delivery servlet
                     DeliveryDB deliveryDB = new DeliveryDB();
                     String companyName = request.getParameter("companyName");
-//                    HttpSession session = request.getSession();
+                    HttpSession session = request.getSession();
 //                    int empId = (int) session.getAttribute("empId");
 //THIS IS HARDCODED SINCE THE LOGIN CURRENTLY DOES NOT WORK FOR SOME REASON THIS CAN BE REMOVED ONCE THE SITE WORKS PROPPERLY TALK TO JESSIE
                     int empId = 1;

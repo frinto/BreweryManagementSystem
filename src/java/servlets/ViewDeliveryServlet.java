@@ -41,18 +41,31 @@ public class ViewDeliveryServlet extends HttpServlet
 
         try
         {
-            Object deliveryId = request.getParameter("deliveryId");
+            HttpSession session = request.getSession();
+            String deliveryId = (String) request.getParameter("deliveryId");
+            try
+            {
+                String sessionDeliveryId = (String) session.getAttribute("deliveryId");
+                if (!deliveryId.isEmpty() && sessionDeliveryId.isEmpty() && !deliveryId.equals(sessionDeliveryId))
+                {
+                    session.setAttribute("deliveryId", deliveryId);
+                }
+                deliveryId = (String) session.getAttribute("deliveryId");
+            }catch(NullPointerException e)
+            {
+                session.setAttribute("deliveryId", deliveryId);
+            }
+
             //get delivery information
             DeliveryDB deliveryDB = new DeliveryDB();
-            List<Delivery> delivery = deliveryDB.getByDeliveryId((String) deliveryId);
+            List<Delivery> delivery = deliveryDB.getByDeliveryId(deliveryId);
             request.setAttribute("deliverys", delivery);
             request.setAttribute("companyName", delivery.get(0).getCompanyName());
             request.setAttribute("date", delivery.get(0).getDate());
-            
-            
+
             //make a list of products for the jsp
             ProductDB productDB = new ProductDB();
-            List<Product> product = productDB.getByDeliveryId((String) deliveryId);
+            List<Product> product = productDB.getByDeliveryId(deliveryId);
             request.setAttribute("products", product);
         } catch (BrewDBException ex)
         {
@@ -67,28 +80,29 @@ public class ViewDeliveryServlet extends HttpServlet
         try
         {
             String action = request.getParameter("action");
-            
+            HttpSession session = request.getSession();
+            String deliveryId = (String) session.getAttribute("deliveryId");
+
             switch (action)
             {
                 case "edit":
                     //get all qtys
                     String[] qty = request.getParameterValues("qty");
-                    
+
                     //make a list of all products from the database
-                    Object deliveryId = request.getParameter("deliveryId");
                     ProductDB productDB = new ProductDB();
-                    List<Product> product = productDB.getByDeliveryId((String) deliveryId);
+                    List<Product> product = productDB.getByDeliveryId(deliveryId);
                     //get the list of finished products from the database
                     FinishedInventoryDB finishedInventoryDB = new FinishedInventoryDB();
                     List<Finishedproduct> finishedProduct = finishedInventoryDB.getAllInventory();
-                    
+
                     //update product values
                     for (int i = 0; i < product.size(); i++)
                     {
                         int difference = product.get(i).getQty() - Integer.parseInt(qty[i]);
                         product.get(i).setQty(Integer.parseInt(qty[i]));
                         productDB.update(product.get(i));
-                        
+
                         //remove product from finished goods
                         for (int x = 0; x < finishedProduct.size(); x++)
                         {
@@ -102,11 +116,21 @@ public class ViewDeliveryServlet extends HttpServlet
                 case "remove":
                     break;
             }
-            response.sendRedirect("viewDelivery");
+            DeliveryDB deliveryDB = new DeliveryDB();
+            List<Delivery> delivery = deliveryDB.getByDeliveryId(deliveryId);
+            request.setAttribute("deliverys", delivery);
+            request.setAttribute("companyName", delivery.get(0).getCompanyName());
+            request.setAttribute("date", delivery.get(0).getDate());
+
+            //make a list of products for the jsp
+            ProductDB productDB = new ProductDB();
+            List<Product> product = productDB.getByDeliveryId(deliveryId);
+            request.setAttribute("products", product);
         } catch (BrewDBException ex)
         {
             Logger.getLogger(ViewDeliveryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        getServletContext().getRequestDispatcher("/WEB-INF/viewDelivery.jsp").forward(request, response);
     }
 
 }

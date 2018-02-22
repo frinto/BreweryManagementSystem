@@ -125,7 +125,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
-                  <form action="delivery?action=edit" method="POST">
+                  <form action="viewDelivery?action=edit" method="POST">
                       <table class="table">
                         <thead class="thead-dark">
                             <tr>
@@ -140,9 +140,11 @@
                                     <td><input style="width:100%" min="0" type="number" name="qty" id="qty" value="${product.qty}" width="99%"></td>
                                 </tr>
                             </c:forEach>
+                                
                         </tbody>
                       </table>
         <table><th><td><input name="submit" type="submit"</td></th></table>
+        <input type="hidden" name="deliveryId" id="deliveryId" value="${deliveryId}">
                   </form>
               </div>
               <div class="modal-footer">
