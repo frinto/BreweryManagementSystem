@@ -13,10 +13,6 @@
         <servlet-class>servlets.ResetPasswordServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>TankStatusServlet</servlet-name>
-        <servlet-class>servlets.TankStatusServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>BrewServlet</servlet-name>
         <servlet-class>servlets.BrewServlet</servlet-class>
     </servlet>
@@ -25,12 +21,16 @@
         <servlet-class>servlets.ProductionServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>TankTransferServlet</servlet-name>
-        <servlet-class>servlets.TankTransferServlet</servlet-class>
+        <servlet-name>TankFarmServlet</servlet-name>
+        <servlet-class>servlets.TankFarmServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeliveryServlet</servlet-name>
         <servlet-class>servlets.DeliveryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDeliveryServlet</servlet-name>
+        <servlet-class>servlets.ViewDeliveryServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -53,10 +53,6 @@
         <url-pattern>/finishedInventory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>TankStatusServlet</servlet-name>
-        <url-pattern>/tankStatus</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ResetPasswordServlet</servlet-name>
         <url-pattern>/reset</url-pattern>
     </servlet-mapping>
@@ -69,12 +65,16 @@
         <url-pattern>/production</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>TankTransferServlet</servlet-name>
-        <url-pattern>/tankTransfer</url-pattern>
+        <servlet-name>TankFarmServlet</servlet-name>
+        <url-pattern>/tankFarm</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeliveryServlet</servlet-name>
         <url-pattern>/delivery</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDeliveryServlet</servlet-name>
+        <url-pattern>/viewDelivery</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
