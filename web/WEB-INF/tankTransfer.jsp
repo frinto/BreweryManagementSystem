@@ -206,6 +206,7 @@ ${message}
     <c:if test="${loadAddTransfer != null}">
         <script type="text/javascript">
             $(window).on('load',function(){
+                $('#myModal').fadeOut(500,function(){ $('#myModal').modal('hide'); 
                 $('#myModal').modal('show');
             });
         </script>
