@@ -87,7 +87,7 @@
             </div>
             <!-- End Navbar -->
         
-        <!-- start main panel and top header text-->    
+    <!-- start main panel and top header text-->    
     <div class="main-panel">
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">

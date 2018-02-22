@@ -63,7 +63,6 @@ public class TankTransferServlet extends HttpServlet
             int fromFV;
             double correction = 0;
             String dateString;
-            Transfer transfer;
             String isEmpty;
             
             //execute all logic
@@ -87,18 +86,23 @@ public class TankTransferServlet extends HttpServlet
                 Fv fv = tankDB.getFV(fromFV);
                 double currentSvVolume = sv.getVolume();
                 double currentFvVolume = fv.getVolume();
+                int svCapacity = sv.getCapacity();
                 
                 //check that the fv is not empty
                 if (currentFvVolume == 0) {
-                    
                     //save user input values for page reload
                     saveUserInput(request, toSV, fromFV, volume, isEmpty);
-                    
-                    request.setAttribute("capacityMessage", "Selected FV is empty.");
+                    request.setAttribute("capacityMessage", "FV " + fromFV + " is empty.");
                     throw new BrewDBException("");
                 }
                 
-                int svCapacity = sv.getCapacity();
+                //check that the SV is not full
+                if (svCapacity == currentSvVolume) {
+                    saveUserInput(request, toSV, fromFV, volume, isEmpty);
+                    request.setAttribute("capacityMessage", "SV " + toSV + " is full.");
+                    throw new BrewDBException();
+                }
+                
                 double newSvVolume = currentSvVolume + volume;
                 brand = fv.getBrand();
                 
@@ -121,7 +125,6 @@ public class TankTransferServlet extends HttpServlet
                 sv.setBrew1(fv.getBrew1());
                 sv.setBrew2(fv.getBrew2());
                 sv.setBrew3(fv.getBrew3());
-                tankDB.updateSV(sv);
                 
                 //Determine the possible volume correction, (+) Gain / (-) Loss
                 //Set emptied fv fields to zero
@@ -137,15 +140,15 @@ public class TankTransferServlet extends HttpServlet
                     //This value may be negative if there is a case where there is a positive correction (gains in beer) and still beer in the tank.
                     double newFvVolume = currentFvVolume - volume;
                     if (newFvVolume<0) {
-                        request.setAttribute("message", "This sets the Fermenting Vessel volume to a negative number but do not be alaramed! That's extra beer gained and there's beer still in there, ya dingus.");
+                        request.setAttribute("message", "This sets the Fermenting Vessel volume to a negative number but do not be alarmed! That's extra beer gained and there's beer still in there, ya dingus.");
                     }
                     fv.setVolume(newFvVolume);
                 }
                 
+                //do the changes
+                tankDB.updateSV(sv);
                 tankDB.updateFV(fv);
-                
-                transfer = new Transfer(0, date, brand, fromFV, toSV, volume, correction);
-                transferDB.insertTransfer(transfer);
+                transferDB.insertTransfer(new Transfer(0, date, brand, fromFV, toSV, volume, correction));
                 
             } catch (ParseException ex) {
                 request.setAttribute("message", ex);
@@ -154,6 +157,7 @@ public class TankTransferServlet extends HttpServlet
                 Logger.getLogger(TankTransferServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+            request.setAttribute("message", "Success!");
             setTodaysDate(request);
             retrieveAllTransfers(request);
             getServletContext().getRequestDispatcher("/WEB-INF/tankTransfer.jsp").forward(request, response);
