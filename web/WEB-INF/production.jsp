@@ -105,6 +105,8 @@
                                 <th>ProductionType</th>
                                 <th>Quantity</th>
                                 <th>SVNumber</th>
+                                <th>Starting Sv Volume</th>
+                                <th>Finished Sv Volume</th>
                                 </thead>
                                 <tbody>
                                     <tr>
@@ -116,7 +118,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="text" name="quantity">
+                                            <input type="number" name="quantity">
                                         </td>
                                         <td>
                                             <select name="svNumber">
@@ -124,6 +126,12 @@
                                                     <option value="${storageVessel.svId}">${storageVessel.svId}</option>
                                                 </c:forEach>
                                             </select>
+                                        </td>
+                                        <c:forEach var="ssv" items="${startSvVol}">
+                                            <td>${ssv.volume}</td>
+                                        </c:forEach>
+                                        <td>
+                                            <input type="number" name="finishedSvVolume">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -136,28 +144,33 @@
                             <button type="submit" class="btn btn-success">Add Production</button>
                         </form>
                         <p class="productionMessage">${message}</p>
-                        <table class="table">
-                            <thead class="thead-dark">
-                            <th>Date</th>
-                            <th>ProductionType</th>
-                            <th>Quantity</th>
-                            <th>SVNumber</th>
-                            <th>EmployeeID</th>
-                            <th>SV Correction +/-</th>
-                            </thead>
-                            <tbody>
-                                <c:forEach var="production" items="${prod}">
-                                    <tr>
-                                        <td>${production.date}</td>
-                                        <td>${production.productionType}</td>
-                                        <td>${production.quantity}</td>
-                                        <td>${production.svNum}</td>
-                                        <td>${production.employeeId}</td>
-                                        <td><input type="text" value=""></input></td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
+                        <form action="production?action=update" method="POST" class="productionButton">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <th>Date</th>
+                                <th>ProductionType</th>
+                                <th>Quantity</th>
+                                <th>SVNumber</th>
+                                <th>EmployeeID</th>
+                                <th>Finished Sv Volume</th>
+                                <th>Gain/Loss +-</th>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="production" items="${prod}">
+                                        <tr>
+                                            <td>${production.date}</td>
+                                            <td>${production.productionType}</td>
+                                            <td>${production.quantity}</td>
+                                            <td>${production.svNum}</td>
+                                            <td>${production.employeeId}</td>                                           
+                                            <td>${finishSvVol}</td>
+                                            <td>${gainLoss}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-success">Update</button>
+                        </form>
                     </c:otherwise>
                 </c:choose>
                 </body>

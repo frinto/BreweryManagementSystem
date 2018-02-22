@@ -60,24 +60,24 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             EmployeeDB empDB = new EmployeeDB();
             
-            String userId = request.getParameter("empId");
+            String empId = request.getParameter("empId");
             String password = request.getParameter("password");
             
             // validatation for the user id and password
-            if (userId == null || password == null || userId.isEmpty() || password.isEmpty()) {
+            if (empId == null || password == null || empId.isEmpty() || password.isEmpty()) {
                 request.setAttribute("message", "Invalid.  Please try again.");
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 return;
             }
             //Gets the employee by the employee id and compares it to the password in the database.
             //If the employee id mataches the password then the employee will be logged in.
-            Employee employee = empDB.getEmployee(userId);
+            Employee employee = empDB.getEmployee(empId);
             if (employee != null && employee.getPassword().equals(password)) {
                 if(employee.getIsActive() == 0) {
                     request.setAttribute("message", "Invalid. Please try again.");
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 }
-                session.setAttribute("empId", userId);
+                session.setAttribute("empId", empId);
                 response.sendRedirect("tankStatus");
             }
             //If the userId does not match the password, it will show that it was invalid and tell the user to try again
