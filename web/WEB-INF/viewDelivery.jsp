@@ -160,6 +160,7 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">${companyName}, ${date}</th>
+                                <th scope="col"></th>
                             </tr>
                             <tr>
                                 <th scope="col">Product Name</th>
