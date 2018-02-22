@@ -78,11 +78,6 @@ public class TankTransferServlet extends HttpServlet
                 int svCapacity = sv.getCapacity();
                 double newVolume = (long)currentSvVolume + volume;
                 
-                //Determine the possible volume correction, (+) Gain / (-) Loss
-                if (isEmpty != null && isEmpty.equals("on")) {
-                    correction = volume - (long)currentFvVolume;
-                }
-                
                 //If the added volume pushes the SV's volume above capacity, display warning/save user input
                 if (newVolume>svCapacity) {
                     double maxTransfer = svCapacity - currentSvVolume;
@@ -102,16 +97,31 @@ public class TankTransferServlet extends HttpServlet
                 //Add the volume transfered to the SV
                 double newSvVolume = currentSvVolume + volume;
                 sv.setVolume(newSvVolume);
+                sv.setBrew1(fv.getBrew1());
+                sv.setBrew2(fv.getBrew2());
+                sv.setBrew3(fv.getBrew3());
                 tankDB.updateSV(sv);
                 
                 //Subtract the volume transfered from the FV
                 //This value may be negative if there is a case where Gains are greater than amount left in the FV
                 double newFvVolume = currentFvVolume - volume;
                 fv.setVolume(newFvVolume);
+                
+                //Determine the possible volume correction, (+) Gain / (-) Loss
+                //Set emptied fv fields to zero
+                if (isEmpty != null && isEmpty.equals("on")) {
+                    correction = volume - (long)currentFvVolume;
+                    fv.setVolume(0.0);
+                    fv.setBrew1(0);
+                    fv.setBrew2(0);
+                    fv.setBrew3(0);
+                }
+                
                 tankDB.updateFV(fv);
                 
                 transfer = new Transfer(0, date, fromFV, toSV, volume, correction);
                 transferDB.insertTransfer(transfer);
+                
             } catch (ParseException ex) {
                 request.setAttribute("message", ex);
                 Logger.getLogger(TankTransferServlet.class.getName()).log(Level.SEVERE, null, ex);

@@ -375,6 +375,7 @@ CREATE TABLE IF NOT EXISTS `transfer` (
   `volume` DOUBLE NULL,
   `fromFv` INT NOT NULL,
   `toSv` INT NOT NULL,
+  `brand` VARCHAR(15) NULL,
   `correction` DOUBLE NULL,
   PRIMARY KEY (`transferId`))
 ENGINE = InnoDB;
