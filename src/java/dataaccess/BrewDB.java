@@ -14,7 +14,7 @@ import javax.persistence.EntityTransaction;
 
 public class BrewDB {
 
-    public int insert(Brew brew) throws BrewDBException {
+    public Brew insert(Brew brew) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
@@ -22,7 +22,7 @@ public class BrewDB {
             trans.begin();
             em.persist(brew);
             trans.commit();
-            return 1;
+            return brew;
         } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(Brew.class.getName()).log(Level.SEVERE, "Cannot insert " + brew.toString(), ex);

@@ -24,6 +24,8 @@
                 
     <!-- start page functionality -->
     
+    
+    
 
     <div>
         <!-- 'Add A Transfer' button -->
@@ -31,6 +33,8 @@
         <!-- Trigger the modal with a button -->
         <div class="text-center">
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add A Transfer</button>
+          ${message}
+          ${capacityMessage}
         </div>
 
         <!-- Modal -->
@@ -51,18 +55,19 @@
                             <th>Date</th>
                             <th>From FV</th>
                             <th>To SV</th>
-                            <th>Volume</th>
+                            <th>Volume (L)</th>
                             <th>Emptying FV? <a class="helpInfo" style="font-size:10px" href="#" data-toggle="tooltip" title="If the FV is being emptied, then the system well calculate any loss for this brew.">Help</a></th>
                           </tr>
                       </thead>
                       <tbody>
                         <tr>
                             <td><input type="date" name="date" value="${dateToday}"/></td>
-                            <td><input type="number" name="fromFV" required/></td>
-                            <td><input type="number" name="toSV" required/></td>
-                            <td><input type="number" name="volume" step=".01" required/></td>
-                            <td><input type="checkbox" name="isFvEmpty"/></td>
+                            <td><input type="number" name="fromFV" value="${inputFV}" required/></td>
+                            <td><input type="number" name="toSV" value="${inputSV}" required/></td>
+                            <td><input type="number" name="volume" value="${inputVolume}" required/></td>
+                            <td><input type="checkbox" name="isEmpty" ${checkedIsEmpty}/></td>
                         </tr>
+                        <tr>${capacityMessage}</tr>
                       </tbody>
                     </table>
                     <button type="submit" class="btn btn-success">Submit</button>
@@ -109,9 +114,33 @@
             </tbody>
         </table>
     </div>
-
 ${message}
 </div>
 </div>
 </body>
-<c:import url="includes/footer.html"/>
+
+<!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+    <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="assets/js/plugins/bootstrap-switch.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!--  Chartist Plugin  -->
+    <script src="assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+    <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
+    <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+    <script src="assets/js/demo.js"></script>
+    <!-- script to open modal if requested from back-end -->
+    <c:if test="${loadAddTransfer != null}">
+        <script type="text/javascript">
+        $(window).on('load',function(){
+            $('#myModal').modal('show');
+        });
+        </script>
+    </c:if>
+</html>
