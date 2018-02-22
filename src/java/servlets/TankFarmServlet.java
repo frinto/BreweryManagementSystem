@@ -185,7 +185,7 @@ public class TankFarmServlet extends HttpServlet
             request.setAttribute("transfers", transfers);
             
         } catch (BrewDBException ex) {
-            Logger.getLogger(TankStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("message", "error retrieving transfers from database");
         }
     }
@@ -212,7 +212,7 @@ public class TankFarmServlet extends HttpServlet
             request.setAttribute("svs", svs);
             request.setAttribute("fvs", fvs);            
         } catch (BrewDBException ex) {
-            Logger.getLogger(TankStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("message", "error retrieving tank lists (fv and sv) from database");
         }
     }
