@@ -78,7 +78,7 @@ public class LoginServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 }
                 session.setAttribute("empId", empId);
-                response.sendRedirect("tankStatus");
+                response.sendRedirect("tankFarm");
             }
             //If the userId does not match the password, it will show that it was invalid and tell the user to try again
             else {

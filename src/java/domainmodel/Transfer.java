@@ -33,6 +33,18 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Transfer.findByFromFv", query = "SELECT t FROM Transfer t WHERE t.fromFv = :fromFv"),
     @NamedQuery(name = "Transfer.findByToSv", query = "SELECT t FROM Transfer t WHERE t.toSv = :toSv")})
 public class Transfer implements Serializable {
+
+    @Column(name = "brand")
+    private String brand;
+
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "volume")
+    private Double volume;
+
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "correction")
+    private Double correction;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -41,15 +53,13 @@ public class Transfer implements Serializable {
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
-    @Column(name = "volume")
-    private Long volume;
     @Basic(optional = false)
     @Column(name = "fromFv")
     private int fromFv;
     @Basic(optional = false)
     @Column(name = "toSv")
     private int toSv;
-
+    
     public Transfer() {
     }
 
@@ -57,12 +67,14 @@ public class Transfer implements Serializable {
         this.transferId = transferId;
     }
 
-    public Transfer(Integer transferId, Date date, int fromFv, int toSv, Long volume) {
+    public Transfer(Integer transferId, Date date, String brand, int fromFv, int toSv, Double volume, Double correction) {
         this.transferId = transferId;
         this.date = date;
+        this.brand = brand;
         this.fromFv = fromFv;
         this.toSv = toSv;
         this.volume = volume;
+        this.correction = correction;
     }
 
     public Integer getTransferId() {
@@ -81,13 +93,6 @@ public class Transfer implements Serializable {
         this.date = date;
     }
 
-    public Long getVolume() {
-        return volume;
-    }
-
-    public void setVolume(Long volume) {
-        this.volume = volume;
-    }
 
     public int getFromFv() {
         return fromFv;
@@ -104,6 +109,7 @@ public class Transfer implements Serializable {
     public void setToSv(int toSv) {
         this.toSv = toSv;
     }
+    
 
     @Override
     public int hashCode() {
@@ -129,5 +135,28 @@ public class Transfer implements Serializable {
     public String toString() {
         return "domainmodel.Transfer[ transferId=" + transferId + " ]";
     }
-    
+
+    public Double getCorrection() {
+        return correction;
+    }
+
+    public void setCorrection(Double correction) {
+        this.correction = correction;
+    }
+
+    public Double getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Double volume) {
+        this.volume = volume;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 }

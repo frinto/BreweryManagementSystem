@@ -6,10 +6,9 @@
 package domainmodel;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -17,92 +16,93 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author root
+ * @author reare
  */
 @Entity
 @Table(name = "account")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
-    @NamedQuery(name = "Account.findByAccountId", query = "SELECT a FROM Account a WHERE a.accountId = :accountId"),
-    @NamedQuery(name = "Account.findByName", query = "SELECT a FROM Account a WHERE a.name = :name"),
-    @NamedQuery(name = "Account.findByPhoneNumber", query = "SELECT a FROM Account a WHERE a.phoneNumber = :phoneNumber"),
-    @NamedQuery(name = "Account.findByAddress", query = "SELECT a FROM Account a WHERE a.address = :address")})
-public class Account implements Serializable {
+@NamedQueries(
+{
+    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
+    , @NamedQuery(name = "Account.findByCompanyName", query = "SELECT a FROM Account a WHERE a.accountPK.companyName = :companyName")
+    , @NamedQuery(name = "Account.findByPhoneNumber", query = "SELECT a FROM Account a WHERE a.phoneNumber = :phoneNumber")
+    , @NamedQuery(name = "Account.findByAddress", query = "SELECT a FROM Account a WHERE a.accountPK.address = :address")
+})
+public class Account implements Serializable
+{
+
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "accountId")
-    private Integer accountId;
-    @Column(name = "name")
-    private String name;
+    @EmbeddedId
+    protected AccountPK accountPK;
     @Column(name = "phoneNumber")
     private String phoneNumber;
-    @Column(name = "address")
-    private String address;
 
-    public Account() {
+    public Account()
+    {
     }
 
-    public Account(Integer accountId) {
-        this.accountId = accountId;
+    public Account(AccountPK accountPK)
+    {
+        this.accountPK = accountPK;
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public Account(String companyName, String address)
+    {
+        this.accountPK = new AccountPK(companyName, address);
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public AccountPK getAccountPK()
+    {
+        return accountPK;
     }
 
-    public String getName() {
-        return name;
+    public void setAccountPK(AccountPK accountPK)
+    {
+        this.accountPK = accountPK;
+    }
+    public String getCompanyName()
+    {
+        return this.accountPK.getCompanyName();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhoneNumber() {
+    public String getPhoneNumber()
+    {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber)
+    {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 0;
-        hash += (accountId != null ? accountId.hashCode() : 0);
+        hash += (accountPK != null ? accountPK.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object object)
+    {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Account)) {
+        if (!(object instanceof Account))
+        {
             return false;
         }
         Account other = (Account) object;
-        if ((this.accountId == null && other.accountId != null) || (this.accountId != null && !this.accountId.equals(other.accountId))) {
+        if ((this.accountPK == null && other.accountPK != null) || (this.accountPK != null && !this.accountPK.equals(other.accountPK)))
+        {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString() {
-        return "domainmodel.Account[ accountId=" + accountId + " ]";
+    public String toString()
+    {
+        return "domainmodel.Account[ accountPK=" + accountPK + " ]";
     }
     
 }
