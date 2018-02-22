@@ -129,7 +129,12 @@
                       <table>
                           <tr>
                               <th><h4>Company Name</h4></th>
-                              <th><input type="text" name="companyName" id="companyName" value${companyName}></th>
+                              <th><select name="companyName">
+                                  <c:forEach var="account" items="${accounts}">
+                                      <option  value="${account.companyName}">${account.companyName}</option>
+                                  </c:forEach>
+                              </select>
+                              </th>
                           <!--</tr>-->
                           <!--<tr>-->
                               <th><h4>Date</h4></th>

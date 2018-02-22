@@ -5,10 +5,12 @@
  */
 package servlets;
 
+import dataaccess.AccountDB;
 import dataaccess.BrewDBException;
 import dataaccess.DeliveryDB;
 import dataaccess.FinishedInventoryDB;
 import dataaccess.ProductDB;
+import domainmodel.Account;
 import domainmodel.Delivery;
 import domainmodel.Finishedproduct;
 import domainmodel.Product;
@@ -41,9 +43,15 @@ public class DeliveryServlet extends HttpServlet
 
         try
         {
+            //get a list of deliveries for the jsp
             DeliveryDB db = new DeliveryDB();
             List<Delivery> delivery = db.getAll();
             request.setAttribute("deliverys", delivery);
+            
+            //get a list of accounts for the jsp
+            AccountDB accountDB = new AccountDB();
+            List<Account> account = accountDB.getAll();
+            request.setAttribute("accounts", account);
         } catch (BrewDBException ex)
         {
             Logger.getLogger(DeliveryServlet.class.getName()).log(Level.SEVERE, null, ex);
