@@ -46,9 +46,17 @@ public class RecipeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String newRecipe = request.getParameter("newRecipe");
+        if(newRecipe!=null)
+        {
+            session.setAttribute("newRecipe", newRecipe);
+            getServletContext().getRequestDispatcher("/WEB-INF/recipe.jsp").forward(request, response);
+            return;
+        }
         
         try {
-            HttpSession session = request.getSession();
+            
             RecipeDB recipeDB = new RecipeDB();
             
             List<Recipe> recipeList = recipeDB.getAll();
@@ -63,6 +71,14 @@ public class RecipeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        HttpSession session = request.getSession();
+        String newRecipe = request.getParameter("newRecipe");
+        if(newRecipe!=null)
+        {
+            session.setAttribute("newRecipe", newRecipe);
+        }
         
     }
 
