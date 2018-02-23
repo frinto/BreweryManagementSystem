@@ -116,11 +116,10 @@
                 <button type="submit" class="btn btn-success">Add a Tank</button>
             </form>
 
-            <div>
             <h2>SV Tanks</h2>
 
                 <table class="table">
-                    <thead class="thead dark">
+                    <thead class="thead-dark">
                         <tr>
                             <th>SV ID</th>
                             <th>Volume</th>
@@ -130,6 +129,7 @@
                             <th>Brew 3</th>
                             <th>Brand</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -152,41 +152,41 @@
                         </c:forEach>
                     </tbody>
                 </table>
-            </div>
-            <div>
             <h2>FV Tanks</h2>
-                <table>
+            <table class="table">
                     <thead class="thead-dark">
-                    <tr>
-                        <th>FV ID</th>
-                        <th>Volume</th>
-                        <th>Capacity</th>
-                        <th>Brew 1</th>
-                        <th>Brew 2</th>
-                        <th>Brew 3</th>
-                        <th>Brand</th>
-                        <th>Status</th>
-                    </tr>
-                    
-                    <c:forEach var="fv" items="${fvs}">
                         <tr>
-                            <td>${fv.fvId}</td>
-                            <td>${fv.volume}</td>
-                            <td>${fv.capacity}</td>
-                            <td>${fv.brew1}</td>
-                            <td>${fv.brew2}</td>
-                            <td>${fv.brew3}</td>
-                            <td>${fv.brand}</td>
-                            <td>${fv.status}</td>
-                            <td>
-                                <form action="tankFarm?action=editFv" method="POST">
-                                    <button type="submit">Edit</button>
-                                </form>
-                            </td>
+                            <th>FV ID</th>
+                            <th>Volume</th>
+                            <th>Capacity</th>
+                            <th>Brew 1</th>
+                            <th>Brew 2</th>z
+                            <th>Brew 3</th>
+                            <th>Brand</th>
+                            <th>Status</th>
+                            <th></th>
                         </tr>
-                    </c:forEach>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="fv" items="${fvs}">
+                            <tr>
+                                <td>${fv.fvId}</td>
+                                <td>${fv.volume}</td>
+                                <td>${fv.capacity}</td>
+                                <td>${fv.brew1}</td>
+                                <td>${fv.brew2}</td>
+                                <td>${fv.brew3}</td>
+                                <td>${fv.brand}</td>
+                                <td>${fv.status}</td>
+                                <td>
+                                    <form action="tankFarm?action=editFv" method="POST">
+                                        <button type="submit">Edit</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
                 </table>
-            </div>
             ${message}
           </div>
           
