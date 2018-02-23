@@ -18,11 +18,10 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginServlet extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
         request.setAttribute("message", "");
         //Checks if the user is already logged in
@@ -35,7 +34,7 @@ public class LoginServlet extends HttpServlet {
                 if (employee.getIsActive() == 0) {
                     request.setAttribute("message", "Account is inactive");
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-                    
+
                 }
             } catch (BrewDBException ex) {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,27 +43,27 @@ public class LoginServlet extends HttpServlet {
         //Checks the logout parameter if it is not null. If it is not null, 
         //the session will log the user out of the system.
         if (request.getParameter("logout") != null) {
-                session = request.getSession();
-                session.invalidate();
-                request.setAttribute("message", "Logged out");
-            }
-        
+            session = request.getSession();
+            session.invalidate();
+            request.setAttribute("message", "Logged out");
+        }
+
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         try {
             HttpSession session = request.getSession();
             EmployeeDB empDB = new EmployeeDB();
-            
-            String userId = request.getParameter("empId");
+
+            String empId = request.getParameter("empId");
             String password = request.getParameter("password");
-            
+
             // validatation for the user id and password
-            if (userId == null || password == null || userId.isEmpty() || password.isEmpty()) {
+            if (empId == null || password == null || empId.isEmpty() || password.isEmpty()) {
                 request.setAttribute("message", "Invalid.  Please try again.");
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 return;
@@ -72,23 +71,25 @@ public class LoginServlet extends HttpServlet {
             //Gets the employee by the employee id and compares it to the password in the database.
             //If the employee id mataches the password then the employee will be logged in.
 
-            Employee employee = empDB.getEmployee(userId);
+            Employee employee = empDB.getEmployee(empId);
+
             if (employee != null && employee.getPassword().equals(password)) {
-                if(employee.getIsActive() == 0) {
+                if (employee.getIsActive() == 0) {
                     request.setAttribute("message", "Invalid. Please try again.");
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 }
-                session.setAttribute("empId", userId);
+                session.setAttribute("empId", empId);
                 response.sendRedirect("tankFarm");
-            }
-            //If the userId does not match the password, it will show that it was invalid and tell the user to try again
+            } //If the userId does not match the password, it will show that it was invalid and tell the user to try again
             else {
-                request.setAttribute("message", "Invalid.  Please try again.");                    
+                request.setAttribute("message", "Invalid.  Please try again.");
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             }
         } catch (BrewDBException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("message", "Invalid.  Please try again.");
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
     }
-    
+
 }

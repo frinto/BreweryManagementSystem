@@ -42,7 +42,7 @@
                                 <p style ="padding-left:5px">Tank Farm</p>
                             </a>
                         </li>
-                        <li class="nav-item active">
+                        <li >
                             <a class="nav-link" href="production">
                                 <img src="assets/img/barrel.png" class="barrelIcon" alt="Norway">
                                 <p style ="padding-left:5px">Production</p>
@@ -54,7 +54,7 @@
                                 <p>Brew</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="nav-item active">
                             <a class="nav-link" href="finishedInventory">
                                 <i class="nc-icon nc-paper-2"></i>
                                 <p>Finished Inventory</p>
