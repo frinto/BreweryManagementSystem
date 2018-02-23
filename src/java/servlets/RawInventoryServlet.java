@@ -45,11 +45,9 @@ public class RawInventoryServlet extends HttpServlet {
             request.setAttribute("message", "error retrieving brew material list from database");
 
         }
-        
+
         //**********************************************************************************************
-        
-        
-         getServletContext().getRequestDispatcher("/WEB-INF/rawInventory.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/rawInventory.jsp").forward(request, response);
     }
 
     @Override
@@ -61,6 +59,27 @@ public class RawInventoryServlet extends HttpServlet {
         RawInventoryDB rawDatabase = new RawInventoryDB();
 
         if (actionBrewMaterial != null) {
+            if (actionBrewMaterial.equals("addBrewMaterials")) {
+                String name = request.getParameter("addName");
+                String quantity = request.getParameter("addQty");
+                String units = request.getParameter("addUnits");
+                String type = request.getParameter("addType");
+
+                Brewmaterials bm = new Brewmaterials(name);
+                bm.setQty(Double.parseDouble(quantity));
+                bm.setUnits(units);
+                bm.setType(type);
+
+                try {
+                    rawDatabase.insertInventoryBrewMaterial(bm);
+                } catch (BrewDBException ex) {
+                    Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                response.sendRedirect("rawInventory");
+
+            }
+
             if (actionBrewMaterial.equals("updateBrewMaterials")) {
                 try {
                     List<Brewmaterials> brewMaterials = rawDatabase.getAllInventoryBrewMaterial();
@@ -79,11 +98,10 @@ public class RawInventoryServlet extends HttpServlet {
                         rawDatabase.updateBrewMaterials(brewMaterials.get(i));
                     }
                     request.setAttribute("brewMaterials", brewMaterials);
-                    
+
                     //keep the production materials list
-                    
                     List<Productionmaterial> productionMaterials = rawDatabase.getAllInventoryProductionMaterial();
-                    
+
                     request.setAttribute("productionMaterials", productionMaterials);
 
                 } catch (BrewDBException ex) {
@@ -91,12 +109,31 @@ public class RawInventoryServlet extends HttpServlet {
                     request.setAttribute("message", "error updating brew material list from database");
 
                 }
-                
+
                 getServletContext().getRequestDispatcher("/WEB-INF/rawInventory.jsp").forward(request, response);
             }
-            if(actionBrewMaterial.equals("updateProductionMaterials"))
+            
+            if(actionBrewMaterial.equals("addProductionMaterials"))
             {
-               try {
+                String name = request.getParameter("addName");
+                String quantity = request.getParameter("addQty");
+                
+                Productionmaterial p = new Productionmaterial(name);
+                
+                p.setQty(Integer.parseInt(quantity));
+                
+                try {
+                    rawDatabase.insertInventoryProductionMaterial(p);
+                } catch (BrewDBException ex) {
+                    Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                response.sendRedirect("finishedInventory");
+               
+            }
+            if (actionBrewMaterial.equals("updateProductionMaterials")) {
+                try {
                     List<Productionmaterial> productionMaterials = rawDatabase.getAllInventoryProductionMaterial();
                     int[] qty = new int[productionMaterials.size()];
                     for (int i = 0; i < productionMaterials.size(); i++) {
@@ -113,9 +150,8 @@ public class RawInventoryServlet extends HttpServlet {
                         rawDatabase.updateProductionMaterials(productionMaterials.get(i));
                     }
                     request.setAttribute("productionMaterials", productionMaterials);
-                    
+
                     //keep the brew materials list
-                    
                     List<Brewmaterials> brewMaterials = rawDatabase.getAllInventoryBrewMaterial();
                     request.setAttribute("brewMaterials", brewMaterials);
 
@@ -124,10 +160,10 @@ public class RawInventoryServlet extends HttpServlet {
                     request.setAttribute("message", "error updating production material list from database");
 
                 }
-                
-                getServletContext().getRequestDispatcher("/WEB-INF/rawInventory.jsp").forward(request, response); 
+
+                getServletContext().getRequestDispatcher("/WEB-INF/rawInventory.jsp").forward(request, response);
             }
         }
-        
+
     }
 }

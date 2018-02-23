@@ -1,6 +1,7 @@
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -23,6 +24,7 @@
     </head>
 
     <body onbeforeunload="">
+        
         <div class="wrapper">
 
             <!--Nav bar----------------------------------------------------------------------------->
@@ -33,7 +35,7 @@
                     </div>
                     <ul class="nav">
                         <li>
-                            <a class="nav-link" href="tankStatus">
+                            <a class="nav-link" href="tankFarm">
                                 <img src="assets/img/tank.png" class="tankfarmIcon" alt="Norway">
                                 <p style ="padding-left:5px">Tank Farm</p>
                             </a>
@@ -63,7 +65,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="production">
+                            <a class="nav-link" href="recipe">
                                 <i class="nc-icon nc-pin-3"></i>
                                 <p>Recipes</p>
                             </a>
@@ -142,7 +144,8 @@
                                     <c:if test="${brewDate.equals(brew.date)}">
                                     <tr>
                                         <td>${brew.brewId}</td>
-                                        <td>${brew.date}</td>
+                                        
+                                        <td><fmt:formatDate value="${brew.date}" pattern="MMM-dd-yyy" /></td>
                                         <td>${brew.recipeName}</td>
                                     </tr>
                                     </c:if>

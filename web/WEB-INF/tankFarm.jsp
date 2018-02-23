@@ -111,14 +111,17 @@
         <!-- Tab Content -->
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="tankStatus" role="tabpanel" aria-labelledby="tankStatus-tab">
-            
-            <form action="tankFarm?action=addTank" method="POST">
-                <button type="submit" class="btn btn-success">Add a Tank</button>
-            </form>
-
-            <h2>SV Tanks</h2>
-
-                <table class="table">
+              <div class="row">  
+                <div class="col text-center">
+                  <h2>SV Tanks</h2>  
+                </div>
+                <div class="col text-right">
+                  <form action="tankFarm?action=addTank" method="POST">
+                    <button type="submit" class="btn btn-success" style="margin-top:5%;margin-right:3%">Add a Tank</button>
+                  </form>
+                </div>
+              </div>
+                <table class="table" style="margin-top: 0%">
                     <thead class="thead-dark">
                         <tr>
                             <th>SV ID</th>
@@ -152,15 +155,21 @@
                         </c:forEach>
                     </tbody>
                 </table>
-            <h2>FV Tanks</h2>
-            <table class="table">
+              <div class="row">
+                  <div class="col text-center">
+                      <h2>FV Tanks</h2>
+                  </div>
+                  <div class="col">
+                  </div>
+              </div>
+              <table class="table" style="margin-top: 0%">
                     <thead class="thead-dark">
                         <tr>
                             <th>FV ID</th>
                             <th>Volume</th>
                             <th>Capacity</th>
                             <th>Brew 1</th>
-                            <th>Brew 2</th>z
+                            <th>Brew 2</th>
                             <th>Brew 3</th>
                             <th>Brand</th>
                             <th>Status</th>
@@ -196,7 +205,7 @@
 
                 <!-- Trigger the modal with a button -->
                 <div class="text-center">
-                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add A New Transfer</button>
+                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" style="margin-top:2%">Add A New Transfer</button>
                 </div>
 
                 <!-- User Feedback Message -->
@@ -246,7 +255,7 @@
                 </div>
 
                 <!-- main page table for displaying transfers -->
-                <table class="table">
+                <table class="table" style="margin-top: 2%">
                     <thead class="thead-dark">
                         <tr>
                             <th>Date</th>
@@ -301,5 +310,4 @@
             });
         </script>
     </c:if>
-        
 </html>

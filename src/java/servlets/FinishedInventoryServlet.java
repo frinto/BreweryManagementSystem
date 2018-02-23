@@ -58,30 +58,56 @@ public class FinishedInventoryServlet extends HttpServlet {
 
         FinishedInventoryDB finishedDatabase = new FinishedInventoryDB();
 
-        try {
-            List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
-            int[] qty = new int[finishedProducts.size()];
-            for (int i = 0; i < finishedProducts.size(); i++) {
+        String action = request.getParameter("action");
+
+        if (action != null) {
+            if (action.equals("update")) {
+                try {
+                    List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
+                    int[] qty = new int[finishedProducts.size()];
+                    for (int i = 0; i < finishedProducts.size(); i++) {
 
                 //name is the product name
-                //productQtyString get the string of the productname from jsp
-                //we then parse the productQtyString to an int quantity
-                String name = finishedProducts.get(i).getProductName();
-                String productQtyString = request.getParameter(name);
-                qty[i] = Integer.parseInt(productQtyString);
-            }
-            for (int i = 0; i < finishedProducts.size(); i++) {
-                finishedProducts.get(i).setQty(qty[i]);
-                finishedDatabase.update(finishedProducts.get(i));
-            }
-            request.setAttribute("finishedProducts", finishedProducts);
+                        //productQtyString get the string of the productname from jsp
+                        //we then parse the productQtyString to an int quantity
+                        String name = finishedProducts.get(i).getProductName();
+                        String productQtyString = request.getParameter(name);
+                        qty[i] = Integer.parseInt(productQtyString);
+                    }
+                    for (int i = 0; i < finishedProducts.size(); i++) {
+                        finishedProducts.get(i).setQty(qty[i]);
+                        finishedDatabase.update(finishedProducts.get(i));
+                    }
+                    request.setAttribute("finishedProducts", finishedProducts);
 
-        } catch (BrewDBException ex) {
-            Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("message", "error updating finished product list from database");
+                } catch (BrewDBException ex) {
+                    Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    request.setAttribute("message", "error updating finished product list from database");
 
+                }
+
+                getServletContext().getRequestDispatcher("/WEB-INF/finishedInventory.jsp").forward(request, response);
+            }
+            if(action.equals("add"))
+            {
+                String name = request.getParameter("addProductName");
+                String quantity = request.getParameter("addQty");
+                
+                Finishedproduct fp = new Finishedproduct(name);
+                
+                fp.setQty(Integer.parseInt(quantity));
+                
+                try {
+                    finishedDatabase.insertInventory(fp);
+                } catch (BrewDBException ex) {
+                    Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                response.sendRedirect("finishedInventory");
+               
+            }
         }
 
-        getServletContext().getRequestDispatcher("/WEB-INF/finishedInventory.jsp").forward(request, response);
     }
 }

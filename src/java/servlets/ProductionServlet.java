@@ -6,8 +6,10 @@
 package servlets;
 
 import dataaccess.BrewDBException;
+import dataaccess.FinishedInventoryDB;
 import dataaccess.ProductionDB;
 import dataaccess.TankDB;
+import domainmodel.Finishedproduct;
 import domainmodel.Production;
 import domainmodel.Sv;
 import java.io.IOException;
@@ -32,32 +34,7 @@ public class ProductionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        try {
-            ProductionDB prodDB = new ProductionDB();
-
-            List<Production> prodList = prodDB.getAllProduction();
-
-            request.setAttribute("prod", prodList);
-            getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
-        } catch (BrewDBException ex) {
-            Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String action = request.getParameter("action");
-        String employeeId = (String) session.getAttribute("empId");
-        String productionType = request.getParameter("productionType");
-        String quantity = request.getParameter("quantity");
-        String svNumber = request.getParameter("svNumber");
-        Production production = new Production();
-        ProductionDB prodDB = new ProductionDB();
-        TankDB tankDB = new TankDB();
         String startDateStr = request.getParameter("productionDate");
             
             if(startDateStr==null)
@@ -83,13 +60,40 @@ public class ProductionServlet extends HttpServlet {
                 Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             }
+        try {
+            ProductionDB prodDB = new ProductionDB();
+
+            List<Production> prodList = prodDB.getAllProduction(); 
+
+            request.setAttribute("prod", prodList);
+            getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
+        } catch (BrewDBException ex) {
+            Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String action = request.getParameter("action");
+        String employeeId = (String) session.getAttribute("empId");
+        String productionType = request.getParameter("productionType");
+        String quantity = request.getParameter("quantity");
+        String svNumber = request.getParameter("svNumber");
+        Production production = new Production();
+        ProductionDB prodDB = new ProductionDB();
+        TankDB tankDB = new TankDB();
+        FinishedInventoryDB finProdDB = new FinishedInventoryDB();
+        
         //navigates to the production form to submit a new production
         if (action.equals("add")) {
             try {
-                List<Production> prodList = prodDB.getAllProduction();
                 List<Sv> svTankList = tankDB.getAllSV();
-
-                request.setAttribute("prod", prodList);
+                List<Finishedproduct> finProdList = finProdDB.getAllInventory();
+                
+                request.setAttribute("finishedProd", finProdList);
                 request.setAttribute("sv", svTankList);
                 request.setAttribute("action", action);
                 getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);

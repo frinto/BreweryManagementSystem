@@ -137,7 +137,16 @@ public class BrewServlet extends HttpServlet {
         String empId = (String) session.getAttribute("empId");
 
         int fvSelection = Integer.parseInt(request.getParameter("fvList"));
-        Date date = new Date();
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String startDate = sdf.format(new Date());
+                Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
         Recipe recipe = (Recipe) session.getAttribute("recipe");
 
