@@ -35,7 +35,7 @@
                     </div>
                     <ul class="nav">
                         <li>
-                            <a class="nav-link" href="tankStatus">
+                            <a class="nav-link" href="tankFarm">
                                 <img src="assets/img/tank.png" class="tankfarmIcon" alt="Norway">
                                 <p style ="padding-left:5px">Tank Farm</p>
                             </a>
