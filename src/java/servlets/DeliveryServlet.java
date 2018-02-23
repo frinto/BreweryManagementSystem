@@ -40,7 +40,31 @@ public class DeliveryServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-
+        HttpSession session = request.getSession();
+        String startDateStr = request.getParameter("deliveryDate");
+        if(startDateStr==null)
+            {
+                
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String startDate = sdf.format(new Date());
+                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+                
+                session.setAttribute("deliveryDate",date);
+            } catch (ParseException ex) {
+                Logger.getLogger(DeliveryServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+            if(startDateStr!=null)
+            {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date startDate = sdf.parse(startDateStr);
+                session.setAttribute("deliveryDate", startDate);
+            } catch (ParseException ex) {
+                Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
         try
         {
             //get a list of deliveries for the jsp
