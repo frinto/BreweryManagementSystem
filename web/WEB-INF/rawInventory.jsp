@@ -37,7 +37,7 @@
                     </div>
                     <ul class="nav">
                         <li>
-                            <a class="nav-link" href="tankStatus">
+                            <a class="nav-link" href="tankFarm">
                                 <img src="assets/img/tank.png" class="tankfarmIcon" alt="Norway">
                                 <p style ="padding-left:5px">Tank Farm</p>
                             </a>
@@ -113,6 +113,29 @@
                     <!-- brew materials tab-->  
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <h3>Brew Materials</h3>
+                        
+                        <form action="rawInventory?action=addBrewMaterials" method="post" class="rawInventoryUpdateButton">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Units</th>
+                                        <th>Type</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tr>
+                                    <td><input type="text" name="addName" placeholder="name"></td>
+                                    <td><input type="number" name="addQty" placeholder="quantity"></td>
+                                    <td><input type="text" name="addUnits" placeholder="units"></td>
+                                    <td><input type="text" name="addType" placeholder="type"></td>
+                                </tr>
+                                
+                            </table>
+                            
+                            <button type="submit" class="btn btn-success">Add</button>
+                        </form>
 
 
                         <form action="rawInventory?action=updateBrewMaterials" method="post" class="rawInventoryUpdateButton">

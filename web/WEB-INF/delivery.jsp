@@ -37,7 +37,7 @@
                     </div>
                     <ul class="nav">
                         <li>
-                            <a class="nav-link" href="tankStatus">
+                            <a class="nav-link" href="tankFarm">
                                 <img src="assets/img/tank.png" class="tankfarmIcon" alt="Norway">
                                 <p style ="padding-left:5px">Tank Farm</p>
                             </a>
@@ -106,130 +106,100 @@
                                     <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                                 </p>-->
 
-    <div class = "brews">
-<!--        <form class ="datepicker">
-            View Brews by Date:
-            <input type="date" name="bdaytime">
-        </form>-->
-        <div class="text-center">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add A Delivery</button>
-        </div>
+                <div class = "brews">
 
-        <!-- Modal -->
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog" style="max-width:1000px">
-<!-- Modal content-->
-            <div class="modal-content" style="position:fixed; width:100%">
-                <div class="modal-header" >
-                  <h4 class="modal-title" style="text-align:center;width:100%">Add A Delivery</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <div class="modal-body">
-                  <form action="delivery?action=add" method="POST">
-                      <table>
-                          <tr>
-                              <th style="width:25%"><h4>Company Name</h4></th>
-                              <th style="width:25%"><select style="height:100%; width: 100%" name="companyName">
-                                  <c:forEach var="account" items="${accounts}">
-                                      <option  value="${account.companyName}">${account.companyName}</option>
-                                  </c:forEach>
-                              </select>
-                              </th>
-                          <!--</tr>-->
-                          <!--<tr>-->
-                              <th style="width:25%"><h4>Date</h4></th>
-                              <th style="width:25%"><input type="date" name="date" id="date" value="${dateToday}"></th>
-                          </tr>
-                      </table>
-                      <table class="table">
+                    <form class ="datepicker" action="delivery" method="GET">
+                        <h4>View Deliveries by Date:</h4>
+                        <input type="date" name="deliveryDate" id="datePicker">
+                        <button type="submit" class="btn btn-outline-primary">Select Date</button>
+                    </form>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add A Delivery</button>
+                    </div>
+
+                    <!-- Modal -->
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog" style="max-width:1000px">
+                            <!-- Modal content-->
+                            <div class="modal-content" style="position:fixed; width:100%">
+                                <div class="modal-header" >
+                                    <h4 class="modal-title" style="text-align:center;width:100%">Add A Delivery</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="delivery?action=add" method="POST">
+                                        <table>
+                                            <tr>
+                                                <th style="width:25%"><h4>Company Name</h4></th>
+                                                <th style="width:25%"><select style="height:100%; width: 100%" name="companyName">
+                                                        <c:forEach var="account" items="${accounts}">
+                                                            <option  value="${account.companyName}">${account.companyName}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </th>
+                                                <!--</tr>-->
+                                                <!--<tr>-->
+                                                <th style="width:25%"><h4>Date</h4></th>
+                                                <th style="width:25%"><input type="date" name="date" id="date" value="${dateToday}"></th>
+                                            </tr>
+                                        </table>
+                                        <table class="table">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Item Name</th>
+                                                    <th>Quantity</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="finishedProduct" items="${finishedProducts}">
+                                                    <tr>
+
+                                                        <td><input style="width:100%" name="productName" readonly type="hidden" value="${finishedProduct.productName}">${finishedProduct.productName}</td>
+                                                        <td><input style="width:100%" min="0" type="number" name="qty" id="qty" value="${qty}" width="99%"></td>
+
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                        <table><th><td><input name="submit" type="submit"</td></th></table>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--This is a list of all the delivery objects in the future they will become a hrefs with links to the delivery page specific to that delivery-->
+                    <table class="table">
                         <thead class="thead-dark">
                             <tr>
-                                <th>Item Name</th>
-                                <th>Quantity</th>
+                                <th scope="col">Company Name</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Employee ID</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="finishedProduct" items="${finishedProducts}">
-                            <tr>
-                                
-                                    <td><input style="width:100%" name="productName" readonly type="hidden" value="${finishedProduct.productName}">${finishedProduct.productName}</td>
-                                    <td><input style="width:100%" min="0" type="number" name="qty" id="qty" value="${qty}" width="99%"></td>
-                                
-                            </tr>
+                            <c:forEach var="delivery" items="${deliverys}">
+                                <c:if test="${deliveryDate.equals(delivery.date)}">
+                                    <tr>
+                                        <td> <a href="viewDelivery?deliveryId=${delivery.deliveryId}" style="text-decoration: underline;"> ${delivery.companyName} </a></td>
+                                        <td> <a href="viewDelivery?deliveryId=${delivery.deliveryId}" style="text-decoration: underline;"> <fmt:formatDate value="${delivery.date}" pattern="MMM-dd-yyy" /></a></td>
+                                        <td> <a href="viewDelivery?deliveryId=${delivery.deliveryId}" style="text-decoration: underline;"> ${delivery.empId}</a></td>
+                                    </tr>
+                                </c:if>
                             </c:forEach>
                         </tbody>
-<!--<script type="text/javascript">-->
-<!--//function addRow () 
-//{
-//	var body = document.getElementsByTagName("body")[0];
-//	var form = body.getElementsByTagName("form")[0];
-//	var tbody = form.getElementsByTagName("tbody")[1];
-//	
-//	var productName = document.createElement("select");
-//        var forEach = document.createElement("c:forEach");
-//        var option = document.createElement("option");
-////	
-//	productName.setAttribute("name", "productName");
-//	forEach.setAttribute("var", "finishedProducts");
-//	forEach.setAttribute("items", "${finishedProduct}");
-//	option.setAttribute("value", "${finishedProduct.productName}");
-//	option.innerHTML = ${finishedProduct.productName};
-//	form.appendChild(productName);
-//	
-//	var qty = document.createElement("input");
-//	
-//	qty.setAttribute("name", "qty");
-//	qty.setAttribute("id", "qty");
-//	qty.setAttribute("style", "width:99%");
-//        qty.setAttribute("min", "0");
-//	qty.setAttribute("value", "${qty}");
-//	qty.setAttribute("type", "number");
-//	
-//	var td1 = document.createElement("td");
-//	var td2 = document.createElement("td");
-//	var tr = document.createElement("tr");
-//        
-//	forEach.appendChild(option);
-//        productName.appendChild(forEach);
-//	td1.appendChild(productName);
-//	td2.appendChild(qty);
-//	tr.appendChild(td1);
-//	tr.appendChild(td2);
-//	tbody.appendChild(tr);
-//}
-//</script>-->
-                      </table>
-        <table><th><td><input name="submit" type="submit"</td></th></table>
-                  </form>
-              </div>
-              <div class="modal-footer">
-              </div>
+                    </table>
+                </div>
             </div>
-
-          </div>
         </div>
-
-<!--This is a list of all the delivery objects in the future they will become a hrefs with links to the delivery page specific to that delivery-->
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Company Name</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Employee ID</th>
-                </tr>
-            </thead>
-             <tbody>
-            <c:forEach var="delivery" items="${deliverys}">
-                <tr>
-                    <td> <a href="viewDelivery?deliveryId=${delivery.deliveryId}" style="text-decoration: underline;"> ${delivery.companyName} </a></td>
-                    <td> <a href="viewDelivery?deliveryId=${delivery.deliveryId}" style="text-decoration: underline;"> ${delivery.date}</a></td>
-                    <td> <a href="viewDelivery?deliveryId=${delivery.deliveryId}" style="text-decoration: underline;"> ${delivery.empId}</a></td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
-</div>
-</div>
-</body>
-<c:import url="includes/footer.html"/>
+    </body>
+    <script srt="assets/js/brew.js"></script>
+    <script  type="text/javascript">
+                        $(document).ready( function() {
+                        document.getElementById('datePicker').valueAsDate = new Date();
+                        });
+    </script>
+    <c:import url="includes/footer.html"/>
