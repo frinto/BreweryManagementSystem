@@ -42,20 +42,15 @@ public class ViewDeliveryServlet extends HttpServlet
         try
         {
             HttpSession session = request.getSession();
-            String deliveryId = (String) request.getParameter("deliveryId");
-            try
+            String deliveryId = request.getParameter("deliveryId");
+            if (deliveryId.isEmpty())
             {
-                String sessionDeliveryId = (String) session.getAttribute("deliveryId");
-                if (!deliveryId.isEmpty() && sessionDeliveryId.isEmpty() && !deliveryId.equals(sessionDeliveryId))
-                {
-                    session.setAttribute("deliveryId", deliveryId);
-                }
-                deliveryId = (String) session.getAttribute("deliveryId");
-            }catch(NullPointerException e)
+                deliveryId = (String) session.getAttribute(deliveryId);
+            }
+            else
             {
                 session.setAttribute("deliveryId", deliveryId);
             }
-
             //get delivery information
             DeliveryDB deliveryDB = new DeliveryDB();
             List<Delivery> delivery = deliveryDB.getByDeliveryId(deliveryId);

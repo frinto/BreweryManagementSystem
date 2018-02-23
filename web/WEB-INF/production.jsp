@@ -1,6 +1,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -99,24 +101,26 @@
                 <h1>Production</h1>
                 <c:choose>
                     <c:when test="${action == 'add'}">
-                        <form action="production?action=newProduction" method="POST">
+                        <form action="production?action=finalProduction" method="POST">
                             <table class="table">
                                 <thead class="thead-dark">
                                 <th>ProductionType</th>
                                 <th>Quantity</th>
                                 <th>SVNumber</th>
+                                <!--                                <th>Starting Sv Volume</th>
+                                                                <th>Finished Sv Volume</th>-->
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
                                             <select name="productionType">
-                                                <c:forEach var="production" items="${prod}">
-                                                    <option value="${production.productionType}">${production.productionType}</option>
+                                                <c:forEach var="finishedProduct" items="${finishedProd}">
+                                                    <option value="${finishedProduct.productName}">${finishedProduct.productName}</option>
                                                 </c:forEach>
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="text" name="quantity">
+                                            <input type="number" name="quantity">
                                         </td>
                                         <td>
                                             <select name="svNumber">
@@ -124,6 +128,41 @@
                                                     <option value="${storageVessel.svId}">${storageVessel.svId}</option>
                                                 </c:forEach>
                                             </select>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-success">Next</button>
+                        </form>
+                    </c:when>
+                    <c:when test="${action == 'finalProduction'}">
+                        <form action="production?action=newProduction" method="POST">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <th>ProductionType</th>
+                                <th>Quantity</th>
+                                <th>SVNumber</th>
+                                <th>Starting Sv Volume</th>
+                                <th>Finished Sv Volume</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" name="productionType" value="${productionType}">
+                                            ${productionType}
+                                        </td>
+                                        <td>
+                                            <input type="hidden" name="quantity" value="${quantity}">
+                                            ${quantity}
+                                        </td>
+                                        <td>
+                                            <input type="hidden" name="svNumber" value="${svNumber}">
+                                            ${svNumber}
+                                        </td>
+                                        <td>
+                                            ${svVolume}
+                                        </td>
+                                        <td>
+                                            <input type="number" name="finishedSvVolume">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -132,33 +171,67 @@
                         </form>
                     </c:when>
                     <c:otherwise>
+                        <form class ="datepicker" action="production" method="GET">
+                            <h4>View Productions by Date:</h4>
+                            <input type="date" name="productionDate" id="datePicker">
+                            <button type="submit" class="btn btn-outline-primary">Select Date</button>
+                        </form>
                         <form action="production?action=add" method="POST" class="productionButton">
                             <button type="submit" class="btn btn-success">Add Production</button>
                         </form>
                         <p class="productionMessage">${message}</p>
-                        <table class="table">
-                            <thead class="thead-dark">
-                            <th>Date</th>
-                            <th>ProductionType</th>
-                            <th>Quantity</th>
-                            <th>SVNumber</th>
-                            <th>EmployeeID</th>
-                            <th>SV Correction +/-</th>
-                            </thead>
-                            <tbody>
-                                <c:forEach var="production" items="${prod}">
-                                    <tr>
-                                        <td>${production.date}</td>
-                                        <td>${production.productionType}</td>
-                                        <td>${production.quantity}</td>
-                                        <td>${production.svNum}</td>
-                                        <td>${production.employeeId}</td>
-                                        <td><input type="text" value=""></input></td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
+                        <form action="production?action=update" method="POST" class="productionButton">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <th>Date</th>
+                                <th>ProductionType</th>
+                                <th>Quantity</th>
+                                <th>SVNumber</th>
+                                <th>EmployeeID</th>
+                                <th>Finished Sv Volume</th>
+                                <th>Gain/Loss +-</th>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="production" items="${prod}">
+                                            <tr>
+                                                <td><fmt:formatDate value="${production.date}" pattern="MMM-dd-yyy" /></td>
+                                                <td>${production.productionType}</td>
+                                                <td>${production.quantity}</td>
+                                                <td>${production.svNum}</td>
+                                                <td>${production.employeeId}</td>                                           
+                                                <td>${finishSvVol}</td>
+                                                <td>${gainLoss}</td>
+                                            </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-success">Update</button>
+                        </form>
                     </c:otherwise>
                 </c:choose>
                 </body>
-                <c:import url="includes/footer.html"/>
+                <!--   Core JS Files   -->
+                <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+                <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+                <script src="assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+                <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+                <script src="assets/js/plugins/bootstrap-switch.js"></script>
+                <!--  Google Maps Plugin    -->
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+                <!--  Chartist Plugin  -->
+                <script src="assets/js/plugins/chartist.min.js"></script>
+                <!--  Notifications Plugin    -->
+                <script src="assets/js/plugins/bootstrap-notify.js"></script>
+                <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+                <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
+                <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+                <script src="assets/js/production.js"></script>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        // Javascript method's body can be found in assets/js/demos.js
+
+                    });
+                </script>
+
+                </html>
+

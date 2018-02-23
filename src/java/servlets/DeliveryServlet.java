@@ -40,43 +40,48 @@ public class DeliveryServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        setTodaysDate(request);
         HttpSession session = request.getSession();
         String startDateStr = request.getParameter("deliveryDate");
-        if(startDateStr==null)
+        if (startDateStr == null)
+        {
+
+            try
             {
-                
-            try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String startDate = sdf.format(new Date());
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
-                
-                session.setAttribute("deliveryDate",date);
-            } catch (ParseException ex) {
+
+                session.setAttribute("deliveryDate", date);
+            } catch (ParseException ex)
+            {
                 Logger.getLogger(DeliveryServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            }
-            if(startDateStr!=null)
-            {
+        }
+        if (startDateStr != null)
+        {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            try {
+            try
+            {
                 Date startDate = sdf.parse(startDateStr);
                 session.setAttribute("deliveryDate", startDate);
-            } catch (ParseException ex) {
+            } catch (ParseException ex)
+            {
                 Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            }
+        }
         try
         {
             //get a list of deliveries for the jsp
             DeliveryDB db = new DeliveryDB();
             List<Delivery> delivery = db.getAll();
             request.setAttribute("deliverys", delivery);
-            
+
             //get a list of accounts for the jsp
             AccountDB accountDB = new AccountDB();
             List<Account> account = accountDB.getAll();
             request.setAttribute("accounts", account);
-            
+
             //get a list of finished goods for the jsp
             FinishedInventoryDB finishedInventoryDB = new FinishedInventoryDB();
             List<Finishedproduct> finishedProduct = finishedInventoryDB.getAllInventory();
@@ -111,8 +116,7 @@ public class DeliveryServlet extends HttpServlet
                     Delivery delivery = new Delivery();
                     delivery = new Delivery(delivery.getDeliveryId(), companyName, empId, date);
                     deliveryDB.insert(delivery);
-                    
-                    
+
                     //Product
                     ProductDB productDB = new ProductDB();
                     String qty[] = request.getParameterValues("qty");
@@ -124,8 +128,7 @@ public class DeliveryServlet extends HttpServlet
                         productDB.insert(p);
 
                     }
-                    
-                    
+
                     //Remove from finished Goods
                     FinishedInventoryDB finishedInventoryDB = new FinishedInventoryDB();
                     List<Finishedproduct> finishedProduct = finishedInventoryDB.getAllInventory();
@@ -135,7 +138,7 @@ public class DeliveryServlet extends HttpServlet
                         {
                             String pName1 = productName[x];
                             String pName2 = finishedProduct.get(i).getProductName();
-                            if(pName1.equals(pName2))
+                            if (pName1.equals(pName2))
                             {
                                 finishedProduct.get(i).setQty(finishedProduct.get(i).getQty() - Integer.parseInt(qty[x]));
                                 finishedInventoryDB.update(finishedProduct.get(i));
@@ -154,4 +157,12 @@ public class DeliveryServlet extends HttpServlet
         response.sendRedirect("delivery");
     }
 
+    private void setTodaysDate(HttpServletRequest request)
+    {
+        //set the current date to a variable so the Add A Transfer form has the current date pre-set
+        //this is the required format to pre-set a date value in a date input field
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateToday = dateFormat.format(new Date());
+        request.setAttribute("dateToday", dateToday);
+    }
 }

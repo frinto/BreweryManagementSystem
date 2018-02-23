@@ -1,6 +1,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -159,7 +160,7 @@
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
-                                <th scope="col">${companyName}, ${date}</th>
+                                <th scope="col" style="font-size: 1.5rem">${companyName}, <fmt:formatDate value="${date}" pattern="MMM-dd-yyy" /></th>
                                 <th scope="col"></th>
                             </tr>
                             <tr>
@@ -170,8 +171,8 @@
                         <tbody>
                             <c:forEach var="product" items="${products}">
                                 <tr>
-                                    <td>${product.productName}</td>
-                                    <td>${product.qty}</td>
+                                    <td style="font-size: 1.25rem">${product.productName}</td>
+                                    <td style="font-size: 1.25rem">${product.qty}</td>
                                 </tr>
                             </c:forEach>
                         </tbody>
