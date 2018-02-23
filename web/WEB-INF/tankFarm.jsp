@@ -114,11 +114,12 @@
               ${message}
               <div class="row">
                 <div class="col text-center">
-                  <h2>SV Tanks</h2>  
+                  <h2>SV Tanks</h2>
                 </div>
-                <!-- Add a Tank Button to activate Modal -->
                 <div class="col text-right">
-                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalTank" style="margin-top:4%;margin-right:2%">Add A New Tank</button>
+                    <form>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalTank" style="margin-top:5%;margin-right:3%">Add A New Tank</button>
+                    </form>
                 </div>
               </div>
                 <table class="table" style="margin-top: 0%">
