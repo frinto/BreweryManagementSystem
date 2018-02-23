@@ -112,6 +112,26 @@ public class RawInventoryServlet extends HttpServlet {
 
                 getServletContext().getRequestDispatcher("/WEB-INF/rawInventory.jsp").forward(request, response);
             }
+            
+            if(actionBrewMaterial.equals("addProductionMaterials"))
+            {
+                String name = request.getParameter("addName");
+                String quantity = request.getParameter("addQty");
+                
+                Productionmaterial p = new Productionmaterial(name);
+                
+                p.setQty(Integer.parseInt(quantity));
+                
+                try {
+                    rawDatabase.insertInventoryProductionMaterial(p);
+                } catch (BrewDBException ex) {
+                    Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                response.sendRedirect("finishedInventory");
+               
+            }
             if (actionBrewMaterial.equals("updateProductionMaterials")) {
                 try {
                     List<Productionmaterial> productionMaterials = rawDatabase.getAllInventoryProductionMaterial();
