@@ -99,14 +99,14 @@
                 <h1>Production</h1>
                 <c:choose>
                     <c:when test="${action == 'add'}">
-                        <form action="production?action=newProduction" method="POST">
+                        <form action="production?action=finalProduction" method="POST">
                             <table class="table">
                                 <thead class="thead-dark">
                                 <th>ProductionType</th>
                                 <th>Quantity</th>
                                 <th>SVNumber</th>
-                                <th>Starting Sv Volume</th>
-                                <th>Finished Sv Volume</th>
+                                <!--                                <th>Starting Sv Volume</th>
+                                                                <th>Finished Sv Volume</th>-->
                                 </thead>
                                 <tbody>
                                     <tr>
@@ -126,10 +126,39 @@
                                                     <option value="${storageVessel.svId}">${storageVessel.svId}</option>
                                                 </c:forEach>
                                             </select>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-success">Next</button>
+                        </form>
+                    </c:when>
+                    <c:when test="${action == 'finalProduction'}">
+                        <form action="production?action=newProduction" method="POST">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <th>ProductionType</th>
+                                <th>Quantity</th>
+                                <th>SVNumber</th>
+                                <th>Starting Sv Volume</th>
+                                <th>Finished Sv Volume</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" name="productionType" value="${productionType}">
+                                            ${productionType}
                                         </td>
-                                        <c:forEach var="ssv" items="${startSvVol}">
-                                            <td>${ssv.volume}</td>
-                                        </c:forEach>
+                                        <td>
+                                            <input type="hidden" name="quantity" value="${quantity}">
+                                            ${quantity}
+                                        </td>
+                                        <td>
+                                            <input type="hidden" name="svNumber" value="${svNumber}">
+                                            ${svNumber}
+                                        </td>
+                                        <td>
+                                            ${svVolume}
+                                        </td>
                                         <td>
                                             <input type="number" name="finishedSvVolume">
                                         </td>
@@ -140,6 +169,11 @@
                         </form>
                     </c:when>
                     <c:otherwise>
+                        <form class ="datepicker" action="production" method="GET">
+                            <h4>View Productions by Date:</h4>
+                            <input type="date" name="productionDate" id="datePicker">
+                            <button type="submit" class="btn btn-outline-primary">Select Date</button>
+                        </form>
                         <form action="production?action=add" method="POST" class="productionButton">
                             <button type="submit" class="btn btn-success">Add Production</button>
                         </form>

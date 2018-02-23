@@ -11,7 +11,6 @@ import dataaccess.TankDB;
 import domainmodel.Production;
 import domainmodel.Sv;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,25 +58,47 @@ public class ProductionServlet extends HttpServlet {
         Production production = new Production();
         ProductionDB prodDB = new ProductionDB();
         TankDB tankDB = new TankDB();
+        String startDateStr = request.getParameter("productionDate");
+            
+            if(startDateStr==null)
+            {
+                
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String startDate = sdf.format(new Date());
+                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+                
+                session.setAttribute("productionDate",date);
+            } catch (ParseException ex) {
+                Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+            if(startDateStr!=null)
+            {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date startDate = sdf.parse(startDateStr);
+                session.setAttribute("productionDate", startDate);
+            } catch (ParseException ex) {
+                Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
         //navigates to the production form to submit a new production
         if (action.equals("add")) {
             try {
                 List<Production> prodList = prodDB.getAllProduction();
                 List<Sv> svTankList = tankDB.getAllSV();
-                List<Sv> svList = tankDB.getAllSV();
 
-                request.setAttribute("startSvVol", svList);
                 request.setAttribute("prod", prodList);
                 request.setAttribute("sv", svTankList);
                 request.setAttribute("action", action);
                 getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
-            } //Add a new production to the database
+            } 
             catch (BrewDBException ex) {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equals("newProduction")) {
             try {
-                //Production(Integer prodId, int quantity, Date date, int employeeId, int svNum, String productionType)
                 Date date = new Date();
                 production = new Production(production.getProdId(), Integer.parseInt(quantity), date, Integer.parseInt(employeeId), Integer.parseInt(svNumber), productionType);
                 prodDB.insertProduction(production);
@@ -87,6 +108,23 @@ public class ProductionServlet extends HttpServlet {
                 request.setAttribute("message", "Production Submitted");
                 getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
 
+            } catch (BrewDBException ex) {
+                Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (action.equals("finalProduction")) {
+
+            try {
+                List<Sv> svTankList = tankDB.getAllSV();
+                double startVol = svTankList.get(Integer.parseInt(svNumber)).getVolume();
+                
+                request.setAttribute("svVolume", startVol);
+                request.setAttribute("productionType", productionType);
+                request.setAttribute("quantity", quantity);
+                request.setAttribute("svNumber", svNumber);
+                
+                request.setAttribute("action", action);
+                
+                getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
             } catch (BrewDBException ex) {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
