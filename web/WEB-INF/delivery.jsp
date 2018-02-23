@@ -1,6 +1,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -110,7 +111,7 @@
 
                     <form class ="datepicker" action="delivery" method="GET">
                         <h4>View Deliveries by Date:</h4>
-                        <input type="date" name="deliveryDate" id="datePicker">
+                        <input type="date" name="deliveryDate" id="datePicker" value="${dateToday}">
                         <button type="submit" class="btn btn-outline-primary">Select Date</button>
                     </form>
                     <div class="text-center">
@@ -196,10 +197,4 @@
             </div>
         </div>
     </body>
-    <script srt="assets/js/brew.js"></script>
-    <script  type="text/javascript">
-                        $(document).ready( function() {
-                        document.getElementById('datePicker').valueAsDate = new Date();
-                        });
-    </script>
     <c:import url="includes/footer.html"/>
