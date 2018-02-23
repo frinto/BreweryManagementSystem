@@ -98,6 +98,27 @@
 
 
                 <h1>Finished Inventory</h1>
+                
+                <form action="finishedInventory?action=add" method="post" class="finishedInventoryUpdateButton">
+                    
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        
+                        
+                        <tr>
+                            <td><input type="text" name="addProductName" placeholder="product name"></td>
+                            <td><input type="number" name="addQty" placeholder="quantity"></td>
+                        </tr>
+                        
+                    </table>
+                    
+                    <button type="submit" class="btn btn-success">Add</button>
+                </form>
 
 
                 <form action="finishedInventory?action=update" method="post" class="finishedInventoryUpdateButton">
