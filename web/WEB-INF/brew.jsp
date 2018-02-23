@@ -1,6 +1,7 @@
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -23,6 +24,7 @@
     </head>
 
     <body onbeforeunload="">
+        
         <div class="wrapper">
 
             <!--Nav bar----------------------------------------------------------------------------->
@@ -142,7 +144,8 @@
                                     <c:if test="${brewDate.equals(brew.date)}">
                                     <tr>
                                         <td>${brew.brewId}</td>
-                                        <td>${brew.date}</td>
+                                        
+                                        <td><fmt:formatDate value="${brew.date}" pattern="MMM-dd-yyy" /></td>
                                         <td>${brew.recipeName}</td>
                                     </tr>
                                     </c:if>
