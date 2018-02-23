@@ -221,6 +221,7 @@ DROP TABLE IF EXISTS `recipe` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `recipe` (
   `recipeName` VARCHAR(25) NOT NULL,
+  `dateModified` DATE NULL,
   `mashInTemp` FLOAT NULL,
   `mashInTime` FLOAT NULL,
   `mashWaterVolume` INT NULL,
