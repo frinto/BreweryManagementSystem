@@ -65,7 +65,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="production">
+                            <a class="nav-link" href="recipe">
                                 <i class="nc-icon nc-pin-3"></i>
                                 <p>Recipes</p>
                             </a>
