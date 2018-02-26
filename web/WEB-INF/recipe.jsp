@@ -83,7 +83,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand" href="#pablo"> Brew </a>
+                        <a class="navbar-brand" href="#pablo"> Recipes </a>
                         <li><a href="login?logout">Log Out</a></li>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -97,6 +97,7 @@
                 <div class = "brews">
 
 
+                    <c:if test="${newRecipe==null}">
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
@@ -119,9 +120,13 @@
                         </tbody>
                     </table>
 
-                    <form action="recipe" method ="POST" class ="brewButton">
+                    <form action="recipe" method ="GET" class ="brewButton">
                         <button type="submit" class="btn btn-success" name="newRecipe">Add a Recipe</button>
                     </form>
+                    
+                    </c:if>
+                    
+                    
                 </div>
 
 

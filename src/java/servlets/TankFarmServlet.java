@@ -48,11 +48,37 @@ public class TankFarmServlet extends HttpServlet
             throws ServletException, IOException
     {
         String action = request.getParameter("action");
-        if (action!=null && action.equals("addTransfer")) {
             
-            //clear user messages
-            request.setAttribute("message", "");
-            request.setAttribute("capacityMessage", "");
+        //clear user messages
+        request.setAttribute("message", "");
+        request.setAttribute("capacityMessage", "");
+        
+        //----------- ADD A SV TANK -----------//
+        if (action!=null && action.equals("addSV")) {
+            
+            
+        }
+        
+        //----------- ADD A FV TANK -----------//
+        if (action!=null && action.equals("addFV")) {
+            
+            
+        }
+        
+        //----------- EDIT A SV TANK -----------//
+        if (action!=null && action.equals("editSV")) {
+            
+            
+        }
+        
+        //----------- EDIT A FV TANK -----------//
+        if (action!=null && action.equals("editFV")) {
+            
+            
+        }
+        
+        //----------- ADD A TRANSFER -----------//
+        if (action!=null && action.equals("addTransfer")) {
             
             //create variables
             TransferDB transferDB = new TransferDB();

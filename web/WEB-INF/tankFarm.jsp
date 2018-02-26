@@ -88,7 +88,8 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand"> Tank Farm </a>
+                        <a class="navbar-brand" href="#pablo"> Tank Farm </a>
+                        <li><a href="login?logout">Log Out</a></li>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -108,17 +109,18 @@
             </li>
         </ul>
         
-        <!-- Tab Content -->
+        <!-- Tank Tab Content -->
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="tankStatus" role="tabpanel" aria-labelledby="tankStatus-tab">
-              <div class="row">  
+              ${message}
+              <div class="row">
                 <div class="col text-center">
-                  <h2>SV Tanks</h2>  
+                  <h2>SV Tanks</h2>
                 </div>
                 <div class="col text-right">
-                  <form action="tankFarm?action=addTank" method="POST">
-                    <button type="submit" class="btn btn-success" style="margin-top:5%;margin-right:3%">Add a Tank</button>
-                  </form>
+                    <form>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalTank" style="margin-top:5%;margin-right:3%">Add A New Tank</button>
+                    </form>
                 </div>
               </div>
                 <table class="table" style="margin-top: 0%">
@@ -196,23 +198,64 @@
                         </c:forEach>
                     </tbody>
                 </table>
-            ${message}
+              <!-- Add A Tank Modal -->
+              <div id="myModalTank" class="modal fade" role="dialog">
+                    <div class="modal-dialog" style="max-width:1000px">
+
+                    <!-- Modal content-->
+                    <div class="modal-content" style="width:100%">
+                      <div class="modal-header" >
+                        <h4 class="modal-title" style="text-align:center;width:100%">Add A New Tank</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <!-- Table for user input -->
+                        <form action="tankFarm?action=addTank" method="POST">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Tank Type</th>
+                                        <th>Capacity</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          <div class="radio-inline">
+                                              <label style="padding-right:2rem"><input type="radio" name="tankType" checked>SV</label>
+                                            <label><input type="radio" name="tankType">FV</label>
+                                          </div>
+                                      </td>
+                                      <td><input type="number" name="capacity" required/></td>
+                                  </tr>
+                                <tr>${tankMessage}</tr>
+                              </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                      </div> <!-- end Modal Body -->
+                      <div class="modal-footer">
+                      </div>
+                    </div>
+                  </div>
+                </div>
           </div>
           
           <!-- Transfer Tab -->
           <div class="tab-pane fade" id="transferLog" role="tabpanel" aria-labelledby="transferLog-tab">
-                <!-- 'Add A Transfer' button -->
+                
+              <!-- 'Add A Transfer' button -->
 
                 <!-- Trigger the modal with a button -->
                 <div class="text-center">
-                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" style="margin-top:2%">Add A New Transfer</button>
+                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalTransfer" style="margin-top:2%">Add A New Transfer</button>
                 </div>
 
                 <!-- User Feedback Message -->
                 ${message}
 
                 <!-- Modal -->
-                <div id="myModal" class="modal fade" role="dialog">
+                <div id="myModalTransfer" class="modal fade" role="dialog">
                     <div class="modal-dialog" style="max-width:1000px">
 
                     <!-- Modal content-->

@@ -1,6 +1,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -85,7 +86,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand" > Delivery </a>
+                        <a class="navbar-brand" href="#pablo"> Delivery </a>
                         <li><a href="login?logout">Log Out</a></li>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -110,7 +111,7 @@
 
                     <form class ="datepicker" action="delivery" method="GET">
                         <h4>View Deliveries by Date:</h4>
-                        <input type="date" name="deliveryDate" id="datePicker">
+                        <input type="date" name="deliveryDate" id="datePicker" value="${dateToday}">
                         <button type="submit" class="btn btn-outline-primary">Select Date</button>
                     </form>
                     <div class="text-center">
@@ -196,10 +197,4 @@
             </div>
         </div>
     </body>
-    <script srt="assets/js/brew.js"></script>
-    <script  type="text/javascript">
-                        $(document).ready( function() {
-                        document.getElementById('datePicker').valueAsDate = new Date();
-                        });
-    </script>
     <c:import url="includes/footer.html"/>

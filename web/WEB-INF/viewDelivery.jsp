@@ -1,6 +1,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -85,7 +86,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand" > View Delivery </a>
+                        <a class="navbar-brand" href="#pablo"> View Delivery </a>
                         <li><a href="login?logout">Log Out</a></li>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -159,7 +160,7 @@
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
-                                <th scope="col">${companyName}, ${date}</th>
+                                <th scope="col" style="font-size: 1.5rem">${companyName}, <fmt:formatDate value="${date}" pattern="MMM-dd-yyy" /></th>
                                 <th scope="col"></th>
                             </tr>
                             <tr>
@@ -170,8 +171,8 @@
                         <tbody>
                             <c:forEach var="product" items="${products}">
                                 <tr>
-                                    <td>${product.productName}</td>
-                                    <td>${product.qty}</td>
+                                    <td style="font-size: 1.25rem">${product.productName}</td>
+                                    <td style="font-size: 1.25rem">${product.qty}</td>
                                 </tr>
                             </c:forEach>
                         </tbody>
