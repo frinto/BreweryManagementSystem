@@ -98,35 +98,55 @@
 
 
                     <c:if test="${newRecipe==null}">
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Recipe</th>
-                                <th scope="col">Last Modified</th>
-                                <th scope="col">Edit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Recipe</th>
+                                    <th scope="col">Last Modified</th>
+                                    <th scope="col">Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
 
-                            <c:forEach var="recipe" items="${recipeList}">
-                                
+                                <c:forEach var="recipe" items="${recipeList}">
+
                                     <tr>
                                         <td>${recipe.recipeName}</td>
                                         <td><fmt:formatDate value="${recipe.dateModified}" pattern="MMM-dd-yyy" /></td>
                                     </tr>
-                                
-                            </c:forEach>
-                        </tbody>
-                    </table>
 
-                    <form action="recipe" method ="GET" class ="brewButton">
-                        <button type="submit" class="btn btn-success" name="newRecipe">Add a Recipe</button>
-                    </form>
-                    
+                                </c:forEach>
+                            </tbody>
+                        </table>
+
+                        <form action="recipe" method ="GET" class ="brewButton">
+                            <button type="submit" class="btn btn-success" name="newRecipe">Add a Recipe</button>
+                        </form>
+
                     </c:if>
-                    
-                    
+
+                    <h1 class="leftSpacingh1">Add Recipe:</h1>
+
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Recipe Attribute</th>
+                                <th scope="col">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Brand Name:</th>
+                                <td><input type="text" name="recipeName" id="recipeName" required></td>
+                            </tr>
+                            
+                            
+                        </tbody>
+
+                    </table>    
+
+
                 </div>
 
 
