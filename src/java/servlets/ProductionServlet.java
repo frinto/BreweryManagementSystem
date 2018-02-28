@@ -118,10 +118,6 @@ public class ProductionServlet extends HttpServlet {
 
                 List<Sv> svTankList = tankDB.getAllSV();
 
-                Sv sv = svTankList.get(Integer.parseInt(svNumber));
-                sv.setVolume(Double.parseDouble(finishedSvVolume));
-                tankDB.updateSV(sv);
-
                 List<Production> prodList = prodDB.getAllProduction();
 
                 request.setAttribute("prod", prodList);
