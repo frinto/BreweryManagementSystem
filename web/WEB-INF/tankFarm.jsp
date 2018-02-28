@@ -103,17 +103,17 @@
         <!-- List of Tabs -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tankStatus" role="tab" aria-controls="tankStatus" aria-selected="true">Tank Status</a>
+                <a class="nav-link active" id="tank-tab" data-toggle="tab" href="#tankStatus" role="tab" aria-controls="tankStatus" aria-selected="true">Tank Status</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#transferLog" role="tab" aria-controls="transferLog" aria-selected="false">Transfer Log</a>
+                <a class="nav-link" id="transfer-tab" data-toggle="tab" href="#transferLog" role="tab" aria-controls="transferLog" aria-selected="false">Transfer Log</a>
             </li>
         </ul>
         
         <!-- Tank Tab Content -->
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="tankStatus" role="tabpanel" aria-labelledby="tankStatus-tab">
-              ${message}
+              ${tankTabMessage}
               <div class="row">
                 <div class="col text-center">
                   <h2>SV Tanks</h2>
@@ -211,7 +211,7 @@
             </div>
 
             <!-- User Feedback Message -->
-            ${message}
+            ${transferTabMessage}
             
             <!-- main page table for displaying transfers -->
             <table class="table" style="margin-top: 2%">
@@ -264,7 +264,7 @@
                         <th>From FV</th>
                         <th>To SV</th>
                         <th>Volume (L)</th>
-                        <th>Emptying FV? <a class="helpInfo" style="font-size:10px" href="#" data-toggle="tooltip" title="If the FV is being emptied, then the system well calculate any loss for this brew.">Help</a></th>
+                        <th>Emptying FV? <a class="helpInfo" style="font-size:10px" href="#" data-toggle="tooltip" title="If the FV is being emptied, then the system will calculate any loss for this brew.">Help</a></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -275,7 +275,7 @@
                         <td><input type="number" name="volume" value="${inputVolume}" required/></td>
                         <td><input type="checkbox" name="isEmpty" ${checkedIsEmpty}/></td>
                     </tr>
-                    <tr>${capacityMessage}</tr>
+                    <tr>${transferAddMessage}</tr>
                   </tbody>
                 </table>
                 <button type="submit" class="btn btn-success">Submit</button>
@@ -317,7 +317,7 @@
                             </td>
                             <td><input type="number" name="tankCapacity" required/></td>
                         </tr>
-                      <tr>${tankMessage}</tr>
+                      <tr>${tankAddMessage}</tr>
                     </tbody>
                   </table>
                   <button type="submit" class="btn btn-success">Submit</button>
@@ -352,13 +352,14 @@
     <c:if test="${loadAddTransfer != null}">
         <script type="text/javascript">
             $(window).on('load',function(){
+                $('#myTab a[href="#transferLog"]').tab('show');
                 $('#myModalTransfer').modal('show');
             });
         </script>
     </c:if>
     
     <!-- script to open Edit Tank Modal if requested from back-end based on loadEditTank being set-->
-    <c:if test="${loadAddTransfer != null}">
+    <c:if test="${loadEditTransfer != null}">
         <script type="text/javascript">
             $(window).on('load',function(){
                 $('#myModalEditTank').modal('show');
