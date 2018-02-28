@@ -113,6 +113,8 @@ CREATE TABLE IF NOT EXISTS `production` (
   `employeeId` INT NOT NULL,
   `svNum` INT NOT NULL,
   `productionType` VARCHAR(20) NOT NULL,
+  `finishedSvVolume` DOUBLE NOT NULL,
+  `gainLoss` DOUBLE NOT NULL,
   PRIMARY KEY (`prodId`))
 ENGINE = InnoDB;
 

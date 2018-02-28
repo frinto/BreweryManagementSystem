@@ -108,8 +108,6 @@
                                 <th>ProductionType</th>
                                 <th>Quantity</th>
                                 <th>SVNumber</th>
-                                <!--                                <th>Starting Sv Volume</th>
-                                                                <th>Finished Sv Volume</th>-->
                                 </thead>
                                 <tbody>
                                     <tr>
@@ -129,6 +127,7 @@
                                                     <option value="${storageVessel.svId}">${storageVessel.svId}</option>
                                                 </c:forEach>
                                             </select>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -160,6 +159,7 @@
                                             ${svNumber}
                                         </td>
                                         <td>
+                                            <input type="hidden" name="svVolume" value="${svVolume}">
                                             ${svVolume}
                                         </td>
                                         <td>
@@ -179,9 +179,7 @@
                         </form>
                         <form action="production?action=add" method="POST" class="productionButton">
                             <button type="submit" class="btn btn-success">Add Production</button>
-                        </form>
-                        <p class="productionMessage">${message}</p>
-                        <form action="production?action=update" method="POST" class="productionButton">
+                            <p class="productionMessage">${message}</p>
                             <table class="table">
                                 <thead class="thead-dark">
                                 <th>Date</th>
@@ -194,19 +192,20 @@
                                 </thead>
                                 <tbody>
                                     <c:forEach var="production" items="${prod}">
+                                        <c:if test="${productionDate.equals(production.date)}">
                                             <tr>
                                                 <td><fmt:formatDate value="${production.date}" pattern="MMM-dd-yyy" /></td>
                                                 <td>${production.productionType}</td>
                                                 <td>${production.quantity}</td>
                                                 <td>${production.svNum}</td>
                                                 <td>${production.employeeId}</td>                                           
-                                                <td>${finishSvVol}</td>
-                                                <td>${gainLoss}</td>
+                                                <td>${production.finishedSvVolume}</td>
+                                                <td>${production.gainLoss}</td>
                                             </tr>
+                                        </c:if>
                                     </c:forEach>
                                 </tbody>
                             </table>
-                            <button type="submit" class="btn btn-success">Update</button>
                         </form>
                     </c:otherwise>
                 </c:choose>
