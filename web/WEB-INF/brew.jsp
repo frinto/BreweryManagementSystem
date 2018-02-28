@@ -112,7 +112,7 @@
 
 
                 <!--------------------------------------Brew Selector------------------------------------------->
-                ${errorMessage}
+
                 <c:if test="${recipe==null}">
                     <c:if test="${newBrew != null}">
                         <div class ="selectBrew">
@@ -234,7 +234,7 @@
                                             <th scope="row">Mash-In Time</th>
                                             <td>Minutes</td>
                                             <td>${recipe.mashInTime}</td>
-                                            <td><input type="number" name="mashInTime" id="mashInTime" onkeyup="UpdateInfo()" min="0" max="500" required></td>
+                                            <td><input type="number" value="${mashInTime}" name="mashInTime" id="mashInTime" onfocusout="UpdateInfo()" min="0" max="500" required></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Mash-In Water</th>
@@ -246,7 +246,7 @@
                                             <th scope="row">Rest Time</th>
                                             <td>Minutes</td>
                                             <td>${recipe.restTime}</td>
-                                            <td><input type="number" name="restTime" id="restTime" onkeyup="UpdateInfo()" min="0" max="500" required></td>
+                                            <td><input type="number" value="${restTime}" name="restTime" id="restTime" onfocusout="UpdateInfo()" min="0" max="500" required></td>
                                         </tr>
                                         <tr>
                                             <th colspan="4" style ="text-align:center">****DO STARCH TEST****</th>
@@ -262,13 +262,13 @@
                                             <th scope="row">In Time</th>
                                             <td>Minutes</td>
                                             <td>${recipe.inTime}</td>
-                                            <td><input type="number" name="inTime" id="inTime" min="0" max="500" required></td>
+                                            <td><input type="number" value="${inTime}" name="inTime" id="inTime" min="0" max="500" required></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Total Mash Time</th>
                                             <td>Minutes</td>
                                             <td>${recipe.totalMashTime}</td>
-                                            <td><input type="number" name="totalMashTime" id="totalMashTime" min="0" max="500" readonly></td>
+                                            <td><input type="number" value="${totalMashTime}" name="totalMashTime" id="totalMashTime" min="0" max="500" readonly></td>
                                         </tr>
 
                                     </tbody>
@@ -290,7 +290,7 @@
                                             <th scope="row">Underlet</th>
                                             <td>Litres</td>
                                             <td>${recipe.underletLitres}</td>
-                                            <td><input type="number" name="underletTime" min="0" max="500" required></td>
+                                            <td><input type="number" value="${underletTime}" name="underletTime" min="0" max="500" required></td>
 
 
                                         </tr>
@@ -298,25 +298,25 @@
                                             <th scope="row">Rest</th>
                                             <td>Minutes</td>
                                             <td>${recipe.rest}</td>
-                                            <td><input type="number" name="lauterRest" min="0" max="500" required></td>
+                                            <td><input type="number" value="${lauterTime}" name="lauterRest" min="0" max="500" required></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Vorlauf</th>
                                             <td>Minutes</td>
                                             <td>${recipe.vorlaufTime}</td>
-                                            <td><input type="number" name="vorlaufTime" min="0" max="500" required></td>
+                                            <td><input type="number" value="${vorlaufTime}" name="vorlaufTime" min="0" max="500" required></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">First Wort Gravity</th>
                                             <td>oP</td>
                                             <td>${recipe.firstWortGrav}</td>
-                                            <td><input type="number" name="firstWortGrav" min="0" max="500" required></td>
+                                            <td><input type="number" value="${firstWortGrav}" name="firstWortGrav" min="0" max="500" required></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Run-Off</th>
                                             <td>Minutes</td>
                                             <td>${recipe.runOffTime}</td>
-                                            <td><input type="number" name="runOffTime" min="0" max="500" required></td>
+                                            <td><input type="number" value="${runOffTime}" name="runOffTime" min="0" max="500" required></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Sparge Volume</th>
@@ -336,14 +336,14 @@
                                             <th scope="row">Last Runnings Gravity</th>
                                             <td>oP</td>
                                             <td>${recipe.lastRunningsGrav}</td>
-                                            <td><input type="number" name="lastRunnings" min="0" max="500" required></td>
+                                            <td><input type="number" value="${lastRunnings}" name="lastRunnings" min="0" max="500" required></td>
                                         </tr>
 
                                         <tr>
                                             <th scope="row">Kettle Full Volume</th>
                                             <td>Hectolitres</td>
                                             <td>${recipe.kettleFullVol}</td>
-                                            <td><input type="number" name="kettleFullVol" min="0" max="500" required></td>
+                                            <td><input type="number" value="${kettleFullVol}" name="kettleFullVol" min="0" max="500" required></td>
                                         </tr>
 
 
@@ -367,7 +367,7 @@
                                             <th scope="row">Kettle Full Gravity</th>
                                             <td>oP</td>
                                             <td>${recipe.kettleFullGrav}</td>
-                                            <td><input type="number" name="kettleFullGrav" min="0" max="500" required></td>
+                                            <td><input type="number" value="${kettleFullGrav}" name="kettleFullGrav" min="0" max="500" required></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Boil</th>
@@ -400,13 +400,13 @@
                                             <th scope="row">Kettle Strikeout Volume</th>
                                             <td>Hectolitres</td>
                                             <td>${recipe.strikeOutVol}</td>
-                                            <td><input type="number" name="strikeOutVol" min="0" max="500" required></td>
+                                            <td><input type="number" value="${strikeOutVol}" name="strikeOutVol" min="0" max="500" required></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Kettle Strikeout Gravity</th>
                                             <td>oP</td>
                                             <td>${recipe.strikeOutGrav}</td>
-                                            <td><input type="number" name="strikeOutGrav" min="0" max="500" required></td>
+                                            <td><input type="number" value="${strikeOutGrav}" name="strikeOutGrav" min="0" max="500" required></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Whirlpool Time</th>
@@ -436,7 +436,7 @@
                                             <td>
                                                 <select name="fvList" class="custom-select">
                                                     <c:forEach items="${fvs}" var="fv">
-                                                        <option value="${fv.fvId}" selected ="selected">
+                                                        <option value="${fv.fvId}" selected ="selected" required>
                                                             ${fv.fvId} 
                                                         </option>
                                                     </c:forEach>
@@ -622,9 +622,7 @@
                     <div class="modal-dialog modal-confirm">
                         <div class="modal-content">
                             <div class="modal-header">
-<!--                                <div class="icon-box">
-                                    <i class="far fa-check-circle"></i>
-                                </div>-->
+
                                 <div style="font-size:5em;">
                                     <i class="far fa-check-circle"></i>
                                 </div>
@@ -632,11 +630,9 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body text-center">
-                                <form action="successmodal" method="GET">
                                     <h4>Great!</h4>	
                                     <p>Brew submitted successfully.</p>
-                                    <input type ="submit" class="btn btn-success" value="OK"></button>
-                                </form>
+                                    <input type ="button" class="btn btn-success"data-dismiss="modal" value="OK">Ok</button>
                             </div>
                         </div>
                     </div>
@@ -646,6 +642,36 @@
             </c:if>
 
             <!-------------------------------------------------End Success Modal------------------------------------------->
+            
+            <c:if test="${errorMessage!=null}">
+
+                <div id="myModal" class="modal fade">
+
+                    <div class="modal-dialog modal-confirm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+<!--                                <div class="icon-box">
+                                    <i class="far fa-check-circle"></i>
+                                </div>-->
+                                <div style="font-size:5em; color:red">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body text-center">
+
+                                    <h4>Uh oh!</h4>	
+                                    <p>${errorMessage}</p>
+                                    <button type ="button" class="btn btn-success" data-dismiss="modal" value="OK">Ok</button>
+                      
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+            </c:if>
     </body>
     <!--   Core JS Files   -->
     <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>

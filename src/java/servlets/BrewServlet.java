@@ -46,28 +46,24 @@ public class BrewServlet extends HttpServlet {
             session.setAttribute("newBrew", null);
             session.setAttribute("recipes", null);
             String startDateStr = request.getParameter("brewDate");
-            
-            if(startDateStr==null)
-            {
-                
+
+            if (startDateStr == null) {
+
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String startDate = sdf.format(new Date());
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
-                
-                session.setAttribute("brewDate",date);
+
+                session.setAttribute("brewDate", date);
             }
-            if(startDateStr!=null)
-            {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                Date startDate = sdf.parse(startDateStr);
-                session.setAttribute("brewDate", startDate);
-            } catch (ParseException ex) {
-                Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+            if (startDateStr != null) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date startDate = sdf.parse(startDateStr);
+                    session.setAttribute("brewDate", startDate);
+                } catch (ParseException ex) {
+                    Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            }
-            
-            
 
             String cancelBrew = request.getParameter("cancelBrew");
             if (cancelBrew != null) {
@@ -114,14 +110,10 @@ public class BrewServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         BrewDB brewDB = new BrewDB();
-        
-        String success = "success";
-        
-        
-    
-        
-    
 
+        String success = "success";
+
+        //Variables parsed from user input for new brew form
         float mashInTime = Float.parseFloat(request.getParameter("mashInTime"));
         float restTime = Float.parseFloat(request.getParameter("restTime"));
         float inTime = Float.parseFloat(request.getParameter("inTime"));
@@ -139,22 +131,18 @@ public class BrewServlet extends HttpServlet {
         float finalVolume = Float.parseFloat(request.getParameter("finalVolume"));
 
         String empId = (String) session.getAttribute("empId");
-        
-        //Method to save user input in case of an error
-        
-        
 
         int fvSelection = Integer.parseInt(request.getParameter("fvList"));
-        
+
+        //New format for date that gets rid of seconds and time zone so that date picker works
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String startDate = sdf.format(new Date());
-                Date date = null;
+        String startDate = sdf.format(new Date());
+        Date date = null;
         try {
             date = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
         } catch (ParseException ex) {
             Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
         Recipe recipe = (Recipe) session.getAttribute("recipe");
 
@@ -168,29 +156,39 @@ public class BrewServlet extends HttpServlet {
                 kettleStrikeOutVol, strikeOutGrav, finalVolume, Integer.parseInt(empId), fvSelection, recipeName);
 
         try {
-            
-            
+
             TankDB tankDB = new TankDB();
 
             Fv fv = tankDB.getFV(fvSelection);
 
             fv.setBrand(brew.getRecipeName());
             double volume = fv.getVolume();
+
             double newVolume = volume + (brew.getAllInVolume() * 100);
+
             if (newVolume > fv.getCapacity()) {
+
+                saveInput(request, mashInTime, restTime, inTime, totalMashTime, underletTime, lauterRestTime,
+                        vorlaufTime, firstWortGrav, runOffTime, lastRunnings, kettleFullVol, kettleFullGrav,
+                        strikeOutGrav, kettleStrikeOutVol, finalVolume);
+
                 request.setAttribute("errorMessage", "Error, fermenter is over capacity. Please redo EVERYTHING");
+
                 getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
                 return;
             }
-           
-            
+
             //check if there are three brews first, before insert brew into database
             if (fv.getBrew3() != 0 && fv.getBrew1() != 0 && fv.getBrew2() != 0) {
+
+                saveInput(request, mashInTime, restTime, inTime, totalMashTime, underletTime, lauterRestTime,
+                        vorlaufTime, firstWortGrav, runOffTime, lastRunnings, kettleFullVol, kettleFullGrav,
+                        strikeOutGrav, kettleStrikeOutVol, finalVolume);
                 request.setAttribute("errorMessage", "Error, fermenter already has 3 brews. Please redo EVERYTHING");
                 getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
                 return;
             }
-            
+
             brew = brewDB.insert(brew);
             fv.setVolume(newVolume);
             if (fv.getBrew1() == 0) {
@@ -204,18 +202,14 @@ public class BrewServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
                 return;
             }
-            
+
             //Returns the brew after being inserted in the database. This allows the database to auto increment the brew ID.
-           
             tankDB.updateFV(fv);
-            
-            
+
             session.setAttribute("recipe", null);
             List<Brew> brews = brewDB.getAll();
             session.setAttribute("brews", brews);
-            session.setAttribute("success",success);
-            
-            
+            request.setAttribute("success", success);
 
             getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
 
@@ -224,12 +218,13 @@ public class BrewServlet extends HttpServlet {
         }
 
     }
-    
-    private void saveInput(HttpServletRequest request,float mashInTime,float restTime,float inTime, float totalMashTime,
-                float underletTime, float lauterTime, float vorlaufTime, float firstWortGrav, float runOffTime,
-                float lastRunnings, float kettleFullVol, float kettleFullGrav, float strikeOutGrav, float kettleStrikeOutVol,
-                float finalVolume)
-    {
+
+//    --------------------------------------------Helper Methods---------------------------------------------------------
+    //Method to save user input in case of an error
+    private void saveInput(HttpServletRequest request, float mashInTime, float restTime, float inTime, float totalMashTime,
+            float underletTime, float lauterTime, float vorlaufTime, float firstWortGrav, float runOffTime,
+            float lastRunnings, float kettleFullVol, float kettleFullGrav, float strikeOutGrav, float kettleStrikeOutVol,
+            float finalVolume) {
         request.setAttribute("mashInTime", mashInTime);
         request.setAttribute("restTime", restTime);
         request.setAttribute("inTime", inTime);
