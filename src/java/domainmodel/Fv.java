@@ -66,6 +66,10 @@ public class Fv implements Serializable {
     public Fv(Integer fvId, int capacity) {
         this.fvId = fvId;
         this.capacity = capacity;
+        this.volume = 0.0;
+        this.brew1 = 0;
+        this.brew2 = 0;
+        this.brew3 = 0;
     }
 
     public Integer getFvId() {

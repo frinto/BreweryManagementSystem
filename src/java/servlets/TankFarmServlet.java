@@ -48,21 +48,29 @@ public class TankFarmServlet extends HttpServlet
             throws ServletException, IOException
     {
         String action = request.getParameter("action");
-            
+        
+        TankDB tankDB = new TankDB();
         //clear user messages
         request.setAttribute("message", "");
         request.setAttribute("capacityMessage", "");
         
-        //----------- ADD A SV TANK -----------//
-        if (action!=null && action.equals("addSV")) {
+        //----------- ADD A NEW TANK -----------//
+        if (action!=null && action.equals("addTank")) {
             
-            
-        }
-        
-        //----------- ADD A FV TANK -----------//
-        if (action!=null && action.equals("addFV")) {
-            
-            
+            //Determine if adding SV or FV
+            String tankType = request.getParameter("tankType");
+            String tankCapacity = request.getParameter("tankCapacity");
+            try {
+                if (tankType.equals("FV")) {
+                    tankDB.insertFV(new Fv(0, Integer.parseInt(tankCapacity)));
+                }
+                if (tankType.equals("SV")) {
+                    tankDB.insertSV(new Sv(0, Integer.parseInt(tankCapacity)));
+                }
+                request.setAttribute("message", "Successfully added a new tank.");
+            } catch (BrewDBException | NumberFormatException ex) {
+                request.setAttribute("message", "Error adding a new tank.");
+            }
         }
         
         //----------- EDIT A SV TANK -----------//
@@ -82,7 +90,6 @@ public class TankFarmServlet extends HttpServlet
             
             //create variables
             TransferDB transferDB = new TransferDB();
-            TankDB tankDB = new TankDB();
             Date date;
             String brand;
             double volume;
@@ -184,12 +191,11 @@ public class TankFarmServlet extends HttpServlet
             } catch (BrewDBException ex) {
                 Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            setTodaysDate(request);
-            retrieveAllTransfers(request);
-            retrieveAllTanks(request);
-            getServletContext().getRequestDispatcher("/WEB-INF/tankFarm.jsp").forward(request, response);
         }
+        setTodaysDate(request);
+        retrieveAllTransfers(request);
+        retrieveAllTanks(request);
+        getServletContext().getRequestDispatcher("/WEB-INF/tankFarm.jsp").forward(request, response);
     }
     
     // ----------------------- HELPER METHODS ----------------------------------- //

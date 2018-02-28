@@ -179,3 +179,9 @@ body>.navbar-collapse[data-color="red"]:after {
     max-width: 50px;
     /*width: 350px;*/
 }
+
+/*-------------------------------- Modal ------------------------------------------------*/
+.modal-content {
+    overflow-x: scroll;
+    overflow-y: scroll;
+}

@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -119,7 +120,7 @@
                 </div>
                 <div class="col text-right">
                     <form>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalTank" style="margin-top:5%;margin-right:3%">Add A New Tank</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalAddTank" style="margin-top:5%;margin-right:3%">Add A New Tank</button>
                     </form>
                 </div>
               </div>
@@ -198,134 +199,136 @@
                         </c:forEach>
                     </tbody>
                 </table>
-              <!-- Add A Tank Modal -->
-              <div id="myModalTank" class="modal fade" role="dialog">
-                    <div class="modal-dialog" style="max-width:1000px">
-
-                    <!-- Modal content-->
-                    <div class="modal-content" style="width:100%">
-                      <div class="modal-header" >
-                        <h4 class="modal-title" style="text-align:center;width:100%">Add A New Tank</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      </div>
-                      <div class="modal-body">
-                        <!-- Table for user input -->
-                        <form action="tankFarm?action=addTank" method="POST">
-                            <table class="table">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>Tank Type</th>
-                                        <th>Capacity</th>
-                                    </tr>
-                                </thead>
-                              <tbody>
-                                  <tr>
-                                      <td>
-                                          <div class="radio-inline">
-                                              <label style="padding-right:2rem"><input type="radio" name="tankType" checked>SV</label>
-                                            <label><input type="radio" name="tankType">FV</label>
-                                          </div>
-                                      </td>
-                                      <td><input type="number" name="capacity" required/></td>
-                                  </tr>
-                                <tr>${tankMessage}</tr>
-                              </tbody>
-                            </table>
-                            <button type="submit" class="btn btn-success">Submit</button>
-                        </form>
-                      </div> <!-- end Modal Body -->
-                      <div class="modal-footer">
-                      </div>
-                    </div>
-                  </div>
-                </div>
           </div>
           
           <!-- Transfer Tab -->
           <div class="tab-pane fade" id="transferLog" role="tabpanel" aria-labelledby="transferLog-tab">
-                
-              <!-- 'Add A Transfer' button -->
+            
+            <!-- 'Add A Transfer' button -->
+            <!-- Trigger the Transfer Modal with a button -->
+            <div class="text-center">
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalTransfer" style="margin-top:2%">Add A New Transfer</button>
+            </div>
 
-                <!-- Trigger the modal with a button -->
-                <div class="text-center">
-                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalTransfer" style="margin-top:2%">Add A New Transfer</button>
-                </div>
-
-                <!-- User Feedback Message -->
-                ${message}
-
-                <!-- Modal -->
-                <div id="myModalTransfer" class="modal fade" role="dialog">
-                    <div class="modal-dialog" style="max-width:1000px">
-
-                    <!-- Modal content-->
-                    <div class="modal-content" style="width:100%">
-                      <div class="modal-header" >
-                        <h4 class="modal-title" style="text-align:center;width:100%">Add A New Transfer</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      </div>
-                      <div class="modal-body">
-                        <!-- Table for user input -->
-                        <form action="tankFarm?action=addTransfer" method="POST">
-                            <table class="table">
-                              <thead class="thead-dark">
-                                <tr>
-                                    <th>Date</th>
-                                    <th>From FV</th>
-                                    <th>To SV</th>
-                                    <th>Volume (L)</th>
-                                    <th>Emptying FV? <a class="helpInfo" style="font-size:10px" href="#" data-toggle="tooltip" title="If the FV is being emptied, then the system well calculate any loss for this brew.">Help</a></th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                    <td><input type="date" name="date" value="${dateToday}"/></td>
-                                    <td><input type="number" name="fromFV" value="${inputFV}" required/></td>
-                                    <td><input type="number" name="toSV" value="${inputSV}" required/></td>
-                                    <td><input type="number" name="volume" value="${inputVolume}" required/></td>
-                                    <td><input type="checkbox" name="isEmpty" ${checkedIsEmpty}/></td>
-                                </tr>
-                                <tr>${capacityMessage}</tr>
-                              </tbody>
-                            </table>
-                            <button type="submit" class="btn btn-success">Submit</button>
-                        </form>
-                      </div> <!-- end Modal Body -->
-                      <div class="modal-footer">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- main page table for displaying transfers -->
-                <table class="table" style="margin-top: 2%">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Date</th>
-                            <th>Brand</th>
-                            <th>FV</th>
-                            <th>SV</th>
-                            <th>Volume</th>
-                            <th>Correction</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="transfer" items="${transfers}">
-                        <tr>
-                            <td>${transfer.date}</td>
-                            <td>${transfer.brand}</td>
-                            <td>${transfer.fromFv}</td>
-                            <td>${transfer.toSv}</td>
-                            <td>${transfer.volume}</td>
-                            <td>${transfer.correction}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+            <!-- User Feedback Message -->
+            ${message}
+            
+            <!-- main page table for displaying transfers -->
+            <table class="table" style="margin-top: 2%">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Date</th>
+                        <th>Brand</th>
+                        <th>FV</th>
+                        <th>SV</th>
+                        <th>Volume</th>
+                        <th>Correction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="transfer" items="${transfers}">
+                    <tr>
+                        <td><fmt:formatDate value="${transfer.date}" pattern="MMM-dd-yyy" /></td>
+                        <td>${transfer.brand}</td>
+                        <td>${transfer.fromFv}</td>
+                        <td>${transfer.toSv}</td>
+                        <td>${transfer.volume}</td>
+                        <td>${transfer.correction}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
           </div>
         </div>
         </div>
+    </div>
+                              
+    <!-- MODALS -->
+    <!-- Transfer Modal -->
+    <div id="myModalTransfer" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="max-width:1000px">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="width:100%">
+          <div class="modal-header" >
+            <h4 class="modal-title" style="text-align:center;width:100%">Add A New Transfer</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <!-- Table for user input -->
+            <form action="tankFarm?action=addTransfer" method="POST">
+                <table class="table">
+                  <thead class="thead-dark">
+                    <tr>
+                        <th>Date</th>
+                        <th>From FV</th>
+                        <th>To SV</th>
+                        <th>Volume (L)</th>
+                        <th>Emptying FV? <a class="helpInfo" style="font-size:10px" href="#" data-toggle="tooltip" title="If the FV is being emptied, then the system well calculate any loss for this brew.">Help</a></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td><input type="date" name="date" value="${dateToday}"/></td>
+                        <td><input type="number" name="fromFV" value="${inputFV}" required/></td>
+                        <td><input type="number" name="toSV" value="${inputSV}" required/></td>
+                        <td><input type="number" name="volume" value="${inputVolume}" required/></td>
+                        <td><input type="checkbox" name="isEmpty" ${checkedIsEmpty}/></td>
+                    </tr>
+                    <tr>${capacityMessage}</tr>
+                  </tbody>
+                </table>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+          </div> <!-- end Modal Body -->
+          <div class="modal-footer">
+          </div>
         </div>
+      </div>
+    </div>
+    
+    <!-- Add A Tank Modal -->
+    <div id="myModalAddTank" class="modal fade" role="dialog">
+          <div class="modal-dialog" style="max-width:1000px">
+
+          <!-- Modal content-->
+          <div class="modal-content" style="width:100%">
+            <div class="modal-header" >
+              <h4 class="modal-title" style="text-align:center;width:100%">Add A New Tank</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <!-- Table for user input -->
+              <form action="tankFarm?action=addTank" method="POST">
+                  <table class="table">
+                      <thead class="thead-dark">
+                          <tr>
+                              <th>Tank Type</th>
+                              <th>Capacity</th>
+                          </tr>
+                      </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="radio-inline">
+                                    <label style="padding-right:2rem"><input type="radio" name="tankType" value="SV" checked>SV</label>
+                                  <label><input type="radio" name="tankType" value="FV">FV</label>
+                                </div>
+                            </td>
+                            <td><input type="number" name="tankCapacity" required/></td>
+                        </tr>
+                      <tr>${tankMessage}</tr>
+                    </tbody>
+                  </table>
+                  <button type="submit" class="btn btn-success">Submit</button>
+              </form>
+            </div> <!-- end Modal Body -->
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+        
     </body>
 
 <!--   Core JS Files   -->
@@ -345,11 +348,20 @@
     <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
     <script src="assets/js/demo.js"></script>
     
-    <!-- script to open modal if requested from back-end based on loadAddTransfer being set-->
+    <!-- script to open Transfer Modal if requested from back-end based on loadAddTransfer being set-->
     <c:if test="${loadAddTransfer != null}">
         <script type="text/javascript">
             $(window).on('load',function(){
-                $('#myModal').modal('show');
+                $('#myModalTransfer').modal('show');
+            });
+        </script>
+    </c:if>
+    
+    <!-- script to open Edit Tank Modal if requested from back-end based on loadEditTank being set-->
+    <c:if test="${loadAddTransfer != null}">
+        <script type="text/javascript">
+            $(window).on('load',function(){
+                $('#myModalEditTank').modal('show');
             });
         </script>
     </c:if>
