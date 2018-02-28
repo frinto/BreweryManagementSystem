@@ -25,15 +25,24 @@ BEGIN
       LEAVE read_loop;
       END IF;
     
-    if(NEW.productionType = prodName) THEN
+    IF(NEW.productionType = prodName) THEN
         UPDATE productionmaterial
             SET qty = qty-matQty*prodQty
                 WHERE name = matName;
-                END if;
-                
-                
-           
-    
+        
+        IF(matName = 'PrivateMouldBottles') THEN
+            UPDATE finishedproduct
+                SET qty = qty+prodQty
+                    WHERE productName = prodName;
+        END IF;
+        
+        ELSE IF(matName = '473mlCansBlonde') THEN
+            UPDATE finishedproduct
+                SET qty = qty+prodQty
+                    WHERE productName = prodName;
+        END IF;
+    END IF;
+
   END LOOP;
 
   CLOSE cur1;
