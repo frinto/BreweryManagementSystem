@@ -21,59 +21,67 @@
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
         <link href="assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
         <link href="assets/css/override.css" rel="stylesheet" />
+        <link href="assets/css/successmodal.css" rel="stylesheet" />
     </head>
 
     <body onbeforeunload="">
-        
+
         <div class="wrapper">
 
             <!--Nav bar----------------------------------------------------------------------------->
-            <div class="sidebar" data-image="../assets/img/sidebar-5.jpg" data-color="red">
+            <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <image src ="assets/img/logo.jpg">
+                        <image src ="assets/img/logo.png">
                     </div>
                     <ul class="nav">
                         <li>
                             <a class="nav-link" href="tankFarm">
-                                <img src="assets/img/tank.png" class="tankfarmIcon" alt="Norway">
+                                <i class ="navIcon" icon="assets/img/farm.png"></i>
+                                <img src="assets/img/farm.png" class="" alt="Norway">
                                 <p style ="padding-left:5px">Tank Farm</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="production">
-                                <img src="assets/img/barrel.png" class="barrelIcon" alt="Norway">
+                                <img src="assets/img/barrel.png" class="" alt="Norway">
                                 <p style ="padding-left:5px">Production</p>
                             </a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="brew">
-                                <i class="nc-icon nc-notes"></i>
-                                <p>Brew</p>
+                                <img src="assets/img/brew.png" class="" alt="Norway">
+                                <p style ="padding-left:5px">Brew</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="finishedInventory">
-                                <i class="nc-icon nc-paper-2"></i>
+                                <img src="assets/img/finished.png" class="" alt="Norway">
                                 <p>Finished Inventory</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="rawInventory">
-                                <i class="nc-icon nc-atom"></i>
+                                <img src="assets/img/raw.png" class="" alt="Norway">
                                 <p>Raw Inventory</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="recipe">
-                                <i class="nc-icon nc-pin-3"></i>
+                                <img src="assets/img/recipe.png" class="" alt="Norway">
                                 <p>Recipes</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="delivery">
-                                <i class="nc-icon nc-bell-55"></i>
+                                <img src="assets/img/delivery.png" class="" alt="Norway">
                                 <p>Delivery</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="reports">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Reports</p>
                             </a>
                         </li>
                     </ul>
@@ -83,8 +91,15 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand" href="#pablo"> Brew </a>
-                        <li><a href="login?logout">Log Out</a></li>
+                        <a class="navbar-brand"> Brew </a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Matthew
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button">Logout</button>
+                            </div>
+                        </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -122,13 +137,19 @@
                     <!-------------------------------------- End Brew Selector------------------------------------------->
                     <!--------------------------------------Start  New Brew------------------------------------------->
                     <div class = "brews">
-                        
+
+                        <!-----------------------------------------------Success Modal---------------------------->
+
+
+
+                        <!-----------------------------------------------End Success Modal---------------------------->
+
                         <form class ="datepicker" action="brew" method="GET">
                             <h4>View Brews by Date:</h4>
                             <input type="date" name="brewDate" id="datePicker">
                             <button type="submit" class="btn btn-outline-primary">Select Date</button>
                         </form>
-                        
+
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
@@ -138,21 +159,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
 
                                 <c:forEach var="brew" items="${brews}">
                                     <c:if test="${brewDate.equals(brew.date)}">
-                                    <tr>
-                                        <td>${brew.brewId}</td>
-                                        
-                                        <td><fmt:formatDate value="${brew.date}" pattern="MMM-dd-yyy" /></td>
-                                        <td>${brew.recipeName}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>${brew.brewId}</td>
+
+                                            <td><fmt:formatDate value="${brew.date}" pattern="MMM-dd-yyy" /></td>
+                                            <td>${brew.recipeName}</td>
+                                        </tr>
                                     </c:if>
                                 </c:forEach>
                             </tbody>
                         </table>
-                        
+
                         <form action="brew" method ="GET" class ="brewButton">
                             <button type="submit" class="btn btn-success" name="newBrew">Add a Brew</button>
                         </form>
@@ -453,6 +474,7 @@
 
                         </div>
 
+
                         <!-------------------------------------------------------Brew Sheet----------------------------------------------------------->
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
@@ -591,6 +613,39 @@
                     <!--------------------------------------End Start New Brew------------------------------------------->
                 </div>
             </div>
+
+            <!---------------------------------------------Success Modal-------------------------------------------------->
+            <c:if test="${success!=null}">
+
+                <div id="myModal" class="modal fade">
+
+                    <div class="modal-dialog modal-confirm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+<!--                                <div class="icon-box">
+                                    <i class="far fa-check-circle"></i>
+                                </div>-->
+                                <div style="font-size:5em;">
+                                    <i class="far fa-check-circle"></i>
+                                </div>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <form action="successmodal" method="GET">
+                                    <h4>Great!</h4>	
+                                    <p>Brew submitted successfully.</p>
+                                    <input type ="submit" class="btn btn-success" value="OK"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+            </c:if>
+
+            <!-------------------------------------------------End Success Modal------------------------------------------->
     </body>
     <!--   Core JS Files   -->
     <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -612,6 +667,9 @@
                                                     // Javascript method's body can be found in assets/js/demos.js
                                                 });
     </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+
 
 </html>
 

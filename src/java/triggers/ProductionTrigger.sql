@@ -16,6 +16,14 @@ BEGIN
   
   SET prodQty = New.quantity;
   
+  UPDATE sv
+    SET volume = NEW.finishedSvVolume
+        WHERE svId = NEW.svNum;
+
+  UPDATE finishedproduct
+    SET qty = qty+prodQty
+        WHERE productName = NEW.productionType;
+
   OPEN cur1;
   
 
@@ -29,18 +37,7 @@ BEGIN
         UPDATE productionmaterial
             SET qty = qty-matQty*prodQty
                 WHERE name = matName;
-        
-        IF(matName = 'PrivateMouldBottles') THEN
-            UPDATE finishedproduct
-                SET qty = qty+prodQty
-                    WHERE productName = prodName;
-        END IF;
-        
-        ELSE IF(matName = '473mlCansBlonde') THEN
-            UPDATE finishedproduct
-                SET qty = qty+prodQty
-                    WHERE productName = prodName;
-        END IF;
+
     END IF;
 
   END LOOP;
