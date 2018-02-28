@@ -375,7 +375,7 @@ body>.navbar-collapse .sidebar-wrapper {
     overflow: auto;
     width: 260px;
     z-index: 4;
-    padding-bottom: 100px;
+    padding-bottom: 25px;
 }
 
 .sidebar .sidebar-background,
@@ -447,7 +447,7 @@ body>.navbar-collapse .nav {
 
 .sidebar .nav li .nav-link,
 body>.navbar-collapse .nav li .nav-link {
-    color: #FFFFFF;
+    color: black;
     margin: 5px 15px;
     opacity: .86;
     border-radius: 4px;
@@ -489,9 +489,9 @@ body>.navbar-collapse .nav li:hover .nav-link {
 
 .sidebar .nav li.active .nav-link,
 body>.navbar-collapse .nav li.active .nav-link {
-    color: #FFFFFF;
+    color: #1c829e;
     opacity: 1;
-    background: rgba(255, 255, 255, 0.23);
+    background: rgba(255, 255, 255, 100);
 }
 
 .sidebar .nav li.separator,
@@ -603,13 +603,7 @@ body>.navbar-collapse:before {
 
 .sidebar:after,
 body>.navbar-collapse:after {
-    background: #9368E9;
-    background: -moz-linear-gradient(top, #9368E9 0%, #943bea 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #9368E9), color-stop(100%, #943bea));
-    background: -webkit-linear-gradient(top, #9368E9 0%, #943bea 100%);
-    background: -o-linear-gradient(top, #9368E9 0%, #943bea 100%);
-    background: -ms-linear-gradient(top, #9368E9 0%, #943bea 100%);
-    background: linear-gradient(to bottom, #9368E9 0%, #943bea 100%);
+    background-color: #878888;
     background-size: 150% 150%;
     z-index: 3;
     opacity: 1;

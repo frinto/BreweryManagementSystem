@@ -7,18 +7,14 @@ package servlets;
 
 import dataaccess.BrewDB;
 import dataaccess.BrewDBException;
-import dataaccess.BrewMaterialsDB;
 import dataaccess.RecipeDB;
 import dataaccess.TankDB;
 import domainmodel.Brew;
-import domainmodel.Brewmaterials;
 import domainmodel.Fv;
 import domainmodel.Recipe;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import java.util.List;
@@ -103,6 +99,7 @@ public class BrewServlet extends HttpServlet {
             }
 
             getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
+            session.setAttribute("recipes", null);
         } catch (BrewDBException ex) {
             Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
@@ -117,6 +114,13 @@ public class BrewServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         BrewDB brewDB = new BrewDB();
+        
+        String success = "success";
+        
+        
+    
+        
+    
 
         float mashInTime = Float.parseFloat(request.getParameter("mashInTime"));
         float restTime = Float.parseFloat(request.getParameter("restTime"));
@@ -135,6 +139,10 @@ public class BrewServlet extends HttpServlet {
         float finalVolume = Float.parseFloat(request.getParameter("finalVolume"));
 
         String empId = (String) session.getAttribute("empId");
+        
+        //Method to save user input in case of an error
+        
+        
 
         int fvSelection = Integer.parseInt(request.getParameter("fvList"));
         
@@ -164,7 +172,7 @@ public class BrewServlet extends HttpServlet {
             
             TankDB tankDB = new TankDB();
 
-            Fv fv = tankDB.getFV(brew.getFvId());
+            Fv fv = tankDB.getFV(fvSelection);
 
             fv.setBrand(brew.getRecipeName());
             double volume = fv.getVolume();
@@ -174,7 +182,7 @@ public class BrewServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
                 return;
             }
-            fv.setVolume(newVolume);
+           
             
             //check if there are three brews first, before insert brew into database
             if (fv.getBrew3() != 0 && fv.getBrew1() != 0 && fv.getBrew2() != 0) {
@@ -183,9 +191,8 @@ public class BrewServlet extends HttpServlet {
                 return;
             }
             
-            //Returns the brew after being inserted in the database. This allows the database to auto increment the brew ID.
             brew = brewDB.insert(brew);
-            
+            fv.setVolume(newVolume);
             if (fv.getBrew1() == 0) {
                 fv.setBrew1(brew.getBrewId());
             } else if (fv.getBrew1() != 0 && fv.getBrew2() == 0) {
@@ -197,13 +204,18 @@ public class BrewServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
                 return;
             }
-
+            
+            //Returns the brew after being inserted in the database. This allows the database to auto increment the brew ID.
+           
             tankDB.updateFV(fv);
             
-
+            
             session.setAttribute("recipe", null);
             List<Brew> brews = brewDB.getAll();
             session.setAttribute("brews", brews);
+            session.setAttribute("success",success);
+            
+            
 
             getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
 
@@ -211,6 +223,28 @@ public class BrewServlet extends HttpServlet {
             Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    private void saveInput(HttpServletRequest request,float mashInTime,float restTime,float inTime, float totalMashTime,
+                float underletTime, float lauterTime, float vorlaufTime, float firstWortGrav, float runOffTime,
+                float lastRunnings, float kettleFullVol, float kettleFullGrav, float strikeOutGrav, float kettleStrikeOutVol,
+                float finalVolume)
+    {
+        request.setAttribute("mashInTime", mashInTime);
+        request.setAttribute("restTime", restTime);
+        request.setAttribute("inTime", inTime);
+        request.setAttribute("totalMashTime", totalMashTime);
+        request.setAttribute("underletTime", underletTime);
+        request.setAttribute("lauterTime", lauterTime);
+        request.setAttribute("vorlaufTime", vorlaufTime);
+        request.setAttribute("firstWortGrav", firstWortGrav);
+        request.setAttribute("runOffTime", runOffTime);
+        request.setAttribute("lastRunnings", lastRunnings);
+        request.setAttribute("kettleFullVol", kettleFullVol);
+        request.setAttribute("kettleFullGrav", kettleFullGrav);
+        request.setAttribute("strikeOutGrav", strikeOutGrav);
+        request.setAttribute("strikeOutVol", kettleStrikeOutVol);
+        request.setAttribute("finalVolume", finalVolume);
     }
 
 }

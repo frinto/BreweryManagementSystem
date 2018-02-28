@@ -1,40 +1,30 @@
 
 /*------------------------------------------ICONS/LOGOS--------------------------------------------*/
 
-.tankfarmIcon{
-    
-    height :50px;
-    width: 50px;
-    padding-right: 2px;
-    
-    
+
+
+.sidebar:after, body>.navbar-collapse:after{
+    background-color: white;
 }
 
-.sidebar[data-color="red"]:after,
-body>.navbar-collapse[data-color="red"]:after {
-    background:   #ef7f7f;
-    
-    background-size: 150% 150%;
-}
-.barrelIcon{
-    
-    height :40px;
-    width: 50px;
-    position: relative;
-    right: 5px;
-    
-    
+.btn-group>.btn:first-child{
+    padding: 0;
+    border: none;
+    background: none;
 }
 
-.logo img{
-    
-   
-    border-style: solid;
-    border-color: black;
-    width:98%;
-    height:98%;
-    
+
+
+
+
+
+.logo{
+
+    background-color: white;
+
 }
+
+
 
 /*------------------------------------------------------TABLES-------------------------------------------*/
 
@@ -46,22 +36,22 @@ body>.navbar-collapse[data-color="red"]:after {
     background-color: transparent;
     margin-left: 5px;
     margin-top: 5%;
-    
+
 }
 .table-sm{
-    
+
     font-size: 80%;
     margin-top: 2%;
 }
 .table-sm td,th{
-    
+
     width:2px;
 }
 
 /*----------------------------------DropDown Menu CSS------------------------------*/
 
 .custom-select{
-    
+
     width: 300px;
 }
 
@@ -72,17 +62,17 @@ body>.navbar-collapse[data-color="red"]:after {
 /*---------------------------------------HEADER SPACING------------------------------------------------*/
 
 .leftSpacingh1{
-    
+
     margin-left:2%;
 }
 
 .leftSpacingh4{
-    
+
     margin-left:5%;
 }
 
 .brewSteps{
-    
+
     border-style: hidden;
     background-color: #fcf8e3;
     border: 1px solid #faebcc;
@@ -92,22 +82,22 @@ body>.navbar-collapse[data-color="red"]:after {
 }
 /*------------------------------Production----------------------------------------------*/
 .productionButton{
-    
+
     margin-left:2%;
-    
+
 }
 
 .productionMessage {
-    
+
     text-align: center;
-    
+
 }
 
 /*-----------------------------Finished Inventory---------------------------------------*/
 .finishedInventoryUpdateButton{
-    
+
     margin-left:2%;
-    
+
 }
 
 .rawInventoryUpdateButton{
@@ -118,12 +108,12 @@ body>.navbar-collapse[data-color="red"]:after {
 /*------------------------------------------BUTTONS-----------------------------*/
 
 .brewSubmit{
-    
+
     text-align: center;
 }
 
 .btn-danger{
-    
+
     margin-left:80%;
 }
 
@@ -135,37 +125,37 @@ body>.navbar-collapse[data-color="red"]:after {
 }
 
 .brewButton{
-    
+
     margin-left:10%;
-    
+
 }
 
 /*---------------------------------------------DROP DOWN MENUS-------------------------------------*/
 
 .fvSelect{
-    
+
     margin-left:20%;
-    
+
 }
 
 .selectBrew{
-    
+
     margin-left:35%;
     margin-right:35%;
     margin-top:10%;
 }
 
 .custom-select{
-    
+
     width: 300px;
 }
 
 .datepicker{
-    
+
     margin-top:5%;
     margin-left: 30%;
-    
-    
+
+
 }
 
 /*-------------------------------Tank Transfer------------------------------------------*/
