@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 public class BrewMaterialsDB {
 
@@ -53,6 +54,53 @@ public class BrewMaterialsDB {
         try {
             List<Brewmaterials> brewmaterials = em.createNamedQuery("brewmaterials.findAll", Brewmaterials.class).getResultList();
             return brewmaterials;
+        } catch (Exception ex) {
+            Logger.getLogger(BrewMaterialsDB.class.getName()).log(Level.SEVERE, "Cannot read materials", ex);
+            throw new BrewDBException("Error getting brewmaterialss");
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Brewmaterials> getHops() throws BrewDBException {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Query queryDeliveryById = em.createNamedQuery("Brewmaterials.findByType", Brewmaterials.class);
+            queryDeliveryById.setParameter("type", "hops");
+            List hops = queryDeliveryById.getResultList();
+            return hops;
+        } catch (Exception ex) {
+            Logger.getLogger(BrewMaterialsDB.class.getName()).log(Level.SEVERE, "Cannot read materials", ex);
+            throw new BrewDBException("Error getting brewmaterialss");
+        } finally {
+            em.close();
+        }
+    }
+    public List<Brewmaterials> getMalt() throws BrewDBException {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Query queryDeliveryById = em.createNamedQuery("Brewmaterials.findByType", Brewmaterials.class);
+            queryDeliveryById.setParameter("type", "malt");
+            List malt = queryDeliveryById.getResultList();
+            return malt;
+        } catch (Exception ex) {
+            Logger.getLogger(BrewMaterialsDB.class.getName()).log(Level.SEVERE, "Cannot read materials", ex);
+            throw new BrewDBException("Error getting brewmaterialss");
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Brewmaterials> getChemicals() throws BrewDBException {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Query queryDeliveryById = em.createNamedQuery("Brewmaterials.findByType", Brewmaterials.class);
+            queryDeliveryById.setParameter("type", "chemical");
+            List chemicals = queryDeliveryById.getResultList();
+            return chemicals;
         } catch (Exception ex) {
             Logger.getLogger(BrewMaterialsDB.class.getName()).log(Level.SEVERE, "Cannot read materials", ex);
             throw new BrewDBException("Error getting brewmaterialss");

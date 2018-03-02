@@ -6,7 +6,9 @@
 package servlets;
 
 import dataaccess.BrewDBException;
+import dataaccess.BrewMaterialsDB;
 import dataaccess.RecipeDB;
+import domainmodel.Brewmaterials;
 import domainmodel.Recipe;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -57,10 +59,22 @@ public class RecipeServlet extends HttpServlet {
         
         try {
             
+            //Grabbing the various lists from the database to display as options for the recipe.
+            //The multiple brew materials lists are based on the type of material (Hops, malt, chemistry..
+            
+            BrewMaterialsDB materialDB = new BrewMaterialsDB();
             RecipeDB recipeDB = new RecipeDB();
             
+            List<Brewmaterials> hopList = materialDB.getHops();
+            List<Brewmaterials> maltList = materialDB.getMalt();
+            List<Brewmaterials> chemicalList = materialDB.getChemicals();
             List<Recipe> recipeList = recipeDB.getAll();
+            
+            
             session.setAttribute("recipeList",recipeList);
+            session.setAttribute("hopList", hopList);
+            session.setAttribute("maltList", maltList);
+            session.setAttribute("chemicalList", chemicalList);
             
             getServletContext().getRequestDispatcher("/WEB-INF/recipe.jsp").forward(request, response);
         } catch (BrewDBException ex) {

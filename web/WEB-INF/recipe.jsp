@@ -28,52 +28,61 @@
         <div class="wrapper">
 
             <!--Nav bar----------------------------------------------------------------------------->
-            <div class="sidebar" data-image="../assets/img/sidebar-5.jpg" data-color="red">
+            <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <image src ="assets/img/logo.jpg">
+                        <image src ="assets/img/logo4.png">
+
                     </div>
+                    <hr>
                     <ul class="nav">
                         <li>
-                            <a class="nav-link" href="tankStatus">
-                                <img src="assets/img/tank.png" class="tankfarmIcon" alt="Norway">
+                            <a class="nav-link" href="tankFarm">
+                                <i class ="navIcon" icon="assets/img/farm.png"></i>
+                                <img src="assets/img/farm.png" class="" alt="Norway">
                                 <p style ="padding-left:5px">Tank Farm</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="production">
-                                <img src="assets/img/barrel.png" class="barrelIcon" alt="Norway">
+                                <img src="assets/img/barrel.png" class="" alt="Norway">
                                 <p style ="padding-left:5px">Production</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="brew">
-                                <i class="nc-icon nc-notes"></i>
-                                <p>Brew</p>
+                                <img src="assets/img/brew.png" class="" alt="Norway">
+                                <p style ="padding-left:5px">Brew</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="finishedInventory">
-                                <i class="nc-icon nc-paper-2"></i>
+                                <img src="assets/img/finished.png" class="" alt="Norway">
                                 <p>Finished Inventory</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="rawInventory">
-                                <i class="nc-icon nc-atom"></i>
+                                <img src="assets/img/raw.png" class="" alt="Norway">
                                 <p>Raw Inventory</p>
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="production">
-                                <i class="nc-icon nc-pin-3"></i>
+                            <a class="nav-link" href="recipe">
+                                <img src="assets/img/recipe.png" class="" alt="Norway">
                                 <p>Recipes</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="delivery">
-                                <i class="nc-icon nc-bell-55"></i>
+                                <img src="assets/img/delivery.png" class="" alt="Norway">
                                 <p>Delivery</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="reports">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Reports</p>
                             </a>
                         </li>
                     </ul>
@@ -83,8 +92,15 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand" href="#pablo"> Recipes </a>
-                        <li><a href="login?logout">Log Out</a></li>
+                        <a class="navbar-brand"></a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Matthew
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button" a href="login?logout">Logout</button>
+                            </div>
+                        </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -97,13 +113,18 @@
                 <div class = "brews">
 
 
+
+
                     <c:if test="${newRecipe==null}">
+
+                        <form action="recipe" method ="GET" class ="recipeButton">
+                            <button type="submit" class="btn btn-success" name="newRecipe">Add a Recipe</button>
+                        </form>
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">Recipe</th>
                                     <th scope="col">Last Modified</th>
-                                    <th scope="col">Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -120,61 +141,384 @@
                             </tbody>
                         </table>
 
-                        <form action="recipe" method ="GET" class ="brewButton">
-                            <button type="submit" class="btn btn-success" name="newRecipe">Add a Recipe</button>
-                        </form>
+
 
                     </c:if>
+                    <form action="brew" method ="POST">
 
-                    <h1 class="leftSpacingh1">Add Recipe:</h1>
+                        <h1 class="leftSpacingh1">Add Recipe:</h1>
 
-                    <table class="table">
-                        <thead class="thead-dark">
+                        <table class="table">
+
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Brand Name:</th>
+                                    <td><input type="text" name="recipeName" id="recipeName" required></td>
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+                        <h3 class ="brewSteps">Raw Materials</h3>
+
+                        <table class="table">
+
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Recipe Attribute</th>
+                                    <th scope="col">Units</th>
+                                    <th scope="col">Material Name</th>
+                                    <th scope="col">Material Amount</th>
+                                </tr>
+                            </thead>
+
                             <tr>
-                                <th scope="col">Recipe Attribute</th>
-                                <th scope="col">Value</th>
+                                <th scope="row">Base Malt</th>
+                                <td>kg</td>
+                                <td><select name="baseMaltList" class="custom-select">
+                                        <option value="">--None--</option>
+                                        <c:forEach items="${maltList}" var="malt">
+                                            <option value="${malt}">
+                                                ${malt.name} 
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                                <td><input type="number" value="${baseMaltAmt}" name="baseMaltAmt" min="0" max="500"></td>
                             </tr>
-                        </thead>
-                        <tbody>
+
                             <tr>
-                                <th scope="row">Brand Name:</th>
-                                <td><input type="text" name="recipeName" id="recipeName" required></td>
+                                <th scope="row">Second Malt</th>
+                                <td>kg</td>
+                                <td><select name="secondMaltList" class="custom-select">
+                                        <option value="">--None--</option>
+                                        <c:forEach items="${maltList}" var="malt">
+                                            <option value="${malt}">
+                                                ${malt.name} 
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                                <td><input type="number" value="${secondMaltAmt}" name="secondMaltAmt" min="0" max="500"></td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">Third Malt</th>
+                                <td>kg</td>
+                                <td><select name="thirdMaltList" class="custom-select">
+                                        <option value="">--None--</option>
+                                        <c:forEach items="${maltList}" var="malt">
+                                            <option value="${malt}">
+                                                ${malt.name} 
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                                <td><input type="number" value="${thirdMaltAmt}" name="thirdMaltAmt" min="0" max="500"></td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">Fourth Malt</th>
+                                <td>kg</td>
+                                <td><select name="fourthMaltList" class="custom-select">
+                                        <option value="">--None--</option>
+                                        <c:forEach items="${maltList}" var="malt">
+                                            <option value="${malt}">
+                                                ${malt.name} 
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                                <td><input type="number" value="${fourthMaltAmt}" name="fourthMaltAmt" min="0" max="500"></td>
+                            </tr>
+
+                            <th colspan="4" style ="text-align:center">****HOPS****</th>
+
+
+                            <tr>
+                                <th scope="row">First Hop</th>
+                                <td>kg</td>
+                                <td><select name="firsrHopList" class="custom-select">
+                                        <option value="">--None--</option>
+                                        <c:forEach items="${hopList}" var="hop">
+                                            <option value="${hop}">
+                                                ${hop.name} 
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                                <td><input type="number" value="${firstHopAmt}" name="firstHopAmt" min="0" max="500"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Second Hop</th>
+                                <td>kg</td>
+                                <td><select name="secondhopList" class="custom-select">
+                                        <option value="">--None--</option>
+                                        <c:forEach items="${hopList}" var="hop">
+                                            <option value="${hop}">
+                                                ${hop.name} 
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                                <td><input type="number" value="${secondHopAmt}" name="secondHopAmt" min="0" max="500"></td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">Third Hop</th>
+                                <td>kg</td>
+                                <td><select name="thirdHopList" class="custom-select">
+                                        <option value="">--None--</option>
+                                        <c:forEach items="${hopList}" var="hop">
+
+                                            <option value="${hop}">
+                                                ${hop.name} 
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                                <td><input type="number" value="${thirdHopAmt}" name="thirdHopAmt" min="0" max="500"></td>
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+                        <h3 class ="brewSteps">Mash Chemistry</h3>
+
+                        <table class="table">
+
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Units</th>
+                                    <th scope="col">Amount</th>
+                                </tr>
+                            </thead>
+                            
+                            <tr>
+                                <th scope="row">Sodium Chloride Amount</th>
+                                <td>mg</td>
+                                <td><input type="number" value="${sodiumChlorideAmt}" name="sodiumChlorideAmt" id="sodiumChlorideAmt" min="0" max="500"></td>
+
+
                             </tr>
                             
+
+                            <tr>
+                                <th scope="row">Gypsum Amount</th>
+                                <td>mg</td>
+                                <td><input type="number" value="${gypsumAmt}" name="gypsumAmt" id="gypsumAmt" min="0" max="500"></td>
+
+
+                            </tr>
                             
-                        </tbody>
-
-                    </table>    
-
-
-                </div>
+                            <tr>
+                                <th scope="row">Calcium Chloride Amount</th>
+                                <td>mg</td>
+                                <td><input type="number" value="${calciumChlorideAmt}" name="calciumChlorideAmt" id="calciumChlorideAmt" min="0" max="500"></td>
 
 
+                            </tr>
+                            
+                            <tr>
+                                <th scope="row">Phosphoric Acid Amount</th>
+                                <td>ml</td>
+                                <td><input type="number" value="${phosphAcidAmt}" name="phosphAcidAmt" id="phosphAcidAmt" min="0" max="500" ></td>
+
+
+                            </tr>
+
+
+                        </table>
+
+                        <form action="brew" method ="POST">
+                            <h3 class ="brewSteps">Mash Tun</h3>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Recipe Attribute</th>
+                                        <th scope="col">Units</th>
+                                        <th scope="col">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Mash-In Temperature</th>
+                                        <td>oC</td>
+                                        <td colspan="4">${recipe.mashInTemp}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Mash-In Time</th>
+                                        <td>Minutes</td>
+                                        <td><input type="number" value="${mashInTime}" name="mashInTime" id="mashInTime" onfocusout="UpdateInfo()" min="0" max="500" required></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Mash-In Water</th>
+                                        <td>Litres</td>
+                                        <td>${recipe.mashWaterVolume}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Rest Time</th>
+                                        <td>Minutes</td>
+
+                                        <td><input type="number" value="${restTime}" name="restTime" id="restTime" onfocusout="UpdateInfo()" min="0" max="500" required></td>
+                                    </tr>
+                                    <tr>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Raise To Temperature</th>
+                                        <td>oC</td>
+                                        <td colspan="4">${recipe.raiseToTemp}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">In Time</th>
+                                        <td>Minutes</td>
+                                        <td><input type="number" value="${inTime}" name="inTime" id="inTime" min="0" max="500" required></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Total Mash Time</th>
+                                        <td>Minutes</td>
+                                        <td><input type="number" value="${totalMashTime}" name="totalMashTime" id="totalMashTime" min="0" max="500" readonly></td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                            <h3 class ="brewSteps">Lauter Tun/Kettle</h3>
+
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Recipe Attribute</th>
+                                        <th scope="col">Units</th>
+                                        <th scope="col">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Underlet</th>
+                                        <td>Litres</td>
+                                        <td><input type="number" value="${underletTime}" name="underletTime" min="0" max="500" required></td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Rest</th>
+                                        <td>Minutes</td>
+                                        <td><input type="number" value="${lauterTime}" name="lauterRest" min="0" max="500" required></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Vorlauf</th>
+                                        <td>Minutes</td>
+                                        <td><input type="number" value="${vorlaufTime}" name="vorlaufTime" min="0" max="500" required></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">First Wort Gravity</th>
+                                        <td>oP</td>
+                                        <td><input type="number" value="${firstWortGrav}" name="firstWortGrav" min="0" max="500" required></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Run-Off</th>
+                                        <td>Minutes</td>
+                                        <td><input type="number" value="${runOffTime}" name="runOffTime" min="0" max="500" required></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Sparge Volume</th>
+                                        <td>Hectolitres</td>
+                                        <td>${recipe.spargVol}</td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Sparge Temperature</th>
+                                        <td>oC</td>
+                                        <td>${recipe.spargTemp}</td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Last Runnings Gravity</th>
+                                        <td>oP</td>
+                                        <td><input type="number" value="${lastRunnings}" name="lastRunnings" min="0" max="500" required></td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Kettle Full Volume</th>
+                                        <td>Hectolitres</td>
+                                        <td><input type="number" value="${kettleFullVol}" name="kettleFullVol" min="0" max="500" required></td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Kettle Full Gravity</th>
+                                        <td>oP</td>
+                                        <td><input type="number" value="${kettleFullGrav}" name="kettleFullGrav" min="0" max="500" required></td>
+                                    </tr>
+
+                                <th scope="row">Kettle Strikeout Volume</th>
+                                <td>Hectolitres</td>
+                                <td><input type="number" value="${strikeOutVol}" name="strikeOutVol" min="0" max="500" required></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Kettle Strikeout Gravity</th>
+                                    <td>oP</td>
+                                    <td><input type="number" value="${strikeOutGrav}" name="strikeOutGrav" min="0" max="500" required></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Whirlpool Time</th>
+                                    <td>Minutes</td>
+                                    <td>${recipe.whirlPoolTime}</td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">Oxygen Rate</th>
+                                    <td>Litres Per Minute</td>
+                                    <td>${recipe.oxygenRate}</td>
+
+                                </tr>
+
+
+                                </tbody>
+                            </table>
 
 
 
-            </div>
-    </body>
-    <!--   Core JS Files   -->
-    <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-    <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
-    <script src="assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-    <script src="assets/js/plugins/bootstrap-switch.js"></script>
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-    <!--  Chartist Plugin  -->
-    <script src="assets/js/plugins/chartist.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="assets/js/plugins/bootstrap-notify.js"></script>
-    <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-    <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
-    <script src="assets/js/brew.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Javascript method's body can be found in assets/js/demos.js
-        });
-    </script>
 
-</html>
+                            </div>
+
+
+
+
+
+                            </div>
+                            </body>
+                            <!--   Core JS Files   -->
+                            <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+                            <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+                            <script src="assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+                            <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+                            <script src="assets/js/plugins/bootstrap-switch.js"></script>
+                            <!--  Google Maps Plugin    -->
+                            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+                            <!--  Chartist Plugin  -->
+                            <script src="assets/js/plugins/chartist.min.js"></script>
+                            <!--  Notifications Plugin    -->
+                            <script src="assets/js/plugins/bootstrap-notify.js"></script>
+                            <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+                            <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
+                            <script src="assets/js/brew.js"></script>
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    // Javascript method's body can be found in assets/js/demos.js
+                                });
+                            </script>
+
+                            </html>
 

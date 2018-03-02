@@ -48,21 +48,28 @@ public class TankFarmServlet extends HttpServlet
             throws ServletException, IOException
     {
         String action = request.getParameter("action");
-            
-        //clear user messages
-        request.setAttribute("message", "");
-        request.setAttribute("capacityMessage", "");
         
-        //----------- ADD A SV TANK -----------//
-        if (action!=null && action.equals("addSV")) {
-            
-            
-        }
+        TankDB tankDB = new TankDB();
         
-        //----------- ADD A FV TANK -----------//
-        if (action!=null && action.equals("addFV")) {
+        //possible need to clear user messages (?)
+        
+        //----------- ADD A NEW TANK -----------//
+        if (action!=null && action.equals("addTank")) {
             
-            
+            //Determine if adding SV or FV
+            String tankType = request.getParameter("tankType");
+            String tankCapacity = request.getParameter("tankCapacity");
+            try {
+                if (tankType.equals("FV")) {
+                    tankDB.insertFV(new Fv(0, Integer.parseInt(tankCapacity)));
+                }
+                if (tankType.equals("SV")) {
+                    tankDB.insertSV(new Sv(0, Integer.parseInt(tankCapacity)));
+                }
+                request.setAttribute("tankTabMessage", "Successfully added a new tank.");
+            } catch (BrewDBException | NumberFormatException ex) {
+                request.setAttribute("tankTabMessage", "Error adding a new tank.");
+            }
         }
         
         //----------- EDIT A SV TANK -----------//
@@ -82,7 +89,6 @@ public class TankFarmServlet extends HttpServlet
             
             //create variables
             TransferDB transferDB = new TransferDB();
-            TankDB tankDB = new TankDB();
             Date date;
             String brand;
             double volume;
@@ -104,7 +110,7 @@ public class TankFarmServlet extends HttpServlet
                 //show the user an error if volume is 0
                 if (volume == 0) {
                     saveUserInput(request, toSV, fromFV, volume, isEmpty);
-                    request.setAttribute("capacityMessage", "Volume cannot be zero");
+                    request.setAttribute("transferAddMessage", "Volume cannot be zero");
                     throw new BrewDBException();
                 }
                 
@@ -119,14 +125,14 @@ public class TankFarmServlet extends HttpServlet
                 if (currentFvVolume == 0) {
                     //save user input values for page reload
                     saveUserInput(request, toSV, fromFV, volume, isEmpty);
-                    request.setAttribute("capacityMessage", "FV " + fromFV + " is empty.");
+                    request.setAttribute("transferAddMessage", "FV " + fromFV + " is empty.");
                     throw new BrewDBException("");
                 }
                 
                 //check that the SV is not full
                 if (svCapacity == currentSvVolume) {
                     saveUserInput(request, toSV, fromFV, volume, isEmpty);
-                    request.setAttribute("capacityMessage", "SV " + toSV + " is full.");
+                    request.setAttribute("transferAddMessage", "SV " + toSV + " is full.");
                     throw new BrewDBException();
                 }
                 
@@ -141,7 +147,7 @@ public class TankFarmServlet extends HttpServlet
                     
                     double maxTransfer = svCapacity - currentSvVolume;
                     request.setAttribute("inputVolume", maxTransfer);
-                    request.setAttribute("capacityMessage", "The maximum amount that can be transferred into SV " + toSV + " is " + maxTransfer);
+                    request.setAttribute("transferAddMessage", "The maximum amount that can be transferred into SV " + toSV + " is " + maxTransfer);
                     throw new BrewDBException("");
                 }
                 
@@ -167,7 +173,7 @@ public class TankFarmServlet extends HttpServlet
                     //This value may be negative if there is a case where there is a positive correction (gains in beer) and still beer in the tank.
                     double newFvVolume = currentFvVolume - volume;
                     if (newFvVolume<0) {
-                        request.setAttribute("message", "Please note that Fermenting Vessel " + fromFV + "'s volume has been set to a negative number. This represents that there has been more beer produced from this tank than anticipated. The negative number indicates the amount of unanticipated extra beer. And there is still more unanticipated beer in the tank!");
+                        request.setAttribute("transferTabMessage", "Please note that Fermenting Vessel " + fromFV + "'s volume has been set to a negative number. This represents that there has been more beer produced from this tank than anticipated. The negative number indicates the amount of unanticipated extra beer. And there is still more unanticipated beer in the tank!");
                     }
                     fv.setVolume(newFvVolume);
                 }
@@ -176,20 +182,16 @@ public class TankFarmServlet extends HttpServlet
                 tankDB.updateSV(sv);
                 tankDB.updateFV(fv);
                 transferDB.insertTransfer(new Transfer(0, date, brand, fromFV, toSV, volume, correction));
-                request.setAttribute("message", "Success!");
+                request.setAttribute("transferTabMessage", "Success!");
                 
-            } catch (ParseException ex) {
-                request.setAttribute("message", ex);
-                Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (BrewDBException ex) {
+            } catch (ParseException | BrewDBException ex) {
                 Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            setTodaysDate(request);
-            retrieveAllTransfers(request);
-            retrieveAllTanks(request);
-            getServletContext().getRequestDispatcher("/WEB-INF/tankFarm.jsp").forward(request, response);
         }
+        setTodaysDate(request);
+        retrieveAllTransfers(request);
+        retrieveAllTanks(request);
+        getServletContext().getRequestDispatcher("/WEB-INF/tankFarm.jsp").forward(request, response);
     }
     
     // ----------------------- HELPER METHODS ----------------------------------- //
@@ -212,7 +214,7 @@ public class TankFarmServlet extends HttpServlet
             
         } catch (BrewDBException ex) {
             Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("message", "error retrieving transfers from database");
+            request.setAttribute("transferTabMessage", "error retrieving transfers from database");
         }
     }
     
@@ -220,7 +222,7 @@ public class TankFarmServlet extends HttpServlet
     private void saveUserInput(HttpServletRequest request, int toSV, int fromFV, double volume, String isEmpty) {
         request.setAttribute("inputSV", toSV);
         request.setAttribute("inputFV", fromFV);
-        request.setAttribute("volume", volume);
+        request.setAttribute("inputVolume", volume);
         if (isEmpty != null && isEmpty.equals("on")) {
             request.setAttribute("checkedIsEmpty", "checked");
         }
@@ -230,7 +232,6 @@ public class TankFarmServlet extends HttpServlet
 
     private void retrieveAllTanks(HttpServletRequest request) {
         TankDB tankDB = new TankDB();
-        
         try {
             List<Fv> fvs = tankDB.getAllFV();
             List<Sv> svs = tankDB.getAllSV();
@@ -239,7 +240,7 @@ public class TankFarmServlet extends HttpServlet
             request.setAttribute("fvs", fvs);            
         } catch (BrewDBException ex) {
             Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("message", "error retrieving tank lists (fv and sv) from database");
+            request.setAttribute("tankTabMessage", "Error retrieving tank lists (fv and sv) from database");
         }
     }
 }

@@ -20,7 +20,7 @@ import javax.persistence.EntityTransaction;
  */
 public class TankDB {
 
-    public int insertFV(Fv fv) throws BrewDBException {
+    public Fv insertFV(Fv fv) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
@@ -28,7 +28,7 @@ public class TankDB {
             trans.begin();
             em.persist(fv);
             trans.commit();
-            return 1;
+            return fv;
         } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(TankDB.class.getName()).log(Level.SEVERE, "Cannot insert " + fv.toString(), ex);
@@ -38,7 +38,7 @@ public class TankDB {
         }
     }
     
-    public int insertSV(Sv sv) throws BrewDBException {
+    public Sv insertSV(Sv sv) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
@@ -46,7 +46,7 @@ public class TankDB {
             trans.begin();
             em.persist(sv);
             trans.commit();
-            return 1;
+            return sv;
         } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(TankDB.class.getName()).log(Level.SEVERE, "Cannot insert " + sv.toString(), ex);
