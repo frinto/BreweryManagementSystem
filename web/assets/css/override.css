@@ -14,16 +14,25 @@
 }
 
 
-
-
+.main-panel .navbar{
+    
+    max-height: 10px;
+}
 
 
 .logo{
 
-    background-color: white;
+    text-align: center;
 
 }
 
+hr { margin: 2px 20px 20px 20px; }
+
+.recipeButton{
+    
+    margin-top:5%;
+    margin-left:10%;
+}
 
 
 /*------------------------------------------------------TABLES-------------------------------------------*/
@@ -174,4 +183,30 @@
 .modal-content {
     overflow-x: scroll;
     overflow-y: scroll;
+}
+
+.logo{
+    
+    margin-left:20px;
+    margin-right:20px;
+}
+
+
+.sidebar .sidebar-wrapper, body>.navbar-collapse .sidebar-wrapper{
+    
+    width:240px;
+}
+
+.main-panel{
+    
+    width: calc(100% - 240px);
+}
+
+.sidebar, body>.navbar-collapse{
+        width: 240px;
+}
+
+.sidebar, body>.navbar-collapse{
+    
+    
 }
