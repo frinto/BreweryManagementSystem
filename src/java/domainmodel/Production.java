@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Production.findByEmployeeId", query = "SELECT p FROM Production p WHERE p.employeeId = :employeeId")
     , @NamedQuery(name = "Production.findBySvNum", query = "SELECT p FROM Production p WHERE p.svNum = :svNum")
     , @NamedQuery(name = "Production.findByProductionType", query = "SELECT p FROM Production p WHERE p.productionType = :productionType")
+    , @NamedQuery(name = "Production.findByExpectedSvVolume", query = "SELECT p FROM Production p WHERE p.expectedSvVolume = :expectedSvVolume")
     , @NamedQuery(name = "Production.findByFinishedSvVolume", query = "SELECT p FROM Production p WHERE p.finishedSvVolume = :finishedSvVolume")
     , @NamedQuery(name = "Production.findByGainLoss", query = "SELECT p FROM Production p WHERE p.gainLoss = :gainLoss")})
 public class Production implements Serializable {
@@ -62,6 +63,9 @@ public class Production implements Serializable {
     @Column(name = "productionType")
     private String productionType;
     @Basic(optional = false)
+    @Column(name = "expectedSvVolume")
+    private double expectedSvVolume;
+    @Basic(optional = false)
     @Column(name = "finishedSvVolume")
     private double finishedSvVolume;
     @Basic(optional = false)
@@ -75,13 +79,14 @@ public class Production implements Serializable {
         this.prodId = prodId;
     }
 
-    public Production(Integer prodId, int quantity, Date date, int employeeId, int svNum, String productionType, double finishedSvVolume, double gainLoss) {
+    public Production(Integer prodId, int quantity, Date date, int employeeId, int svNum, String productionType, double expectedSvVolume, double finishedSvVolume, double gainLoss) {
         this.prodId = prodId;
         this.quantity = quantity;
         this.date = date;
         this.employeeId = employeeId;
         this.svNum = svNum;
         this.productionType = productionType;
+        this.expectedSvVolume = expectedSvVolume;
         this.finishedSvVolume = finishedSvVolume;
         this.gainLoss = gainLoss;
     }
@@ -132,6 +137,14 @@ public class Production implements Serializable {
 
     public void setProductionType(String productionType) {
         this.productionType = productionType;
+    }
+
+    public double getExpectedSvVolume() {
+        return expectedSvVolume;
+    }
+
+    public void setExpectedSvVolume(double expectedSvVolume) {
+        this.expectedSvVolume = expectedSvVolume;
     }
 
     public double getFinishedSvVolume() {

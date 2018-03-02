@@ -11,6 +11,7 @@ import dataaccess.ProductionDB;
 import dataaccess.TankDB;
 import domainmodel.Finishedproduct;
 import domainmodel.Production;
+import domainmodel.Productionmaterialusage;
 import domainmodel.Sv;
 import java.io.IOException;
 import java.text.ParseException;
@@ -84,13 +85,13 @@ public class ProductionServlet extends HttpServlet {
         String productionType = request.getParameter("productionType");
         String quantity = request.getParameter("quantity");
         String svNumber = request.getParameter("svNumber");
-        String svVolume = request.getParameter("svVolume");
+        String expectedSvVolume = request.getParameter("expectedSvVolume");
         String finishedSvVolume = request.getParameter("finishedSvVolume");
         Production production = new Production();
         ProductionDB prodDB = new ProductionDB();
+        double volumePerUnit = 0;
         TankDB tankDB = new TankDB();
         FinishedInventoryDB finProdDB = new FinishedInventoryDB();
-
         //navigates to the production form to submit a new production
         if (action.equals("add")) {
             try {
@@ -110,10 +111,11 @@ public class ProductionServlet extends HttpServlet {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String startDate = sdf.format(new Date());
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+                
+                double gainLoss = Double.parseDouble(finishedSvVolume) - Double.parseDouble(expectedSvVolume);
 
-                double gainLoss = Double.parseDouble(finishedSvVolume) - Double.parseDouble(svVolume);
 
-                production = new Production(production.getProdId(), Integer.parseInt(quantity), date, Integer.parseInt(employeeId), Integer.parseInt(svNumber), productionType, Double.parseDouble(finishedSvVolume), gainLoss);
+                production = new Production(production.getProdId(), Integer.parseInt(quantity), date, Integer.parseInt(employeeId), Integer.parseInt(svNumber), productionType, Double.parseDouble(expectedSvVolume), Double.parseDouble(finishedSvVolume), gainLoss);
                 prodDB.insertProduction(production);
 
                 List<Sv> svTankList = tankDB.getAllSV();
@@ -131,12 +133,16 @@ public class ProductionServlet extends HttpServlet {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equals("finalProduction")) {
-
             try {
-                List<Sv> svTankList = tankDB.getAllSV();
-                double startVol = svTankList.get(Integer.parseInt(svNumber)).getVolume();
+                List<Finishedproduct> finList = finProdDB.getAllInventory();
+                for (int i = 0; i < finList.size(); i++) {
+                    if(finList.get(i).getProductName().equals(productionType)) {
+                        volumePerUnit = finList.get(i).getVolumePerUnit();
+                    }
+                }
+                double expectedSvVolumeCalc = Double.parseDouble(quantity)*volumePerUnit;
 
-                request.setAttribute("svVolume", startVol);
+                request.setAttribute("expectedSvVolume", expectedSvVolumeCalc);
                 request.setAttribute("productionType", productionType);
                 request.setAttribute("quantity", quantity);
                 request.setAttribute("svNumber", svNumber);
@@ -147,7 +153,7 @@ public class ProductionServlet extends HttpServlet {
             } catch (BrewDBException ex) {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
+            } else {
             getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
         }
     }

@@ -25,7 +25,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Productionmaterialusage.findAll", query = "SELECT p FROM Productionmaterialusage p")
     , @NamedQuery(name = "Productionmaterialusage.findByMaterialQty", query = "SELECT p FROM Productionmaterialusage p WHERE p.materialQty = :materialQty")
     , @NamedQuery(name = "Productionmaterialusage.findByName", query = "SELECT p FROM Productionmaterialusage p WHERE p.productionmaterialusagePK.name = :name")
-    , @NamedQuery(name = "Productionmaterialusage.findByUsage", query = "SELECT p FROM Productionmaterialusage p WHERE p.productionmaterialusagePK.usage = :usage")})
+    , @NamedQuery(name = "Productionmaterialusage.findByUsage", query = "SELECT p FROM Productionmaterialusage p WHERE p.productionmaterialusagePK.usage = :usage")
+    , @NamedQuery(name = "Productionmaterialusage.findByVolumePerOne", query = "SELECT p FROM Productionmaterialusage p WHERE p.volumePerOne = :volumePerOne")})
 public class Productionmaterialusage implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,6 +35,8 @@ public class Productionmaterialusage implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "materialQty")
     private Double materialQty;
+    @Column(name = "volumePerOne")
+    private Double volumePerOne;
 
     public Productionmaterialusage() {
     }
@@ -60,6 +63,14 @@ public class Productionmaterialusage implements Serializable {
 
     public void setMaterialQty(Double materialQty) {
         this.materialQty = materialQty;
+    }
+
+    public Double getVolumePerOne() {
+        return volumePerOne;
+    }
+
+    public void setVolumePerOne(Double volumePerOne) {
+        this.volumePerOne = volumePerOne;
     }
 
     @Override

@@ -17,16 +17,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author root
+ * @author 579957
  */
 @Entity
 @Table(name = "finishedproduct")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Finishedproduct.findAll", query = "SELECT f FROM Finishedproduct f"),
-    @NamedQuery(name = "Finishedproduct.findByProductName", query = "SELECT f FROM Finishedproduct f WHERE f.productName = :productName"),
-    @NamedQuery(name = "Finishedproduct.findByQty", query = "SELECT f FROM Finishedproduct f WHERE f.qty = :qty")})
+    @NamedQuery(name = "Finishedproduct.findAll", query = "SELECT f FROM Finishedproduct f")
+    , @NamedQuery(name = "Finishedproduct.findByProductName", query = "SELECT f FROM Finishedproduct f WHERE f.productName = :productName")
+    , @NamedQuery(name = "Finishedproduct.findByQty", query = "SELECT f FROM Finishedproduct f WHERE f.qty = :qty")
+    , @NamedQuery(name = "Finishedproduct.findByVolumePerUnit", query = "SELECT f FROM Finishedproduct f WHERE f.volumePerUnit = :volumePerUnit")})
 public class Finishedproduct implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -34,12 +36,20 @@ public class Finishedproduct implements Serializable {
     private String productName;
     @Column(name = "qty")
     private Integer qty;
+    @Basic(optional = false)
+    @Column(name = "volumePerUnit")
+    private double volumePerUnit;
 
     public Finishedproduct() {
     }
 
     public Finishedproduct(String productName) {
         this.productName = productName;
+    }
+
+    public Finishedproduct(String productName, double volumePerUnit) {
+        this.productName = productName;
+        this.volumePerUnit = volumePerUnit;
     }
 
     public String getProductName() {
@@ -56,6 +66,14 @@ public class Finishedproduct implements Serializable {
 
     public void setQty(Integer qty) {
         this.qty = qty;
+    }
+
+    public double getVolumePerUnit() {
+        return volumePerUnit;
+    }
+
+    public void setVolumePerUnit(double volumePerUnit) {
+        this.volumePerUnit = volumePerUnit;
     }
 
     @Override
