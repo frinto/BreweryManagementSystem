@@ -113,6 +113,7 @@ CREATE TABLE IF NOT EXISTS `production` (
   `employeeId` INT NOT NULL,
   `svNum` INT NOT NULL,
   `productionType` VARCHAR(20) NOT NULL,
+  `expectedSvVolume` DOUBLE NOT NULL,  
   `finishedSvVolume` DOUBLE NOT NULL,
   `gainLoss` DOUBLE NOT NULL,
   PRIMARY KEY (`prodId`))
@@ -128,8 +129,8 @@ DROP TABLE IF EXISTS `productionmaterialusage` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `productionmaterialusage` (
   `materialQty` DOUBLE NULL,
-  `name` VARCHAR(20) NOT NULL,
-  `usage` VARCHAR(20) NOT NULL,
+  `name` VARCHAR(40) NOT NULL,
+  `usage` VARCHAR(40) NOT NULL,
   PRIMARY KEY (`Usage`, `Name`))
 ENGINE = InnoDB;
 
@@ -159,6 +160,7 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `finishedproduct` (
   `productName` VARCHAR(40) NOT NULL,
   `qty` INT NULL,
+  `volumePerUnit` DOUBLE NOT NULL,
   PRIMARY KEY (`productName`))
 ENGINE = InnoDB;
 
