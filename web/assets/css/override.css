@@ -192,21 +192,3 @@ hr { margin: 2px 20px 20px 20px; }
 }
 
 
-.sidebar .sidebar-wrapper, body>.navbar-collapse .sidebar-wrapper{
-    
-    width:240px;
-}
-
-.main-panel{
-    
-    width: calc(100% - 240px);
-}
-
-.sidebar, body>.navbar-collapse{
-        width: 240px;
-}
-
-.sidebar, body>.navbar-collapse{
-    
-    
-}

@@ -173,7 +173,7 @@
                                     <th scope="col">Material Amount</th>
                                 </tr>
                             </thead>
-                            
+
                             <tr>
                                 <th scope="row">Base Malt</th>
                                 <td>kg</td>
@@ -186,9 +186,9 @@
                                         </c:forEach>
                                     </select>
                                 </td>
-                                <td><input type="number" value="${baseMaltAmt}" name="baseMaltAmt" min="0" max="500" required></td>
+                                <td><input type="number" value="${baseMaltAmt}" name="baseMaltAmt" min="0" max="500"></td>
                             </tr>
-                            
+
                             <tr>
                                 <th scope="row">Second Malt</th>
                                 <td>kg</td>
@@ -201,9 +201,9 @@
                                         </c:forEach>
                                     </select>
                                 </td>
-                                <td><input type="number" value="${secondMaltAmt}" name="secondMaltAmt" min="0" max="500" required></td>
+                                <td><input type="number" value="${secondMaltAmt}" name="secondMaltAmt" min="0" max="500"></td>
                             </tr>
-                            
+
                             <tr>
                                 <th scope="row">Third Malt</th>
                                 <td>kg</td>
@@ -216,9 +216,9 @@
                                         </c:forEach>
                                     </select>
                                 </td>
-                                <td><input type="number" value="${thirdMaltAmt}" name="thirdMaltAmt" min="0" max="500" required></td>
+                                <td><input type="number" value="${thirdMaltAmt}" name="thirdMaltAmt" min="0" max="500"></td>
                             </tr>
-                            
+
                             <tr>
                                 <th scope="row">Fourth Malt</th>
                                 <td>kg</td>
@@ -231,9 +231,9 @@
                                         </c:forEach>
                                     </select>
                                 </td>
-                                <td><input type="number" value="${fourthMaltAmt}" name="fourthMaltAmt" min="0" max="500" required></td>
+                                <td><input type="number" value="${fourthMaltAmt}" name="fourthMaltAmt" min="0" max="500"></td>
                             </tr>
-                            
+
                             <th colspan="4" style ="text-align:center">****HOPS****</th>
 
 
@@ -249,7 +249,7 @@
                                         </c:forEach>
                                     </select>
                                 </td>
-                                <td><input type="number" value="${firstHopAmt}" name="firstHopAmt" min="0" max="500" required></td>
+                                <td><input type="number" value="${firstHopAmt}" name="firstHopAmt" min="0" max="500"></td>
                             </tr>
                             <tr>
                                 <th scope="row">Second Hop</th>
@@ -263,7 +263,7 @@
                                         </c:forEach>
                                     </select>
                                 </td>
-                                <td><input type="number" value="${secondHopAmt}" name="secondHopAmt" min="0" max="500" required></td>
+                                <td><input type="number" value="${secondHopAmt}" name="secondHopAmt" min="0" max="500"></td>
 
                             </tr>
                             <tr>
@@ -279,14 +279,14 @@
                                         </c:forEach>
                                     </select>
                                 </td>
-                                <td><input type="number" value="${thirdHopAmt}" name="thirdHopAmt" min="0" max="500" required></td>
+                                <td><input type="number" value="${thirdHopAmt}" name="thirdHopAmt" min="0" max="500"></td>
                             </tr>
 
                             </tbody>
 
                         </table>
-                            
-                            <h3 class ="brewSteps">Mash Chemistry</h3>
+
+                        <h3 class ="brewSteps">Mash Chemistry</h3>
 
                         <table class="table">
 
@@ -297,6 +297,42 @@
                                     <th scope="col">Amount</th>
                                 </tr>
                             </thead>
+                            
+                            <tr>
+                                <th scope="row">Sodium Chloride Amount</th>
+                                <td>mg</td>
+                                <td><input type="number" value="${sodiumChlorideAmt}" name="sodiumChlorideAmt" id="sodiumChlorideAmt" min="0" max="500"></td>
+
+
+                            </tr>
+                            
+
+                            <tr>
+                                <th scope="row">Gypsum Amount</th>
+                                <td>mg</td>
+                                <td><input type="number" value="${gypsumAmt}" name="gypsumAmt" id="gypsumAmt" min="0" max="500"></td>
+
+
+                            </tr>
+                            
+                            <tr>
+                                <th scope="row">Calcium Chloride Amount</th>
+                                <td>mg</td>
+                                <td><input type="number" value="${calciumChlorideAmt}" name="calciumChlorideAmt" id="calciumChlorideAmt" min="0" max="500"></td>
+
+
+                            </tr>
+                            
+                            <tr>
+                                <th scope="row">Phosphoric Acid Amount</th>
+                                <td>ml</td>
+                                <td><input type="number" value="${phosphAcidAmt}" name="phosphAcidAmt" id="phosphAcidAmt" min="0" max="500" ></td>
+
+
+                            </tr>
+
+
+                        </table>
 
                         <form action="brew" method ="POST">
                             <h3 class ="brewSteps">Mash Tun</h3>
