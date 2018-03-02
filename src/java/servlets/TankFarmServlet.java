@@ -214,7 +214,7 @@ public class TankFarmServlet extends HttpServlet
             
         } catch (BrewDBException ex) {
             Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("transferTabMessage", "error retrieving transfers from database");
+            request.setAttribute("transferTabMessage", "Error retrieving transfers from database");
         }
     }
     

@@ -20,77 +20,84 @@
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
         <link href="assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
         <link href="assets/css/override.css" rel="stylesheet" />
+        <link href="assets/css/successmodal.css" rel="stylesheet" />
     </head>
 
     <body>
         <div class="wrapper">
             
-            <!-- start sidebar -->
-            <div class="sidebar" data-image="../assets/img/sidebar-5.jpg" data-color="red">
-
-                <!--
-            Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-    
-            Tip 2: you can also add an image using data-image tag
-                -->
+            <!--Nav bar----------------------------------------------------------------------------->
+            <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <image src ="assets/img/logo.jpg">
+                        <image src ="assets/img/logo.png">
                     </div>
                     <ul class="nav">
                         <li class="nav-item active">
                             <a class="nav-link" href="tankFarm">
-                                <img src="assets/img/tank.png" class="tankfarmIcon" alt="Norway">
+                                <i class ="navIcon" icon="assets/img/farm.png"></i>
+                                <img src="assets/img/farm.png" class="" alt="Norway">
                                 <p style ="padding-left:5px">Tank Farm</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="production">
-                                <img src="assets/img/barrel.png" class="barrelIcon" alt="Norway">
+                                <img src="assets/img/barrel.png" class="" alt="Norway">
                                 <p style ="padding-left:5px">Production</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="nav-item">
                             <a class="nav-link" href="brew">
-                                <i class="nc-icon nc-notes"></i>
-                                <p>Brew</p>
+                                <img src="assets/img/brew.png" class="" alt="Norway">
+                                <p style ="padding-left:5px">Brew</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="finishedInventory">
-                                <i class="nc-icon nc-paper-2"></i>
+                                <img src="assets/img/finished.png" class="" alt="Norway">
                                 <p>Finished Inventory</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="rawInventory">
-                                <i class="nc-icon nc-atom"></i>
-                                <p>Raw Goods Inventory</p>
+                                <img src="assets/img/raw.png" class="" alt="Norway">
+                                <p>Raw Inventory</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="recipe">
-                                <i class="nc-icon nc-pin-3"></i>
+                                <img src="assets/img/recipe.png" class="" alt="Norway">
                                 <p>Recipes</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="delivery">
-                                <i class="nc-icon nc-bell-55"></i>
+                                <img src="assets/img/delivery.png" class="" alt="Norway">
                                 <p>Delivery</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="reports">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Reports</p>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-            
-            <!-- start main page -->
             <div class="main-panel">
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand" href="#pablo"> Tank Farm </a>
-                        <li><a href="login?logout">Log Out</a></li>
+                        <a class="navbar-brand"> Brew </a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Matthew
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button">Logout</button>
+                            </div>
+                        </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -98,7 +105,8 @@
                         </button>
                     </div>
                 </nav>
-                <!-- End Navbar -->
+
+                <!--End nav bar-------------------------------------------------------------------------->
         
         <!-- List of Tabs -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -347,6 +355,15 @@
     <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
     <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
     <script src="assets/js/demo.js"></script>
+    
+    <!-- script to open Transfer Tab if requested from back-end based on loadTransferTab being set-->
+    <c:if test="${loadTransferTab != null}">
+        <script type="text/javascript">
+            $(window).on('load',function(){
+                $('#myTab a[href="#transferLog"]').tab('show');
+            });
+        </script>
+    </c:if>
     
     <!-- script to open Transfer Modal if requested from back-end based on loadAddTransfer being set-->
     <c:if test="${loadAddTransfer != null}">
