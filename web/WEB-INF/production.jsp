@@ -112,7 +112,7 @@
                 <h1>Production</h1>
                 <c:choose>
                     <c:when test="${action == 'add'}">
-                        <form action="production?action=finalProduction" method="POST">
+                        <form action="production?action=nextProduction" method="POST">
                             <table class="table">
                                 <thead class="thead-dark">
                                 <th>ProductionType</th>
@@ -144,8 +144,8 @@
                             <button type="submit" class="btn btn-success">Next</button>
                         </form>
                     </c:when>
-                    <c:when test="${action == 'finalProduction'}">
-                        <form action="production?action=newProduction" method="POST">
+                    <c:when test="${action == 'nextProduction'}">
+                        <form action="production?action=submitProduction" method="POST">
                             <table class="table">
                                 <thead class="thead-dark">
                                 <th>ProductionType</th>
