@@ -26,56 +26,61 @@
         <div class="wrapper">
 
             <!--Nav bar----------------------------------------------------------------------------->
-
-            <div class="sidebar" data-image="../assets/img/sidebar-5.jpg" data-color="red">
-
+            <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-
-                        <image src ="assets/img/logo.jpg">
-
+                        <image src ="assets/img/logo4.png">
+                        
                     </div>
+                    
                     <ul class="nav">
                         <li>
                             <a class="nav-link" href="tankFarm">
-                                <img src="assets/img/tank.png" class="tankfarmIcon" alt="Norway">
+                                <i class ="navIcon" icon="assets/img/farm.png"></i>
+                                <img src="assets/img/farm.png" class="" alt="Norway">
                                 <p style ="padding-left:5px">Tank Farm</p>
                             </a>
                         </li>
-                        <li >
+                        <li>
                             <a class="nav-link" href="production">
-                                <img src="assets/img/barrel.png" class="barrelIcon" alt="Norway">
+                                <img src="assets/img/barrel.png" class="" alt="Norway">
                                 <p style ="padding-left:5px">Production</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="brew">
-                                <i class="nc-icon nc-notes"></i>
-                                <p>Brew</p>
+                                <img src="assets/img/brew.png" class="" alt="Norway">
+                                <p style ="padding-left:5px">Brew</p>
                             </a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="finishedInventory">
-                                <i class="nc-icon nc-paper-2"></i>
+                                <img src="assets/img/finished.png" class="" alt="Norway">
                                 <p>Finished Inventory</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="rawInventory">
-                                <i class="nc-icon nc-atom"></i>
+                                <img src="assets/img/raw.png" class="" alt="Norway">
                                 <p>Raw Inventory</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="production">
-                                <i class="nc-icon nc-pin-3"></i>
+                            <a class="nav-link" href="recipe">
+                                <img src="assets/img/recipe.png" class="" alt="Norway">
                                 <p>Recipes</p>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="delivery">
-                                <i class="nc-icon nc-bell-55"></i>
+                                <img src="assets/img/delivery.png" class="" alt="Norway">
                                 <p>Delivery</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="reports">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Reports</p>
                             </a>
                         </li>
                     </ul>
@@ -85,8 +90,15 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand" href="#pablo"> Finished Inventory </a>
-                        <li><a href="login?logout">Log Out</a></li>
+                        <a class="navbar-brand"></a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Matthew
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button" onclick="window.location.href='login?logout'">Logout</button>
+                            </div>
+                        </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
                             <span class="navbar-toggler-bar burger-lines"></span>
