@@ -122,17 +122,17 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <select name="productionType">
+                                            <select name="productionType" required="true">
                                                 <c:forEach var="finishedProduct" items="${finishedProd}">
                                                     <option value="${finishedProduct.productName}">${finishedProduct.productName}</option>
                                                 </c:forEach>
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="number" name="quantity">
+                                            <input type="number" name="quantity" required="true">
                                         </td>
                                         <td>
-                                            <select name="svNumber">
+                                            <select name="svNumber" required="true">
                                                 <c:forEach var="storageVessel" items="${sv}">
                                                     <option value="${storageVessel.svId}">${storageVessel.svId}</option>
                                                 </c:forEach>
@@ -173,7 +173,7 @@
                                             ${expectedSvVolume}
                                         </td>
                                         <td>
-                                            <input type="number" name="finishedSvVolume">
+                                            <input type="number" name="finishedSvVolume" required="true">
                                         </td>
                                     </tr>
                                 </tbody>
