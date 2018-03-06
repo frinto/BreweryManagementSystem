@@ -16,20 +16,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author reare
+ * @author 553817
  */
 @Entity
 @Table(name = "account")
 @XmlRootElement
-@NamedQueries(
-{
+@NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
     , @NamedQuery(name = "Account.findByCompanyName", query = "SELECT a FROM Account a WHERE a.accountPK.companyName = :companyName")
     , @NamedQuery(name = "Account.findByPhoneNumber", query = "SELECT a FROM Account a WHERE a.phoneNumber = :phoneNumber")
-    , @NamedQuery(name = "Account.findByAddress", query = "SELECT a FROM Account a WHERE a.accountPK.address = :address")
-})
-public class Account implements Serializable
-{
+    , @NamedQuery(name = "Account.findByAddress", query = "SELECT a FROM Account a WHERE a.accountPK.address = :address")})
+public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -37,71 +34,55 @@ public class Account implements Serializable
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    public Account()
-    {
+    public Account() {
     }
 
-    public Account(AccountPK accountPK)
-    {
+    public Account(AccountPK accountPK) {
         this.accountPK = accountPK;
     }
 
-    public Account(String companyName, String address)
-    {
+    public Account(String companyName, String address) {
         this.accountPK = new AccountPK(companyName, address);
     }
 
-    public AccountPK getAccountPK()
-    {
+    public AccountPK getAccountPK() {
         return accountPK;
     }
 
-    public void setAccountPK(AccountPK accountPK)
-    {
+    public void setAccountPK(AccountPK accountPK) {
         this.accountPK = accountPK;
     }
-    public String getCompanyName()
-    {
-        return this.accountPK.getCompanyName();
-    }
 
-    public String getPhoneNumber()
-    {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber)
-    {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (accountPK != null ? accountPK.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
+    public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Account))
-        {
+        if (!(object instanceof Account)) {
             return false;
         }
         Account other = (Account) object;
-        if ((this.accountPK == null && other.accountPK != null) || (this.accountPK != null && !this.accountPK.equals(other.accountPK)))
-        {
+        if ((this.accountPK == null && other.accountPK != null) || (this.accountPK != null && !this.accountPK.equals(other.accountPK))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "domainmodel.Account[ accountPK=" + accountPK + " ]";
     }
     

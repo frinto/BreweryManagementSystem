@@ -94,6 +94,22 @@ public class RecipeServlet extends HttpServlet {
             session.setAttribute("newRecipe", newRecipe);
         }
         
+        float mashInTime = Float.parseFloat(request.getParameter("mashInTime"));
+        float restTime = Float.parseFloat(request.getParameter("restTime"));
+        float inTime = Float.parseFloat(request.getParameter("inTime"));
+        float totalMashTime = Float.parseFloat(request.getParameter("totalMashTime"));
+        float underletTime = Float.parseFloat(request.getParameter("underletTime"));
+        float lauterRestTime = Float.parseFloat(request.getParameter("lauterRest"));
+        float vorlaufTime = Float.parseFloat(request.getParameter("vorlaufTime"));
+        float firstWortGrav = Float.parseFloat(request.getParameter("firstWortGrav"));
+        float runOffTime = Float.parseFloat(request.getParameter("runOffTime"));
+        float lastRunnings = Float.parseFloat(request.getParameter("lastRunnings"));
+        float kettleFullVol = Float.parseFloat(request.getParameter("kettleFullVol"));
+        float kettleFullGrav = Float.parseFloat(request.getParameter("kettleFullGrav"));
+        float strikeOutGrav = Float.parseFloat(request.getParameter("strikeOutGrav"));
+        float kettleStrikeOutVol = Float.parseFloat(request.getParameter("strikeOutVol"));
+        float finalVolume = Float.parseFloat(request.getParameter("finalVolume"));
+        
     }
 
     /**

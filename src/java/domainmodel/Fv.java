@@ -5,11 +5,12 @@
  */
 package domainmodel;
 
-import dataaccess.BrewDBException;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -18,24 +19,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author root
+ * @author 553817
  */
 @Entity
 @Table(name = "fv")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Fv.findAll", query = "SELECT f FROM Fv f"),
-    @NamedQuery(name = "Fv.findByFvId", query = "SELECT f FROM Fv f WHERE f.fvId = :fvId"),
-    @NamedQuery(name = "Fv.findByCapacity", query = "SELECT f FROM Fv f WHERE f.capacity = :capacity"),
-    @NamedQuery(name = "Fv.findByVolume", query = "SELECT f FROM Fv f WHERE f.volume = :volume"),
-    @NamedQuery(name = "Fv.findByBrew1", query = "SELECT f FROM Fv f WHERE f.brew1 = :brew1"),
-    @NamedQuery(name = "Fv.findByBrew2", query = "SELECT f FROM Fv f WHERE f.brew2 = :brew2"),
-    @NamedQuery(name = "Fv.findByBrew3", query = "SELECT f FROM Fv f WHERE f.brew3 = :brew3"),
-    @NamedQuery(name = "Fv.findByBrand", query = "SELECT f FROM Fv f WHERE f.brand = :brand"),
-    @NamedQuery(name = "Fv.findByStatus", query = "SELECT f FROM Fv f WHERE f.status = :status")})
+    @NamedQuery(name = "Fv.findAll", query = "SELECT f FROM Fv f")
+    , @NamedQuery(name = "Fv.findByFvId", query = "SELECT f FROM Fv f WHERE f.fvId = :fvId")
+    , @NamedQuery(name = "Fv.findByCapacity", query = "SELECT f FROM Fv f WHERE f.capacity = :capacity")
+    , @NamedQuery(name = "Fv.findByVolume", query = "SELECT f FROM Fv f WHERE f.volume = :volume")
+    , @NamedQuery(name = "Fv.findByBrew1", query = "SELECT f FROM Fv f WHERE f.brew1 = :brew1")
+    , @NamedQuery(name = "Fv.findByBrew2", query = "SELECT f FROM Fv f WHERE f.brew2 = :brew2")
+    , @NamedQuery(name = "Fv.findByBrew3", query = "SELECT f FROM Fv f WHERE f.brew3 = :brew3")
+    , @NamedQuery(name = "Fv.findByBrand", query = "SELECT f FROM Fv f WHERE f.brand = :brand")
+    , @NamedQuery(name = "Fv.findByStatus", query = "SELECT f FROM Fv f WHERE f.status = :status")})
 public class Fv implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "fvId")
     private Integer fvId;
@@ -66,10 +69,6 @@ public class Fv implements Serializable {
     public Fv(Integer fvId, int capacity) {
         this.fvId = fvId;
         this.capacity = capacity;
-        this.volume = 0.0;
-        this.brew1 = 0;
-        this.brew2 = 0;
-        this.brew3 = 0;
     }
 
     public Integer getFvId() {
@@ -142,8 +141,6 @@ public class Fv implements Serializable {
         hash += (fvId != null ? fvId.hashCode() : 0);
         return hash;
     }
-    
-    
 
     @Override
     public boolean equals(Object object) {
