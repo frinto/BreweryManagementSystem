@@ -116,7 +116,7 @@ public class ProductionServlet extends HttpServlet {
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
                 double gainLoss = Double.parseDouble(df.format(Double.parseDouble(finishedSvVolume) - Double.parseDouble(expectedSvVolume)));
 
-                production = new Production(production.getProdId(), Integer.parseInt(quantity), date, Integer.parseInt(employeeId), Integer.parseInt(svNumber), productionType, Double.parseDouble(expectedSvVolume), Double.parseDouble(finishedSvVolume), gainLoss);
+                production = new Production(production.getProdId(), Integer.parseInt(quantity), date, Integer.parseInt(employeeId), Integer.parseInt(svNumber), productionType, Double.parseDouble(df.format(Double.parseDouble(expectedSvVolume))), Double.parseDouble(finishedSvVolume), gainLoss);
                 prodDB.insertProduction(production);
 
                 List<Sv> svTankList = tankDB.getAllSV();
@@ -150,7 +150,10 @@ public class ProductionServlet extends HttpServlet {
                 }
                 double totalProducedVolume = Double.parseDouble(quantity)*volumePerUnit;
                 double expectedSvVolumeCalc = currentVolume - totalProducedVolume;
-
+                    if (expectedSvVolumeCalc < 0) {
+                        request.setAttribute("message", "Expected sv volume cannot be less than zero.");
+                        getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
+                    }
                 request.setAttribute("expectedSvVolume", expectedSvVolumeCalc);
                 request.setAttribute("productionType", productionType);
                 request.setAttribute("quantity", quantity);
