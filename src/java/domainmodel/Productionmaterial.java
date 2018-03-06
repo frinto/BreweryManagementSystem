@@ -17,16 +17,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author root
+ * @author 553817
  */
 @Entity
 @Table(name = "productionmaterial")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Productionmaterial.findAll", query = "SELECT p FROM Productionmaterial p"),
-    @NamedQuery(name = "Productionmaterial.findByName", query = "SELECT p FROM Productionmaterial p WHERE p.name = :name"),
-    @NamedQuery(name = "Productionmaterial.findByQty", query = "SELECT p FROM Productionmaterial p WHERE p.qty = :qty")})
+    @NamedQuery(name = "Productionmaterial.findAll", query = "SELECT p FROM Productionmaterial p")
+    , @NamedQuery(name = "Productionmaterial.findByName", query = "SELECT p FROM Productionmaterial p WHERE p.name = :name")
+    , @NamedQuery(name = "Productionmaterial.findByQty", query = "SELECT p FROM Productionmaterial p WHERE p.qty = :qty")})
 public class Productionmaterial implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

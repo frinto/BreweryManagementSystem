@@ -37,6 +37,7 @@
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/brewery?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name = "eclipselink.cache.shared.default" value = "false"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="password"/>
     </properties>

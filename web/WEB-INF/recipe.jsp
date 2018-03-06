@@ -141,23 +141,26 @@
                             </tbody>
                         </table>
 
-
-
                     </c:if>
-                    <form action="brew" method ="POST">
+                     <h1 class="leftSpacingh1">Add Recipe:</h1>
+                    <div class="cancelButton">
+                        <form action ="brew" method ="GET">
+                            <button type="submit" class="btn btn-danger" name="cancelBrew">Cancel Brew</button>
+                        </form>
+                        </div>
+                    <form action="recipe" method ="POST">
 
-                        <h1 class="leftSpacingh1">Add Recipe:</h1>
 
                         <table class="table">
+                            <form action="brew" method ="POST">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Brand Name:</th>
+                                        <td><input type="text" name="recipeName" id="recipeName" required></td>
+                                    </tr>
 
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Brand Name:</th>
-                                    <td><input type="text" name="recipeName" id="recipeName" required></td>
-                                </tr>
 
-
-                            </tbody>
+                                </tbody>
 
                         </table>
 
@@ -297,7 +300,7 @@
                                     <th scope="col">Amount</th>
                                 </tr>
                             </thead>
-                            
+
                             <tr>
                                 <th scope="row">Sodium Chloride Amount</th>
                                 <td>mg</td>
@@ -305,7 +308,7 @@
 
 
                             </tr>
-                            
+
 
                             <tr>
                                 <th scope="row">Gypsum Amount</th>
@@ -314,7 +317,7 @@
 
 
                             </tr>
-                            
+
                             <tr>
                                 <th scope="row">Calcium Chloride Amount</th>
                                 <td>mg</td>
@@ -322,7 +325,7 @@
 
 
                             </tr>
-                            
+
                             <tr>
                                 <th scope="row">Phosphoric Acid Amount</th>
                                 <td>ml</td>
@@ -334,191 +337,206 @@
 
                         </table>
 
-                        <form action="brew" method ="POST">
-                            <h3 class ="brewSteps">Mash Tun</h3>
-                            <table class="table">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">Recipe Attribute</th>
-                                        <th scope="col">Units</th>
-                                        <th scope="col">Value</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Mash-In Temperature</th>
-                                        <td>oC</td>
-                                        <td colspan="4">${recipe.mashInTemp}</td>
 
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Mash-In Time</th>
-                                        <td>Minutes</td>
-                                        <td><input type="number" value="${mashInTime}" name="mashInTime" id="mashInTime" onfocusout="UpdateInfo()" min="0" max="500" required></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Mash-In Water</th>
-                                        <td>Litres</td>
-                                        <td>${recipe.mashWaterVolume}</td>
+                        <h3 class ="brewSteps">Mash Tun</h3>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Recipe Attribute</th>
+                                    <th scope="col">Units</th>
+                                    <th scope="col">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Mash-In Temperature</th>
+                                    <td>oC</td>
+                                    <td colspan="4">${recipe.mashInTemp}</td>
 
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Rest Time</th>
-                                        <td>Minutes</td>
-
-                                        <td><input type="number" value="${restTime}" name="restTime" id="restTime" onfocusout="UpdateInfo()" min="0" max="500" required></td>
-                                    </tr>
-                                    <tr>
-
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Raise To Temperature</th>
-                                        <td>oC</td>
-                                        <td colspan="4">${recipe.raiseToTemp}</td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">In Time</th>
-                                        <td>Minutes</td>
-                                        <td><input type="number" value="${inTime}" name="inTime" id="inTime" min="0" max="500" required></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Total Mash Time</th>
-                                        <td>Minutes</td>
-                                        <td><input type="number" value="${totalMashTime}" name="totalMashTime" id="totalMashTime" min="0" max="500" readonly></td>
-                                    </tr>
-
-                                </tbody>
-
-                            </table>
-                            <h3 class ="brewSteps">Lauter Tun/Kettle</h3>
-
-                            <table class="table">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">Recipe Attribute</th>
-                                        <th scope="col">Units</th>
-                                        <th scope="col">Value</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Underlet</th>
-                                        <td>Litres</td>
-                                        <td><input type="number" value="${underletTime}" name="underletTime" min="0" max="500" required></td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Rest</th>
-                                        <td>Minutes</td>
-                                        <td><input type="number" value="${lauterTime}" name="lauterRest" min="0" max="500" required></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Vorlauf</th>
-                                        <td>Minutes</td>
-                                        <td><input type="number" value="${vorlaufTime}" name="vorlaufTime" min="0" max="500" required></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">First Wort Gravity</th>
-                                        <td>oP</td>
-                                        <td><input type="number" value="${firstWortGrav}" name="firstWortGrav" min="0" max="500" required></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Run-Off</th>
-                                        <td>Minutes</td>
-                                        <td><input type="number" value="${runOffTime}" name="runOffTime" min="0" max="500" required></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Sparge Volume</th>
-                                        <td>Hectolitres</td>
-                                        <td>${recipe.spargVol}</td>
-
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">Sparge Temperature</th>
-                                        <td>oC</td>
-                                        <td>${recipe.spargTemp}</td>
-
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">Last Runnings Gravity</th>
-                                        <td>oP</td>
-                                        <td><input type="number" value="${lastRunnings}" name="lastRunnings" min="0" max="500" required></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">Kettle Full Volume</th>
-                                        <td>Hectolitres</td>
-                                        <td><input type="number" value="${kettleFullVol}" name="kettleFullVol" min="0" max="500" required></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">Kettle Full Gravity</th>
-                                        <td>oP</td>
-                                        <td><input type="number" value="${kettleFullGrav}" name="kettleFullGrav" min="0" max="500" required></td>
-                                    </tr>
-
-                                <th scope="row">Kettle Strikeout Volume</th>
-                                <td>Hectolitres</td>
-                                <td><input type="number" value="${strikeOutVol}" name="strikeOutVol" min="0" max="500" required></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Kettle Strikeout Gravity</th>
-                                    <td>oP</td>
-                                    <td><input type="number" value="${strikeOutGrav}" name="strikeOutGrav" min="0" max="500" required></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Whirlpool Time</th>
+                                    <th scope="row">Mash-In Time</th>
                                     <td>Minutes</td>
-                                    <td>${recipe.whirlPoolTime}</td>
+                                    <td><input type="number" value="${mashInTime}" name="mashInTime" id="mashInTime" onfocusout="UpdateInfo()" min="0" max="500" required></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Mash-In Water</th>
+                                    <td>Litres</td>
+                                    <td><input type="number" value="${mashWaterVolume}" name="mashWaterVolume" id="mashWaterVolume" onfocusout="UpdateInfo()" min="0" max="500" required></td>
+
 
                                 </tr>
                                 <tr>
-                                    <th scope="row">Oxygen Rate</th>
-                                    <td>Litres Per Minute</td>
-                                    <td>${recipe.oxygenRate}</td>
+                                    <th scope="row">Rest Time</th>
+                                    <td>Minutes</td>
+
+                                    <td><input type="number" value="${restTime}" name="restTime" id="restTime" onfocusout="UpdateInfo()" min="0" max="500" required></td>
+                                </tr>
+                                <tr>
+
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">Raise To Temperature</th>
+                                    <td>oC</td>
+                                    <td><input type="number" value="${raiseToTemp}" name="raiseToTemp" id="raiseToTemp" onfocusout="UpdateInfo()" min="0" max="500" required></td>
+
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">In Time</th>
+                                    <td>Minutes</td>
+                                    <td><input type="number" value="${inTime}" name="inTime" id="inTime" min="0" max="500" required></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Total Mash Time</th>
+                                    <td>Minutes</td>
+                                    <td><input type="number" value="${totalMashTime}" name="totalMashTime" id="totalMashTime" min="0" max="500" readonly></td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                        <h3 class ="brewSteps">Lauter Tun/Kettle</h3>
+
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Recipe Attribute</th>
+                                    <th scope="col">Units</th>
+                                    <th scope="col">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Underlet</th>
+                                    <td>Litres</td>
+                                    <td><input type="number" value="${underletTime}" name="underletTime" min="0" max="500" required></td>
+
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">Rest</th>
+                                    <td>Minutes</td>
+                                    <td><input type="number" value="${lauterTime}" name="lauterRest" min="0" max="500" required></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Vorlauf</th>
+                                    <td>Minutes</td>
+                                    <td><input type="number" value="${vorlaufTime}" name="vorlaufTime" min="0" max="500" required></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">First Wort Gravity</th>
+                                    <td>oP</td>
+                                    <td><input type="number" value="${firstWortGrav}" name="firstWortGrav" min="0" max="500" required></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Run-Off</th>
+                                    <td>Minutes</td>
+                                    <td><input type="number" value="${runOffTime}" name="runOffTime" min="0" max="500" required></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Sparge Volume</th>
+                                    <td>Hectolitres</td>
+                                    <td><input type="number" value="${spargVol}" name="spargVol" min="0" max="500" required></td>
+
 
                                 </tr>
 
-
-                                </tbody>
-                            </table>
-
-
-
-
-                            </div>
+                                <tr>
+                                    <th scope="row">Sparge Temperature</th>
+                                    <td>oC</td>
+                                    <td><input type="number" value="${spargTemp}" name="spargVol" min="0" max="500" required></td>
 
 
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Last Runnings Gravity</th>
+                                    <td>oP</td>
+                                    <td><input type="number" value="${lastRunnings}" name="lastRunnings" min="0" max="500" required></td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Kettle Full Volume</th>
+                                    <td>Hectolitres</td>
+                                    <td><input type="number" value="${kettleFullVol}" name="kettleFullVol" min="0" max="500" required></td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Kettle Full Gravity</th>
+                                    <td>oP</td>
+                                    <td><input type="number" value="${kettleFullGrav}" name="kettleFullGrav" min="0" max="500" required></td>
+                                </tr>
+
+                            <th scope="row">Kettle Strikeout Volume</th>
+                            <td>Hectolitres</td>
+                            <td><input type="number" value="${strikeOutVol}" name="strikeOutVol" min="0" max="500" required></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Kettle Strikeout Gravity</th>
+                                <td>oP</td>
+                                <td><input type="number" value="${strikeOutGrav}" name="strikeOutGrav" min="0" max="500" required></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Whirlpool Time</th>
+                                <td>Minutes</td>
+                                <td><input type="number" value="${whirlPoolTime}" name="whirlPoolTime" min="0" max="500" required></td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">Oxygen Rate</th>
+                                <td>Litres Per Minute</td>
+                                <td><input type="number" value="${oxygenRate}" name="oxygenRate" min="0" max="500" required></td>
+
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                                <br>
+                                <br>
+
+                        <div class="brewSubmit">
+                            <button type="submit" class="btn btn-success" name="newRecipe" style="text-align: center">Add Recipe</button>
+                        </div>
+                    </form>
 
 
 
-                            </div>
-                            </body>
-                            <!--   Core JS Files   -->
-                            <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-                            <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
-                            <script src="assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-                            <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-                            <script src="assets/js/plugins/bootstrap-switch.js"></script>
-                            <!--  Google Maps Plugin    -->
-                            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-                            <!--  Chartist Plugin  -->
-                            <script src="assets/js/plugins/chartist.min.js"></script>
-                            <!--  Notifications Plugin    -->
-                            <script src="assets/js/plugins/bootstrap-notify.js"></script>
-                            <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-                            <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
-                            <script src="assets/js/brew.js"></script>
-                            <script type="text/javascript">
-                                $(document).ready(function () {
-                                    // Javascript method's body can be found in assets/js/demos.js
-                                });
-                            </script>
 
-                            </html>
+                </div>
+                                <br>
+                                <br>
+                                <br>
+                                
+
+
+
+
+
+            </div>
+    </body>
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+    <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="assets/js/plugins/bootstrap-switch.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!--  Chartist Plugin  -->
+    <script src="assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+    <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
+    <script src="assets/js/brew.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Javascript method's body can be found in assets/js/demos.js
+        });
+    </script>
+
+</html>
 

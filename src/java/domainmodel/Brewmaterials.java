@@ -88,13 +88,6 @@ public class Brewmaterials implements Serializable {
         hash += (name != null ? name.hashCode() : 0);
         return hash;
     }
-    
-    public void useMaterial(double usage)
-    {
-        double quantity = this.getQty();
-        double newQty = quantity - usage;
-        this.setQty(newQty);
-    }
 
     @Override
     public boolean equals(Object object) {

@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author 579957
+ * @author 553817
  */
 @Embeddable
 public class ProductionmaterialusagePK implements Serializable {

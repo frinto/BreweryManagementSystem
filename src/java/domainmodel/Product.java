@@ -17,20 +17,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author reare
+ * @author 553817
  */
 @Entity
 @Table(name = "product")
 @XmlRootElement
-@NamedQueries(
-{
+@NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
     , @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productPK.productName = :productName")
     , @NamedQuery(name = "Product.findByQty", query = "SELECT p FROM Product p WHERE p.qty = :qty")
-    , @NamedQuery(name = "Product.findByDeliveryId", query = "SELECT p FROM Product p WHERE p.productPK.deliveryId = :deliveryId")
-})
-public class Product implements Serializable
-{
+    , @NamedQuery(name = "Product.findByDeliveryId", query = "SELECT p FROM Product p WHERE p.productPK.deliveryId = :deliveryId")})
+public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -39,77 +36,64 @@ public class Product implements Serializable
     @Column(name = "qty")
     private int qty;
 
-    public Product()
-    {
+    public Product() {
     }
 
-    public Product(ProductPK productPK)
-    {
+    public Product(ProductPK productPK) {
         this.productPK = productPK;
     }
 
-    public Product(ProductPK productPK, int qty)
-    {
+    public Product(ProductPK productPK, int qty) {
         this.productPK = productPK;
         this.qty = qty;
     }
 
-    public Product(String productName, int deliveryId)
-    {
+    public Product(String productName, int deliveryId) {
         this.productPK = new ProductPK(productName, deliveryId);
     }
 
-    public ProductPK getProductPK()
-    {
+    public ProductPK getProductPK() {
         return productPK;
     }
 
-    public void setProductPK(ProductPK productPK)
-    {
+    public void setProductPK(ProductPK productPK) {
         this.productPK = productPK;
     }
 
+    public int getQty() {
+        return qty;
+    }
     public String getProductName()
     {
         return productPK.getProductName();
     }
-    public int getQty()
-    {
-        return qty;
-    }
 
-    public void setQty(int qty)
-    {
+    public void setQty(int qty) {
         this.qty = qty;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (productPK != null ? productPK.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
+    public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Product))
-        {
+        if (!(object instanceof Product)) {
             return false;
         }
         Product other = (Product) object;
-        if ((this.productPK == null && other.productPK != null) || (this.productPK != null && !this.productPK.equals(other.productPK)))
-        {
+        if ((this.productPK == null && other.productPK != null) || (this.productPK != null && !this.productPK.equals(other.productPK))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "domainmodel.Product[ productPK=" + productPK + " ]";
     }
     

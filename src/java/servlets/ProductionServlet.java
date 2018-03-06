@@ -79,6 +79,7 @@ public class ProductionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         String employeeId = (String) session.getAttribute("empId");
@@ -118,6 +119,7 @@ public class ProductionServlet extends HttpServlet {
 
                 production = new Production(production.getProdId(), Integer.parseInt(quantity), date, Integer.parseInt(employeeId), Integer.parseInt(svNumber), productionType, Double.parseDouble(expectedSvVolume), Double.parseDouble(finishedSvVolume), gainLoss);
                 prodDB.insertProduction(production);
+                
 
                 List<Sv> svTankList = tankDB.getAllSV();
 
@@ -157,6 +159,7 @@ public class ProductionServlet extends HttpServlet {
                 request.setAttribute("svNumber", svNumber);
 
                 request.setAttribute("action", action);
+
 
                 getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
             } catch (BrewDBException ex) {
