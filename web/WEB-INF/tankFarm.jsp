@@ -89,7 +89,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand"> Brew </a>
+                        <a class="navbar-brand">Tank Farm</a>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Matthew
