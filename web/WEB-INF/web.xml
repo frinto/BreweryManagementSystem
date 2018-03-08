@@ -100,6 +100,14 @@
         <servlet-name>ReportServlet</servlet-name>
         <url-pattern>/reports</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ProductionScheduleServlet</servlet-name>
+        <servlet-class>servlets.ProductionScheduleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductionScheduleServlet</servlet-name>
+        <url-pattern>/productionSchedule</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

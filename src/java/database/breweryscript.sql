@@ -396,11 +396,7 @@ DROP TABLE IF EXISTS `productionschedule` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `productionschedule` (
   `date` DATE NOT NULL,
-  `brew1` VARCHAR(45) NULL,
-  `brew2` VARCHAR(45) NULL,
-  `brew3` VARCHAR(45) NULL,
-  `transfer` VARCHAR(45) NULL,
-  `productionDetail` VARCHAR(45) NULL,
+  `brew` VARCHAR(255) NULL,
   PRIMARY KEY (`date`))
 ENGINE = InnoDB;
 
