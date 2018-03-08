@@ -1,10 +1,5 @@
-<%-- 
-    Document   : productionSchedule
-    Created on : Mar 8, 2018, 2:02:30 PM
-    Author     : root
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,23 +10,51 @@
         <form action="productionSchedule?action=submit" method="post" class="productionScheduleSubmitButton">
             <table class="table">
                 <thead class="thead-dark">
-                    <tr>
-                        <th>Date</th>
-                        <th>Brew</th>
+                    <tr><th>Date</th>
+                        <th>brew</th>
+                        <th>fv</th>
+                        <th>yst</th>
+                        <th>transfer</th>
+                        <th>fuge</th>
+                        <th>clean</th>
+                        <th>keg</th>
+                        <th>bottle</th>
+                        <th>can</th>
                     </tr>
                 </thead>
-<!--                <c:forEach var="productName" items="${finishedProducts}">
-                    <tr>
-                        <td>${productName.productName}</td>
-                        <td>${productName.qty}</td>
-                        <td>
-                            <input type="number" name="${productName.productName}" value="${productName.qty}">
-                        </td>
-                    </tr>
-                </c:forEach>-->
+
+
+                <tr>
+                    <td>Monday</td>
+                    <c:forEach var="var" items="${productionSchedules}">
+                        <c:if test="${var.getBrew() =='test info'}">
+                            <td>
+                                ${var.getDate()}
+                            </td>
+
+
+
+                        </c:if>
+                    </c:forEach>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                </tr>
+                <tr>
+                    <td>Wedenesday</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                </tr>
+
+
+
             </table>
 
-            <button type="submit" class="btn btn-success">Update Inventory</button>
+            <button type="submit" class="btn btn-success">submit</button>
         </form>
     </body>
 </html>

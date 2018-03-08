@@ -30,9 +30,9 @@
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <image src ="assets/img/logo4.png">
-                        
+
                     </div>
-                    
+
                     <ul class="nav">
                         <li>
                             <a class="nav-link" href="tankFarm">
@@ -96,7 +96,7 @@
                                 Matthew
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button" onclick="window.location.href='login?logout'">Logout</button>
+                                <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
                             </div>
                         </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -214,7 +214,6 @@
                                         <th>New Quantity</th>
                                     </tr>
                                 </thead>
-                                </tbody>
                                 <c:forEach var="prodList" items="${productionMaterials}">
                                     <tr>
                                         <td>${prodList.name}</td>

@@ -143,7 +143,6 @@
                                 <th>Update</th>
                             </tr>
                         </thead>
-                        </tbody>
                         <c:forEach var="productName" items="${finishedProducts}">
                             <tr>
                                 <td>${productName.productName}</td>

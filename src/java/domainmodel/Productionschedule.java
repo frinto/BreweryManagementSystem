@@ -20,37 +20,48 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 553817
+ * @author root
  */
 @Entity
 @Table(name = "productionschedule")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Productionschedule.findAll", query = "SELECT p FROM Productionschedule p")
-    , @NamedQuery(name = "Productionschedule.findByDate", query = "SELECT p FROM Productionschedule p WHERE p.date = :date")
-    , @NamedQuery(name = "Productionschedule.findByBrew1", query = "SELECT p FROM Productionschedule p WHERE p.brew1 = :brew1")
-    , @NamedQuery(name = "Productionschedule.findByBrew2", query = "SELECT p FROM Productionschedule p WHERE p.brew2 = :brew2")
-    , @NamedQuery(name = "Productionschedule.findByBrew3", query = "SELECT p FROM Productionschedule p WHERE p.brew3 = :brew3")
-    , @NamedQuery(name = "Productionschedule.findByTransfer", query = "SELECT p FROM Productionschedule p WHERE p.transfer = :transfer")
-    , @NamedQuery(name = "Productionschedule.findByProductionDetail", query = "SELECT p FROM Productionschedule p WHERE p.productionDetail = :productionDetail")})
+    @NamedQuery(name = "Productionschedule.findAll", query = "SELECT p FROM Productionschedule p"),
+    @NamedQuery(name = "Productionschedule.findByDate", query = "SELECT p FROM Productionschedule p WHERE p.date = :date"),
+    @NamedQuery(name = "Productionschedule.findByBrew", query = "SELECT p FROM Productionschedule p WHERE p.brew = :brew"),
+    @NamedQuery(name = "Productionschedule.findByFv", query = "SELECT p FROM Productionschedule p WHERE p.fv = :fv"),
+    @NamedQuery(name = "Productionschedule.findByYst", query = "SELECT p FROM Productionschedule p WHERE p.yst = :yst"),
+    @NamedQuery(name = "Productionschedule.findByTransfer", query = "SELECT p FROM Productionschedule p WHERE p.transfer = :transfer"),
+    @NamedQuery(name = "Productionschedule.findByFuge", query = "SELECT p FROM Productionschedule p WHERE p.fuge = :fuge"),
+    @NamedQuery(name = "Productionschedule.findByClean", query = "SELECT p FROM Productionschedule p WHERE p.clean = :clean"),
+    @NamedQuery(name = "Productionschedule.findByKeg", query = "SELECT p FROM Productionschedule p WHERE p.keg = :keg"),
+    @NamedQuery(name = "Productionschedule.findByBottle", query = "SELECT p FROM Productionschedule p WHERE p.bottle = :bottle"),
+    @NamedQuery(name = "Productionschedule.findByCan", query = "SELECT p FROM Productionschedule p WHERE p.can = :can")})
 public class Productionschedule implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
-    @Column(name = "brew1")
-    private String brew1;
-    @Column(name = "brew2")
-    private String brew2;
-    @Column(name = "brew3")
-    private String brew3;
+    @Column(name = "brew")
+    private String brew;
+    @Column(name = "fv")
+    private String fv;
+    @Column(name = "yst")
+    private String yst;
     @Column(name = "transfer")
     private String transfer;
-    @Column(name = "productionDetail")
-    private String productionDetail;
+    @Column(name = "fuge")
+    private String fuge;
+    @Column(name = "clean")
+    private String clean;
+    @Column(name = "keg")
+    private String keg;
+    @Column(name = "bottle")
+    private String bottle;
+    @Column(name = "can")
+    private String can;
 
     public Productionschedule() {
     }
@@ -67,28 +78,28 @@ public class Productionschedule implements Serializable {
         this.date = date;
     }
 
-    public String getBrew1() {
-        return brew1;
+    public String getBrew() {
+        return brew;
     }
 
-    public void setBrew1(String brew1) {
-        this.brew1 = brew1;
+    public void setBrew(String brew) {
+        this.brew = brew;
     }
 
-    public String getBrew2() {
-        return brew2;
+    public String getFv() {
+        return fv;
     }
 
-    public void setBrew2(String brew2) {
-        this.brew2 = brew2;
+    public void setFv(String fv) {
+        this.fv = fv;
     }
 
-    public String getBrew3() {
-        return brew3;
+    public String getYst() {
+        return yst;
     }
 
-    public void setBrew3(String brew3) {
-        this.brew3 = brew3;
+    public void setYst(String yst) {
+        this.yst = yst;
     }
 
     public String getTransfer() {
@@ -99,12 +110,44 @@ public class Productionschedule implements Serializable {
         this.transfer = transfer;
     }
 
-    public String getProductionDetail() {
-        return productionDetail;
+    public String getFuge() {
+        return fuge;
     }
 
-    public void setProductionDetail(String productionDetail) {
-        this.productionDetail = productionDetail;
+    public void setFuge(String fuge) {
+        this.fuge = fuge;
+    }
+
+    public String getClean() {
+        return clean;
+    }
+
+    public void setClean(String clean) {
+        this.clean = clean;
+    }
+
+    public String getKeg() {
+        return keg;
+    }
+
+    public void setKeg(String keg) {
+        this.keg = keg;
+    }
+
+    public String getBottle() {
+        return bottle;
+    }
+
+    public void setBottle(String bottle) {
+        this.bottle = bottle;
+    }
+
+    public String getCan() {
+        return can;
+    }
+
+    public void setCan(String can) {
+        this.can = can;
     }
 
     @Override
