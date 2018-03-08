@@ -72,6 +72,7 @@ public class LoginServlet extends HttpServlet {
             //If the employee id mataches the password then the employee will be logged in.
 
             Employee employee = empDB.getEmployee(empId);
+            int role = empDB.getEmployee(empId).getRoleId();
 
             if (employee != null && employee.getPassword().equals(password)) {
                 if (employee.getIsActive() == 0) {
@@ -79,6 +80,7 @@ public class LoginServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 }
                 session.setAttribute("empId", empId);
+                session.setAttribute("role", role);
                 response.sendRedirect("tankFarm");
             } //If the userId does not match the password, it will show that it was invalid and tell the user to try again
             else {

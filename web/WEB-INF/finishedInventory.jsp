@@ -111,7 +111,7 @@
 
 
                 <h1>Finished Inventory</h1>
-                
+                <c:if test="${role == 1}">
                 <form action="finishedInventory?action=add" method="post" class="finishedInventoryUpdateButton">
                     
                     <table class="table">
@@ -132,6 +132,7 @@
                     
                     <button type="submit" class="btn btn-success">Add</button>
                 </form>
+                </c:if>
 
 
                 <form action="finishedInventory?action=update" method="post" class="finishedInventoryUpdateButton">
