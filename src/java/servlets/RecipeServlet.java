@@ -94,20 +94,31 @@ public class RecipeServlet extends HttpServlet {
             session.setAttribute("newRecipe", newRecipe);
         }
         
+        String recipeName = request.getParameter("recipeName");
+        
+        float mashInTemp = Float.parseFloat(request.getParameter("mashInTemp"));
         float mashInTime = Float.parseFloat(request.getParameter("mashInTime"));
+        float mashWaterVolume = Float.parseFloat(request.getParameter("mashWaterVolume"));
+        
         float restTime = Float.parseFloat(request.getParameter("restTime"));
+        float raiseToTemp = Float.parseFloat(request.getParameter("raiseToTemp"));
         float inTime = Float.parseFloat(request.getParameter("inTime"));
         float totalMashTime = Float.parseFloat(request.getParameter("totalMashTime"));
-        float underletTime = Float.parseFloat(request.getParameter("underletTime"));
+        float underletLitres = Float.parseFloat(request.getParameter("underletLitres"));
         float lauterRestTime = Float.parseFloat(request.getParameter("lauterRest"));
         float vorlaufTime = Float.parseFloat(request.getParameter("vorlaufTime"));
         float firstWortGrav = Float.parseFloat(request.getParameter("firstWortGrav"));
         float runOffTime = Float.parseFloat(request.getParameter("runOffTime"));
+        float spargVol = Float.parseFloat(request.getParameter("spargVol"));
+        float spargTemp = Float.parseFloat(request.getParameter("spargTemp"));
         float lastRunnings = Float.parseFloat(request.getParameter("lastRunnings"));
         float kettleFullVol = Float.parseFloat(request.getParameter("kettleFullVol"));
         float kettleFullGrav = Float.parseFloat(request.getParameter("kettleFullGrav"));
+        float boilTime = Float.parseFloat(request.getParameter("boilTime"));
+        float strikeOutVol = Float.parseFloat(request.getParameter("strikeOutVol"));
         float strikeOutGrav = Float.parseFloat(request.getParameter("strikeOutGrav"));
         float kettleStrikeOutVol = Float.parseFloat(request.getParameter("strikeOutVol"));
+        
         float finalVolume = Float.parseFloat(request.getParameter("finalVolume"));
         
     }

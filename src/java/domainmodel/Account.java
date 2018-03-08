@@ -33,6 +33,7 @@ public class Account implements Serializable {
     protected AccountPK accountPK;
     @Column(name = "phoneNumber")
     private String phoneNumber;
+    
 
     public Account() {
     }

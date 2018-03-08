@@ -411,7 +411,7 @@
                                 <tr>
                                     <th scope="row">Underlet</th>
                                     <td>Litres</td>
-                                    <td><input type="number" value="${underletTime}" name="underletTime" min="0" max="500" required></td>
+                                    <td><input type="number" value="${underletLitres}" name="underletLitres" min="0" max="500" required></td>
 
 
                                 </tr>
@@ -446,7 +446,7 @@
                                 <tr>
                                     <th scope="row">Sparge Temperature</th>
                                     <td>oC</td>
-                                    <td><input type="number" value="${spargTemp}" name="spargVol" min="0" max="500" required></td>
+                                    <td><input type="number" value="${spargTemp}" name="spargTemp" min="0" max="500" required></td>
 
 
                                 </tr>
@@ -467,6 +467,11 @@
                                     <th scope="row">Kettle Full Gravity</th>
                                     <td>oP</td>
                                     <td><input type="number" value="${kettleFullGrav}" name="kettleFullGrav" min="0" max="500" required></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Boil Time</th>
+                                    <td>Minutes</td>
+                                    <td><input type="number" value="${boilTime}" name="boilTime" min="0" max="500" required></td>
                                 </tr>
 
                             <th scope="row">Kettle Strikeout Volume</th>
