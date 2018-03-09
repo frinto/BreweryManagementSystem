@@ -53,7 +53,7 @@
                                 <p style ="padding-left:5px">Brew</p>
                             </a>
                         </li>
-                        <li class="nav-item active">
+                        <li>
                             <a class="nav-link" href="finishedInventory">
                                 <img src="assets/img/finished.png" class="" alt="Norway">
                                 <p>Finished Inventory</p>
@@ -81,6 +81,12 @@
                             <a class="nav-link" href="reports">
                                 <img src="assets/img/report.png" class="" alt="Norway">
                                 <p>Reports</p>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Production Schedule</p>
                             </a>
                         </li>
                     </ul>
