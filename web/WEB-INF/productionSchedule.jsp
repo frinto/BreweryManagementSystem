@@ -29,25 +29,170 @@
                     <c:forEach var="var" items="${productionSchedules}">
                         <c:if test="${var.getDayOfWeek() =='monday'}">
                             <td>
-                                ${var.getDate()}
+                                ${var.brew}
                             </td>
-
-
-
+                            <td>
+                                ${var.fv}
+                            </td>
+                            <td>
+                                ${var.yst}
+                            </td>
+                            <td>
+                                ${var.transfer}
+                            </td>
+                            <td>
+                                ${var.fuge}
+                            </td>
+                            <td>
+                                ${var.clean}
+                            </td>
+                            <td>
+                                ${var.keg}
+                            </td>
+                            <td>
+                                ${var.bottle}
+                            </td>
+                            <td>
+                                ${var.can}
+                            </td>
                         </c:if>
                     </c:forEach>
                 </tr>
                 <tr>
                     <td>Tuesday</td>
+                    <c:forEach var="var" items="${productionSchedules}">
+                        <c:if test="${var.getDayOfWeek() =='tuesday'}">
+                            <td>
+                                ${var.brew}
+                            </td>
+                            <td>
+                                ${var.fv}
+                            </td>
+                            <td>
+                                ${var.yst}
+                            </td>
+                            <td>
+                                ${var.transfer}
+                            </td>
+                            <td>
+                                ${var.fuge}
+                            </td>
+                            <td>
+                                ${var.clean}
+                            </td>
+                            <td>
+                                ${var.keg}
+                            </td>
+                            <td>
+                                ${var.bottle}
+                            </td>
+                            <td>
+                                ${var.can}
+                            </td>
+                        </c:if>
+                    </c:forEach>
                 </tr>
                 <tr>
-                    <td>Wedenesday</td>
+                    <td>Wednesday</td>
+                    <c:forEach var="var" items="${productionSchedules}">
+                        <c:if test="${var.getDayOfWeek() =='wednesday'}">
+                            <td>
+                                ${var.brew}
+                            </td>
+                            <td>
+                                ${var.fv}
+                            </td>
+                            <td>
+                                ${var.yst}
+                            </td>
+                            <td>
+                                ${var.transfer}
+                            </td>
+                            <td>
+                                ${var.fuge}
+                            </td>
+                            <td>
+                                ${var.clean}
+                            </td>
+                            <td>
+                                ${var.keg}
+                            </td>
+                            <td>
+                                ${var.bottle}
+                            </td>
+                            <td>
+                                ${var.can}
+                            </td>
+                        </c:if>
+                    </c:forEach>
                 </tr>
                 <tr>
                     <td>Thursday</td>
+                    <c:forEach var="var" items="${productionSchedules}">
+                        <c:if test="${var.getDayOfWeek() =='thursday'}">
+                            <td>
+                                ${var.brew}
+                            </td>
+                            <td>
+                                ${var.fv}
+                            </td>
+                            <td>
+                                ${var.yst}
+                            </td>
+                            <td>
+                                ${var.transfer}
+                            </td>
+                            <td>
+                                ${var.fuge}
+                            </td>
+                            <td>
+                                ${var.clean}
+                            </td>
+                            <td>
+                                ${var.keg}
+                            </td>
+                            <td>
+                                ${var.bottle}
+                            </td>
+                            <td>
+                                ${var.can}
+                            </td>
+                        </c:if>
+                    </c:forEach>
                 </tr>
                 <tr>
                     <td>Friday</td>
+                    <c:forEach var="var" items="${productionSchedules}">
+                        <c:if test="${var.getDayOfWeek() =='friday'}">
+                            <td>
+                                ${var.brew}
+                            </td>
+                            <td>
+                                ${var.fv}
+                            </td>
+                            <td>
+                                ${var.yst}
+                            </td>
+                            <td>
+                                ${var.transfer}
+                            </td>
+                            <td>
+                                ${var.fuge}
+                            </td>
+                            <td>
+                                ${var.clean}
+                            </td>
+                            <td>
+                                ${var.keg}
+                            </td>
+                            <td>
+                                ${var.bottle}
+                            </td>
+                            <td>
+                                ${var.can}
+                            </td>
+                        </c:if>
+                    </c:forEach>
                 </tr>
 
 
