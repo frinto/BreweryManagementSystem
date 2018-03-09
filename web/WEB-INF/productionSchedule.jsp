@@ -304,11 +304,7 @@
                                 </c:if>
                             </c:forEach>
                         </tr>
-
-
-
                     </table>
-
                     <button type="submit" class="btn btn-success">update</button>
                 </form>
             </div>
