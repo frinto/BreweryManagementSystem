@@ -6,7 +6,7 @@
 package domainmodel;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Productionschedule.findByBottle", query = "SELECT p FROM Productionschedule p WHERE p.bottle = :bottle"),
     @NamedQuery(name = "Productionschedule.findByCan", query = "SELECT p FROM Productionschedule p WHERE p.can = :can")})
 public class Productionschedule implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -138,6 +139,40 @@ public class Productionschedule implements Serializable {
         return bottle;
     }
 
+    public String getDayOfWeek() {
+        String dayOfWeekString;
+        Calendar c = Calendar.getInstance();
+        c.setTime(this.date);
+        int dayOfWeekIndex = c.get(Calendar.DAY_OF_WEEK);
+        
+        if(dayOfWeekIndex == 1)
+        {
+            dayOfWeekString = "sunday";
+            return dayOfWeekString;
+        }else if(dayOfWeekIndex == 2){
+            dayOfWeekString = "monday";
+            return dayOfWeekString;
+        }else if(dayOfWeekIndex == 3){
+            dayOfWeekString = "tuesday";
+            return dayOfWeekString;
+        }else if(dayOfWeekIndex == 4){
+            dayOfWeekString = "wednesday";
+            return dayOfWeekString;
+        }else if(dayOfWeekIndex == 5){
+            dayOfWeekString = "thursday";
+            return dayOfWeekString;
+        }else if(dayOfWeekIndex == 6){
+            dayOfWeekString = "friday";
+            return dayOfWeekString;
+        }else if(dayOfWeekIndex == 7){
+            dayOfWeekString = "saturday";
+            return dayOfWeekString;
+        }
+        else{
+            return null;
+        }
+    }
+
     public void setBottle(String bottle) {
         this.bottle = bottle;
     }
@@ -174,5 +209,5 @@ public class Productionschedule implements Serializable {
     public String toString() {
         return "domainmodel.Productionschedule[ date=" + date + " ]";
     }
-    
+
 }

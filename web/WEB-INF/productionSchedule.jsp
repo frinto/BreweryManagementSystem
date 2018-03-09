@@ -27,7 +27,7 @@
                 <tr>
                     <td>Monday</td>
                     <c:forEach var="var" items="${productionSchedules}">
-                        <c:if test="${var.getBrew() =='test info'}">
+                        <c:if test="${var.getDayOfWeek() =='monday'}">
                             <td>
                                 ${var.getDate()}
                             </td>
