@@ -408,6 +408,12 @@ CREATE TABLE IF NOT EXISTS `productionschedule` (
   PRIMARY KEY (`date`))
 ENGINE = InnoDB;
 
+INSERT INTO `productionschedule` VALUES ('2018-03-05', null,null, null, null, null, null, null, null, null);
+INSERT INTO `productionschedule` VALUES ('2018-03-06', null,null, null, null, null, null, null, null, null);
+INSERT INTO `productionschedule` VALUES ('2018-03-07', null,null, null, null, null, null, null, null, null);
+INSERT INTO `productionschedule` VALUES ('2018-03-08', null,null, null, null, null, null, null, null, null);
+INSERT INTO `productionschedule` VALUES ('2018-03-09', null,null, null, null, null, null, null, null, null);
+
 SHOW WARNINGS;
 
 SET SQL_MODE=@OLD_SQL_MODE;
