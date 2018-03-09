@@ -634,11 +634,10 @@
                             <div class="modal-body text-center">
                                     <h4>Great!</h4>	
                                     <p>Brew submitted successfully.</p>
-                                    <input type ="button" class="btn btn-success"data-dismiss="modal" value="OK">Ok</button>
+                                    <input type ="button" class="btn btn-success"data-dismiss="modal" value="OK"></button>
                             </div>
                         </div>
                     </div>
-                    </form>
                 </div>
 
             </c:if>
@@ -665,12 +664,11 @@
 
                                     <h4>Uh oh!</h4>	
                                     <p>${errorMessage}</p>
-                                    <button type ="button" class="btn btn-success" data-dismiss="modal" value="OK">Ok</button>
+                                    <input type ="button" class="btn btn-success" data-dismiss="modal" value="OK"></button>
                       
                             </div>
                         </div>
                     </div>
-                    </form>
                 </div>
 
             </c:if>

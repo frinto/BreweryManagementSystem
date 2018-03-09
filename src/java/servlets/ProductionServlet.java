@@ -79,7 +79,7 @@ public class ProductionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         String employeeId = (String) session.getAttribute("empId");
@@ -95,6 +95,7 @@ public class ProductionServlet extends HttpServlet {
         TankDB tankDB = new TankDB();
         FinishedInventoryDB finProdDB = new FinishedInventoryDB();
         DecimalFormat df = new DecimalFormat("#0.000");
+        String success = "success";
 
         //navigates to the production form to submit a new production
         if (action.equals("add")) {
@@ -119,7 +120,6 @@ public class ProductionServlet extends HttpServlet {
 
                 production = new Production(production.getProdId(), Integer.parseInt(quantity), date, Integer.parseInt(employeeId), Integer.parseInt(svNumber), productionType, Double.parseDouble(df.format(Double.parseDouble(expectedSvVolume))), Double.parseDouble(finishedSvVolume), gainLoss);
                 prodDB.insertProduction(production);
-                
 
                 List<Sv> svTankList = tankDB.getAllSV();
 
@@ -127,10 +127,11 @@ public class ProductionServlet extends HttpServlet {
 
                 request.setAttribute("prod", prodList);
                 request.setAttribute("sv", svTankList);
-                request.setAttribute("message", "Production Submitted");
+                request.setAttribute("success", success);
                 getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
 
             } catch (BrewDBException ex) {
+                request.setAttribute("errorMessage", "Error has occured, please try again.");
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ParseException ex) {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -138,24 +139,29 @@ public class ProductionServlet extends HttpServlet {
         } else if (action.equals("nextProduction")) {
             try {
                 List<Sv> svTankList = tankDB.getAllSV();
+                List<Finishedproduct> finProdList = finProdDB.getAllInventory();
+
                 for (int i = 0; i < svTankList.size(); i++) {
                     if (svTankList.get(i).getSvId() == Integer.parseInt(svNumber)) {
                         currentVolume = svTankList.get(i).getVolume();
                     }
                 }
-                
+
                 List<Finishedproduct> finList = finProdDB.getAllInventory();
                 for (int i = 0; i < finList.size(); i++) {
-                    if(finList.get(i).getProductName().equals(productionType)) {
+                    if (finList.get(i).getProductName().equals(productionType)) {
                         volumePerUnit = finList.get(i).getVolumePerUnit();
                     }
                 }
-                double totalProducedVolume = Double.parseDouble(quantity)*volumePerUnit;
+                double totalProducedVolume = Double.parseDouble(quantity) * volumePerUnit;
                 double expectedSvVolumeCalc = currentVolume - totalProducedVolume;
-                    if (expectedSvVolumeCalc < 0) {
-                        request.setAttribute("message", "Expected sv volume cannot be less than zero.");
-                        getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
-                    }
+                if (expectedSvVolumeCalc < 0) {
+                    request.setAttribute("errorMessage", "Expected sv volume cannot be less than zero.");
+                    request.setAttribute("finishedProd", finProdList);
+                    request.setAttribute("sv", svTankList);
+                    request.setAttribute("action", "add");
+                    getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
+                }
                 request.setAttribute("expectedSvVolume", expectedSvVolumeCalc);
                 request.setAttribute("productionType", productionType);
                 request.setAttribute("quantity", quantity);
@@ -163,12 +169,11 @@ public class ProductionServlet extends HttpServlet {
 
                 request.setAttribute("action", action);
 
-
                 getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
             } catch (BrewDBException ex) {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            } else {
+        } else {
             getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
         }
     }
