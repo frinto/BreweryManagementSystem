@@ -82,6 +82,12 @@
                                 <p>Reports</p>
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Production Schedule</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

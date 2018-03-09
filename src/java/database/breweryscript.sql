@@ -397,8 +397,22 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `productionschedule` (
   `date` DATE NOT NULL,
   `brew` VARCHAR(255) NULL,
+  `fv` VARCHAR(255) NULL,
+  `yst` VARCHAR(255) NULL,
+  `transfer` VARCHAR(255) NULL,
+  `fuge` VARCHAR(255) NULL,
+  `clean` VARCHAR(255) NULL,
+  `keg` VARCHAR(255) NULL,
+  `bottle` VARCHAR(255) NULL,
+  `can` VARCHAR(255) NULL,
   PRIMARY KEY (`date`))
 ENGINE = InnoDB;
+
+INSERT INTO `productionschedule` VALUES ('2018-03-05', null,null, null, null, null, null, null, null, null);
+INSERT INTO `productionschedule` VALUES ('2018-03-06', null,null, null, null, null, null, null, null, null);
+INSERT INTO `productionschedule` VALUES ('2018-03-07', null,null, null, null, null, null, null, null, null);
+INSERT INTO `productionschedule` VALUES ('2018-03-08', null,null, null, null, null, null, null, null, null);
+INSERT INTO `productionschedule` VALUES ('2018-03-09', null,null, null, null, null, null, null, null, null);
 
 SHOW WARNINGS;
 
