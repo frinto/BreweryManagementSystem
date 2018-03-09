@@ -307,6 +307,9 @@
                     </table>
                     <button type="submit" class="btn btn-success">update</button>
                 </form>
+                <form form action="productionSchedule?action=clear" id="pForm" method="post" class="finishedInventoryUpdateButton">
+                    <button type="submit" class="btn btn-success">clear</button>
+                </form>
             </div>
         </div>
     </body>
