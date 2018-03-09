@@ -115,7 +115,6 @@
 
                 <!--End nav bar-------------------------------------------------------------------------->
 
-
                 <h1>Production Schedule</h1>
                 <form action="productionSchedule?action=update" id="pForm" method="post" class="finishedInventoryUpdateButton">
                     <table class="table">
@@ -132,178 +131,215 @@
                                 <th>can</th>
                             </tr>
                         </thead>
+                        <div id="sample">
+                            <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">
+                                    //<![CDATA[
+                                    bkLib.onDomLoaded(function () {
+                                        var myNicEditor = new nicEditor();
+                                        myNicEditor.setPanel('myNicPanel');
+                                        myNicEditor.addInstance('myInstance1');
+                                        myNicEditor.addInstance('myInstance2');
+                                        myNicEditor.addInstance('myInstance3');
+                                        myNicEditor.addInstance('myInstance4');
+                                        myNicEditor.addInstance('myInstance5');
+                                        myNicEditor.addInstance('myInstance6');
+                                        myNicEditor.addInstance('myInstance7');
+                                        myNicEditor.addInstance('myInstance8');
+                                        myNicEditor.addInstance('myInstance9');
+                                        myNicEditor.addInstance('myInstance10');
+                                        myNicEditor.addInstance('myInstance11');
+                                        myNicEditor.addInstance('myInstance12');
+                                        myNicEditor.addInstance('myInstance13');
+                                        myNicEditor.addInstance('myInstance14');
+                                        myNicEditor.addInstance('myInstance15');
+                                        myNicEditor.addInstance('myInstance16');
+                                        myNicEditor.addInstance('myInstance17');
+                                        myNicEditor.addInstance('myInstance18');
+                                        myNicEditor.addInstance('myInstance19');
+                                        myNicEditor.addInstance('myInstance20');
+                                        myNicEditor.addInstance('myInstance21');
+                                        myNicEditor.addInstance('myInstance22');
+                                        myNicEditor.addInstance('myInstance23');
+                                        myNicEditor.addInstance('myInstance24');
+                                        myNicEditor.addInstance('myInstance25');
+                                        myNicEditor.addInstance('myInstance26');
+                                        myNicEditor.addInstance('myInstance27');
+                                    });
+                                    //]]>
+                            </script>
+                            <div id="myNicPanel" style="width: 525px;"></div><br />
 
 
-                        <tr>
-                            <td>Monday</td>
-                            <c:forEach var="var" items="${productionSchedules}">
-                                <c:if test="${var.getDayOfWeek() =='monday'}">
-                                    <td>
-                                        <textarea rows="4" cols="10" name="brewMon" form="pForm">${var.brew}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="fvMon" form="pForm">${var.fv}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="ystMon" form="pForm">${var.yst}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="transferMon" form="pForm">${var.transfer}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="fugeMon" form="pForm">${var.fuge}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="cleanMon" form="pForm">${var.clean}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="kegMon" form="pForm">${var.keg}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="bottleMon" form="pForm">${var.bottle}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="canMon" form="pForm">${var.can}</textarea>
-                                    </td>
-                                </c:if>
-                            </c:forEach>
-                        </tr>
-                        <tr>
-                            <td>Tuesday</td>
-                            <c:forEach var="var" items="${productionSchedules}">
-                                <c:if test="${var.getDayOfWeek() =='tuesday'}">
-                                    <td>
-                                        <textarea rows="4" cols="10" name="brewTues" form="pForm">${var.brew}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="fvTues" form="pForm">${var.fv}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="ystTues" form="pForm">${var.yst}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="transferTues" form="pForm">${var.transfer}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="fugeTues" form="pForm">${var.fuge}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="cleanTues" form="pForm">${var.clean}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="kegTues" form="pForm">${var.keg}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="bottleTues" form="pForm">${var.bottle}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="canTues" form="pForm">${var.can}</textarea>
-                                    </td>
-                                </c:if>
-                            </c:forEach>
-                        </tr>
-                        <tr>
-                            <td>Wednesday</td>
-                            <c:forEach var="var" items="${productionSchedules}">
-                                <c:if test="${var.getDayOfWeek() =='wednesday'}">
-                                    <td>
-                                        <textarea rows="4" cols="10" name="brewWed" form="pForm">${var.brew}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="fvWed" form="pForm">${var.fv}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="ystWed" form="pForm">${var.yst}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="transferWed" form="pForm">${var.transfer}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="fugeWed" form="pForm">${var.fuge}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="cleanWed" form="pForm">${var.clean}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="kegWed" form="pForm">${var.keg}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="bottleWed" form="pForm">${var.bottle}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="canWed" form="pForm">${var.can}</textarea>
-                                    </td>
-                                </c:if>
-                            </c:forEach>
-                        </tr>
-                        <tr>
-                            <td>Thursday</td>
-                            <c:forEach var="var" items="${productionSchedules}">
-                                <c:if test="${var.getDayOfWeek() =='thursday'}">
-                                    <td>
-                                        <textarea rows="4" cols="10" name="brewThurs" form="pForm">${var.brew}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="fvThurs" form="pForm">${var.fv}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="ystThurs" form="pForm">${var.yst}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="transferThurs" form="pForm">${var.transfer}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="fugeThurs" form="pForm">${var.fuge}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="cleanThurs" form="pForm">${var.clean}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="kegThurs" form="pForm">${var.keg}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="bottleThurs" form="pForm">${var.bottle}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="canThurs" form="pForm">${var.can}</textarea>
-                                    </td>
-                                </c:if>
-                            </c:forEach>
-                        </tr>
-                        <tr>
-                            <td>Friday</td>
-                            <c:forEach var="var" items="${productionSchedules}">
-                                <c:if test="${var.getDayOfWeek() =='friday'}">
-                                    <td>
-                                        <textarea rows="4" cols="10" name="brewFri" form="pForm">${var.brew}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="fvFri" form="pForm">${var.fv}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="ystFri" form="pForm">${var.yst}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="transferFri" form="pForm">${var.transfer}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="fugeFri" form="pForm">${var.fuge}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="cleanFri" form="pForm">${var.clean}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="kegFri" form="pForm">${var.keg}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="bottleFri" form="pForm">${var.bottle}</textarea>
-                                    </td>
-                                    <td>
-                                        <textarea rows="4" cols="10" name="canFri" form="pForm">${var.can}</textarea>
-                                    </td>
-                                </c:if>
-                            </c:forEach>
-                        </tr>
+                            <tr>
+                                <td>Monday</td>
+                                <c:forEach var="var" items="${productionSchedules}">
+                                    <c:if test="${var.getDayOfWeek() =='monday'}">
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance1" name="brewMon" form="pForm">${var.brew}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance2" name="fvMon" form="pForm">${var.fv}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance3" name="ystMon" form="pForm">${var.yst}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id ="myInstance4" name="transferMon" form="pForm">${var.transfer}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance5" name="fugeMon" form="pForm">${var.fuge}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance6" name="cleanMon" form="pForm">${var.clean}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance7" name="kegMon" form="pForm">${var.keg}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance8" name="bottleMon" form="pForm">${var.bottle}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance9"name="canMon" form="pForm">${var.can}</textarea>
+                                        </td>
+                                    </c:if>
+                                </c:forEach>
+                            </tr>
+                            <tr>
+                                <td>Tuesday</td>
+                                <c:forEach var="var" items="${productionSchedules}">
+                                    <c:if test="${var.getDayOfWeek() =='tuesday'}">
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance10" name="brewTues" form="pForm">${var.brew}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance11" name="fvTues" form="pForm">${var.fv}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance12" name="ystTues" form="pForm">${var.yst}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance13" name="transferTues" form="pForm">${var.transfer}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance14" name="fugeTues" form="pForm">${var.fuge}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance15" name="cleanTues" form="pForm">${var.clean}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance16" name="kegTues" form="pForm">${var.keg}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance17" name="bottleTues" form="pForm">${var.bottle}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance18" name="canTues" form="pForm">${var.can}</textarea>
+                                        </td>
+                                    </c:if>
+                                </c:forEach>
+                            </tr>
+                            <tr>
+                                <td>Wednesday</td>
+                                <c:forEach var="var" items="${productionSchedules}">
+                                    <c:if test="${var.getDayOfWeek() =='wednesday'}">
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance19" name="brewWed" form="pForm">${var.brew}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance20" name="fvWed" form="pForm">${var.fv}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance21" name="ystWed" form="pForm">${var.yst}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance22" name="transferWed" form="pForm">${var.transfer}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance23" name="fugeWed" form="pForm">${var.fuge}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance24" name="cleanWed" form="pForm">${var.clean}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance25" name="kegWed" form="pForm">${var.keg}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance26" name="bottleWed" form="pForm">${var.bottle}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" id="myInstance27" name="canWed" form="pForm">${var.can}</textarea>
+                                        </td>
+                                    </c:if>
+                                </c:forEach>
+                            </tr>
+                            <tr>
+                                <td>Thursday</td>
+                                <c:forEach var="var" items="${productionSchedules}">
+                                    <c:if test="${var.getDayOfWeek() =='thursday'}">
+                                        <td>
+                                            <textarea rows="4" cols="10" name="brewThurs" form="pForm">${var.brew}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="fvThurs" form="pForm">${var.fv}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="ystThurs" form="pForm">${var.yst}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="transferThurs" form="pForm">${var.transfer}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="fugeThurs" form="pForm">${var.fuge}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="cleanThurs" form="pForm">${var.clean}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="kegThurs" form="pForm">${var.keg}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="bottleThurs" form="pForm">${var.bottle}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="canThurs" form="pForm">${var.can}</textarea>
+                                        </td>
+                                    </c:if>
+                                </c:forEach>
+                            </tr>
+                            <tr>
+                                <td>Friday</td>
+                                <c:forEach var="var" items="${productionSchedules}">
+                                    <c:if test="${var.getDayOfWeek() =='friday'}">
+                                        <td>
+                                            <textarea rows="4" cols="10" name="brewFri" form="pForm">${var.brew}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="fvFri" form="pForm">${var.fv}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="ystFri" form="pForm">${var.yst}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="transferFri" form="pForm">${var.transfer}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="fugeFri" form="pForm">${var.fuge}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="cleanFri" form="pForm">${var.clean}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="kegFri" form="pForm">${var.keg}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="bottleFri" form="pForm">${var.bottle}</textarea>
+                                        </td>
+                                        <td>
+                                            <textarea rows="4" cols="10" name="canFri" form="pForm">${var.can}</textarea>
+                                        </td>
+                                    </c:if>
+                                </c:forEach>
+                            </tr>
                     </table>
                     <button type="submit" class="btn btn-success">update</button>
                 </form>
