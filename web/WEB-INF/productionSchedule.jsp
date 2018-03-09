@@ -185,7 +185,7 @@
                                     });
                                     //]]>
                             </script>
-                            <div id="myNicPanel" style="width: 525px;"></div>
+                            <div id="myNicPanel" style="width: 100%;"></div>
                             <tr>
                                 <td>Monday</td>
                                 <c:forEach var="var" items="${productionSchedules}">
