@@ -32,7 +32,7 @@
             <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <image src ="assets/img/logo4.png">
+                        <image src ="assets/img/logo.png">
 
                     </div>
 
@@ -118,7 +118,7 @@
 
                 <!--End nav bar-------------------------------------------------------------------------->
 
-                <h1>Production</h1>
+                <h1 class="leftSpacingh1">Production</h1>
                 <c:choose>
                     <c:when test="${action == 'add'}">
                         <form action="production?action=nextProduction" method="POST">
@@ -191,13 +191,13 @@
                         </form>
                     </c:when>
                     <c:otherwise>
-                        <form class ="datepicker" action="production" method="GET">
+                        <form class ="datepicker productionDate" action="production" method="GET">
                             <h4>View Productions by Date:</h4>
                             <input type="date" name="productionDate" id="datePicker">
                             <button type="submit" class="btn btn-outline-primary">Select Date</button>
                         </form>
-                        <form action="production?action=add" method="POST" class="productionButton">
-                            <button type="submit" class="btn btn-success">Add Production</button>
+                        <form action="production?action=add" method="POST">
+                            <button type="submit" class="btn btn-success productionButton">Add Production</button>
                             <table class="table">
                                 <thead class="thead-dark">
                                 <th>Date</th>
