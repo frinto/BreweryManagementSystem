@@ -22,6 +22,9 @@ public class ReportServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        
+        
+        request.setAttribute("reportData", "greetings from the backend!");
         getServletContext().getRequestDispatcher("/WEB-INF/reports.jsp").forward(request, response);
     }
 

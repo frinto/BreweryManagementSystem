@@ -1,8 +1,7 @@
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,17 +21,21 @@
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
         <link href="assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
         <link href="assets/css/override.css" rel="stylesheet" />
+        <link href="assets/css/successmodal.css" rel="stylesheet" />
     </head>
 
-    <body>
+    <body onbeforeunload="">
+
         <div class="wrapper">
 
             <!--Nav bar----------------------------------------------------------------------------->
             <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <image src ="assets/img/logo.png">
+                        <image src ="assets/img/logo4.png">
+
                     </div>
+
                     <ul class="nav">
                         <li>
                             <a class="nav-link" href="tankFarm">
@@ -83,6 +86,12 @@
                                 <p>Reports</p>
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Production Schedule</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -90,13 +99,13 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand"> Brew </a>
+                        <a class="navbar-brand"></a>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Matthew
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">Logout</button>
+                                <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
                             </div>
                         </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -189,7 +198,6 @@
                         </form>
                         <form action="production?action=add" method="POST" class="productionButton">
                             <button type="submit" class="btn btn-success">Add Production</button>
-                            <p class="productionMessage">${message}</p>
                             <table class="table">
                                 <thead class="thead-dark">
                                 <th>Date</th>
@@ -219,6 +227,63 @@
                         </form>
                     </c:otherwise>
                 </c:choose>
+
+                <!---------------------------------------------Success Modal-------------------------------------------------->
+                <c:if test="${success!=null}">
+
+                <div id="myModal" class="modal fade">
+
+                    <div class="modal-dialog modal-confirm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <div style="font-size:5em;">
+                                    <i class="far fa-check-circle"></i>
+                                </div>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <h4>Great!</h4>	
+                                <p>Production submitted successfully.</p>
+                                <input type ="button" class="btn btn-success"data-dismiss="modal" value="OK"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </c:if>
+
+                <!-------------------------------------------------End Success Modal------------------------------------------->
+
+                <c:if test="${errorMessage!=null}">
+
+                    <div id="myModal" class="modal fade">
+
+                        <div class="modal-dialog modal-confirm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!--                                <div class="icon-box">
+                                                                        <i class="far fa-check-circle"></i>
+                                                                    </div>-->
+                                    <div style="font-size:5em; color:red">
+                                        <i class="fas fa-times-circle"></i>
+                                    </div>
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body text-center">
+
+                                    <h4>Uh oh!</h4>	
+                                    <p>${errorMessage}</p>
+                                    <input type ="button" class="btn btn-success" data-dismiss="modal" value="OK"></button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </c:if>
                 </body>
                 <!--   Core JS Files   -->
                 <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -234,14 +299,7 @@
                 <script src="assets/js/plugins/bootstrap-notify.js"></script>
                 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
                 <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
-                <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
                 <script src="assets/js/production.js"></script>
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        // Javascript method's body can be found in assets/js/demos.js
-
-                    });
-                </script>
-
+                <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
                 </html>
 

@@ -129,7 +129,7 @@ public class RawInventoryServlet extends HttpServlet {
                 }
                 
                 
-                response.sendRedirect("finishedInventory");
+                response.sendRedirect("rawInventory");
                
             }
             if (actionBrewMaterial.equals("updateProductionMaterials")) {

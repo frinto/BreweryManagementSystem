@@ -30,9 +30,9 @@
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <image src ="assets/img/logo4.png">
-                        
+
                     </div>
-                    
+
                     <ul class="nav">
                         <li>
                             <a class="nav-link" href="tankFarm">
@@ -83,6 +83,12 @@
                                 <p>Reports</p>
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Production Schedule</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -96,7 +102,7 @@
                                 Matthew
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button" onclick="window.location.href='login?logout'">Logout</button>
+                                <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
                             </div>
                         </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,7 +133,7 @@
                     <!-- brew materials tab-->  
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <h3>Brew Materials</h3>
-
+                        <c:if test="${role == 1}">
                         <form action="rawInventory?action=addBrewMaterials" method="post" class="rawInventoryUpdateButton">
                             <table class="table">
                                 <thead class="thead-dark">
@@ -150,7 +156,7 @@
 
                             <button type="submit" class="btn btn-success">Add</button>
                         </form>
-
+                        </c:if>
 
                         <form action="rawInventory?action=updateBrewMaterials" method="post" class="rawInventoryUpdateButton">
                             <table class="table">
@@ -160,24 +166,28 @@
                                         <th>Quantity</th>
                                         <th>Units</th>
                                         <th>Type</th>
+                                        <c:if test="${role == 1}">
                                         <th>New Quantity</th>
+                                        </c:if>
                                     </tr>
                                 </thead>
-                                </tbody>
                                 <c:forEach var="brewList" items="${brewMaterials}">
                                     <tr>
                                         <td>${brewList.name}</td>
                                         <td>${brewList.qty}</td>
                                         <td>${brewList.units}</td>
                                         <td>${brewList.type}</td>
+                                        <c:if test="${role == 1}">
                                         <td>
                                             <input type="number" name="${brewList.name}" value="${brewList.qty}">
                                         </td>
+                                        </c:if>
                                     </tr>
                                 </c:forEach>
                             </table>
-
+                            <c:if test="${role == 1}">
                             <button type="submit" class="btn btn-success">Update Inventory</button>
+                            </c:if>
                         </form>
 
                     </div>
@@ -186,7 +196,7 @@
                     <!--production materials tab-->
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <h3>Production Materials</h3>
-
+                        <c:if test="${role == 1}">
                         <form action="rawInventory?action=addProductionMaterials" method="post" class="rawInventoryUpdateButton">
                             <table class="table">
                                 <thead class="thead-dark">
@@ -204,29 +214,33 @@
 
                             <button type="submit" class="btn btn-success">Add</button>
                         </form>
-
+                        </c:if>
                         <form action="rawInventory?action=updateProductionMaterials" method="post" class="rawInventoryUpdateButton">
                             <table class="table">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Name</th>
                                         <th>Quantity</th>
+                                        <c:if test="${role == 1}">
                                         <th>New Quantity</th>
+                                        </c:if>
                                     </tr>
                                 </thead>
-                                </tbody>
                                 <c:forEach var="prodList" items="${productionMaterials}">
                                     <tr>
                                         <td>${prodList.name}</td>
                                         <td>${prodList.qty}</td>
+                                        <c:if test="${role == 1}">
                                         <td>
                                             <input type="number" name="${prodList.name}" value="${prodList.qty}">
                                         </td>
+                                        </c:if>
                                     </tr>
                                 </c:forEach>
                             </table>
-
+                            <c:if test="${role == 1}">
                             <button type="submit" class="btn btn-success">Update Inventory</button>
+                            </c:if>
                         </form>
                     </div>
                     <!--end production materials tab-->
