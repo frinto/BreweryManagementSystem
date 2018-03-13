@@ -32,7 +32,7 @@
             <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <image src ="assets/img/logo4.png">
+                        <image src ="assets/img/logo.png">
                         
                     </div>
                     
