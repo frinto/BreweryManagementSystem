@@ -119,7 +119,8 @@
                 <form action="productionSchedule?action=update" id="pForm" method="post" class="finishedInventoryUpdateButton">
                     <table class="table">
                         <thead class="thead-dark">
-                            <tr><th>Date</th>
+                            <tr>
+                                <th>Date</th>
                                 <th>brew</th>
                                 <th>fv</th>
                                 <th>yst</th>
