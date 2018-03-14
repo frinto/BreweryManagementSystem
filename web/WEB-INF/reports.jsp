@@ -42,17 +42,20 @@
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
+          ['Blonde(6Pack)', ${blonde6qty}],
+          ['blonde 12 pack (flats)', ${blonde12qty}],
+          ['Blacksmith(6Pack)', ${black6qty}],
+          ['wit', ${witqty}],
+          ['bobby', ${bobbyqty}],
+          ['beachcomber', ${beachcomberqty}],
+          ['neighbour', ${neighbourqty}],
+          ['gardener', ${gardenerqty}]
         ]);
 
         // Set chart options
         var options = {'title':reportData,
-                       'width':400,
-                       'height':300};
+                       'width':600,
+                       'height':600};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
