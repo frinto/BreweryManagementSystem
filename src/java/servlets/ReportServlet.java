@@ -59,7 +59,7 @@ public class ReportServlet extends HttpServlet {
         List<Production> prodList;
         try {
             Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.DATE, -7);
+            cal.add(Calendar.DATE, -10);
             Date minDate = cal.getTime();
             prodList = prodDB.getProdByDateRange(minDate, new Date());
             request.setAttribute("prodList", prodList);
