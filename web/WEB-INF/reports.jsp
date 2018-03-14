@@ -60,6 +60,32 @@
         
         //-----------------END Finished Inventory Chart------------------------------------------------------------------
         
+        
+        //----------------START RAW INVENTORY CHART----------------------------------------------------------------------
+        
+        var titleProductionMaterials = '${reportDataProductionMaterials}';
+        
+        // Create the data table.
+        var dataProductionMaterials = new google.visualization.DataTable();
+        dataProductionMaterials.addColumn('string', 'Topping');
+        dataProductionMaterials.addColumn('number', 'Slices');
+        
+        <c:forEach var="prodList" items="${productionMaterials}">
+            dataProductionMaterials.addRows([
+                ['${prodList.name}', ${prodList.qty}]
+            ]);
+        </c:forEach>
+        
+
+        // Set chart options
+        var optionsProductionMaterials = {'title':titleProductionMaterials,
+                       'width':600,
+                       'height':600};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart2 = new google.visualization.PieChart(document.getElementById('chart_productionMaterials'));
+        chart2.draw(dataProductionMaterials, optionsProductionMaterials);
+        
       }
         </script>
     </head>
@@ -156,6 +182,8 @@
                 <!--End nav bar-------------------------------------------------------------------------->
         
           <div id="chart_finishedInventory"></div>
+          
+          <div id="chart_productionMaterials"></div>
                 
         </div>
       </div>
