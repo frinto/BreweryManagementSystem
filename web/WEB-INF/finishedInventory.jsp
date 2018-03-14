@@ -29,7 +29,7 @@
             <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <image src ="assets/img/logo4.png">
+                        <image src ="assets/img/logo.png">
                         
                     </div>
                     
@@ -81,6 +81,12 @@
                             <a class="nav-link" href="reports">
                                 <img src="assets/img/report.png" class="" alt="Norway">
                                 <p>Reports</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Production Schedule</p>
                             </a>
                         </li>
                     </ul>
@@ -144,7 +150,6 @@
                                 <th>Update</th>
                             </tr>
                         </thead>
-                        </tbody>
                         <c:forEach var="productName" items="${finishedProducts}">
                             <tr>
                                 <td>${productName.productName}</td>

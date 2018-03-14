@@ -228,25 +228,25 @@ CREATE TABLE IF NOT EXISTS `recipe` (
   `dateModified` DATE NULL,
   `mashInTemp` FLOAT NULL,
   `mashInTime` FLOAT NULL,
-  `mashWaterVolume` INT NULL,
-  `restTime` DECIMAL NULL,
-  `raiseToTemp` INT NULL,
-  `inTime` DECIMAL NULL,
-  `totalMashTime` DECIMAL NULL,
-  `underletLitres` INT NULL,
-  `rest` DECIMAL NULL,
-  `vorlaufTime` DECIMAL NULL,
+  `mashWaterVolume` FLOAT NULL,
+  `restTime` FLOAT NULL,
+  `raiseToTemp` FLOAT NULL,
+  `inTime` FLOAT NULL,
+  `totalMashTime` FLOAT NULL,
+  `underletLitres` FLOAT NULL,
+  `rest` FLOAT NULL,
+  `vorlaufTime` FLOAT NULL,
   `firstWortGrav` FLOAT NULL,
-  `runOffTime` DECIMAL NULL,
-  `spargVol` DECIMAL NULL,
+  `runOffTime` FLOAT NULL,
+  `spargVol` FLOAT NULL,
   `spargTemp` FLOAT NULL,
   `lastRunningsGrav` FLOAT NULL,
-  `kettleFullVol` DECIMAL NULL,
+  `kettleFullVol` FLOAT NULL,
   `kettleFullGrav` FLOAT NULL,
-  `boilTime` DECIMAL NULL,
-  `strikeOutVol` DECIMAL NULL,
+  `boilTime` FLOAT NULL,
+  `strikeOutVol` FLOAT NULL,
   `strikeOutGrav` FLOAT NULL,
-  `whirlPoolTime` DECIMAL NULL,
+  `whirlPoolTime` FLOAT NULL,
   `coolInTemp` FLOAT NULL,
   `oxygenRate` FLOAT NULL,
   `gypsumAmt` FLOAT NULL,
@@ -397,8 +397,22 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `productionschedule` (
   `date` DATE NOT NULL,
   `brew` VARCHAR(255) NULL,
+  `fv` VARCHAR(255) NULL,
+  `yst` VARCHAR(255) NULL,
+  `transfer` VARCHAR(255) NULL,
+  `fuge` VARCHAR(255) NULL,
+  `clean` VARCHAR(255) NULL,
+  `keg` VARCHAR(255) NULL,
+  `bottle` VARCHAR(255) NULL,
+  `can` VARCHAR(255) NULL,
   PRIMARY KEY (`date`))
 ENGINE = InnoDB;
+
+INSERT INTO `productionschedule` VALUES ('2018-03-05', null,null, null, null, null, null, null, null, null);
+INSERT INTO `productionschedule` VALUES ('2018-03-06', null,null, null, null, null, null, null, null, null);
+INSERT INTO `productionschedule` VALUES ('2018-03-07', null,null, null, null, null, null, null, null, null);
+INSERT INTO `productionschedule` VALUES ('2018-03-08', null,null, null, null, null, null, null, null, null);
+INSERT INTO `productionschedule` VALUES ('2018-03-09', null,null, null, null, null, null, null, null, null);
 
 SHOW WARNINGS;
 

@@ -32,7 +32,7 @@
             <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <image src ="assets/img/logo4.png">
+                        <image src ="assets/img/logo.png">
                         
                     </div>
                     
@@ -84,6 +84,12 @@
                             <a class="nav-link" href="reports">
                                 <img src="assets/img/report.png" class="" alt="Norway">
                                 <p>Reports</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Production Schedule</p>
                             </a>
                         </li>
                     </ul>
@@ -634,11 +640,10 @@
                             <div class="modal-body text-center">
                                     <h4>Great!</h4>	
                                     <p>Brew submitted successfully.</p>
-                                    <input type ="button" class="btn btn-success"data-dismiss="modal" value="OK">Ok</button>
+                                    <input type ="button" class="btn btn-success"data-dismiss="modal" value="OK"></button>
                             </div>
                         </div>
                     </div>
-                    </form>
                 </div>
 
             </c:if>
@@ -665,12 +670,11 @@
 
                                     <h4>Uh oh!</h4>	
                                     <p>${errorMessage}</p>
-                                    <button type ="button" class="btn btn-success" data-dismiss="modal" value="OK">Ok</button>
+                                    <input type ="button" class="btn btn-success" data-dismiss="modal" value="OK"></button>
                       
                             </div>
                         </div>
                     </div>
-                    </form>
                 </div>
 
             </c:if>

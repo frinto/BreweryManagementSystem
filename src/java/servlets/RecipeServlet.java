@@ -11,7 +11,9 @@ import dataaccess.RecipeDB;
 import domainmodel.Brewmaterials;
 import domainmodel.Recipe;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -98,8 +100,7 @@ public class RecipeServlet extends HttpServlet {
         
         float mashInTemp = Float.parseFloat(request.getParameter("mashInTemp"));
         float mashInTime = Float.parseFloat(request.getParameter("mashInTime"));
-        float mashWaterVolume = Float.parseFloat(request.getParameter("mashWaterVolume"));
-        
+        float mashWaterVolume = Float.parseFloat(request.getParameter("mashWaterVolume"));        
         float restTime = Float.parseFloat(request.getParameter("restTime"));
         float raiseToTemp = Float.parseFloat(request.getParameter("raiseToTemp"));
         float inTime = Float.parseFloat(request.getParameter("inTime"));
@@ -117,9 +118,63 @@ public class RecipeServlet extends HttpServlet {
         float boilTime = Float.parseFloat(request.getParameter("boilTime"));
         float strikeOutVol = Float.parseFloat(request.getParameter("strikeOutVol"));
         float strikeOutGrav = Float.parseFloat(request.getParameter("strikeOutGrav"));
-        float kettleStrikeOutVol = Float.parseFloat(request.getParameter("strikeOutVol"));
+        float whirlPoolTime = Float.parseFloat(request.getParameter("whirlPoolTime"));
+        float coolInTemp = Float.parseFloat(request.getParameter("coolInTemp"));
+        float oxygenRate = Float.parseFloat(request.getParameter("oxygenRate"));
+        float gypsumAmt = Float.parseFloat(request.getParameter("gypsumAmt"));
+        float sodiumChlorideAmt = Float.parseFloat(request.getParameter("sodiumChlorideAmt"));
+        float calciumChlorideAmt = Float.parseFloat(request.getParameter("calciumChlorideAmt"));
+        float phosphAcidAmt = Float.parseFloat(request.getParameter("phosphAcidAmt"));
         
-        float finalVolume = Float.parseFloat(request.getParameter("finalVolume"));
+        String firstHop = request.getParameter("firsrHopList");
+        float firstHopAmt = Float.parseFloat(request.getParameter("firstHopAmt"));
+        String secondHop = request.getParameter("secondhopList");
+        float secondHopAmt = Float.parseFloat(request.getParameter("secondHopAmt"));
+        String thirdHop = request.getParameter("thirdHopList");
+        float thirdHopAmt = Float.parseFloat(request.getParameter("thirdHopAmt"));
+        
+        String baseMalt = request.getParameter("baseMaltList");
+        float baseMaltAmt = Float.parseFloat(request.getParameter("baseMaltAmt"));
+        String secondMalt = request.getParameter("secondMaltList");
+        float secondMaltAmt = Float.parseFloat(request.getParameter("secondMaltAmt"));
+        String thirdMalt = request.getParameter("thirdMaltList");
+        float thirdMaltAmt = Float.parseFloat(request.getParameter("thirdMaltAmt"));
+        String fourthMalt = request.getParameter("fourthMaltList");
+        float fourthMaltAmt = Float.parseFloat(request.getParameter("fourthMaltAmt"));
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String startDate = sdf.format(new Date());
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        RecipeDB recipeDB = new RecipeDB();
+        
+        Recipe recipe = new Recipe(recipeName,date,mashInTemp,mashInTime,mashWaterVolume,restTime,raiseToTemp,inTime,
+        totalMashTime,underletLitres,lauterRestTime,vorlaufTime,firstWortGrav,runOffTime,spargVol,spargTemp,
+        lastRunnings,kettleFullVol,kettleFullGrav,boilTime,strikeOutVol,strikeOutGrav,whirlPoolTime,
+        coolInTemp,oxygenRate,gypsumAmt,sodiumChlorideAmt,calciumChlorideAmt,phosphAcidAmt,firstHop,firstHopAmt,
+        secondHop,secondHopAmt,thirdHop,thirdHopAmt,baseMalt,baseMaltAmt,secondMalt,secondMaltAmt,thirdMalt,
+        thirdMaltAmt,fourthMalt,fourthMaltAmt);
+        
+        
+        try {
+        
+        
+             recipeDB.insert(recipe);
+        } catch (BrewDBException ex) {
+            Logger.getLogger(RecipeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+
+        
+        
+
         
     }
 

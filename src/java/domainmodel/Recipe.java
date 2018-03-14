@@ -72,6 +72,52 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Recipe.findByFourthMaltAmt", query = "SELECT r FROM Recipe r WHERE r.fourthMaltAmt = :fourthMaltAmt")})
 public class Recipe implements Serializable {
 
+    public Recipe(String recipeName, Date dateModified, Float mashInTemp, Float mashInTime, Float mashWaterVolume, Float restTime, Float raiseToTemp, Float inTime, Float totalMashTime, Float underletLitres, Float rest, Float vorlaufTime, Float firstWortGrav, Float runOffTime, Float spargVol, Float spargTemp, Float lastRunningsGrav, Float kettleFullVol, Float kettleFullGrav, Float boilTime, Float strikeOutVol, Float strikeOutGrav, Float whirlPoolTime, Float coolInTemp, Float oxygenRate, Float gypsumAmt, Float calciumChlorideAmt, Float sodiumChlorideAmt, Float phosphAcidAmt, String firstHop, Float firstHopAmt, String secondHop, Float secondHopAmt, String thirdHop, Float thirdHopAmt, String baseMalt, Float baseMaltAmt, String secondMalt, Float secondMaltAmt, String thirdMalt, Float thirdMaltAmt, String fourthMalt, Float fourthMaltAmt) {
+        this.recipeName = recipeName;
+        this.dateModified = dateModified;
+        this.mashInTemp = mashInTemp;
+        this.mashInTime = mashInTime;
+        this.mashWaterVolume = mashWaterVolume;
+        this.restTime = restTime;
+        this.raiseToTemp = raiseToTemp;
+        this.inTime = inTime;
+        this.totalMashTime = totalMashTime;
+        this.underletLitres = underletLitres;
+        this.rest = rest;
+        this.vorlaufTime = vorlaufTime;
+        this.firstWortGrav = firstWortGrav;
+        this.runOffTime = runOffTime;
+        this.spargVol = spargVol;
+        this.spargTemp = spargTemp;
+        this.lastRunningsGrav = lastRunningsGrav;
+        this.kettleFullVol = kettleFullVol;
+        this.kettleFullGrav = kettleFullGrav;
+        this.boilTime = boilTime;
+        this.strikeOutVol = strikeOutVol;
+        this.strikeOutGrav = strikeOutGrav;
+        this.whirlPoolTime = whirlPoolTime;
+        this.coolInTemp = coolInTemp;
+        this.oxygenRate = oxygenRate;
+        this.gypsumAmt = gypsumAmt;
+        this.calciumChlorideAmt = calciumChlorideAmt;
+        this.sodiumChlorideAmt = sodiumChlorideAmt;
+        this.phosphAcidAmt = phosphAcidAmt;
+        this.firstHop = firstHop;
+        this.firstHopAmt = firstHopAmt;
+        this.secondHop = secondHop;
+        this.secondHopAmt = secondHopAmt;
+        this.thirdHop = thirdHop;
+        this.thirdHopAmt = thirdHopAmt;
+        this.baseMalt = baseMalt;
+        this.baseMaltAmt = baseMaltAmt;
+        this.secondMalt = secondMalt;
+        this.secondMaltAmt = secondMaltAmt;
+        this.thirdMalt = thirdMalt;
+        this.thirdMaltAmt = thirdMaltAmt;
+        this.fourthMalt = fourthMalt;
+        this.fourthMaltAmt = fourthMaltAmt;
+    }
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -86,43 +132,43 @@ public class Recipe implements Serializable {
     @Column(name = "mashInTime")
     private Float mashInTime;
     @Column(name = "mashWaterVolume")
-    private Integer mashWaterVolume;
+    private Float mashWaterVolume;
     @Column(name = "restTime")
-    private Long restTime;
+    private Float restTime;
     @Column(name = "raiseToTemp")
-    private Integer raiseToTemp;
+    private Float raiseToTemp;
     @Column(name = "inTime")
-    private Long inTime;
+    private Float inTime;
     @Column(name = "totalMashTime")
-    private Long totalMashTime;
+    private Float totalMashTime;
     @Column(name = "underletLitres")
-    private Integer underletLitres;
+    private Float underletLitres;
     @Column(name = "rest")
-    private Long rest;
+    private Float rest;
     @Column(name = "vorlaufTime")
-    private Long vorlaufTime;
+    private Float vorlaufTime;
     @Column(name = "firstWortGrav")
     private Float firstWortGrav;
     @Column(name = "runOffTime")
-    private Long runOffTime;
+    private Float runOffTime;
     @Column(name = "spargVol")
-    private Long spargVol;
+    private Float spargVol;
     @Column(name = "spargTemp")
     private Float spargTemp;
     @Column(name = "lastRunningsGrav")
     private Float lastRunningsGrav;
     @Column(name = "kettleFullVol")
-    private Long kettleFullVol;
+    private Float kettleFullVol;
     @Column(name = "kettleFullGrav")
     private Float kettleFullGrav;
     @Column(name = "boilTime")
-    private Long boilTime;
+    private Float boilTime;
     @Column(name = "strikeOutVol")
-    private Long strikeOutVol;
+    private Float strikeOutVol;
     @Column(name = "strikeOutGrav")
     private Float strikeOutGrav;
     @Column(name = "whirlPoolTime")
-    private Long whirlPoolTime;
+    private Float whirlPoolTime;
     @Column(name = "coolInTemp")
     private Float coolInTemp;
     @Column(name = "oxygenRate")
@@ -203,67 +249,67 @@ public class Recipe implements Serializable {
         this.mashInTime = mashInTime;
     }
 
-    public Integer getMashWaterVolume() {
+    public Float getMashWaterVolume() {
         return mashWaterVolume;
     }
 
-    public void setMashWaterVolume(Integer mashWaterVolume) {
+    public void setMashWaterVolume(Float mashWaterVolume) {
         this.mashWaterVolume = mashWaterVolume;
     }
 
-    public Long getRestTime() {
+    public Float getRestTime() {
         return restTime;
     }
 
-    public void setRestTime(Long restTime) {
+    public void setRestTime(Float restTime) {
         this.restTime = restTime;
     }
 
-    public Integer getRaiseToTemp() {
+    public Float getRaiseToTemp() {
         return raiseToTemp;
     }
 
-    public void setRaiseToTemp(Integer raiseToTemp) {
+    public void setRaiseToTemp(Float raiseToTemp) {
         this.raiseToTemp = raiseToTemp;
     }
 
-    public Long getInTime() {
+    public Float getInTime() {
         return inTime;
     }
 
-    public void setInTime(Long inTime) {
+    public void setInTime(Float inTime) {
         this.inTime = inTime;
     }
 
-    public Long getTotalMashTime() {
+    public Float getTotalMashTime() {
         return totalMashTime;
     }
 
-    public void setTotalMashTime(Long totalMashTime) {
+    public void setTotalMashTime(Float totalMashTime) {
         this.totalMashTime = totalMashTime;
     }
 
-    public Integer getUnderletLitres() {
+    public Float getUnderletLitres() {
         return underletLitres;
     }
 
-    public void setUnderletLitres(Integer underletLitres) {
+    public void setUnderletLitres(Float underletLitres) {
         this.underletLitres = underletLitres;
     }
 
-    public Long getRest() {
+    public Float getRest() {
         return rest;
     }
 
-    public void setRest(Long rest) {
+    public void setRest(Float rest) {
         this.rest = rest;
     }
 
-    public Long getVorlaufTime() {
+    public Float getVorlaufTime() {
         return vorlaufTime;
     }
 
-    public void setVorlaufTime(Long vorlaufTime) {
+    public void setVorlaufTime(Float vorlaufTime) {
         this.vorlaufTime = vorlaufTime;
     }
 
@@ -275,19 +321,19 @@ public class Recipe implements Serializable {
         this.firstWortGrav = firstWortGrav;
     }
 
-    public Long getRunOffTime() {
+    public Float getRunOffTime() {
         return runOffTime;
     }
 
-    public void setRunOffTime(Long runOffTime) {
+    public void setRunOffTime(Float runOffTime) {
         this.runOffTime = runOffTime;
     }
 
-    public Long getSpargVol() {
+    public Float getSpargVol() {
         return spargVol;
     }
 
-    public void setSpargVol(Long spargVol) {
+    public void setSpargVol(Float spargVol) {
         this.spargVol = spargVol;
     }
 
@@ -307,11 +353,11 @@ public class Recipe implements Serializable {
         this.lastRunningsGrav = lastRunningsGrav;
     }
 
-    public Long getKettleFullVol() {
+    public Float getKettleFullVol() {
         return kettleFullVol;
     }
 
-    public void setKettleFullVol(Long kettleFullVol) {
+    public void setKettleFullVol(Float kettleFullVol) {
         this.kettleFullVol = kettleFullVol;
     }
 
@@ -323,19 +369,19 @@ public class Recipe implements Serializable {
         this.kettleFullGrav = kettleFullGrav;
     }
 
-    public Long getBoilTime() {
+    public Float getBoilTime() {
         return boilTime;
     }
 
-    public void setBoilTime(Long boilTime) {
+    public void setBoilTime(Float boilTime) {
         this.boilTime = boilTime;
     }
 
-    public Long getStrikeOutVol() {
+    public Float getStrikeOutVol() {
         return strikeOutVol;
     }
 
-    public void setStrikeOutVol(Long strikeOutVol) {
+    public void setStrikeOutVol(Float strikeOutVol) {
         this.strikeOutVol = strikeOutVol;
     }
 
@@ -347,11 +393,11 @@ public class Recipe implements Serializable {
         this.strikeOutGrav = strikeOutGrav;
     }
 
-    public Long getWhirlPoolTime() {
+    public Float getWhirlPoolTime() {
         return whirlPoolTime;
     }
 
-    public void setWhirlPoolTime(Long whirlPoolTime) {
+    public void setWhirlPoolTime(Float whirlPoolTime) {
         this.whirlPoolTime = whirlPoolTime;
     }
 

@@ -29,10 +29,10 @@
             <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <image src ="assets/img/logo4.png">
-                        
+                        <image src ="assets/img/logo.png">
+
                     </div>
-                    
+
                     <ul class="nav">
                         <li>
                             <a class="nav-link" href="tankFarm">
@@ -83,6 +83,12 @@
                                 <p>Reports</p>
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Production Schedule</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -96,7 +102,7 @@
                                 Matthew
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button" onclick="window.location.href='login?logout'">Logout</button>
+                                <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
                             </div>
                         </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">

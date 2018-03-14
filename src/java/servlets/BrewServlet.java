@@ -191,11 +191,12 @@ public class BrewServlet extends HttpServlet {
 
             brew = brewDB.insert(brew);
             fv.setVolume(newVolume);
+            
             if (fv.getBrew1() == 0) {
                 fv.setBrew1(brew.getBrewId());
             } else if (fv.getBrew1() != 0 && fv.getBrew2() == 0) {
                 fv.setBrew2(brew.getBrewId());
-            } else if (fv.getBrew3() != 0 && fv.getBrew1() != 0 && fv.getBrew2() == 0) {
+            } else if (fv.getBrew1() != 0 && fv.getBrew2() != 0 && fv.getBrew3() == 0) {
                 fv.setBrew3(brew.getBrewId());
             } else {
                 request.setAttribute("errorMessage", "Error, fermenter already has 3 brews. Please redo EVERYTHING");
