@@ -86,6 +86,31 @@
         var chart2 = new google.visualization.PieChart(document.getElementById('chart_productionMaterials'));
         chart2.draw(dataProductionMaterials, optionsProductionMaterials);
         
+        //---------------------Start brew materials-----------------------------------------------------------------------
+        
+        var titleBrewMaterials = '${reportDataBrewMaterials}';
+        
+        // Create the data table.
+        var dataBrewMaterials = new google.visualization.DataTable();
+        dataBrewMaterials.addColumn('string', 'Topping');
+        dataBrewMaterials.addColumn('number', 'Slices');
+        
+        <c:forEach var="brewList" items="${brewMaterials}">
+            dataBrewMaterials.addRows([
+                ['${brewList.name}', ${brewList.qty}]
+            ]);
+        </c:forEach>
+        
+
+        // Set chart options
+        var optionsBrewMaterials = {'title':titleBrewMaterials,
+                       'width':600,
+                       'height':600};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart3 = new google.visualization.PieChart(document.getElementById('chart_brewMaterials'));
+        chart3.draw(dataBrewMaterials, optionsBrewMaterials);
+        
       }
         </script>
     </head>
@@ -184,6 +209,8 @@
           <div id="chart_finishedInventory"></div>
           
           <div id="chart_productionMaterials"></div>
+          
+          <div id="chart_brewMaterials"></div>
                 
         </div>
       </div>
