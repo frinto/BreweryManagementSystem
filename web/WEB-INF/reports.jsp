@@ -58,8 +58,24 @@
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
         
+        // Create the data table.
+        var data2 = new google.visualization.DataTable();
+        data2.addColumn('string', 'Type');
+        data2.addColumn('number', 'Quantity');
+        
+        <c:forEach var="production" items="${prodList}">
+            data2.addRows([
+                ['${production.productionType}', ${production.quantity}]
+            ]);
+        </c:forEach>
+        
+
+        // Set chart options
+        var options2 = {'title':reportData,
+                       'width':600,
+                       'height':600};
         var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
-        chart2.draw(data,options)
+        chart2.draw(data2,options2)
       }
         </script>
     </head>
