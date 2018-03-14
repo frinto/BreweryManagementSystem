@@ -55,8 +55,11 @@
                        'height':600};
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_finishedInventory'));
-        chart.draw(dataFinishedInventory, optionsFinishedInventory);
+        var chartFinishedInventory = new google.visualization.PieChart(document.getElementById('chart_finishedInventory'));
+        chartFinishedInventory.draw(dataFinishedInventory, optionsFinishedInventory);
+        //-----------------END Finished Inventory Chart------------------------------------------------------------------
+    
+        //------------------MARTINS CHART-----------------------------------------
         // Create the data table.
         var data2 = new google.visualization.DataTable();
         data2.addColumn('string', 'Type');
@@ -70,15 +73,15 @@
         
 
         // Set chart options
-        var options2 = {'title':reportData,
+        var options2 = {'title':"Production Chart",
                        'width':600,
                        'height':600};
-        var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
-        chart2.draw(data2,options2)
-        //-----------------END Finished Inventory Chart------------------------------------------------------------------
+        var chartProduction = new google.visualization.PieChart(document.getElementById('chart_production'));
+        chartProduction.draw(data2,options2);
+        //-------------------END OF MARTINS CHART------------------------------------------------------
         
         
-        //----------------START RAW INVENTORY CHART----------------------------------------------------------------------
+        //----------------START PROD MAT CHART----------------------------------------------------------------------
         
         var titleProductionMaterials = '${reportDataProductionMaterials}';
         
@@ -87,9 +90,9 @@
         dataProductionMaterials.addColumn('string', 'Topping');
         dataProductionMaterials.addColumn('number', 'Slices');
         
-        <c:forEach var="prodList" items="${productionMaterials}">
+        <c:forEach var="prodMatList" items="${productionMaterials}">
             dataProductionMaterials.addRows([
-                ['${prodList.name}', ${prodList.qty}]
+                ['${prodMatList.name}', ${prodMatList.qty}]
             ]);
         </c:forEach>
         
@@ -100,8 +103,36 @@
                        'height':600};
 
         // Instantiate and draw our chart, passing in some options.
-        var chart4 = new google.visualization.PieChart(document.getElementById('chart_productionMaterials'));
-        chart4.draw(dataProductionMaterials, optionsProductionMaterials);
+        var chartProdMat = new google.visualization.PieChart(document.getElementById('chart_productionMaterials'));
+        chartProdMat.draw(dataProductionMaterials, optionsProductionMaterials);
+        //-----------------END PROD MAT CHART------------------------------------------------------------------
+        
+        //---------------------Start brew materials-----------------------------------------------------------------------
+        
+        var titleBrewMaterials = '${reportDataBrewMaterials}';
+        
+        // Create the data table.
+        var dataBrewMaterials = new google.visualization.DataTable();
+        dataBrewMaterials.addColumn('string', 'Topping');
+        dataBrewMaterials.addColumn('number', 'Slices');
+        
+        <c:forEach var="brewList" items="${brewMaterials}">
+            dataBrewMaterials.addRows([
+                ['${brewList.name}', ${brewList.qty}]
+            ]);
+        </c:forEach>
+        
+
+        // Set chart options
+        var optionsBrewMaterials = {'title':titleBrewMaterials,
+                       'width':600,
+                       'height':600};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chartBrewMat = new google.visualization.PieChart(document.getElementById('chart_brewMaterials'));
+        chartBrewMat.draw(dataBrewMaterials, optionsBrewMaterials);
+        
+        //-----------------------END BREW MATERIALS-------------------------------------------------------------------
         
       }
         </script>
@@ -198,9 +229,13 @@
 
                 <!--End nav bar-------------------------------------------------------------------------->
         
+          <div id="chart_production"></div>
           <div id="chart_finishedInventory"></div>
           
           <div id="chart_productionMaterials"></div>
+          
+          <div id="chart_brewMaterials"></div>
+
                 
         </div>
       </div>

@@ -10,6 +10,7 @@ import dataaccess.FinishedInventoryDB;
 import domainmodel.Finishedproduct;
 import dataaccess.ProductionDB;
 import dataaccess.RawInventoryDB;
+import domainmodel.Brewmaterials;
 import domainmodel.Production;
 import domainmodel.Productionmaterial;
 import java.io.IOException;
@@ -40,12 +41,16 @@ public class ReportServlet extends HttpServlet {
 
         try {
             List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
-            request.setAttribute("reportDataFinishedInventory", "Finished Inventory");
+            request.setAttribute("reportDataFinishedInventory", "Finished Inventory"); //title of chart
             request.setAttribute("finishedProducts", finishedProducts);
             
             List<Productionmaterial> productionMaterials = rawInventoryDatabase.getAllInventoryProductionMaterial();
-            request.setAttribute("reportDataProductionMaterials", "Production Materials");
+            request.setAttribute("reportDataProductionMaterials", "Production Materials"); // title of chart
             request.setAttribute("productionMaterials", productionMaterials);
+            
+            List<Brewmaterials> brewMaterials = rawInventoryDatabase.getAllInventoryBrewMaterial();
+            request.setAttribute("reportDataBrewMaterials", "Brew Materials"); // title of chart
+            request.setAttribute("brewMaterials", brewMaterials);
             
             
 
