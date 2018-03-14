@@ -37,6 +37,7 @@ public class ReportServlet extends HttpServlet {
 
         try {
             List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
+            request.setAttribute("reportDataFinishedInventory", "Finished Inventory");
             
             request.setAttribute("finishedProducts", finishedProducts);
             

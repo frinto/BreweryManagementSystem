@@ -35,31 +35,31 @@
       // draws it.
       function drawChart() {
         
-        var reportData = '${reportData}';
+        var titleFinishedInventory = '${reportDataFinishedInventory}';
         
         // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
+        var dataFinishedInventory = new google.visualization.DataTable();
+        dataFinishedInventory.addColumn('string', 'Topping');
+        dataFinishedInventory.addColumn('number', 'Slices');
         
         <c:forEach var="productName" items="${finishedProducts}">
-            data.addRows([
+            dataFinishedInventory.addRows([
                 ['${productName.productName}', ${productName.qty}]
             ]);
         </c:forEach>
         
 
         // Set chart options
-        var options = {'title':reportData,
+        var optionsFinishedInventory = {'title':titleFinishedInventory,
                        'width':600,
                        'height':600};
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
+        var chart = new google.visualization.PieChart(document.getElementById('chart_finishedInventory'));
+        chart.draw(dataFinishedInventory, optionsFinishedInventory);
         
-        var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
-        chart2.draw(data,options)
+        //-----------------END Finished Inventory Chart------------------------------------------------------------------
+        
       }
         </script>
     </head>
@@ -155,10 +155,7 @@
 
                 <!--End nav bar-------------------------------------------------------------------------->
         
-          <div id="chart_div"></div>
-          <div id="chart_div2"></div>
-                
-                
+          <div id="chart_finishedInventory"></div>
                 
         </div>
       </div>
