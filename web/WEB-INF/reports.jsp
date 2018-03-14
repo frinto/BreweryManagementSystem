@@ -60,6 +60,9 @@
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
+        
+        var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+        chart2.draw(data,options)
       }
         </script>
     </head>
@@ -156,6 +159,7 @@
                 <!--End nav bar-------------------------------------------------------------------------->
         
           <div id="chart_div"></div>
+          <div id="chart_div2"></div>
                 
                 
                 
