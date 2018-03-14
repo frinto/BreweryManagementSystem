@@ -41,16 +41,13 @@
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Blonde(6Pack)', ${blonde6qty}],
-          ['blonde 12 pack (flats)', ${blonde12qty}],
-          ['Blacksmith(6Pack)', ${black6qty}],
-          ['wit', ${witqty}],
-          ['bobby', ${bobbyqty}],
-          ['beachcomber', ${beachcomberqty}],
-          ['neighbour', ${neighbourqty}],
-          ['gardener', ${gardenerqty}]
-        ]);
+        
+        <c:forEach var="productName" items="${finishedProducts}">
+            data.addRows([
+                ['${productName.productName}', ${productName.qty}]
+            ]);
+        </c:forEach>
+        
 
         // Set chart options
         var options = {'title':reportData,

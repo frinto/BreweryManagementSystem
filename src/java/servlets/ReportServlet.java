@@ -38,14 +38,8 @@ public class ReportServlet extends HttpServlet {
         try {
             List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
             
-            request.setAttribute("beachcomberqty", finishedProducts.get(0).getQty());
-            request.setAttribute("black6qty", finishedProducts.get(1).getQty());
-            request.setAttribute("blonde12qty", finishedProducts.get(2).getQty());
-            request.setAttribute("blonde6qty", finishedProducts.get(3).getQty());
-            request.setAttribute("bobbyqty", finishedProducts.get(4).getQty());
-            request.setAttribute("gardenerqty", finishedProducts.get(5).getQty());
-            request.setAttribute("neighbourqty", finishedProducts.get(6).getQty());
-            request.setAttribute("witqty", finishedProducts.get(7).getQty());
+            request.setAttribute("finishedProducts", finishedProducts);
+            
             
 
         } catch (BrewDBException ex) {
