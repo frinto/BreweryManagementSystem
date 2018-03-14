@@ -6,6 +6,8 @@
 package dataaccess;
 
 import domainmodel.Production;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -97,5 +99,21 @@ public class ProductionDB {
         } finally {
             em.close();
         }
+    }
+    
+    public List<Production> getProdByDateRange (Date minDate, Date maxDate) throws BrewDBException {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            List<Production> prodList = em.createNamedQuery("Production.findByDateRange", Production.class)
+                    .setParameter("minDate", minDate)
+                    .setParameter("maxDate", maxDate)
+                    .getResultList();
+            return prodList;
+        } catch (Exception ex) {
+            Logger.getLogger(ProductionDB.class.getName()).log(Level.SEVERE, "Cannot read production", ex);
+            throw new BrewDBException("Error getting production");
+        } finally {
+            em.close();
+        }        
     }
 }

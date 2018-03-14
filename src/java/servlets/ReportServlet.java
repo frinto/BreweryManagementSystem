@@ -8,8 +8,13 @@ package servlets;
 import dataaccess.BrewDBException;
 import dataaccess.FinishedInventoryDB;
 import domainmodel.Finishedproduct;
+import dataaccess.ProductionDB;
+import domainmodel.Production;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,6 +54,19 @@ public class ReportServlet extends HttpServlet {
 
         }
 
+        
+        ProductionDB prodDB = new ProductionDB();
+        List<Production> prodList;
+        try {
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, -7);
+            Date minDate = cal.getTime();
+            prodList = prodDB.getProdByDateRange(minDate, new Date());
+            request.setAttribute("prodList", prodList);
+        } catch (BrewDBException ex) {
+            Logger.getLogger(ReportServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         request.setAttribute("reportData", "greetings from the backend!");
         getServletContext().getRequestDispatcher("/WEB-INF/reports.jsp").forward(request, response);
     }
