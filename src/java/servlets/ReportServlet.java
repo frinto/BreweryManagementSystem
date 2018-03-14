@@ -9,7 +9,9 @@ import dataaccess.BrewDBException;
 import dataaccess.FinishedInventoryDB;
 import domainmodel.Finishedproduct;
 import dataaccess.ProductionDB;
+import dataaccess.RawInventoryDB;
 import domainmodel.Production;
+import domainmodel.Productionmaterial;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -34,11 +36,16 @@ public class ReportServlet extends HttpServlet {
             throws ServletException, IOException {
 
         FinishedInventoryDB finishedDatabase = new FinishedInventoryDB();
+        RawInventoryDB rawInventoryDatabase = new RawInventoryDB();
 
         try {
             List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
-            
+            request.setAttribute("reportDataFinishedInventory", "Finished Inventory");
             request.setAttribute("finishedProducts", finishedProducts);
+            
+            List<Productionmaterial> productionMaterials = rawInventoryDatabase.getAllInventoryProductionMaterial();
+            request.setAttribute("reportDataProductionMaterials", "Production Materials");
+            request.setAttribute("productionMaterials", productionMaterials);
             
             
 
