@@ -48,7 +48,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Brew.findByAllInVolume", query = "SELECT b FROM Brew b WHERE b.allInVolume = :allInVolume")
     , @NamedQuery(name = "Brew.findByEmpId", query = "SELECT b FROM Brew b WHERE b.empId = :empId")
     , @NamedQuery(name = "Brew.findByFvId", query = "SELECT b FROM Brew b WHERE b.fvId = :fvId")
-    , @NamedQuery(name = "Brew.findByRecipeName", query = "SELECT b FROM Brew b WHERE b.recipeName = :recipeName")})
+    , @NamedQuery(name = "Brew.findByRecipeName", query = "SELECT b FROM Brew b WHERE b.recipeName = :recipeName")
+//    , @NamedQuery(name = "Brew.findMonthVolumeByRecipe", query = "SELECT SUM(b.allInVolume) FROM Brew b WHERE b.recipeName = :recipeName AND MONTH(date) = :monthNum AND YEAR(date) = :yearNum")
+})
 public class Brew implements Serializable {
 
     private static final long serialVersionUID = 1L;

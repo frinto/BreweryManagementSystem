@@ -5,8 +5,22 @@
  */
 package servlets;
 
+import dataaccess.BrewDBException;
+import dataaccess.FinishedInventoryDB;
+import domainmodel.Finishedproduct;
+import dataaccess.ProductionDB;
+import dataaccess.RawInventoryDB;
+import domainmodel.Brewmaterials;
+import domainmodel.Production;
+import domainmodel.Productionmaterial;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +31,47 @@ import javax.servlet.http.HttpServletResponse;
  * @author 727525
  */
 public class ReportServlet extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        FinishedInventoryDB finishedDatabase = new FinishedInventoryDB();
+        RawInventoryDB rawInventoryDatabase = new RawInventoryDB();
+
+        try {
+            List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
+            request.setAttribute("reportDataFinishedInventory", "Finished Inventory"); //title of chart
+            request.setAttribute("finishedProducts", finishedProducts);
+            
+            List<Productionmaterial> productionMaterials = rawInventoryDatabase.getAllInventoryProductionMaterial();
+            request.setAttribute("reportDataProductionMaterials", "Production Materials"); // title of chart
+            request.setAttribute("productionMaterials", productionMaterials);
+            
+            List<Brewmaterials> brewMaterials = rawInventoryDatabase.getAllInventoryBrewMaterial();
+            request.setAttribute("reportDataBrewMaterials", "Brew Materials"); // title of chart
+            request.setAttribute("brewMaterials", brewMaterials);
+            
+            
+
+        } catch (BrewDBException ex) {
+            Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("message", "error retrieving finished product list from database");
+
+        }
+
         
-        
+        ProductionDB prodDB = new ProductionDB();
+        List<Production> prodList;
+        try {
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, -10);
+            Date minDate = cal.getTime();
+            prodList = prodDB.getProdByDateRange(minDate, new Date());
+            request.setAttribute("prodList", prodList);
+        } catch (BrewDBException ex) {
+            Logger.getLogger(ReportServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         request.setAttribute("reportData", "greetings from the backend!");
         getServletContext().getRequestDispatcher("/WEB-INF/reports.jsp").forward(request, response);
@@ -39,7 +88,7 @@ public class ReportServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**

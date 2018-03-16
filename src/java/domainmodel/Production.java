@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Production.findByProductionType", query = "SELECT p FROM Production p WHERE p.productionType = :productionType")
     , @NamedQuery(name = "Production.findByExpectedSvVolume", query = "SELECT p FROM Production p WHERE p.expectedSvVolume = :expectedSvVolume")
     , @NamedQuery(name = "Production.findByFinishedSvVolume", query = "SELECT p FROM Production p WHERE p.finishedSvVolume = :finishedSvVolume")
-    , @NamedQuery(name = "Production.findByGainLoss", query = "SELECT p FROM Production p WHERE p.gainLoss = :gainLoss")})
+    , @NamedQuery(name = "Production.findByGainLoss", query = "SELECT p FROM Production p WHERE p.gainLoss = :gainLoss")
+    , @NamedQuery(name = "Production.findByDateRange", query = "SELECT p FROM Production p WHERE p.date > :minDate AND p.date < :maxDate")})
 public class Production implements Serializable {
 
     private static final long serialVersionUID = 1L;

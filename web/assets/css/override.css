@@ -113,6 +113,10 @@ hr { margin: 2px 20px 20px 20px; }
 
 }
 
+.productionDate {
+    padding-bottom: 5%;
+}
+
 /*-----------------------------Finished Inventory---------------------------------------*/
 .finishedInventoryUpdateButton{
 
