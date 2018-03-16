@@ -33,7 +33,6 @@ public class Account implements Serializable {
     protected AccountPK accountPK;
     @Column(name = "phoneNumber")
     private String phoneNumber;
-    
 
     public Account() {
     }
@@ -56,6 +55,10 @@ public class Account implements Serializable {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+    
+    public String getCompanyName() {
+        return accountPK.getCompanyName();
     }
 
     public void setPhoneNumber(String phoneNumber) {

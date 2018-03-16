@@ -108,11 +108,13 @@ public class DeliveryServlet extends HttpServlet
                     DeliveryDB deliveryDB = new DeliveryDB();
                     String companyName = request.getParameter("companyName");
                     HttpSession session = request.getSession();
-                    String empId = (String) session.getAttribute("empId");
+//                    int empId = (int) session.getAttribute("empId");
+//THIS IS HARDCODED SINCE THE LOGIN CURRENTLY DOES NOT WORK FOR SOME REASON THIS CAN BE REMOVED ONCE THE SITE WORKS PROPPERLY TALK TO JESSIE
+                    int empId = 1;
                     String dateS = request.getParameter("date");
                     Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateS);
                     Delivery delivery = new Delivery();
-                    delivery = new Delivery(delivery.getDeliveryId(), companyName, Integer.parseInt(empId), date);
+                    delivery = new Delivery(delivery.getDeliveryId(), companyName, empId, date);
                     deliveryDB.insert(delivery);
 
                     //Product
