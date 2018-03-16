@@ -166,6 +166,7 @@ public class RecipeServlet extends HttpServlet {
         
         
              recipeDB.insert(recipe);
+             session.setAttribute("newRecipe", null);
              getServletContext().getRequestDispatcher("/WEB-INF/recipe.jsp").forward(request, response);
         } catch (BrewDBException ex) {
             Logger.getLogger(RecipeServlet.class.getName()).log(Level.SEVERE, null, ex);

@@ -104,6 +104,9 @@
                                 Matthew
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button" onclick="window.location.href='login?logout'">Logout</button>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button" a href="login?logout">Logout</button>
                             </div>
                         </div>
