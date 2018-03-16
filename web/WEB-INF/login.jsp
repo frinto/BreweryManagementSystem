@@ -10,6 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="assets/css/override.css" rel="stylesheet" />
         <link rel="stylesheet" href="<c:url value='styles/style.css'/>" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -21,7 +22,7 @@
             }
 
             #loginbox {
-                margin-top: 10%;
+                margin-top: 5px;
             }
 
             #loginbox > div:first-child {        
@@ -72,15 +73,16 @@
 
     </head>
     <body>
+            
+            <image src ="assets/img/logoLogin.png" class="logoLogin">
+ 
         <div class="container">    
 
             <div id="loginbox" class="mainbox col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3"> 
 
 
                 <div class="panel panel-default" >
-                    <div class="panel-heading">
-                        <div class="panel-title text-center">Village Brewery Management</div>
-                    </div>     
+                       
 
                     <div class="panel-body" >
 

@@ -13,6 +13,17 @@
     background: none;
 }
 
+.logoLogin{
+    
+     display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+#loginbox {
+    margin-top: 5px;
+}
 
 .main-panel .navbar{
     

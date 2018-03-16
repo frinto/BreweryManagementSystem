@@ -10,7 +10,7 @@
 
 
 INSERT INTO `productionmaterialusage` (`materialQty`,`name`,`usage`) VALUES (24,'Blonde(6Pack)','PrivateMouldBottles');
-INSERT INTO `productionmaterialusage` (`materialQty`,`name`,`usage`) VALUES (4,'Blonde(6Pack)','Cartons(6Pack)Blonde');
+INSERT INTO `productionmaterialusage` (`materialQty`,`name`,`usage`) VALUES (4,'Blonde(6Pack)','Blonde(6pack)');
 INSERT INTO `productionmaterialusage` (`materialQty`,`name`,`usage`) VALUES (24,'Blonde(6Pack)','Crowns');
 INSERT INTO `productionmaterialusage` (`materialQty`,`name`,`usage`) VALUES (24,'Blonde(6Pack)','Labels(Blonde)');
 INSERT INTO `productionmaterialusage` (`materialQty`,`name`,`usage`) VALUES (24,'Blonde(6Pack)','473mlCansBlonde');

@@ -361,9 +361,9 @@ DROP TABLE IF EXISTS `recipematerials` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `recipematerials` (
-  `qty` double NULL,
-  `recipeName` VARCHAR(25) NOT NULL,
-  `brewMaterialsName` VARCHAR(15) NOT NULL)
+  `qty` float NULL,
+  `recipeName` VARCHAR(25) NULL,
+  `brewMaterialsName` VARCHAR(30) NULL)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
