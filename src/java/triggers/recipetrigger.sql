@@ -53,6 +53,10 @@ if(NEW.secondHop IS NOT NULL)
                 VALUES(NEW.secondHopAmt, NEW.recipeName, NEW.secondHop);
 end if;
 
+INSERT INTO recipematerials
+            (qty,recipeName,brewMaterialsName)
+                VALUES(NEW.baseMaltAmt, NEW.recipeName, NEW.baseMalt);
+
 
 
 if(NEW.thirdHop IS NOT NULL)
