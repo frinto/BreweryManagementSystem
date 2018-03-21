@@ -1,17 +1,382 @@
 <%-- 
-    Document   : manageEmployee
-    Created on : Mar 21, 2018, 1:40:01 PM
-    Author     : root
+    Document   : users
+    Created on : Nov 1, 2017, 2:02:39 PM
+    Author     : Administrator
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Manage Employee</title>
+        <meta charset="utf-8" />
+        <title>BMS</title> 
+        <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+
+        <!--     Fonts and icons     -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+        <!-- CSS Files -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <link href="assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
+        <link href="assets/css/override.css" rel="stylesheet" />
+        <link href="assets/css/successmodal.css" rel="stylesheet" />
     </head>
     <body>
-        <h1>Manage Employee</h1>
+        <!--Nav bar----------------------------------------------------------------------------->
+            <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+                <div class="sidebar-wrapper">
+                    <div class="logo">
+                        <image src ="assets/img/logo.png">
+                        
+                    </div>
+                    
+                    <ul class="nav">
+                        <li>
+                            <a class="nav-link" href="tankFarm">
+                                <i class ="navIcon" icon="assets/img/farm.png"></i>
+                                <img src="assets/img/farm.png" class="" alt="Norway">
+                                <p style ="padding-left:5px">Tank Farm</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="production">
+                                <img src="assets/img/barrel.png" class="" alt="Norway">
+                                <p style ="padding-left:5px">Production</p>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="brew">
+                                <img src="assets/img/brew.png" class="" alt="Norway">
+                                <p style ="padding-left:5px">Brew</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="finishedInventory">
+                                <img src="assets/img/finished.png" class="" alt="Norway">
+                                <p>Finished Inventory</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="rawInventory">
+                                <img src="assets/img/raw.png" class="" alt="Norway">
+                                <p>Raw Inventory</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="recipe">
+                                <img src="assets/img/recipe.png" class="" alt="Norway">
+                                <p>Recipes</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="delivery">
+                                <img src="assets/img/delivery.png" class="" alt="Norway">
+                                <p>Delivery</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="reports">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Reports</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Production Schedule</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="main-panel">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                    <div class=" container-fluid  ">
+                        <a class="navbar-brand">Brew</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Matthew
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button" onclick="window.location.href='login?logout'">Logout</button>
+                            </div>
+                        </div>
+                        <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                        </button>
+                    </div>
+                </nav>
+
+                <!--End nav bar-------------------------------------------------------------------------->
+        <div class="container-fluid">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="companyAdmin">Company Admin</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="navbar-collapse-2">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="companyAdmin">Company Admin Page</a></li>
+                            <li>
+                                <a href="admin?action=logout" class="btn btn-default btn-outline btn-circle collapsed">Logout</a>
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container -->
+            </nav><!-- /.navbar -->
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>User List</h4>
+                    <div class="table-responsive">
+                        <table id="mytable" class="table table-bordred table-striped">
+                            <thead>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Email</th>
+                            <th>Active</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Company Name</th>
+                            <th></th>
+                            <th></th>
+                            </thead>
+                            <c:forEach var="item" items="${users}">
+                                <tbody>
+                                    <tr>
+                                        <td><c:out value="${item.username}"/></td>
+                                        <td><c:out value="${item.password}"/></td>
+                                        <td><c:out value="${item.email}"/></td>
+                                        <td><c:out value="${item.active}"/></td>
+                                        <td><c:out value="${item.firstname}"/></td>
+                                        <td><c:out value="${item.lastname}"/></td>
+                                        <td><c:out value="${item.company.companyName}"/></td>
+                                        <td>
+                                            <form action="companyAdmin" method="post" >
+                                                <input type="submit" value="Delete">
+                                                <input type="hidden" name="action" value="delete"><span class="glyphicon glyphicon-trash"></span>
+                                                <input type="hidden" name="selectedUser" value="${item.username}">
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="companyAdmin" method="get">
+                                                <input type="submit" value="Edit"><span class="glyphicon glyphicon-pencil"></span>
+                                                <input type="hidden" name="action" value="view">
+                                                <input type="hidden" name="selectedUser" value="${item.username}">
+                                            </form>
+                                        </td>
+                                    </tr>  
+                                </tbody>
+                            </c:forEach>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            ${errorDelete}
+
+            <div class="row">
+                <div class="col-md-4">
+                    <form action="companyAdmin" method="post" class="form-horizontal" role="form">
+                        <fieldset>
+
+                            <!-- Form Name -->
+                            <legend>Add User</legend>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Username</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="username" value="" placeholder="Username" class="form-control" required="required">
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="password" value="" placeholder="Password" class="form-control" required="required">
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="email" value="" placeholder="Email" class="form-control" required="required">
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">First Name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="firstname" value="" placeholder="first name" class=form-control required="required">
+                                </div>
+
+                                <label class="col-sm-2 control-label" for="textinput">Last Name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="lastname" value="" placeholder="last name" class=form-control required="required">
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Active</label>
+                                <div class="col-sm-4">
+                                    <input type="number" name="active" min="0" max="1" value="" placeholder="active" class=form-control required="required">
+                                </div>
+
+                                <label class="col-sm-2 control-label" for="textinput">Role</label>
+                                <div class="col-sm-4">
+                                    <input type="number" name="role" min="1" max="2" value="" placeholder="role" class=form-control required="required">
+                                </div>
+                            </div>
+
+
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Company</label>
+                                <div class="col-sm-10">
+                                    <input type="number" name="company" min="1" max="3" value="" placeholder="company" class=form-control required="required">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="pull-right">
+                                        <input type="hidden" name="action" value="add">
+                                        <input type="submit" value="Add User"  class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div><!-- /.col-lg-12 -->
+                <c:if test="${selectedUser != null}">
+                    <div class="col-md-4">
+                        <form action="companyAdmin" method="post" class="form-horizontal" role="form">
+                            <fieldset>
+
+                                <!-- Form Name -->
+                                <legend>Edit User</legend>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">Username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="username" value="${selectedUser.username}" readonly class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" name="password" value="${selectedUser.password}" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="email" value="${selectedUser.email}" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">First Name</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="firstname" value="${selectedUser.firstname}" class=form-control>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="textinput">Last Name</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="lastname" value="${selectedUser.lastname}" class=form-control>
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">Active</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" name="active" min="0" max="1" value="${selectedUserActive}" class=form-control>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="textinput">Role</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" name="role" min="1" max="2" value="${selectedUserRole}" class=form-control>
+                                    </div>
+                                </div>
+
+
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">Company</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" name="company" min="1" max="3" value="${selectedUserCompany}" class=form-control>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="pull-right">
+                                            <input type="hidden" name="action" value="edit">
+                                            <input type="submit" value="Save" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </div><!-- /.col-lg-12 -->
+                </c:if>
+            </div><!-- /.row -->
+        </div><br>
     </body>
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+    <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="assets/js/plugins/bootstrap-switch.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!--  Chartist Plugin  -->
+    <script src="assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+    <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
+    <script src="assets/js/brew.js"></script>
+    <script type="text/javascript">
+                                                $(document).ready(function () {
+                                                    // Javascript method's body can be found in assets/js/demos.js
+                                                });
+    </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 </html>
