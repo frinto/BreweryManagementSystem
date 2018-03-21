@@ -96,7 +96,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand"></a>
+                        <a class="navbar-brand">Finnished Inventory</a>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Matthew
@@ -116,7 +116,7 @@
                 <!--End nav bar-------------------------------------------------------------------------->
 
 
-                <h1>Finished Inventory</h1>
+                
                 <c:if test="${role == 1}">
                 <form action="finishedInventory?action=add" method="post" class="finishedInventoryUpdateButton">
                     
