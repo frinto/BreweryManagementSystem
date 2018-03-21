@@ -57,6 +57,14 @@
         <url-pattern>/rawInventory</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>ManageEmployeeServlet</servlet-name>
+        <servlet-class>servlets.ManageEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManageEmployeeServlet</servlet-name>
+        <url-pattern>/manageEmployee</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>FinishedInventoryServlet</servlet-name>
         <servlet-class>servlets.FinishedInventoryServlet</servlet-class>
     </servlet>

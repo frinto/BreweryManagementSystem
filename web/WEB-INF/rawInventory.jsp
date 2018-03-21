@@ -96,7 +96,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand"></a>
+                        <a class="navbar-brand">Raw Inventory</a>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Matthew
@@ -115,7 +115,7 @@
 
                 <!--End nav bar-------------------------------------------------------------------------->
 
-                <h1>Raw Goods Inventory</h1>
+                
 
                 <!--These are the tabs from the bootstrap documentation-->
 
@@ -146,10 +146,10 @@
                                 </thead>
 
                                 <tr>
-                                    <td><input type="text" name="addName" placeholder="name"></td>
-                                    <td><input type="number" name="addQty" placeholder="quantity"></td>
-                                    <td><input type="text" name="addUnits" placeholder="units"></td>
-                                    <td><input type="text" name="addType" placeholder="type"></td>
+                                    <td><input type="text" name="addName" placeholder="name" required></td>
+                                    <td><input type="number" name="addQty" placeholder="quantity" required></td>
+                                    <td><input type="text" name="addUnits" placeholder="units" required></td>
+                                    <td><input type="text" name="addType" placeholder="type" required></td>
                                 </tr>
 
                             </table>
@@ -207,8 +207,8 @@
                                 </thead>
 
                                 <tr>
-                                    <td><input type="text" name="addName" placeholder="name"></td>
-                                    <td><input type="number" name="addQty" placeholder="quantity"></td>
+                                    <td><input type="text" name="addName" placeholder="name" required></td>
+                                    <td><input type="number" name="addQty" placeholder="quantity" required></td>
                                 </tr>
                             </table>
 
