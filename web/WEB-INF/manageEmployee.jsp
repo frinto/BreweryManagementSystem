@@ -127,38 +127,40 @@
                         <div class="table-responsive">
                             <table id="mytable" class="table table-bordred table-striped">
                                 <thead>
-                                <th>Username</th>
-                                <th>Password</th>
-                                <th>Email</th>
-                                <th>Active</th>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Company Name</th>
+                                <th>empId</th>
+                                <th>firstName</th>
+                                <th>lastName</th>
+                                <th>password</th>
+                                <th>email</th>
+                                <th>roleId</th>
+                                <th>isActive</th>
+                                <th>resetPasswordUUID</th>
                                 <th></th>
                                 <th></th>
                                 </thead>
                                 <c:forEach var="item" items="${users}">
                                     <tbody>
                                         <tr>
-                                            <td><c:out value="${item.username}"/></td>
+                                            <td><c:out value="${item.empId}"/></td>
+                                            <td><c:out value="${item.firstName}"/></td>
+                                            <td><c:out value="${item.lastName}"/></td>
                                             <td><c:out value="${item.password}"/></td>
                                             <td><c:out value="${item.email}"/></td>
-                                            <td><c:out value="${item.active}"/></td>
-                                            <td><c:out value="${item.firstname}"/></td>
-                                            <td><c:out value="${item.lastname}"/></td>
-                                            <td><c:out value="${item.company.companyName}"/></td>
+                                            <td><c:out value="${item.roleId}"/></td>
+                                            <td><c:out value="${item.isActive}"/></td>
+                                            <td><c:out value="${item.resetPasswordUUID}"/></td>
                                             <td>
                                                 <form action="admin" method="post" >
                                                     <input type="submit" value="Delete">
                                                     <input type="hidden" name="action" value="delete"><span class="glyphicon glyphicon-trash"></span>
-                                                    <input type="hidden" name="selectedUser" value="${item.username}">
+                                                    <input type="hidden" name="selectedUser" value="${item.empId}">
                                                 </form>
                                             </td>
                                             <td>
                                                 <form action="admin" method="get">
                                                     <input type="submit" value="Edit"><span class="glyphicon glyphicon-pencil"></span>
                                                     <input type="hidden" name="action" value="view">
-                                                    <input type="hidden" name="selectedUser" value="${item.username}">
+                                                    <input type="hidden" name="selectedUser" value="${item.empId}">
                                                 </form>
                                             </td>
                                         </tr>  
