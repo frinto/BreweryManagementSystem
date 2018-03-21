@@ -52,6 +52,11 @@ public class RecipeServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String newRecipe = request.getParameter("newRecipe");
+        String cancelRecipe = request.getParameter("cancelRecipe");
+        if(cancelRecipe!=null)
+        {
+            session.setAttribute("newRecipe", null);
+        }
         if(newRecipe!=null)
         {
             session.setAttribute("newRecipe", newRecipe);
@@ -125,13 +130,38 @@ public class RecipeServlet extends HttpServlet {
         float sodiumChlorideAmt = Float.parseFloat(request.getParameter("sodiumChlorideAmt"));
         float calciumChlorideAmt = Float.parseFloat(request.getParameter("calciumChlorideAmt"));
         float phosphAcidAmt = Float.parseFloat(request.getParameter("phosphAcidAmt"));
+        float firstHopAmt=0;
+        float secondHopAmt=0;
+        float thirdHopAmt = 0;
+        String firstHop = request.getParameter("firstHopList");
+        if(firstHop.equals(""))
+        {
+            firstHop=null;
+        }
+        else
+            firstHopAmt = Float.parseFloat(request.getParameter("firstHopAmt"));
+            
         
-        String firstHop = request.getParameter("firsrHopList");
-        float firstHopAmt = Float.parseFloat(request.getParameter("firstHopAmt"));
+        
+     
         String secondHop = request.getParameter("secondhopList");
-        float secondHopAmt = Float.parseFloat(request.getParameter("secondHopAmt"));
+        if(secondHop.equals(""))
+        {
+            secondHop=null;
+        }
+        else
+            secondHopAmt = Float.parseFloat(request.getParameter("secondHopAmt"));
+            
+
         String thirdHop = request.getParameter("thirdHopList");
-        float thirdHopAmt = Float.parseFloat(request.getParameter("thirdHopAmt"));
+        if(thirdHop.equals(""))
+        {
+            thirdHop=null;
+        }
+        else
+            thirdHopAmt = Float.parseFloat(request.getParameter("thirdHopAmt"));
+            
+  
         
         String baseMalt = request.getParameter("baseMaltList");
         float baseMaltAmt = Float.parseFloat(request.getParameter("baseMaltAmt"));

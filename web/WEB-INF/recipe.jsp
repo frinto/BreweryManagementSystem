@@ -98,7 +98,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand"></a>
+                        <a class="navbar-brand">Recipes</a>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Matthew
@@ -154,8 +154,8 @@
                     <c:if test="${newRecipe!=null}">
                         <h1 class="leftSpacingh1">Add Recipe:</h1>
                         <div class="cancelButton">
-                            <form action ="brew" method ="GET">
-                                <button type="submit" class="btn btn-danger" name="cancelBrew">Cancel Brew</button>
+                            <form action ="recipe" method ="GET">
+                                <button type="submit" class="btn btn-danger" name="cancelRecipe">Cancel Recipe</button>
                             </form>
                         </div>
                         <form action="recipe" method ="POST">
@@ -199,7 +199,7 @@
                                             </c:forEach>
                                         </select>
                                     </td>
-                                    <td><input type="number" value="${baseMaltAmt}" name="baseMaltAmt" min="0" max="500"></td>
+                                    <td><input type="number" value="${baseMaltAmt}" id="basemalt" name="baseMaltAmt" min="0" max="500"></td>
                                 </tr>
 
                                 <tr>
@@ -214,7 +214,7 @@
                                             </c:forEach>
                                         </select>
                                     </td>
-                                    <td><input type="number" value="${secondMaltAmt}" name="secondMaltAmt" min="0" max="500"></td>
+                                    <td><input type="number" id="secondmalt" value="${secondMaltAmt}" name="secondMaltAmt" min="0" max="500"></td>
                                 </tr>
 
                                 <tr>
@@ -229,7 +229,7 @@
                                             </c:forEach>
                                         </select>
                                     </td>
-                                    <td><input type="number" value="${thirdMaltAmt}" name="thirdMaltAmt" min="0" max="500"></td>
+                                    <td><input type="number" id="thirdmalt" value="${thirdMaltAmt}" name="thirdMaltAmt" min="0" max="500"></td>
                                 </tr>
 
                                 <tr>
@@ -244,7 +244,7 @@
                                             </c:forEach>
                                         </select>
                                     </td>
-                                    <td><input type="number" value="${fourthMaltAmt}" name="fourthMaltAmt" min="0" max="500"></td>
+                                    <td><input type="number" value="${fourthMaltAmt}" id="fourthmalt" name="fourthMaltAmt" min="0" max="500"></td>
                                 </tr>
 
                                 <th colspan="4" style ="text-align:center">****HOPS****</th>
@@ -253,7 +253,7 @@
                                 <tr>
                                     <th scope="row">First Hop</th>
                                     <td>kg</td>
-                                    <td><select name="firsrHopList" class="custom-select">
+                                    <td><select name="firstHopList" class="custom-select">
                                             <option value="">--None--</option>
                                             <c:forEach items="${hopList}" var="hop">
                                                 <option value="${hop.name}">
@@ -262,7 +262,7 @@
                                             </c:forEach>
                                         </select>
                                     </td>
-                                    <td><input type="number" value="${firstHopAmt}" name="firstHopAmt" min="0" max="500"></td>
+                                    <td><input type="number" value="${firstHopAmt}" id="firsthop" name="firstHopAmt" min="0" max="500"></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Second Hop</th>
@@ -276,7 +276,7 @@
                                             </c:forEach>
                                         </select>
                                     </td>
-                                    <td><input type="number" value="${secondHopAmt}" name="secondHopAmt" min="0" max="500"></td>
+                                    <td><input type="number" value="${secondHopAmt}" id="secondhop" name="secondHopAmt" min="0" max="500"></td>
 
                                 </tr>
                                 <tr>
@@ -292,7 +292,7 @@
                                             </c:forEach>
                                         </select>
                                     </td>
-                                    <td><input type="number" value="${thirdHopAmt}" name="thirdHopAmt" min="0" max="500"></td>
+                                    <td><input type="number" value="${thirdHopAmt}" id="thirdhop" name="thirdHopAmt" min="0" max="500"></td>
                                 </tr>
 
                                 </tbody>
@@ -314,7 +314,7 @@
                                 <tr>
                                     <th scope="row">Sodium Chloride Amount</th>
                                     <td>mg</td>
-                                    <td><input type="number" value="${sodiumChlorideAmt}" name="sodiumChlorideAmt" id="sodiumChlorideAmt" min="0" max="500"></td>
+                                    <td><input type="number" value="${sodiumChlorideAmt}" id="sodium" name="sodiumChlorideAmt" id="sodiumChlorideAmt" min="0" max="500"></td>
 
 
                                 </tr>
@@ -323,7 +323,7 @@
                                 <tr>
                                     <th scope="row">Gypsum Amount</th>
                                     <td>mg</td>
-                                    <td><input type="number" value="${gypsumAmt}" name="gypsumAmt" id="gypsumAmt" min="0" max="500"></td>
+                                    <td><input type="number" value="${gypsumAmt}" id="gypsum" name="gypsumAmt" id="gypsumAmt" min="0" max="500"></td>
 
 
                                 </tr>
@@ -331,7 +331,7 @@
                                 <tr>
                                     <th scope="row">Calcium Chloride Amount</th>
                                     <td>mg</td>
-                                    <td><input type="number" value="${calciumChlorideAmt}" name="calciumChlorideAmt" id="calciumChlorideAmt" min="0" max="500"></td>
+                                    <td><input type="number" value="${calciumChlorideAmt}" id="calcium" name="calciumChlorideAmt" id="calciumChlorideAmt" min="0" max="500"></td>
 
 
                                 </tr>
@@ -339,7 +339,7 @@
                                 <tr>
                                     <th scope="row">Phosphoric Acid Amount</th>
                                     <td>ml</td>
-                                    <td><input type="number" value="${phosphAcidAmt}" name="phosphAcidAmt" id="phosphAcidAmt" min="0" max="500" ></td>
+                                    <td><input type="number" value="${phosphAcidAmt}" id="phosphoric" name="phosphAcidAmt" id="phosphAcidAmt" min="0" max="500" ></td>
 
 
                                 </tr>
@@ -557,6 +557,7 @@
     <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
     <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
     <script src="assets/js/brew.js"></script>
+    <script src="assets/js/recipe.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             // Javascript method's body can be found in assets/js/demos.js
