@@ -5,11 +5,13 @@
  */
 package servlets;
 
+import dataaccess.BrewDB;
 import dataaccess.BrewDBException;
 import dataaccess.FinishedInventoryDB;
 import domainmodel.Finishedproduct;
 import dataaccess.ProductionDB;
 import dataaccess.RawInventoryDB;
+import domainmodel.Brew;
 import domainmodel.Brewmaterials;
 import domainmodel.Production;
 import domainmodel.Productionmaterial;
@@ -59,19 +61,32 @@ public class ReportServlet extends HttpServlet {
             request.setAttribute("message", "error retrieving finished product list from database");
 
         }
-
         
+        //Get the date of the beginning of the last week (7 days ago)
+        //This is used to produce reports based on the last 7 days
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -7);
+        Date previousWeekDate = cal.getTime();
+        
+        //Report that shows the Weekly Production of Individual Items
         ProductionDB prodDB = new ProductionDB();
-        List<Production> prodList;
+        List<Production> prodItemList;
         try {
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.DATE, -10);
-            Date minDate = cal.getTime();
-            prodList = prodDB.getProdByDateRange(minDate, new Date());
-            request.setAttribute("prodList", prodList);
+            prodItemList = prodDB.getProdByDateRange(previousWeekDate, new Date());
+            request.setAttribute("prodItemList", prodItemList);
         } catch (BrewDBException ex) {
             Logger.getLogger(ReportServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        BrewDB brewDB = new BrewDB();
+        List<Brew> brewList;
+        try {
+            brewList = brewDB.getBrewByDateRange(previousWeekDate, new Date());
+            request.setAttribute("brewList", brewList);
+        } catch (BrewDBException ex) {
+            Logger.getLogger(ReportServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         request.setAttribute("reportData", "greetings from the backend!");
         getServletContext().getRequestDispatcher("/WEB-INF/reports.jsp").forward(request, response);

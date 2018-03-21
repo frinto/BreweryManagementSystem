@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -111,4 +112,19 @@ public class BrewDB {
 //        }
 //    }
 
+    public List<Brew> getBrewByDateRange(Date minDate, Date maxDate) throws BrewDBException {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            List<Brew> brewList = em.createNamedQuery("Brew.findByDateRange", Brew.class)
+                    .setParameter("minDate", minDate)
+                    .setParameter("maxDate", maxDate)
+                    .getResultList();
+            return brewList;
+        } catch (Exception ex) {
+            Logger.getLogger(BrewDB.class.getName()).log(Level.SEVERE, "Cannot read brew", ex);
+            throw new BrewDBException("Error getting brew");
+        } finally {
+            em.close();
+        }
+    }
 }

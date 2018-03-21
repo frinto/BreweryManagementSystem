@@ -59,13 +59,13 @@
         chartFinishedInventory.draw(dataFinishedInventory, optionsFinishedInventory);
         //-----------------END Finished Inventory Chart------------------------------------------------------------------
     
-        //------------------MARTINS CHART-----------------------------------------
+        //------------------Weekly Production of Individual Items -----------------------------------------
         // Create the data table.
         var data2 = new google.visualization.DataTable();
         data2.addColumn('string', 'Type');
         data2.addColumn('number', 'Quantity');
         
-        <c:forEach var="production" items="${prodList}">
+        <c:forEach var="production" items="${prodItemList}">
             data2.addRows([
                 ['${production.productionType}', ${production.quantity}]
             ]);
@@ -73,12 +73,12 @@
         
 
         // Set chart options
-        var options2 = {'title':"Production Chart",
+        var options2 = {'title':"Weekly Production of Individual Items",
                        'width':600,
                        'height':600};
-        var chartProduction = new google.visualization.PieChart(document.getElementById('chart_production'));
+        var chartProduction = new google.visualization.BarChart(document.getElementById('chart_production'));
         chartProduction.draw(data2,options2);
-        //-------------------END OF MARTINS CHART------------------------------------------------------
+        //-------------------END OF Weekkly Production of Individual Items CHART------------------------------------------------------
         
         
         //----------------START PROD MAT CHART----------------------------------------------------------------------
