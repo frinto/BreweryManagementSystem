@@ -33,7 +33,7 @@ public class ManageEmployeeServlet extends HttpServlet {
         EmployeeDB employeeDB = new EmployeeDB();
 
         String action = request.getParameter("action");
-        if (action != null && action.equals("view")) {
+        if (action != null && action.equals("viewEdit")) {
             String selectedUsername = request.getParameter("selectedUser");
             try {
                 Employee employee = employeeDB.getEmployee(selectedUsername);
@@ -43,6 +43,16 @@ public class ManageEmployeeServlet extends HttpServlet {
                 Logger.getLogger(ManageEmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        if (action != null && action.equals("viewAdd")) {
+            String selectedUsername = request.getParameter("selectedUserAdd");
+            try {
+               
+                request.setAttribute("selectedUserAdd", selectedUsername);
+            } catch (Exception ex) {
+                Logger.getLogger(ManageEmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         List<Employee> users = null;
         try {
             users = employeeDB.getAll();

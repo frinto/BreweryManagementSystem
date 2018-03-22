@@ -151,7 +151,7 @@
                                             <td>
                                                 <form action="manageEmployee" method="get">
                                                     <input type="submit" value="Edit"><span class="glyphicon glyphicon-pencil"></span>
-                                                    <input type="hidden" name="action" value="view">
+                                                    <input type="hidden" name="action" value="viewEdit">
                                                     <input type="hidden" name="selectedUser" value="${item.empId}">
                                                 </form>
                                             </td>
@@ -162,86 +162,87 @@
                         </div>
                     </div>
                 </div>
-                ${errorDelete}
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <form action="manageEmployee" method="post" class="form-horizontal" role="form">
-                            <fieldset>
+                <form action="manageEmployee" method="get">
+                    <input type="submit" value="Add"><span class="glyphicon glyphicon-pencil"></span>
+                    <input type="hidden" name="action" value="viewAdd">
+                    <input type="hidden" name="selectedUserAdd" value="value">
+                </form>
 
-                                <!-- Form Name -->
-                                <legend>Add User</legend>
 
-<!--                                 Text input
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="textinput">empId</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="empId"  readonly class="form-control">
-                                    </div>
-                                </div>-->
 
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="textinput">First name</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="firstName"  class="form-control">
-                                    </div>
-                                </div>
+                <c:if test="${selectedUserAdd != null}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form action="manageEmployee" method="post" class="form-horizontal" role="form">
+                                <fieldset>
 
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="textinput">Last Name</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="lastName"  class="form-control">
-                                    </div>
-                                </div>
+                                    <!-- Form Name -->
+                                    <legend>Add User</legend>
 
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="textinput">password</label>
-                                    <div class="col-sm-4">
-                                        <input type="password" name="password"  class=form-control>
-                                    </div>
-
-                                    <label class="col-sm-2 control-label" for="textinput">email</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="email"  class=form-control>
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="textinput">Role ID</label>
-                                    <div class="col-sm-4">
-                                        <input type="number" name="roleId"   class=form-control>
-                                    </div>
-
-                                    <label class="col-sm-2 control-label" for="textinput">isActive</label>
-                                    <div class="col-sm-4">
-                                        <input type="number" name="isActive"  class=form-control>
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="textinput">reset Password UUID</label>
-                                    <div class="col-sm-10">
-                                        <input type="number" name="resetPasswordUUID" class=form-control>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <div class="pull-right">
-                                            <input type="hidden" name="action" value="add">
-                                            <input type="submit" value="Add User"  class="btn btn-primary">
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="textinput">First name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="firstName"  class="form-control">
                                         </div>
                                     </div>
-                                </div>
 
-                            </fieldset>
-                        </form>
-                    </div><!-- /.col-lg-12 -->
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="textinput">Last Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="lastName"  class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="textinput">password</label>
+                                        <div class="col-sm-4">
+                                            <input type="password" name="password"  class=form-control>
+                                        </div>
+
+                                        <label class="col-sm-2 control-label" for="textinput">email</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="email"  class=form-control>
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="textinput">Role ID</label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="roleId"   class=form-control>
+                                        </div>
+
+                                        <label class="col-sm-2 control-label" for="textinput">isActive</label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="isActive"  class=form-control>
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="textinput">reset Password UUID</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" name="resetPasswordUUID" class=form-control>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <div class="pull-right">
+                                                <input type="hidden" name="action" value="add">
+                                                <input type="submit" value="Add User"  class="btn btn-primary">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </form>
+                        </div><!-- /.col-lg-12 -->
+                    </c:if>
                     <c:if test="${selectedUser != null}">
                         <div class="col-md-4">
                             <form action="manageEmployee" method="post" class="form-horizontal" role="form">
