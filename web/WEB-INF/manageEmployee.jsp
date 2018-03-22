@@ -150,14 +150,14 @@
                                             <td><c:out value="${item.isActive}"/></td>
                                             <td><c:out value="${item.resetPasswordUUID}"/></td>
                                             <td>
-                                                <form action="admin" method="post" >
+                                                <form action="manageEmployee" method="post" >
                                                     <input type="submit" value="Delete">
                                                     <input type="hidden" name="action" value="delete"><span class="glyphicon glyphicon-trash"></span>
                                                     <input type="hidden" name="selectedUser" value="${item.empId}">
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="admin" method="get">
+                                                <form action="manageEmployee" method="get">
                                                     <input type="submit" value="Edit"><span class="glyphicon glyphicon-pencil"></span>
                                                     <input type="hidden" name="action" value="view">
                                                     <input type="hidden" name="selectedUser" value="${item.empId}">
@@ -254,7 +254,7 @@
                     </div><!-- /.col-lg-12 -->
                     <c:if test="${selectedUser != null}">
                         <div class="col-md-4">
-                            <form action="admin" method="post" class="form-horizontal" role="form">
+                            <form action="manageEmployee" method="post" class="form-horizontal" role="form">
                                 <fieldset>
 
                                     <!-- Form Name -->
@@ -262,61 +262,59 @@
 
                                     <!-- Text input-->
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">Username</label>
+                                        <label class="col-sm-2 control-label" for="textinput">empId</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="username" value="${selectedUser.username}" readonly class="form-control">
+                                            <input type="text" name="empId" value="${selectedUser.empId}" class="form-control">
                                         </div>
                                     </div>
 
                                     <!-- Text input-->
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">Password</label>
+                                        <label class="col-sm-2 control-label" for="textinput">First name</label>
                                         <div class="col-sm-10">
-                                            <input type="password" name="password" value="${selectedUser.password}" class="form-control">
+                                            <input type="text" name="password" value="${selectedUser.firstName}" class="form-control">
                                         </div>
                                     </div>
 
                                     <!-- Text input-->
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="email" value="${selectedUser.email}" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">First Name</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="firstname" value="${selectedUser.firstname}" class=form-control>
-                                        </div>
-
                                         <label class="col-sm-2 control-label" for="textinput">Last Name</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="lastname" value="${selectedUser.lastname}" class=form-control>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="email" value="${selectedUser.lastName}" class="form-control">
                                         </div>
                                     </div>
 
                                     <!-- Text input-->
                                     <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="textinput">password</label>
+                                        <div class="col-sm-4">
+                                            <input type="password" name="firstname" value="${selectedUser.password}" class=form-control>
+                                        </div>
+
+                                        <label class="col-sm-2 control-label" for="textinput">email</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="lastname" value="${selectedUser.email}" class=form-control>
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="textinput">Role ID</label>
+                                        <div class="col-sm-4">
+                                            <input type="number" name="active" min="0" max="1" value="${selectedUser.roleId}" class=form-control>
+                                        </div>
+
                                         <label class="col-sm-2 control-label" for="textinput">Active</label>
                                         <div class="col-sm-4">
-                                            <input type="number" name="active" min="0" max="1" value="${selectedUserActive}" class=form-control>
-                                        </div>
-
-                                        <label class="col-sm-2 control-label" for="textinput">Role</label>
-                                        <div class="col-sm-4">
-                                            <input type="number" name="role" min="1" max="2" value="${selectedUserRole}" class=form-control>
+                                            <input type="number" name="role" min="1" max="2" value="${selectedUser.isActive}" class=form-control>
                                         </div>
                                     </div>
 
-
-
                                     <!-- Text input-->
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">Company</label>
+                                        <label class="col-sm-2 control-label" for="textinput">reset Password UUID</label>
                                         <div class="col-sm-10">
-                                            <input type="number" name="company" min="1" max="3" value="${selectedUserCompany}" class=form-control>
+                                            <input type="number" name="company" min="1" max="3" value="${selectedUser.resetPasswordUUID}" class=form-control>
                                         </div>
                                     </div>
 

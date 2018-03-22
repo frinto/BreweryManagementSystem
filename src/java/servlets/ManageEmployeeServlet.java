@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,65 +27,36 @@ public class ManageEmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        
+            throws ServletException, IOException {
+
 //        HttpSession session = request.getSession();
 //        User admin = (User) session.getAttribute("adminSession");
 //
 //        UserService us = new UserService();
 //
-//        String action = request.getParameter("action");
-//        if (action != null && action.equals("view"))
-//        {
-//            String selectedUsername = request.getParameter("selectedUser");
-//            try
-//            {
-//                User user = us.get(selectedUsername);
-//
-//                boolean isActive = user.getActive();
-//                String active;
-//
-//                if (isActive)
-//                {
-//                    active = "1";
-//                } else
-//                {
-//                    active = "0";
-//                }
-//
-//                Company company = user.getCompany();
-//                Role role = user.getRole();
-//                
-//                Integer roleID = role.getRoleID();
-//                String roleString = roleID.toString();
-//                
-//                Integer companyID = company.getCompanyID();
-//                String companyString = companyID.toString();
-//
-//                request.setAttribute("selectedUserCompany", companyString);
-//                request.setAttribute("selectedUserRole", roleString);
-//                request.setAttribute("selectedUserActive", active);
-//                request.setAttribute("selectedUser", user);
-//            } catch (Exception ex)
-//            {
-//                Logger.getLogger(NoteServlet.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-
-        List<Employee> users = null;
         EmployeeDB employeeDB = new EmployeeDB();
-        try
-        {
+
+        String action = request.getParameter("action");
+        if (action != null && action.equals("view")) {
+            String selectedUsername = request.getParameter("selectedUser");
+            try {
+                Employee employee = employeeDB.getEmployee(selectedUsername);
+
+                request.setAttribute("selectedUser", employee);
+            } catch (Exception ex) {
+                Logger.getLogger(ManageEmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        List<Employee> users = null;
+        try {
             users = employeeDB.getAll();
-        } catch (Exception ex)
-        {
-            
+        } catch (Exception ex) {
+
         }
 
         request.setAttribute("users", users);
         getServletContext().getRequestDispatcher("/WEB-INF/manageEmployee.jsp").forward(request, response);
-        
+
 //        if(action != null && action.equals("logout"))
 //        {
 //            session.invalidate();
@@ -109,8 +81,7 @@ public class ManageEmployeeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
 //        boolean activeBoolean = false;
 //
 //        String username = request.getParameter("username");
@@ -125,7 +96,7 @@ public class ManageEmployeeServlet extends HttpServlet {
 //        int roleInt;
 //        int activeInt;
 //
-//        String action = request.getParameter("action");
+        String action = request.getParameter("action");
 //
 //        UserService us = new UserService();
 //
@@ -181,25 +152,23 @@ public class ManageEmployeeServlet extends HttpServlet {
 //                Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
 //            }
 //            
-//        } else if (action.equals("edit"))
-//        {
-//            companyInt = Integer.parseInt(company);
-//            roleInt = Integer.parseInt(role);
-//            activeInt = Integer.parseInt(active);
-//
-//            if (activeInt == 1)
-//            {
-//                activeBoolean = true;
-//            } else if (activeInt == 0)
-//            {
-//                activeBoolean = false;
-//            }
-//            
-//            Role rolez = new Role(roleInt);
-//            Company companeyz = new Company(companyInt);
-//            User user = new User(username, password, email, activeBoolean, firstname, lastname, rolez, companeyz);
-//            us.update(user);
-//        }
+//        } else 
+        if (action.equals("edit")) {
+            companyInt = Integer.parseInt(company);
+            roleInt = Integer.parseInt(role);
+            activeInt = Integer.parseInt(active);
+
+            if (activeInt == 1) {
+                activeBoolean = true;
+            } else if (activeInt == 0) {
+                activeBoolean = false;
+            }
+
+            Role rolez = new Role(roleInt);
+            Company companeyz = new Company(companyInt);
+            User user = new User(username, password, email, activeBoolean, firstname, lastname, rolez, companeyz);
+            us.update(user);
+        }
 //
 //        List<User> users = null;
 //
