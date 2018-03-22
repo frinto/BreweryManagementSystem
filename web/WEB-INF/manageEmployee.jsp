@@ -264,7 +264,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="textinput">empId</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="empId" value="${selectedUser.empId}" class="form-control">
+                                            <input type="text" name="empId" value="${selectedUser.empId}" readonly class="form-control">
                                         </div>
                                     </div>
 
@@ -272,7 +272,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="textinput">First name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="password" value="${selectedUser.firstName}" class="form-control">
+                                            <input type="text" name="firstName" value="${selectedUser.firstName}" class="form-control">
                                         </div>
                                     </div>
 
@@ -280,7 +280,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="textinput">Last Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="email" value="${selectedUser.lastName}" class="form-control">
+                                            <input type="text" name="lastName" value="${selectedUser.lastName}" class="form-control">
                                         </div>
                                     </div>
 
@@ -288,12 +288,12 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="textinput">password</label>
                                         <div class="col-sm-4">
-                                            <input type="password" name="firstname" value="${selectedUser.password}" class=form-control>
+                                            <input type="password" name="password" value="${selectedUser.password}" class=form-control>
                                         </div>
 
                                         <label class="col-sm-2 control-label" for="textinput">email</label>
                                         <div class="col-sm-4">
-                                            <input type="text" name="lastname" value="${selectedUser.email}" class=form-control>
+                                            <input type="text" name="email" value="${selectedUser.email}" class=form-control>
                                         </div>
                                     </div>
 
@@ -301,12 +301,12 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="textinput">Role ID</label>
                                         <div class="col-sm-4">
-                                            <input type="number" name="active" min="0" max="1" value="${selectedUser.roleId}" class=form-control>
+                                            <input type="number" name="roleId"  value="${selectedUser.roleId}" class=form-control>
                                         </div>
 
-                                        <label class="col-sm-2 control-label" for="textinput">Active</label>
+                                        <label class="col-sm-2 control-label" for="textinput">isActive</label>
                                         <div class="col-sm-4">
-                                            <input type="number" name="role" min="1" max="2" value="${selectedUser.isActive}" class=form-control>
+                                            <input type="number" name="isActive" value="${selectedUser.isActive}" class=form-control>
                                         </div>
                                     </div>
 
@@ -314,7 +314,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="textinput">reset Password UUID</label>
                                         <div class="col-sm-10">
-                                            <input type="number" name="company" min="1" max="3" value="${selectedUser.resetPasswordUUID}" class=form-control>
+                                            <input type="number" name="resetPasswordUUID" value="${selectedUser.resetPasswordUUID}" class=form-control>
                                         </div>
                                     </div>
 

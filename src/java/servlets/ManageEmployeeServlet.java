@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import dataaccess.BrewDBException;
 import dataaccess.EmployeeDB;
 import domainmodel.Employee;
 import java.io.IOException;
@@ -82,20 +83,18 @@ public class ManageEmployeeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        boolean activeBoolean = false;
-//
-//        String username = request.getParameter("username");
-//        String password = request.getParameter("password");
-//        String email = request.getParameter("email");
-//        String active = request.getParameter("active");
-//        String firstname = request.getParameter("firstname");
-//        String lastname = request.getParameter("lastname");
-//        String role = request.getParameter("role");
-//        String company = request.getParameter("company");
-//        int companyInt;
-//        int roleInt;
-//        int activeInt;
-//
+
+        EmployeeDB employeeDB = new EmployeeDB();
+
+        String empId = request.getParameter("empId");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String roleId = request.getParameter("roleId");
+        String isActive = request.getParameter("isActive");
+        String resetPasswordUUID = request.getParameter("resetPasswordUUID");
+
         String action = request.getParameter("action");
 //
 //        UserService us = new UserService();
@@ -154,34 +153,33 @@ public class ManageEmployeeServlet extends HttpServlet {
 //            
 //        } else 
         if (action.equals("edit")) {
-            companyInt = Integer.parseInt(company);
-            roleInt = Integer.parseInt(role);
-            activeInt = Integer.parseInt(active);
+            Employee employee = new Employee();
 
-            if (activeInt == 1) {
-                activeBoolean = true;
-            } else if (activeInt == 0) {
-                activeBoolean = false;
+            employee.setEmpId(Integer.parseInt(empId));
+            employee.setEmail(email);
+            employee.setFirstName(firstName);
+            employee.setIsActive(Short.parseShort(isActive));
+            employee.setLastName(lastName);
+            employee.setPassword(password);
+            employee.setResetPasswordUUID(resetPasswordUUID);
+            employee.setRoleId(Integer.parseInt(roleId));
+
+            try {
+                employeeDB.update(employee);
+            } catch (BrewDBException ex) {
+                Logger.getLogger(ManageEmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            Role rolez = new Role(roleInt);
-            Company companeyz = new Company(companyInt);
-            User user = new User(username, password, email, activeBoolean, firstname, lastname, rolez, companeyz);
-            us.update(user);
         }
-//
-//        List<User> users = null;
-//
-//        try
-//        {
-//            users = us.getAll();
-//        } catch (Exception ex)
-//        {
-//            Logger.getLogger(NoteServlet.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        request.setAttribute("users", users);
-//        getServletContext().getRequestDispatcher("/WEB-INF/admin/admin.jsp").forward(request, response);
+        List<Employee> users = null;
+        try {
+            users = employeeDB.getAll();
+        } catch (Exception ex) {
+
+        }
+
+        request.setAttribute("users", users);
+        getServletContext().getRequestDispatcher("/WEB-INF/manageEmployee.jsp").forward(request, response);
 
     }
 
