@@ -136,7 +136,6 @@
                                 <th>isActive</th>
                                 <th>resetPasswordUUID</th>
                                 <th></th>
-                                <th></th>
                                 </thead>
                                 <c:forEach var="item" items="${users}">
                                     <tbody>
@@ -149,13 +148,6 @@
                                             <td><c:out value="${item.roleId}"/></td>
                                             <td><c:out value="${item.isActive}"/></td>
                                             <td><c:out value="${item.resetPasswordUUID}"/></td>
-                                            <td>
-                                                <form action="manageEmployee" method="post" >
-                                                    <input type="submit" value="Delete">
-                                                    <input type="hidden" name="action" value="delete"><span class="glyphicon glyphicon-trash"></span>
-                                                    <input type="hidden" name="selectedUser" value="${item.empId}">
-                                                </form>
-                                            </td>
                                             <td>
                                                 <form action="manageEmployee" method="get">
                                                     <input type="submit" value="Edit"><span class="glyphicon glyphicon-pencil"></span>
@@ -174,69 +166,67 @@
 
                 <div class="row">
                     <div class="col-md-4">
-                        <form action="admin" method="post" class="form-horizontal" role="form">
+                        <form action="manageEmployee" method="post" class="form-horizontal" role="form">
                             <fieldset>
 
                                 <!-- Form Name -->
                                 <legend>Add User</legend>
 
+<!--                                 Text input
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">empId</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="empId"  readonly class="form-control">
+                                    </div>
+                                </div>-->
+
                                 <!-- Text input-->
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="textinput">Username</label>
+                                    <label class="col-sm-2 control-label" for="textinput">First name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="username" value="" placeholder="Username" class="form-control" required="required">
+                                        <input type="text" name="firstName"  class="form-control">
                                     </div>
                                 </div>
 
                                 <!-- Text input-->
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="textinput">Password</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" name="password" value="" placeholder="Password" class="form-control" required="required">
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="textinput">Email</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="email" value="" placeholder="Email" class="form-control" required="required">
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="textinput">First Name</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="firstname" value="" placeholder="first name" class=form-control required="required">
-                                    </div>
-
                                     <label class="col-sm-2 control-label" for="textinput">Last Name</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="lastname" value="" placeholder="last name" class=form-control required="required">
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="textinput">Active</label>
-                                    <div class="col-sm-4">
-                                        <input type="number" name="active" min="0" max="1" value="" placeholder="active" class=form-control required="required">
-                                    </div>
-
-                                    <label class="col-sm-2 control-label" for="textinput">Role</label>
-                                    <div class="col-sm-4">
-                                        <input type="number" name="role" min="1" max="2" value="" placeholder="role" class=form-control required="required">
-                                    </div>
-                                </div>
-
-
-
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="textinput">Company</label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="company" min="1" max="3" value="" placeholder="company" class=form-control required="required">
+                                        <input type="text" name="lastName"  class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">password</label>
+                                    <div class="col-sm-4">
+                                        <input type="password" name="password"  class=form-control>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="textinput">email</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="email"  class=form-control>
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">Role ID</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" name="roleId"   class=form-control>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="textinput">isActive</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" name="isActive"  class=form-control>
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">reset Password UUID</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" name="resetPasswordUUID" class=form-control>
                                     </div>
                                 </div>
 
@@ -351,9 +341,9 @@
     <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
     <script src="assets/js/brew.js"></script>
     <script type="text/javascript">
-                        $(document).ready(function () {
-                            // Javascript method's body can be found in assets/js/demos.js
-                        });
+                                $(document).ready(function () {
+                                    // Javascript method's body can be found in assets/js/demos.js
+                                });
     </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 </html>

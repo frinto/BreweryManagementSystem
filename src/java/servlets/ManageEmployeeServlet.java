@@ -30,11 +30,6 @@ public class ManageEmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-//        HttpSession session = request.getSession();
-//        User admin = (User) session.getAttribute("adminSession");
-//
-//        UserService us = new UserService();
-//
         EmployeeDB employeeDB = new EmployeeDB();
 
         String action = request.getParameter("action");
@@ -58,26 +53,6 @@ public class ManageEmployeeServlet extends HttpServlet {
         request.setAttribute("users", users);
         getServletContext().getRequestDispatcher("/WEB-INF/manageEmployee.jsp").forward(request, response);
 
-//        if(action != null && action.equals("logout"))
-//        {
-//            session.invalidate();
-//            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-//            return;
-//        }else if(action != null && action.equals("view"))
-//        {
-//            getServletContext().getRequestDispatcher("/WEB-INF/admin/admin.jsp").forward(request, response);
-//            return;
-//        }
-//        else if(action == null && admin != null)
-//        {
-//            getServletContext().getRequestDispatcher("/WEB-INF/admin/admin.jsp").forward(request, response);
-//            return;
-//        }
-//        else
-//        {
-//            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-//            return;
-//        }
     }
 
     @Override
@@ -96,62 +71,24 @@ public class ManageEmployeeServlet extends HttpServlet {
         String resetPasswordUUID = request.getParameter("resetPasswordUUID");
 
         String action = request.getParameter("action");
-//
-//        UserService us = new UserService();
-//
-//        if (action.equals("add"))
-//        {
-//            if (username.equals("") || password.equals("") || email.equals("") || firstname.equals("") || lastname.equals("") || active.equals("") || active.equals("") || role.equals("") || company.equals(""))
-//            {
-//                request.setAttribute("errorMessage", "please fill in all fields");
-//
-//            } else
-//            {
-//                companyInt = Integer.parseInt(company);
-//                roleInt = Integer.parseInt(role);
-//                activeInt = Integer.parseInt(active);
-//
-//                if (activeInt == 1)
-//                {
-//                    activeBoolean = true;
-//                } else if (activeInt == 0)
-//                {
-//                    activeBoolean = false;
-//                }
-//
-//                try
-//                {
-//                    us.insert(username, password, email, activeBoolean, firstname, lastname, roleInt, companyInt);
-//                } catch (Exception ex)
-//                {
-//                    Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//
-//            }
-//
-//        } else if (action.equals("delete"))
-//        {
-//            String selectedUsername = request.getParameter("selectedUser");
-//            
-//            try
-//            {
-//                User user = us.get(selectedUsername);
-//                Role userRole = user.getRole();
-//                
-//                if(userRole.getRoleID() == 1)
-//                {
-//                    request.setAttribute("errorDelete", "ERROR Admins cannot be deleted!");
-//                }
-//                else
-//                {
-//                    us.delete(selectedUsername);
-//                }
-//            } catch (Exception ex)
-//            {
-//                Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            
-//        } else 
+
+        if (action.equals("add")) {
+            Employee employee = new Employee();
+
+            employee.setEmail(email);
+            employee.setFirstName(firstName);
+            employee.setIsActive(Short.parseShort(isActive));
+            employee.setLastName(lastName);
+            employee.setPassword(password);
+            employee.setResetPasswordUUID(resetPasswordUUID);
+            employee.setRoleId(Integer.parseInt(roleId));
+
+            try {
+                employeeDB.insert(employee);
+            } catch (BrewDBException ex) {
+                Logger.getLogger(ManageEmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         if (action.equals("edit")) {
             Employee employee = new Employee();
 
@@ -169,7 +106,6 @@ public class ManageEmployeeServlet extends HttpServlet {
             } catch (BrewDBException ex) {
                 Logger.getLogger(ManageEmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
         List<Employee> users = null;
         try {
