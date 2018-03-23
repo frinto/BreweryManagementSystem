@@ -1,7 +1,8 @@
 
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -21,11 +22,9 @@
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
         <link href="assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
         <link href="assets/css/override.css" rel="stylesheet" />
-        <link href="assets/css/successmodal.css" rel="stylesheet" />
     </head>
 
-    <body onbeforeunload="">
-
+    <body>
         <div class="wrapper">
 
             <!--Nav bar----------------------------------------------------------------------------->
@@ -33,9 +32,7 @@
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <image src ="assets/img/logo.png">
-
                     </div>
-
                     <ul class="nav">
                         <li>
                             <a class="nav-link" href="tankFarm">
@@ -86,12 +83,6 @@
                                 <p>Reports</p>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="productionSchedule">
-                                <img src="assets/img/report.png" class="" alt="Norway">
-                                <p>Production Schedule</p>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -99,13 +90,13 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand"></a>
+                        <a class="navbar-brand"> Brew </a>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Matthew
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
+                                <button class="dropdown-item" type="button">Logout</button>
                             </div>
                         </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,173 +108,176 @@
                 </nav>
 
                 <!--End nav bar-------------------------------------------------------------------------->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#production" role="tab" aria-controls="home" aria-selected="true">Production</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#newProduction" role="tab" aria-controls="profile" aria-selected="false">New Production Type</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <!-- brew materials tab-->  
+                    <div class="tab-pane fade show active" id="production" role="tabpanel" aria-labelledby="home-tab">
 
-                <h1 class="leftSpacingh1">Production</h1>
-                <c:choose>
-                    <c:when test="${action == 'add'}">
-                        <form action="production?action=nextProduction" method="POST">
-                            <table class="table">
-                                <thead class="thead-dark">
-                                <th>ProductionType</th>
-                                <th>Quantity</th>
-                                <th>SVNumber</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <select name="productionType" required="true">
-                                                <c:forEach var="finishedProduct" items="${finishedProd}">
-                                                    <option value="${finishedProduct.productName}">${finishedProduct.productName}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input type="number" name="quantity" required="true">
-                                        </td>
-                                        <td>
-                                            <select name="svNumber" required="true">
-                                                <c:forEach var="storageVessel" items="${sv}">
-                                                    <option value="${storageVessel.svId}">${storageVessel.svId}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button type="submit" class="btn btn-success">Next</button>
-                        </form>
-                    </c:when>
-                    <c:when test="${action == 'nextProduction'}">
-                        <form action="production?action=submitProduction" method="POST">
-                            <table class="table">
-                                <thead class="thead-dark">
-                                <th>ProductionType</th>
-                                <th>Quantity</th>
-                                <th>SVNumber</th>
-                                <th>Expected Sv Volume</th>
-                                <th>Finished Sv Volume</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="hidden" name="productionType" value="${productionType}">
-                                            ${productionType}
-                                        </td>
-                                        <td>
-                                            <input type="hidden" name="quantity" value="${quantity}">
-                                            ${quantity}
-                                        </td>
-                                        <td>
-                                            <input type="hidden" name="svNumber" value="${svNumber}">
-                                            ${svNumber}
-                                        </td>
-                                        <td>
-                                            <input type="hidden" name="expectedSvVolume" value="${expectedSvVolume}">
-                                            ${expectedSvVolume}
-                                        </td>
-                                        <td>
-                                            <input type="number" name="finishedSvVolume" required="true">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button type="submit" class="btn btn-success">Submit</button>
-                        </form>
-                    </c:when>
-                    <c:otherwise>
-                        <form class ="datepicker productionDate" action="production" method="GET">
-                            <h4>View Productions by Date:</h4>
-                            <input type="date" name="productionDate" id="datePicker">
-                            <button type="submit" class="btn btn-outline-primary">Select Date</button>
-                        </form>
-                        <form action="production?action=add" method="POST">
-                            <button type="submit" class="btn btn-success productionButton">Add Production</button>
-                            <table class="table">
-                                <thead class="thead-dark">
-                                <th>Date</th>
-                                <th>ProductionType</th>
-                                <th>Quantity</th>
-                                <th>SVNumber</th>
-                                <th>EmployeeID</th>
-                                <th>Finished Sv Volume</th>
-                                <th>Gain/Loss +-</th>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="production" items="${prod}">
-                                        <c:if test="${productionDate.equals(production.date)}">
+                        <h1>Production</h1>
+                        <c:choose>
+                            <c:when test="${action == 'add'}">
+                                <form action="production?action=nextProduction" method="POST">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                        <th>ProductionType</th>
+                                        <th>Quantity</th>
+                                        <th>SVNumber</th>
+                                        </thead>
+                                        <tbody>
                                             <tr>
-                                                <td><fmt:formatDate value="${production.date}" pattern="MMM-dd-yyy" /></td>
-                                                <td>${production.productionType}</td>
-                                                <td>${production.quantity}</td>
-                                                <td>${production.svNum}</td>
-                                                <td>${production.employeeId}</td>                                           
-                                                <td>${production.finishedSvVolume}</td>
-                                                <td>${production.gainLoss}</td>
+                                                <td>
+                                                    <select name="productionType" required="true">
+                                                        <c:forEach var="finishedProduct" items="${finishedProd}">
+                                                            <option value="${finishedProduct.productName}">${finishedProduct.productName}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="number" name="quantity" required="true">
+                                                </td>
+                                                <td>
+                                                    <select name="svNumber" required="true">
+                                                        <c:forEach var="storageVessel" items="${sv}">
+                                                            <option value="${storageVessel.svId}">${storageVessel.svId}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </td>
                                             </tr>
-                                        </c:if>
-                                    </c:forEach>
-                                </tbody>
+                                        </tbody>
+                                    </table>
+                                    <button type="submit" class="btn btn-success">Next</button>
+                                </form>
+                            </c:when>
+                            <c:when test="${action == 'nextProduction'}">
+                                <form action="production?action=submitProduction" method="POST">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                        <th>ProductionType</th>
+                                        <th>Quantity</th>
+                                        <th>SVNumber</th>
+                                        <th>Expected Sv Volume</th>
+                                        <th>Finished Sv Volume</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" name="productionType" value="${productionType}">
+                                                    ${productionType}
+                                                </td>
+                                                <td>
+                                                    <input type="hidden" name="quantity" value="${quantity}">
+                                                    ${quantity}
+                                                </td>
+                                                <td>
+                                                    <input type="hidden" name="svNumber" value="${svNumber}">
+                                                    ${svNumber}
+                                                </td>
+                                                <td>
+                                                    <input type="hidden" name="expectedSvVolume" value="${expectedSvVolume}">
+                                                    ${expectedSvVolume}
+                                                </td>
+                                                <td>
+                                                    <input type="number" name="finishedSvVolume" required="true">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </form>
+                            </c:when>
+                            <c:otherwise>
+                                <form class ="datepicker" action="production" method="GET">
+                                    <h4>View Productions by Date:</h4>
+                                    <input type="date" name="productionDate" id="datePicker">
+                                    <button type="submit" class="btn btn-outline-primary">Select Date</button>
+                                </form>
+                                <form action="production?action=add" method="POST" class="productionButton">
+                                    <button type="submit" class="btn btn-success">Add Production</button>
+                                    <p class="productionMessage">${message}</p>
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                        <th>Date</th>
+                                        <th>ProductionType</th>
+                                        <th>Quantity</th>
+                                        <th>SVNumber</th>
+                                        <th>EmployeeID</th>
+                                        <th>Finished Sv Volume</th>
+                                        <th>Gain/Loss +-</th>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="production" items="${prod}">
+                                                <c:if test="${productionDate.equals(production.date)}">
+                                                    <tr>
+                                                        <td><fmt:formatDate value="${production.date}" pattern="MMM-dd-yyy" /></td>
+                                                        <td>${production.productionType}</td>
+                                                        <td>${production.quantity}</td>
+                                                        <td>${production.svNum}</td>
+                                                        <td>${production.employeeId}</td>                                           
+                                                        <td>${production.finishedSvVolume}</td>
+                                                        <td>${production.gainLoss}</td>
+                                                    </tr>
+                                                </c:if>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+
+                    <div class="tab-pane fade" id="newProduction" role="tabpanel" aria-labelledby="profile-tab">
+
+                        <!--This is in a new tab for production -->
+                        <h1>Create new Production Type</h1>
+                        <!--This is a form to create a new production type-->
+                        <form action="production?action=newProductionType" id="newProductionTypeForm" method="POST">
+                            <table border="1" class="table">
+                                <thead>
+                                    <tr class="thead-dark">
+                                        <th> </th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <th>
+                                        Production Name
+                                    </th>
+                                    <th>
+                                        <input style="width:100%" type="text" autofocus="on" name="name" id="name" value="${newProduction}" placeholder="Product name">
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select name="usage" id="usage">
+                                            <option value="none">
+                                                NONE
+                                            </option>
+                                            <c:forEach var="productionMaterialUsage" items="${productionMaterialUsages}">
+                                                <option value="${productionMaterialUsage.name}">
+                                                    ${productionMaterialUsage.name}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input style="width:100%" type="number" min="0"  name="qty" id="qty" value="${qty}" placeholder="quantity">
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <input type="button" onclick="addARow()" value="Add a Row">
+                                <input type="submit" value="submit">
                             </table>
                         </form>
-                    </c:otherwise>
-                </c:choose>
-
-                <!---------------------------------------------Success Modal-------------------------------------------------->
-                <c:if test="${success!=null}">
-
-                <div id="myModal" class="modal fade">
-
-                    <div class="modal-dialog modal-confirm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-
-                                <div style="font-size:5em;">
-                                    <i class="far fa-check-circle"></i>
-                                </div>
-
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body text-center">
-                                <h4>Great!</h4>	
-                                <p>Production submitted successfully.</p>
-                                <input type ="button" class="btn btn-success"data-dismiss="modal" value="OK"></button>
-                            </div>
-                        </div>
                     </div>
                 </div>
-
-                </c:if>
-
-                <!-------------------------------------------------End Success Modal------------------------------------------->
-
-                <c:if test="${errorMessage!=null}">
-
-                    <div id="myModal" class="modal fade">
-
-                        <div class="modal-dialog modal-confirm">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <!--                                <div class="icon-box">
-                                                                        <i class="far fa-check-circle"></i>
-                                                                    </div>-->
-                                    <div style="font-size:5em; color:red">
-                                        <i class="fas fa-times-circle"></i>
-                                    </div>
-
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                </div>
-                                <div class="modal-body text-center">
-
-                                    <h4>Uh oh!</h4>	
-                                    <p>${errorMessage}</p>
-                                    <input type ="button" class="btn btn-success" data-dismiss="modal" value="OK"></button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </c:if>
                 </body>
                 <!--   Core JS Files   -->
                 <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -299,7 +293,48 @@
                 <script src="assets/js/plugins/bootstrap-notify.js"></script>
                 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
                 <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
+                <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
                 <script src="assets/js/production.js"></script>
-                <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+                <script type="text/javascript">
+                                    function addARow()
+                                    {
+//grab the location that we are going to add the input box to
+                                        var form = document.getElementById("newProductionTypeForm");
+                                        var table = form.getElementsByTagName("table") [0];
+
+//generate the elements we are adding
+                                        var tr = document.createElement("tr");
+
+//generate our select box
+                                        var td1 = document.createElement("td");
+//this will be used in for our quantity box
+                                        var td2 = document.createElement("td");
+                                        var usage = document.getElementById("usage");
+                                        var duplicateO = usage.cloneNode(true);
+                                        var duplicate  = duplicateO;
+//usage.setAttribute("value","NONE");
+
+//add to our tr
+                                        td1.appendChild(duplicate);
+                                        tr.appendChild(td1);
+
+//generate our quantity box this uses the previously created td2
+                                        var qty = document.createElement("input");
+                                        qty.setAttribute("type", "number");
+                                        qty.setAttribute("min", "0");
+//                                        qty.setAttribute("value", "0");
+                                        qty.setAttribute("name", "qty");
+                                        qty.setAttribute("id", "qty");
+                                        qty.setAttribute("placeholder", "quantity");
+                                        qty.setAttribute("style", "width:100%");
+
+//add to our tr
+                                        td2.appendChild(qty);
+                                        tr.appendChild(td2);
+//add to page
+                                        table.appendChild(tr);
+                                    }
+                </script>
+
                 </html>
 
