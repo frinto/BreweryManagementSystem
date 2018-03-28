@@ -45,7 +45,12 @@ public class BrewServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("newBrew", null);
             session.setAttribute("recipes", null);
+            String delete =request.getParameter("deleteBrew");
             String startDateStr = request.getParameter("brewDate");
+            if(delete!=null)
+            {
+                request.setAttribute("deleteBrew", delete);
+            }
 
             if (startDateStr == null) {
 
@@ -113,6 +118,13 @@ public class BrewServlet extends HttpServlet {
         RecipeDB recipeDB = new RecipeDB();
         
         String viewBrew = request.getParameter("viewBrew");
+        String deleteBrew = request.getParameter("ok");
+        String cancel = request.getParameter("cancel");
+        if(cancel!=null)
+        {
+            session.setAttribute("viewBrew", null);
+            response.sendRedirect("brew");
+        }
         if(viewBrew!=null)
         {
             String brewID = request.getParameter("selectedBrew");
@@ -122,13 +134,28 @@ public class BrewServlet extends HttpServlet {
                 brew = brewDB.getBrew(brewID);
                 Recipe recipe = recipeDB.getRecipe(brew.getRecipeName());
                 request.setAttribute("viewRecipe", recipe);
-                request.setAttribute("viewBrew", brew);
+                session.setAttribute("viewBrew", brew);
                 getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
             } catch (BrewDBException ex) {
                 Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if(viewBrew==null)
+        if(deleteBrew!=null)
+        {
+            Brew brew =(Brew) session.getAttribute("viewBrew");
+            try {
+                brewDB.delete(brew);
+                session.setAttribute("viewBrew", null);
+                response.sendRedirect("brew");
+                
+            } catch (BrewDBException ex) {
+                Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        
+        
+        if(viewBrew==null&&deleteBrew==null&&cancel==null)
         {
 
         String success = "success";

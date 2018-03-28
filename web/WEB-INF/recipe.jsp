@@ -133,7 +133,7 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">Recipe</th>
-                                    <th scope="col">Last Modified</th>
+                                    <th scope="col">Date Created</th>
                                 </tr>
                             </thead>
                             <tbody>
