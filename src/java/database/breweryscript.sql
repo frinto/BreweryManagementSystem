@@ -87,20 +87,6 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `ProductionMaterial`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `productionmaterial` ;
-
-SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `productionmaterial` (
-  `name` VARCHAR(40) NOT NULL,
-  `qty` INT NULL,
-  PRIMARY KEY (`Name`))
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
 -- Table `Production`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `production` ;
@@ -120,22 +106,31 @@ CREATE TABLE IF NOT EXISTS `production` (
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-
 -- -----------------------------------------------------
--- Table `ProductionMaterialUsage`
+-- Table `ProductionMaterial`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `productionmaterialusage` ;
+DROP TABLE IF EXISTS `productionMaterial` ;
 
-SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `productionmaterialusage` (
-  `materialQty` DOUBLE NULL,
-  `name` VARCHAR(40) NOT NULL,
-  `usage` VARCHAR(40) NOT NULL,
-  PRIMARY KEY (`Usage`, `Name`))
+CREATE TABLE IF NOT EXISTS `ProductionMaterial` (
+  `Name` VARCHAR(50) NOT NULL,
+  `qty` INT NULL,
+  PRIMARY KEY (`Name`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
+-- -----------------------------------------------------
+-- Table `ProductionMaterialUsage`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `productionMaterialUsage` ;
 
+CREATE TABLE IF NOT EXISTS `ProductionMaterialUsage` (
+  `materialQty` INT NULL,
+  `Name` VARCHAR(50) NOT NULL,
+  `ProductionUsage` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`ProductionUsage`, `Name`))
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `Account`
 -- -----------------------------------------------------
@@ -228,25 +223,25 @@ CREATE TABLE IF NOT EXISTS `recipe` (
   `dateModified` DATE NULL,
   `mashInTemp` FLOAT NULL,
   `mashInTime` FLOAT NULL,
-  `mashWaterVolume` FLOAT NULL,
-  `restTime` FLOAT NULL,
-  `raiseToTemp` FLOAT NULL,
-  `inTime` FLOAT NULL,
-  `totalMashTime` FLOAT NULL,
-  `underletLitres` FLOAT NULL,
-  `rest` FLOAT NULL,
-  `vorlaufTime` FLOAT NULL,
+  `mashWaterVolume` INT NULL,
+  `restTime` DECIMAL NULL,
+  `raiseToTemp` INT NULL,
+  `inTime` DECIMAL NULL,
+  `totalMashTime` DECIMAL NULL,
+  `underletLitres` INT NULL,
+  `rest` DECIMAL NULL,
+  `vorlaufTime` DECIMAL NULL,
   `firstWortGrav` FLOAT NULL,
-  `runOffTime` FLOAT NULL,
-  `spargVol` FLOAT NULL,
+  `runOffTime` DECIMAL NULL,
+  `spargVol` DECIMAL NULL,
   `spargTemp` FLOAT NULL,
   `lastRunningsGrav` FLOAT NULL,
-  `kettleFullVol` FLOAT NULL,
+  `kettleFullVol` DECIMAL NULL,
   `kettleFullGrav` FLOAT NULL,
-  `boilTime` FLOAT NULL,
-  `strikeOutVol` FLOAT NULL,
+  `boilTime` DECIMAL NULL,
+  `strikeOutVol` DECIMAL NULL,
   `strikeOutGrav` FLOAT NULL,
-  `whirlPoolTime` FLOAT NULL,
+  `whirlPoolTime` DECIMAL NULL,
   `coolInTemp` FLOAT NULL,
   `oxygenRate` FLOAT NULL,
   `gypsumAmt` FLOAT NULL,
@@ -361,9 +356,9 @@ DROP TABLE IF EXISTS `recipematerials` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `recipematerials` (
-  `qty` float NULL,
-  `recipeName` VARCHAR(25) NULL,
-  `brewMaterialsName` VARCHAR(30) NULL)
+  `qty` double NULL,
+  `recipeName` VARCHAR(25) NOT NULL,
+  `brewMaterialsName` VARCHAR(15) NOT NULL)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
@@ -396,23 +391,13 @@ DROP TABLE IF EXISTS `productionschedule` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `productionschedule` (
   `date` DATE NOT NULL,
-  `brew` VARCHAR(255) NULL,
-  `fv` VARCHAR(255) NULL,
-  `yst` VARCHAR(255) NULL,
-  `transfer` VARCHAR(255) NULL,
-  `fuge` VARCHAR(255) NULL,
-  `clean` VARCHAR(255) NULL,
-  `keg` VARCHAR(255) NULL,
-  `bottle` VARCHAR(255) NULL,
-  `can` VARCHAR(255) NULL,
+  `brew1` VARCHAR(45) NULL,
+  `brew2` VARCHAR(45) NULL,
+  `brew3` VARCHAR(45) NULL,
+  `transfer` VARCHAR(45) NULL,
+  `productionDetail` VARCHAR(45) NULL,
   PRIMARY KEY (`date`))
 ENGINE = InnoDB;
-
-INSERT INTO `productionschedule` VALUES ('2018-03-05', null,null, null, null, null, null, null, null, null);
-INSERT INTO `productionschedule` VALUES ('2018-03-06', null,null, null, null, null, null, null, null, null);
-INSERT INTO `productionschedule` VALUES ('2018-03-07', null,null, null, null, null, null, null, null, null);
-INSERT INTO `productionschedule` VALUES ('2018-03-08', null,null, null, null, null, null, null, null, null);
-INSERT INTO `productionschedule` VALUES ('2018-03-09', null,null, null, null, null, null, null, null, null);
 
 SHOW WARNINGS;
 

@@ -12,24 +12,24 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author 553817
+ * @author 740991
  */
 @Embeddable
 public class ProductionmaterialusagePK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "name")
+    @Column(name = "Name")
     private String name;
     @Basic(optional = false)
-    @Column(name = "usage")
-    private String usage;
+    @Column(name = "ProductionUsage")
+    private String productionUsage;
 
     public ProductionmaterialusagePK() {
     }
 
-    public ProductionmaterialusagePK(String name, String usage) {
+    public ProductionmaterialusagePK(String name, String productionUsage) {
         this.name = name;
-        this.usage = usage;
+        this.productionUsage = productionUsage;
     }
 
     public String getName() {
@@ -40,19 +40,19 @@ public class ProductionmaterialusagePK implements Serializable {
         this.name = name;
     }
 
-    public String getUsage() {
-        return usage;
+    public String getProductionUsage() {
+        return productionUsage;
     }
 
-    public void setUsage(String usage) {
-        this.usage = usage;
+    public void setProductionUsage(String productionUsage) {
+        this.productionUsage = productionUsage;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (name != null ? name.hashCode() : 0);
-        hash += (usage != null ? usage.hashCode() : 0);
+        hash += (productionUsage != null ? productionUsage.hashCode() : 0);
         return hash;
     }
 
@@ -66,7 +66,7 @@ public class ProductionmaterialusagePK implements Serializable {
         if ((this.name == null && other.name != null) || (this.name != null && !this.name.equals(other.name))) {
             return false;
         }
-        if ((this.usage == null && other.usage != null) || (this.usage != null && !this.usage.equals(other.usage))) {
+        if ((this.productionUsage == null && other.productionUsage != null) || (this.productionUsage != null && !this.productionUsage.equals(other.productionUsage))) {
             return false;
         }
         return true;
@@ -74,7 +74,7 @@ public class ProductionmaterialusagePK implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.ProductionmaterialusagePK[ name=" + name + ", usage=" + usage + " ]";
+        return "domainmodel.ProductionmaterialusagePK[ name=" + name + ", productionUsage=" + productionUsage + " ]";
     }
     
 }

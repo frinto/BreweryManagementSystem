@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 553817
+ * @author 740991
  */
 @Entity
 @Table(name = "productionmaterial")
@@ -31,7 +31,7 @@ public class Productionmaterial implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "name")
+    @Column(name = "Name")
     private String name;
     @Column(name = "qty")
     private Integer qty;

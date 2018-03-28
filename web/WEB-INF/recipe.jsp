@@ -190,7 +190,7 @@
                                 <tr>
                                     <th scope="row">Base Malt</th>
                                     <td>kg</td>
-                                    <td><select name="baseMaltList" class="custom-select">
+                                    <td><select name="baseMaltList" class="custom-select" required>
                                             <option value="">--None--</option>
                                             <c:forEach items="${maltList}" var="malt">
                                                 <option value="${malt.name}">
@@ -199,7 +199,7 @@
                                             </c:forEach>
                                         </select>
                                     </td>
-                                    <td><input type="number" value="${baseMaltAmt}" id="basemalt" name="baseMaltAmt" min="0" max="500"></td>
+                                    <td><input type="number" value="${baseMaltAmt}" required id="basemalt" name="baseMaltAmt" min="0" max="500"></td>
                                 </tr>
 
                                 <tr>

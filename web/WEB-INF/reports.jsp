@@ -59,13 +59,13 @@
         chartFinishedInventory.draw(dataFinishedInventory, optionsFinishedInventory);
         //-----------------END Finished Inventory Chart------------------------------------------------------------------
     
-        //------------------MARTINS CHART-----------------------------------------
+        //------------------Weekly Production of Individual Items -----------------------------------------
         // Create the data table.
         var data2 = new google.visualization.DataTable();
         data2.addColumn('string', 'Type');
         data2.addColumn('number', 'Quantity');
         
-        <c:forEach var="production" items="${prodList}">
+        <c:forEach var="production" items="${prodItemList}">
             data2.addRows([
                 ['${production.productionType}', ${production.quantity}]
             ]);
@@ -73,12 +73,34 @@
         
 
         // Set chart options
-        var options2 = {'title':"Production Chart",
+        var options2 = {'title':"Weekly Production of Individual Items",
                        'width':600,
                        'height':600};
-        var chartProduction = new google.visualization.PieChart(document.getElementById('chart_production'));
+        var chartProduction = new google.visualization.BarChart(document.getElementById('chart_production'));
         chartProduction.draw(data2,options2);
-        //-------------------END OF MARTINS CHART------------------------------------------------------
+        //-------------------END OF Weekly Production of Individual Items CHART------------------------------------------------------
+        
+        
+        //------------------Weekly Total Volume of Brews -----------------------------------------
+        // Create the data table.
+        var brewVolumeData = new google.visualization.DataTable();
+        brewVolumeData.addColumn('string', 'Type');
+        brewVolumeData.addColumn('number', 'Volume');
+        
+        <c:forEach var="brewMap" items="${brewVolumeMap}">
+            brewVolumeData.addRows([
+                ['${brewMap.key}', ${brewMap.value}]
+            ]);
+        </c:forEach>
+        
+
+        // Set chart options
+        var brewVolumeOptions = {'title':"Weekly Total Volume of Brews",
+                       'width':600,
+                       'height':600};
+        var chartProduction = new google.visualization.BarChart(document.getElementById('chart_brewVolume'));
+        chartProduction.draw(brewVolumeData,brewVolumeOptions);
+        //-------------------END OF Weekly Total Volume of Brews CHART------------------------------------------------------
         
         
         //----------------START PROD MAT CHART----------------------------------------------------------------------
@@ -230,6 +252,9 @@
                 <!--End nav bar-------------------------------------------------------------------------->
         
           <div id="chart_production"></div>
+          
+          <div id="chart_brewVolume"></div>
+          
           <div id="chart_finishedInventory"></div>
           
           <div id="chart_productionMaterials"></div>

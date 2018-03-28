@@ -120,7 +120,7 @@
 
 
                 <!--------------------------------------Brew Selector------------------------------------------->
-
+                <c:if test ="${viewBrew==null}">
                 <c:if test="${recipe==null}">
                     <c:if test="${newBrew != null}">
                         <div class ="selectBrew">
@@ -164,6 +164,7 @@
                                     <th scope="col">Brew #</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Brand</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -176,6 +177,12 @@
 
                                             <td><fmt:formatDate value="${brew.date}" pattern="MMM-dd-yyy" /></td>
                                             <td>${brew.recipeName}</td>
+                                            <td>
+                                                <form action="brew" METHOD ="POST">
+                                                    <input type="submit" value="View" name="viewBrew">
+                                                    <input type="hidden" name="selectedBrew" value="${brew.brewId}">
+                                                </form>
+                                            </td>
                                         </tr>
                                     </c:if>
                                 </c:forEach>
@@ -187,6 +194,245 @@
                         </form>
                     </div>
                 </c:if>
+                </c:if>   
+                    <c:if test="${viewBrew!=null}">
+                 <h1 class="leftSpacingh1">Now Viewing: ${viewBrew.recipeName} | Brew Number : ${viewBrew.brewId}</h1>
+                 <h3 class ="brewSteps">Mash Tun</h3>
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Action</th>
+                                            <th scope="col">Unit</th>
+                                            <th scope="col">Target</th>
+                                            <th scope="col">Actual</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Mash-In Temperature</th>
+                                            <td>oC</td>
+                                            <td colspan="4">${viewRecipe.mashInTemp}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Mash-In Time</th>
+                                            <td>Minutes</td>
+                                            <td>${viewRecipe.mashInTime}</td>
+                                            <td>${viewBrew.mashInTime}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Mash-In Water</th>
+                                            <td>Litres</td>
+                                            <td>${viewRecipe.mashWaterVolume}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Rest Time</th>
+                                            <td>Minutes</td>
+                                            <td>${viewRecipe.restTime}</td>
+                                            <td>${viewBrew.restTime}</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="4" style ="text-align:center">****DO STARCH TEST****</th>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Raise To Temperature</th>
+                                            <td>oC</td>
+                                            <td colspan="4">${viewRecipe.raiseToTemp}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">In Time</th>
+                                            <td>Minutes</td>
+                                            <td>${viewRecipe.inTime}</td>
+                                            <td>${viewBrew.inTime}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Total Mash Time</th>
+                                            <td>Minutes</td>
+                                            <td>${viewRecipe.totalMashTime}</td>
+                                            <td>${viewBrew.totalMashTime}</td>
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                                <h3 class ="brewSteps">Lauter Tun</h3>
+
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Action</th>
+                                            <th scope="col">Unit</th>
+                                            <th scope="col">Target</th>
+                                            <th scope="col">Actual</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Underlet</th>
+                                            <td>Litres</td>
+                                            <td>${viewRecipe.underletLitres}</td>
+                                            <td>${viewBrew.underletTime}</td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Rest</th>
+                                            <td>Minutes</td>
+                                            <td>${viewRecipe.rest}</td>
+                                            <td>${viewBrew.lauterRestTime}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Vorlauf</th>
+                                            <td>Minutes</td>
+                                            <td>${viewRecipe.vorlaufTime}</td>
+                                            <td>${viewBrew.vorlaufTime}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">First Wort Gravity</th>
+                                            <td>oP</td>
+                                            <td>${viewRecipe.firstWortGrav}</td>
+                                            <td>${viewBrew.firstWortGravity}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Run-Off</th>
+                                            <td>Minutes</td>
+                                            <td>${viewRecipe.runOffTime}</td>
+                                            <td>${viewBrew.runOffTime}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Sparge Volume</th>
+                                            <td>Hectolitres</td>
+                                            <td>${viewRecipe.spargVol}</td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">Sparge Temperature</th>
+                                            <td>oC</td>
+                                            <td>${viewRecipe.spargTemp}</td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">Last Runnings Gravity</th>
+                                            <td>oP</td>
+                                            <td>${viewRecipe.lastRunningsGrav}</td>
+                                            <td>${viewBrew.lastRunningsGravity}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">Kettle Full Volume</th>
+                                            <td>Hectolitres</td>
+                                            <td>${viewRecipe.kettleFullVol}</td>
+                                            <td>${viewBrew.kettleFullVol}</td>
+                                        </tr>
+
+
+                                    </tbody>
+
+                                </table>
+
+                                <h3 class ="brewSteps">Brew Kettle</h3>
+
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Action</th>
+                                            <th scope="col">Unit</th>
+                                            <th scope="col">Target</th>
+                                            <th scope="col">Actual</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Kettle Full Gravity</th>
+                                            <td>oP</td>
+                                            <td>${viewRecipe.kettleFullGrav}</td>
+                                            <td>${viewBrew.kettleFullGravity}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Boil</th>
+                                            <td>Minutes</td>
+                                            <td>${viewRecipe.boilTime}</td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <th scope="row">Add First Hop at Kettle Full</th>
+                                            <td>kg</td>
+                                            <td>${viewRecipe.firstHop}</td>
+                                            <td>${viewRecipe.firstHopAmt}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Add Second Hop:30 Min Left</th>
+                                            <td>kg</td>
+                                            <td>${viewRecipe.secondHop}</td>
+                                            <td>${viewRecipe.secondHopAmt}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Add Third Hop: 5 Min Left</th>
+                                            <td>kg</td>
+                                            <td>${viewRecipe.thirdHop}</td>
+                                            <td>${viewRecipe.thirdHopAmt}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">Kettle Strikeout Volume</th>
+                                            <td>Hectolitres</td>
+                                            <td>${viewRecipe.strikeOutVol}</td>
+                                            <td>${viewBrew.kettleStrikeOutVol}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Kettle Strikeout Gravity</th>
+                                            <td>oP</td>
+                                            <td>${viewRecipe.strikeOutGrav}</td>
+                                            <td>${viewBrew.kettleStrikeOutGravity}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Whirlpool Time</th>
+                                            <td>Minutes</td>
+                                            <td>${viewRecipe.whirlPoolTime}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Oxygen Rate</th>
+                                            <td>Litres Per Minute</td>
+                                            <td>${viewRecipe.oxygenRate}</td>
+
+                                        </tr>
+
+
+                                    </tbody>
+
+                                </table>
+                                <h3 class ="brewSteps">Fermenting Vessel and Final Volume</h3>
+                                <br>
+                                <div class="fvSelect">
+                                    <table class="table">
+                                        <tr>
+                                            <td>
+                                                <label for="custom-select">Destination Fermenter:</label>
+                                            </td>
+                                            <td>
+                                                ${viewBrew.fvId}</td>
+
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td>
+
+                                                <label>Final volume for fermenter(hectolitres):</label>
+                                            </td>
+                                            <td>
+                                                ${viewBrew.allInVolume}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+             </c:if>
                 <!----------------------------------------------BrewSheetForm-------------------------------------------->
 
 
@@ -216,6 +462,7 @@
                         </li>
 
                     </ul>
+                    
 
 
                     <div class="tab-content" id="myTabContent">
@@ -678,6 +925,9 @@
                 </div>
 
             </c:if>
+            
+             
+                 
     </body>
     <!--   Core JS Files   -->
     <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>

@@ -8,9 +8,14 @@ package servlets;
 import dataaccess.BrewDBException;
 import dataaccess.FinishedInventoryDB;
 import dataaccess.ProductionDB;
+import dataaccess.ProductionMaterialDB;
+import dataaccess.ProductionMaterialUsageDB;
 import dataaccess.TankDB;
 import domainmodel.Finishedproduct;
 import domainmodel.Production;
+import domainmodel.Productionmaterial;
+import domainmodel.Productionmaterialusage;
+import domainmodel.ProductionmaterialusagePK;
 import domainmodel.Sv;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -36,6 +41,16 @@ public class ProductionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+
+        try {
+            ProductionMaterialDB productionMaterialDB = new ProductionMaterialDB();
+            List<Productionmaterial> pmu;
+            pmu = productionMaterialDB.getAll();
+            request.setAttribute("productionMaterialUsages", pmu);
+        } catch (BrewDBException ex) {
+            Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         TankDB tankDB = new TankDB();
         String startDateStr = request.getParameter("productionDate");
         //Formats the date so it follows the standard.
@@ -82,6 +97,14 @@ public class ProductionServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        try {
+            ProductionMaterialDB productionMaterialDB = new ProductionMaterialDB();
+            List<Productionmaterial> pmu;
+            pmu = productionMaterialDB.getAll();
+            request.setAttribute("productionMaterialUsages", pmu);
+        } catch (BrewDBException ex) {
+            Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String action = request.getParameter("action");
         String employeeId = (String) session.getAttribute("empId");
         String productionType = request.getParameter("productionType");
@@ -97,7 +120,6 @@ public class ProductionServlet extends HttpServlet {
         TankDB tankDB = new TankDB();
         FinishedInventoryDB finProdDB = new FinishedInventoryDB();
         DecimalFormat df = new DecimalFormat("#0.000");
-        String success = "success";
 
         //navigates to the production form to submit a new production
         if (action.equals("add")) {
@@ -129,11 +151,10 @@ public class ProductionServlet extends HttpServlet {
 
                 request.setAttribute("prod", prodList);
                 request.setAttribute("sv", svTankList);
-                request.setAttribute("success", success);
+                request.setAttribute("message", "Production Submitted");
                 getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
 
             } catch (BrewDBException ex) {
-                request.setAttribute("errorMessage", "Error has occured, please try again.");
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ParseException ex) {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -141,8 +162,6 @@ public class ProductionServlet extends HttpServlet {
         } else if (action.equals("nextProduction")) {
             try {
                 List<Sv> svTankList = tankDB.getAllSV();
-                List<Finishedproduct> finProdList = finProdDB.getAllInventory();
-
                 for (int i = 0; i < svTankList.size(); i++) {
                     if (svTankList.get(i).getSvId() == Integer.parseInt(svNumber)) {
                         currentVolume = svTankList.get(i).getVolume();
@@ -158,10 +177,7 @@ public class ProductionServlet extends HttpServlet {
                 double totalProducedVolume = Double.parseDouble(quantity) * volumePerUnit;
                 double expectedSvVolumeCalc = currentVolume - totalProducedVolume;
                 if (expectedSvVolumeCalc < 0) {
-                    request.setAttribute("errorMessage", "Expected sv volume cannot be less than zero.");
-                    request.setAttribute("finishedProd", finProdList);
-                    request.setAttribute("sv", svTankList);
-                    request.setAttribute("action", "add");
+                    request.setAttribute("message", "Expected sv volume cannot be less than zero.");
                     getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
                 }
                 request.setAttribute("expectedSvVolume", expectedSvVolumeCalc);
@@ -183,8 +199,56 @@ public class ProductionServlet extends HttpServlet {
             } catch (BrewDBException ex) {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else if ("newProductionType".equals(action)) {
+            try {
+                String name = request.getParameter("name");
+                String qtyS[] = request.getParameterValues("qty");
+                int qty[] = new int[qtyS.length];
+                for (int i = 0; i < qtyS.length; i++) {
+                    try {
+                        qty[i] = Integer.parseInt(qtyS[i]);
+                    } catch (NumberFormatException ex) {
+                        qty[i] = 0;
+                    }
+
+                }
+                String usage[] = request.getParameterValues("usage");
+
+                AddNewProductionType(name, usage, qty);
+            } catch (BrewDBException ex) {
+                Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            response.sendRedirect("production");
         } else {
-            getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
+            response.sendRedirect("production");
+        }
+    }
+
+    private void AddNewProductionType(String name, String usage[], int qty[]) throws BrewDBException {
+        //im too lazy to not abreviate it
+        ProductionMaterialUsageDB pmuDB = new ProductionMaterialUsageDB();
+        ProductionMaterialDB pmDB = new ProductionMaterialDB();
+        FinishedInventoryDB finishedProductDB = new FinishedInventoryDB();
+//        
+//        
+        Productionmaterial pm = new Productionmaterial(name);
+        pm.setQty(0);
+        pmDB.insert(pm);
+        Finishedproduct newFinishedInventory = new Finishedproduct(name);
+        newFinishedInventory.setQty(0);
+        finishedProductDB.insertInventory(newFinishedInventory);
+//        Test data
+//        ProductionmaterialusagePK pk = new ProductionmaterialusagePK("Beer", "test");
+//        Productionmaterialusage pmu = new Productionmaterialusage(pk);
+//        pmuDB.insert(pmu);
+//        insert data into the table
+        for (int i = 0; i < usage.length && i < qty.length; i++) {
+            if (!usage[i].equals("NONE") && !name.isEmpty()) {
+                ProductionmaterialusagePK pk = new ProductionmaterialusagePK(name, usage[i]);
+                Productionmaterialusage productionMaterialUsage = new Productionmaterialusage(pk, (int) qty[i]);
+//                Productionmaterialusage productionMaterialUsage = new Productionmaterialusage(name, usage[i], qty[i]);
+                pmuDB.insert(productionMaterialUsage);
+            }
         }
     }
 }

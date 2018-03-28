@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 553817
+ * @author 740991
  */
 @Entity
 @Table(name = "productionmaterialusage")
@@ -25,15 +25,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Productionmaterialusage.findAll", query = "SELECT p FROM Productionmaterialusage p")
     , @NamedQuery(name = "Productionmaterialusage.findByMaterialQty", query = "SELECT p FROM Productionmaterialusage p WHERE p.materialQty = :materialQty")
     , @NamedQuery(name = "Productionmaterialusage.findByName", query = "SELECT p FROM Productionmaterialusage p WHERE p.productionmaterialusagePK.name = :name")
-    , @NamedQuery(name = "Productionmaterialusage.findByUsage", query = "SELECT p FROM Productionmaterialusage p WHERE p.productionmaterialusagePK.usage = :usage")})
+    , @NamedQuery(name = "Productionmaterialusage.findByProductionUsage", query = "SELECT p FROM Productionmaterialusage p WHERE p.productionmaterialusagePK.productionUsage = :productionUsage")})
 public class Productionmaterialusage implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProductionmaterialusagePK productionmaterialusagePK;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "materialQty")
-    private Double materialQty;
+    private Integer materialQty;
 
     public Productionmaterialusage() {
     }
@@ -41,9 +40,13 @@ public class Productionmaterialusage implements Serializable {
     public Productionmaterialusage(ProductionmaterialusagePK productionmaterialusagePK) {
         this.productionmaterialusagePK = productionmaterialusagePK;
     }
+    public Productionmaterialusage(ProductionmaterialusagePK productionmaterialusagePK, int qty) {
+        this.productionmaterialusagePK = productionmaterialusagePK;
+        this.materialQty = qty;
+    }
 
-    public Productionmaterialusage(String name, String usage) {
-        this.productionmaterialusagePK = new ProductionmaterialusagePK(name, usage);
+    public Productionmaterialusage(String name, String productionUsage) {
+        this.productionmaterialusagePK = new ProductionmaterialusagePK(name, productionUsage);
     }
 
     public ProductionmaterialusagePK getProductionmaterialusagePK() {
@@ -54,11 +57,11 @@ public class Productionmaterialusage implements Serializable {
         this.productionmaterialusagePK = productionmaterialusagePK;
     }
 
-    public Double getMaterialQty() {
+    public Integer getMaterialQty() {
         return materialQty;
     }
 
-    public void setMaterialQty(Double materialQty) {
+    public void setMaterialQty(Integer materialQty) {
         this.materialQty = materialQty;
     }
 

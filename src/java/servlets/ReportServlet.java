@@ -5,20 +5,27 @@
  */
 package servlets;
 
+import dataaccess.BrewDB;
 import dataaccess.BrewDBException;
 import dataaccess.FinishedInventoryDB;
 import domainmodel.Finishedproduct;
 import dataaccess.ProductionDB;
 import dataaccess.RawInventoryDB;
+import domainmodel.Brew;
 import domainmodel.Brewmaterials;
 import domainmodel.Production;
 import domainmodel.Productionmaterial;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -59,19 +66,60 @@ public class ReportServlet extends HttpServlet {
             request.setAttribute("message", "error retrieving finished product list from database");
 
         }
-
         
+        //Get the date of the beginning of the last week (7 days ago)
+        //This is used to produce reports based on the last 7 days
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -7);
+        Date previousWeekDate = cal.getTime();
+        
+        //The current date must be incremented by 1 so that the range ends at midnight (12:00am) of the current night
+        Calendar calToday = Calendar.getInstance();
+        calToday.add(Calendar.DATE, +1);
+        Date todaysDate = calToday.getTime();
+        
+        //Report that shows the Weekly Production of Individual Items
         ProductionDB prodDB = new ProductionDB();
-        List<Production> prodList;
+        List<Production> prodItemList;
         try {
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.DATE, -10);
-            Date minDate = cal.getTime();
-            prodList = prodDB.getProdByDateRange(minDate, new Date());
-            request.setAttribute("prodList", prodList);
+            prodItemList = prodDB.getProdByDateRange(previousWeekDate, todaysDate);
+            request.setAttribute("prodItemList", prodItemList);
         } catch (BrewDBException ex) {
             Logger.getLogger(ReportServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        //Report that shows Weekly Volume of Beer brewed based on Recipe
+        BrewDB brewDB = new BrewDB();
+        List<Brew> brewList;
+        try {
+            brewList = brewDB.getBrewByDateRange(previousWeekDate, todaysDate);
+            List<String> currentRecipes;
+            Set<String> currentUniqueRecipes = new HashSet<>();
+            ArrayList<Double> brewVolumeList = new ArrayList<>();
+            Map<String, Double> brewMap = new HashMap<>();
+            
+            for (Brew brew : brewList){
+                currentUniqueRecipes.add(brew.getRecipeName());
+            }
+            
+            for (String recipe : currentUniqueRecipes) {
+                
+                double volume = 0;
+                
+                for (Brew brew : brewList) {
+                    
+                    if (recipe.equals(brew.getRecipeName())) {
+                        volume = volume + brew.getAllInVolume();
+                    }
+                    
+                }
+                brewMap.put(recipe,volume);
+            }
+            request.setAttribute("brewVolumeMap", brewMap);
+        } catch (BrewDBException ex) {
+            Logger.getLogger(ReportServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         request.setAttribute("reportData", "greetings from the backend!");
         getServletContext().getRequestDispatcher("/WEB-INF/reports.jsp").forward(request, response);
