@@ -164,12 +164,25 @@ public class RecipeServlet extends HttpServlet {
   
         
         String baseMalt = request.getParameter("baseMaltList");
+    
         float baseMaltAmt = Float.parseFloat(request.getParameter("baseMaltAmt"));
         String secondMalt = request.getParameter("secondMaltList");
+        if(secondMalt.equals(""))
+        {
+            secondMalt=null;
+        }
         float secondMaltAmt = Float.parseFloat(request.getParameter("secondMaltAmt"));
         String thirdMalt = request.getParameter("thirdMaltList");
+        if(thirdMalt.equals(""))
+        {
+            thirdMalt=null;
+        }
         float thirdMaltAmt = Float.parseFloat(request.getParameter("thirdMaltAmt"));
         String fourthMalt = request.getParameter("fourthMaltList");
+        if(fourthMalt.equals(""))
+        {
+            fourthMalt=null;
+        }
         float fourthMaltAmt = Float.parseFloat(request.getParameter("fourthMaltAmt"));
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -197,6 +210,8 @@ public class RecipeServlet extends HttpServlet {
         
              recipeDB.insert(recipe);
              session.setAttribute("newRecipe", null);
+             List<Recipe> recipeList = recipeDB.getAll();
+             session.setAttribute("recipeList",recipeList);
              getServletContext().getRequestDispatcher("/WEB-INF/recipe.jsp").forward(request, response);
         } catch (BrewDBException ex) {
             Logger.getLogger(RecipeServlet.class.getName()).log(Level.SEVERE, null, ex);

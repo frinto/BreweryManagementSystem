@@ -110,6 +110,26 @@ public class BrewServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         BrewDB brewDB = new BrewDB();
+        RecipeDB recipeDB = new RecipeDB();
+        
+        String viewBrew = request.getParameter("viewBrew");
+        if(viewBrew!=null)
+        {
+            String brewID = request.getParameter("selectedBrew");
+            
+            try {
+                Brew brew = new Brew();
+                brew = brewDB.getBrew(brewID);
+                Recipe recipe = recipeDB.getRecipe(brew.getRecipeName());
+                request.setAttribute("viewRecipe", recipe);
+                request.setAttribute("viewBrew", brew);
+                getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
+            } catch (BrewDBException ex) {
+                Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(viewBrew==null)
+        {
 
         String success = "success";
 
@@ -216,6 +236,7 @@ public class BrewServlet extends HttpServlet {
 
         } catch (BrewDBException ex) {
             Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
 
     }

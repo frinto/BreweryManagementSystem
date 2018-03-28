@@ -109,6 +109,8 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `ProductionMaterial`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `productionMaterial` ;
+
 CREATE TABLE IF NOT EXISTS `ProductionMaterial` (
   `Name` VARCHAR(50) NOT NULL,
   `qty` INT NULL,
@@ -119,6 +121,8 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `ProductionMaterialUsage`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `productionMaterialUsage` ;
+
 CREATE TABLE IF NOT EXISTS `ProductionMaterialUsage` (
   `materialQty` INT NULL,
   `Name` VARCHAR(50) NOT NULL,
