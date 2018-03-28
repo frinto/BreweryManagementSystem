@@ -99,7 +99,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand"></a>
+                        <a class="navbar-brand">Production</a>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Matthew
@@ -118,7 +118,6 @@
 
                 <!--End nav bar-------------------------------------------------------------------------->
 
-                <h1 class="leftSpacingh1">Production</h1>
                 <c:choose>
                     <c:when test="${action == 'add'}">
                         <form action="production?action=nextProduction" method="POST">
@@ -198,6 +197,7 @@
                         </form>
                         <form action="production?action=add" method="POST">
                             <button type="submit" class="btn btn-success productionButton">Add Production</button>
+                        </form>
                             <table class="table">
                                 <thead class="thead-dark">
                                 <th>Date</th>
@@ -207,6 +207,7 @@
                                 <th>EmployeeID</th>
                                 <th>Finished Sv Volume</th>
                                 <th>Gain/Loss +-</th>
+                                <th></th>
                                 </thead>
                                 <tbody>
                                     <c:forEach var="production" items="${prod}">
@@ -219,12 +220,15 @@
                                                 <td>${production.employeeId}</td>                                           
                                                 <td>${production.finishedSvVolume}</td>
                                                 <td>${production.gainLoss}</td>
+                                                <form action="production?action=delete" method="POST">
+                                                    <input type="hidden" name="delete" value="${production.prodId}" >
+                                                    <td><button type="submit">Delete</td>
+                                                </form>        
                                             </tr>
                                         </c:if>
                                     </c:forEach>
                                 </tbody>
                             </table>
-                        </form>
                     </c:otherwise>
                 </c:choose>
 

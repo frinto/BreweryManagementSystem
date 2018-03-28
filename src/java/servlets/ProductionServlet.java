@@ -38,7 +38,7 @@ public class ProductionServlet extends HttpServlet {
         HttpSession session = request.getSession();
         TankDB tankDB = new TankDB();
         String startDateStr = request.getParameter("productionDate");
-
+        //Formats the date so it follows the standard.
         if (startDateStr == null) {
 
             try {
@@ -60,6 +60,7 @@ public class ProductionServlet extends HttpServlet {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        //Gets the list of the productions with a specified date.
         try {
             ProductionDB prodDB = new ProductionDB();
 
@@ -88,6 +89,7 @@ public class ProductionServlet extends HttpServlet {
         String svNumber = request.getParameter("svNumber");
         String expectedSvVolume = request.getParameter("expectedSvVolume");
         String finishedSvVolume = request.getParameter("finishedSvVolume");
+        String delete = request.getParameter("delete");
         Production production = new Production();
         ProductionDB prodDB = new ProductionDB();
         double volumePerUnit = 0;
@@ -170,6 +172,14 @@ public class ProductionServlet extends HttpServlet {
                 request.setAttribute("action", action);
 
                 getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
+            } catch (BrewDBException ex) {
+                Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (action.equals("delete")) {
+            try {
+                Production p = prodDB.getProduction(Integer.parseInt(delete));
+                prodDB.deleteProduction(p);
+                response.sendRedirect("production");
             } catch (BrewDBException ex) {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
