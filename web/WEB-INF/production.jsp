@@ -1,7 +1,8 @@
 
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,8 +25,7 @@
         <link href="assets/css/successmodal.css" rel="stylesheet" />
     </head>
 
-    <body onbeforeunload="">
-
+    <body>
         <div class="wrapper">
 
             <!--Nav bar----------------------------------------------------------------------------->
@@ -105,7 +105,7 @@
                                 Matthew
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
+                                <button class="dropdown-item" type="button">Logout</button>
                             </div>
                         </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,6 +117,17 @@
                 </nav>
 
                 <!--End nav bar-------------------------------------------------------------------------->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#production" role="tab" aria-controls="home" aria-selected="true">Production</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#newProduction" role="tab" aria-controls="profile" aria-selected="false">New Production Type</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <!-- brew materials tab-->  
+                    <div class="tab-pane fade show active" id="production" role="tabpanel" aria-labelledby="home-tab">
 
                 <c:choose>
                     <c:when test="${action == 'add'}">
@@ -213,24 +224,24 @@
                                     <c:forEach var="production" items="${prod}">
                                         <c:if test="${productionDate.equals(production.date)}">
                                             <tr>
-                                                <td><fmt:formatDate value="${production.date}" pattern="MMM-dd-yyy" /></td>
-                                                <td>${production.productionType}</td>
-                                                <td>${production.quantity}</td>
-                                                <td>${production.svNum}</td>
-                                                <td>${production.employeeId}</td>                                           
-                                                <td>${production.finishedSvVolume}</td>
-                                                <td>${production.gainLoss}</td>
-                                                <form action="production?action=delete" method="POST">
+                                                        <td><fmt:formatDate value="${production.date}" pattern="MMM-dd-yyy" /></td>
+                                                        <td>${production.productionType}</td>
+                                                        <td>${production.quantity}</td>
+                                                        <td>${production.svNum}</td>
+                                                        <td>${production.employeeId}</td>                                           
+                                                        <td>${production.finishedSvVolume}</td>
+                                                        <td>${production.gainLoss}</td>
+                                                        <form action="production?action=delete" method="POST">
                                                     <input type="hidden" name="delete" value="${production.prodId}" >
                                                     <td><button type="submit">Delete</td>
-                                                </form>        
-                                            </tr>
-                                        </c:if>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                    </c:otherwise>
-                </c:choose>
+                                                </form>     
+                                                    </tr>
+                                                </c:if>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                            </c:otherwise>
+                        </c:choose>
 
                 <!---------------------------------------------Success Modal-------------------------------------------------->
                 <c:if test="${success!=null}">
@@ -257,7 +268,7 @@
                 </div>
 
                 </c:if>
-
+                
                 <!-------------------------------------------------End Success Modal------------------------------------------->
 
                 <c:if test="${errorMessage!=null}">
