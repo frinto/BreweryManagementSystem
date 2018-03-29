@@ -89,6 +89,8 @@ public class ProductionServlet extends HttpServlet {
         } catch (BrewDBException ex) {
             Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        EmployeeDB empDB = new EmployeeDB();
 
     }
 
@@ -199,7 +201,7 @@ public class ProductionServlet extends HttpServlet {
             } catch (BrewDBException ex) {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if ("newProductionType".equals(action)) {
+        } else if (action.equals("newProductionType")) {
             try {
                 String name = request.getParameter("name");
                 String qtyS[] = request.getParameterValues("qty");

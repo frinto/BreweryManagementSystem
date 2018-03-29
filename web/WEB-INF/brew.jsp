@@ -33,9 +33,9 @@
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <image src ="assets/img/logo.png">
-                        
+
                     </div>
-                    
+
                     <ul class="nav">
                         <li>
                             <a class="nav-link" href="tankFarm">
@@ -105,7 +105,7 @@
                                 Matthew
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button" onclick="window.location.href='login?logout'">Logout</button>
+                                <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
                             </div>
                         </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -121,80 +121,327 @@
 
                 <!--------------------------------------Brew Selector------------------------------------------->
                 <c:if test ="${viewBrew==null}">
-                <c:if test="${recipe==null}">
-                    <c:if test="${newBrew != null}">
-                        <div class ="selectBrew">
-                            <h3>Select Brew:</h3>
-                            <form action ="brew" method ="GET">
-                                <select name="recipeList" class="custom-select">
-                                    <c:forEach items="${recipes}" var="recipe">
-                                        <option value="${recipe.recipeName}" selected ="selected">
-                                            ${recipe.recipeName} 
-                                        </option>
-                                    </c:forEach>
-                                </select>
+                    <c:if test="${recipe==null}">
+                        <c:if test="${newBrew != null}">
+                            <div class ="selectBrew">
+                                <h3>Select Brew:</h3>
+                                <form action ="brew" method ="GET">
+                                    <select name="recipeList" class="custom-select">
+                                        <c:forEach items="${recipes}" var="recipe">
+                                            <option value="${recipe.recipeName}" selected ="selected">
+                                                ${recipe.recipeName} 
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                    <br>
+                                    ${errorMessage}
+                                    <br>
+                                    <button type="submit" class="btn btn-primary btn-lg">Start Brew!</button>
+                                </form>
                                 <br>
-                                ${errorMessage}
                                 <br>
-                                <button type="submit" class="btn btn-primary btn-lg">Start Brew!</button>
+                            </div>
+                        </c:if>
+                        <!-------------------------------------- End Brew Selector------------------------------------------->
+                        <!--------------------------------------Start  New Brew------------------------------------------->
+                        <div class = "brews">
+
+                            <!-----------------------------------------------Success Modal---------------------------->
+
+
+
+                            <!-----------------------------------------------End Success Modal---------------------------->
+
+                            <form class ="datepicker" action="brew" method="GET">
+                                <h4>View Brews by Date:</h4>
+                                <input type="date" name="brewDate" id="datePicker">
+                                <button type="submit" class="btn btn-outline-primary">Select Date</button>
                             </form>
-                            <br>
-                            <br>
+
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Brew #</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Brand</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    <c:forEach var="brew" items="${brews}">
+                                        <c:if test="${brewDate.equals(brew.date)}">
+                                            <tr>
+                                                <td>${brew.brewId}</td>
+
+                                                <td><fmt:formatDate value="${brew.date}" pattern="MMM-dd-yyy" /></td>
+                                                <td>${brew.recipeName}</td>
+                                                <td>
+                                                    <form action="brew" METHOD ="POST">
+                                                        <input type="submit" value="View" name="viewBrew">
+                                                        <input type="hidden" name="selectedBrew" value="${brew.brewId}">
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </c:if>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+
+                            <form action="brew" method ="GET" class ="brewButton">
+                                <button type="submit" class="btn btn-success" name="newBrew">Add a Brew</button>
+                            </form>
                         </div>
                     </c:if>
-                    <!-------------------------------------- End Brew Selector------------------------------------------->
-                    <!--------------------------------------Start  New Brew------------------------------------------->
-                    <div class = "brews">
-
-                        <!-----------------------------------------------Success Modal---------------------------->
-
-
-
-                        <!-----------------------------------------------End Success Modal---------------------------->
-
-                        <form class ="datepicker" action="brew" method="GET">
-                            <h4>View Brews by Date:</h4>
-                            <input type="date" name="brewDate" id="datePicker">
-                            <button type="submit" class="btn btn-outline-primary">Select Date</button>
-                        </form>
-
-                        <table class="table">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Brew #</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Brand</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-
-                                <c:forEach var="brew" items="${brews}">
-                                    <c:if test="${brewDate.equals(brew.date)}">
-                                        <tr>
-                                            <td>${brew.brewId}</td>
-
-                                            <td><fmt:formatDate value="${brew.date}" pattern="MMM-dd-yyy" /></td>
-                                            <td>${brew.recipeName}</td>
-                                            <td>
-                                                <form action="brew" METHOD ="POST">
-                                                    <input type="submit" value="View" name="viewBrew">
-                                                    <input type="hidden" name="selectedBrew" value="${brew.brewId}">
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    </c:if>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-
-                        <form action="brew" method ="GET" class ="brewButton">
-                            <button type="submit" class="btn btn-success" name="newBrew">Add a Brew</button>
-                        </form>
-                    </div>
-                </c:if>
                 </c:if>   
+                <c:if test="${viewBrew!=null}">
+                    <h1 class="leftSpacingh1">Now Viewing: ${viewBrew.recipeName} | Brew Number : ${viewBrew.brewId}</h1>
+                    <form action ="brew" method ="GET">
+                        <button type="submit" class="btn btn-danger" name="cancelBrew">Back</button>
+                    </form>
+                    <h3 class ="brewSteps">Mash Tun</h3>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Action</th>
+                                <th scope="col">Unit</th>
+                                <th scope="col">Target</th>
+                                <th scope="col">Actual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Mash-In Temperature</th>
+                                <td>oC</td>
+                                <td colspan="4">${viewRecipe.mashInTemp}</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">Mash-In Time</th>
+                                <td>Minutes</td>
+                                <td>${viewRecipe.mashInTime}</td>
+                                <td>${viewBrew.mashInTime}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Mash-In Water</th>
+                                <td>Litres</td>
+                                <td>${viewRecipe.mashWaterVolume}</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">Rest Time</th>
+                                <td>Minutes</td>
+                                <td>${viewRecipe.restTime}</td>
+                                <td>${viewBrew.restTime}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="4" style ="text-align:center">****DO STARCH TEST****</th>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">Raise To Temperature</th>
+                                <td>oC</td>
+                                <td colspan="4">${viewRecipe.raiseToTemp}</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">In Time</th>
+                                <td>Minutes</td>
+                                <td>${viewRecipe.inTime}</td>
+                                <td>${viewBrew.inTime}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Total Mash Time</th>
+                                <td>Minutes</td>
+                                <td>${viewRecipe.totalMashTime}</td>
+                                <td>${viewBrew.totalMashTime}</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                    <h3 class ="brewSteps">Lauter Tun</h3>
+
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Action</th>
+                                <th scope="col">Unit</th>
+                                <th scope="col">Target</th>
+                                <th scope="col">Actual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Underlet</th>
+                                <td>Litres</td>
+                                <td>${viewRecipe.underletLitres}</td>
+                                <td>${viewBrew.underletTime}</td>
+
+
+                            </tr>
+                            <tr>
+                                <th scope="row">Rest</th>
+                                <td>Minutes</td>
+                                <td>${viewRecipe.rest}</td>
+                                <td>${viewBrew.lauterRestTime}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Vorlauf</th>
+                                <td>Minutes</td>
+                                <td>${viewRecipe.vorlaufTime}</td>
+                                <td>${viewBrew.vorlaufTime}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">First Wort Gravity</th>
+                                <td>oP</td>
+                                <td>${viewRecipe.firstWortGrav}</td>
+                                <td>${viewBrew.firstWortGravity}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Run-Off</th>
+                                <td>Minutes</td>
+                                <td>${viewRecipe.runOffTime}</td>
+                                <td>${viewBrew.runOffTime}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Sparge Volume</th>
+                                <td>Hectolitres</td>
+                                <td>${viewRecipe.spargVol}</td>
+
+                            </tr>
+
+                            <tr>
+                                <th scope="row">Sparge Temperature</th>
+                                <td>oC</td>
+                                <td>${viewRecipe.spargTemp}</td>
+
+                            </tr>
+
+                            <tr>
+                                <th scope="row">Last Runnings Gravity</th>
+                                <td>oP</td>
+                                <td>${viewRecipe.lastRunningsGrav}</td>
+                                <td>${viewBrew.lastRunningsGravity}</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">Kettle Full Volume</th>
+                                <td>Hectolitres</td>
+                                <td>${viewRecipe.kettleFullVol}</td>
+                                <td>${viewBrew.kettleFullVol}</td>
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                    <h3 class ="brewSteps">Brew Kettle</h3>
+
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Action</th>
+                                <th scope="col">Unit</th>
+                                <th scope="col">Target</th>
+                                <th scope="col">Actual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Kettle Full Gravity</th>
+                                <td>oP</td>
+                                <td>${viewRecipe.kettleFullGrav}</td>
+                                <td>${viewBrew.kettleFullGravity}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Boil</th>
+                                <td>Minutes</td>
+                                <td>${viewRecipe.boilTime}</td>
+
+                            </tr>
+
+
+                            <tr>
+                                <th scope="row">Add First Hop at Kettle Full</th>
+                                <td>kg</td>
+                                <td>${viewRecipe.firstHop}</td>
+                                <td>${viewRecipe.firstHopAmt}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Add Second Hop:30 Min Left</th>
+                                <td>kg</td>
+                                <td>${viewRecipe.secondHop}</td>
+                                <td>${viewRecipe.secondHopAmt}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Add Third Hop: 5 Min Left</th>
+                                <td>kg</td>
+                                <td>${viewRecipe.thirdHop}</td>
+                                <td>${viewRecipe.thirdHopAmt}</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">Kettle Strikeout Volume</th>
+                                <td>Hectolitres</td>
+                                <td>${viewRecipe.strikeOutVol}</td>
+                                <td>${viewBrew.kettleStrikeOutVol}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Kettle Strikeout Gravity</th>
+                                <td>oP</td>
+                                <td>${viewRecipe.strikeOutGrav}</td>
+                                <td>${viewBrew.kettleStrikeOutGravity}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Whirlpool Time</th>
+                                <td>Minutes</td>
+                                <td>${viewRecipe.whirlPoolTime}</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">Oxygen Rate</th>
+                                <td>Litres Per Minute</td>
+                                <td>${viewRecipe.oxygenRate}</td>
+
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+                    <h3 class ="brewSteps">Fermenting Vessel and Final Volume</h3>
+                    <br>
+                    <div class="fvSelect">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <label for="custom-select">Destination Fermenter:</label>
+                                </td>
+                                <td>
+                                    ${viewBrew.fvId}</td>
+
+
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <label>Final volume for fermenter(hectolitres):</label>
+                                </td>
+                                <td>
+                                    ${viewBrew.allInVolume}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <form action ="brew" method ="GET">
+                        <button type="submit" class="btn btn-danger" name="deleteBrew">Delete Brew</button>
+                    </form>
+                    <br>
+                    <br>
+                    <br>
+                </c:if>
                     <c:if test="${viewBrew!=null}">
                  <h1 class="leftSpacingh1">Now Viewing: ${viewBrew.recipeName} | Brew Number : ${viewBrew.brewId}</h1>
                  <h3 class ="brewSteps">Mash Tun</h3>
@@ -462,7 +709,7 @@
                         </li>
 
                     </ul>
-                    
+
 
 
                     <div class="tab-content" id="myTabContent">
@@ -885,9 +1132,9 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body text-center">
-                                    <h4>Great!</h4>	
-                                    <p>Brew submitted successfully.</p>
-                                    <input type ="button" class="btn btn-success"data-dismiss="modal" value="OK"></button>
+                                <h4>Great!</h4>	
+                                <p>Brew submitted successfully.</p>
+                                <input type ="button" class="btn btn-success"data-dismiss="modal" value="OK"></button>
                             </div>
                         </div>
                     </div>
@@ -896,7 +1143,7 @@
             </c:if>
 
             <!-------------------------------------------------End Success Modal------------------------------------------->
-            
+
             <c:if test="${errorMessage!=null}">
 
                 <div id="myModal" class="modal fade">
@@ -904,9 +1151,9 @@
                     <div class="modal-dialog modal-confirm">
                         <div class="modal-content">
                             <div class="modal-header">
-<!--                                <div class="icon-box">
-                                    <i class="far fa-check-circle"></i>
-                                </div>-->
+                                <!--                                <div class="icon-box">
+                                                                    <i class="far fa-check-circle"></i>
+                                                                </div>-->
                                 <div style="font-size:5em; color:red">
                                     <i class="fas fa-times-circle"></i>
                                 </div>
@@ -915,10 +1162,10 @@
                             </div>
                             <div class="modal-body text-center">
 
-                                    <h4>Uh oh!</h4>	
-                                    <p>${errorMessage}</p>
-                                    <input type ="button" class="btn btn-success" data-dismiss="modal" value="OK"></button>
-                      
+                                <h4>Uh oh!</h4>	
+                                <p>${errorMessage}</p>
+                                <input type ="button" class="btn btn-success" data-dismiss="modal" value="OK"></button>
+
                             </div>
                         </div>
                     </div>
@@ -926,8 +1173,39 @@
 
             </c:if>
             
-             
-                 
+            <c:if test="${deleteBrew!=null}">
+
+                <div id="myModal" class="modal fade">
+
+                    <div class="modal-dialog modal-confirm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <!--                                <div class="icon-box">
+                                                                    <i class="far fa-check-circle"></i>
+                                                                </div>-->
+                                <div style="font-size:5em; color:red">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body text-center">
+
+                                <h4>Attention!</h4>	
+                                <p>Are you sure you want to delete this brew</p>
+                                <form action="brew" METHOD="POST">
+                                <input type ="submit" class="btn btn-success" value="OK" name="ok">
+                                <input type ="submit" class="btn btn-success" name="cancel" value="cancel">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </c:if>
+
+
+
     </body>
     <!--   Core JS Files   -->
     <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -945,9 +1223,9 @@
     <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
     <script src="assets/js/brew.js"></script>
     <script type="text/javascript">
-                                                $(document).ready(function () {
-                                                    // Javascript method's body can be found in assets/js/demos.js
-                                                });
+                                    $(document).ready(function () {
+                                        // Javascript method's body can be found in assets/js/demos.js
+                                    });
     </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
