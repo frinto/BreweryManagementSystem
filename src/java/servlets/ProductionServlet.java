@@ -6,11 +6,13 @@
 package servlets;
 
 import dataaccess.BrewDBException;
+import dataaccess.EmployeeDB;
 import dataaccess.FinishedInventoryDB;
 import dataaccess.ProductionDB;
 import dataaccess.ProductionMaterialDB;
 import dataaccess.ProductionMaterialUsageDB;
 import dataaccess.TankDB;
+import domainmodel.Employee;
 import domainmodel.Finishedproduct;
 import domainmodel.Production;
 import domainmodel.Productionmaterial;
@@ -41,6 +43,7 @@ public class ProductionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        String employeeId = (String) session.getAttribute("empId");
 
         try {
             ProductionMaterialDB productionMaterialDB = new ProductionMaterialDB();
@@ -78,19 +81,20 @@ public class ProductionServlet extends HttpServlet {
         //Gets the list of the productions with a specified date.
         try {
             ProductionDB prodDB = new ProductionDB();
+            EmployeeDB empDB = new EmployeeDB();
 
             List<Production> prodList = prodDB.getAllProduction();
-
             List<Sv> svTankList = tankDB.getAllSV();
+            List<Employee> employeeList = empDB.getAll();
 
             request.setAttribute("prod", prodList);
             request.setAttribute("sv", svTankList);
+            request.setAttribute("employees", employeeList);
+
             getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
         } catch (BrewDBException ex) {
             Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        EmployeeDB empDB = new EmployeeDB();
 
     }
 
@@ -147,18 +151,9 @@ public class ProductionServlet extends HttpServlet {
                 production = new Production(production.getProdId(), Integer.parseInt(quantity), date, Integer.parseInt(employeeId), Integer.parseInt(svNumber), productionType, Double.parseDouble(df.format(Double.parseDouble(expectedSvVolume))), Double.parseDouble(finishedSvVolume), gainLoss);
                 prodDB.insertProduction(production);
 
-                List<Sv> svTankList = tankDB.getAllSV();
+                response.sendRedirect("production");
 
-                List<Production> prodList = prodDB.getAllProduction();
-
-                request.setAttribute("prod", prodList);
-                request.setAttribute("sv", svTankList);
-                request.setAttribute("message", "Production Submitted");
-                getServletContext().getRequestDispatcher("/WEB-INF/production.jsp").forward(request, response);
-
-            } catch (BrewDBException ex) {
-                Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
+            } catch (BrewDBException | ParseException ex) {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equals("nextProduction")) {
