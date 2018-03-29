@@ -101,7 +101,7 @@
                         <a class="navbar-brand">Recipes</a>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Matthew
+                                ${employee.firstName} ${employee.lastName}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button" onclick="window.location.href='login?logout'">Logout</button>

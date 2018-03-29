@@ -79,6 +79,7 @@ public class LoginServlet extends HttpServlet {
                     request.setAttribute("message", "Invalid. Please try again.");
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 }
+                session.setAttribute("currentEmployee",employee);
                 session.setAttribute("empId", empId);
                 session.setAttribute("role", role);
                 response.sendRedirect("tankFarm");

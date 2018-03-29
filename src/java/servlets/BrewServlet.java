@@ -10,6 +10,7 @@ import dataaccess.BrewDBException;
 import dataaccess.RecipeDB;
 import dataaccess.TankDB;
 import domainmodel.Brew;
+import domainmodel.Employee;
 import domainmodel.Fv;
 import domainmodel.Recipe;
 import java.io.IOException;
@@ -45,6 +46,7 @@ public class BrewServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("newBrew", null);
             session.setAttribute("recipes", null);
+            Employee employee = (Employee)session.getAttribute("currentEmployee");
             String delete =request.getParameter("deleteBrew");
             String startDateStr = request.getParameter("brewDate");
             if(delete!=null)
@@ -72,6 +74,8 @@ public class BrewServlet extends HttpServlet {
 
             String cancelBrew = request.getParameter("cancelBrew");
             if (cancelBrew != null) {
+                session.setAttribute("viewBrew",null);
+                
                 session.setAttribute("recipe", null);
             }
             String newBrew = request.getParameter("newBrew");
@@ -101,6 +105,7 @@ public class BrewServlet extends HttpServlet {
 
             getServletContext().getRequestDispatcher("/WEB-INF/brew.jsp").forward(request, response);
             session.setAttribute("recipes", null);
+            session.setAttribute("employee", employee);
         } catch (BrewDBException ex) {
             Logger.getLogger(BrewServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {

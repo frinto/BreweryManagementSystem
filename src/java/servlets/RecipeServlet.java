@@ -9,6 +9,7 @@ import dataaccess.BrewDBException;
 import dataaccess.BrewMaterialsDB;
 import dataaccess.RecipeDB;
 import domainmodel.Brewmaterials;
+import domainmodel.Employee;
 import domainmodel.Recipe;
 import java.io.IOException;
 import java.text.ParseException;
@@ -53,6 +54,7 @@ public class RecipeServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String newRecipe = request.getParameter("newRecipe");
         String cancelRecipe = request.getParameter("cancelRecipe");
+        Employee employee = (Employee)session.getAttribute("currentEmployee");
         if(cancelRecipe!=null)
         {
             session.setAttribute("newRecipe", null);
@@ -82,7 +84,7 @@ public class RecipeServlet extends HttpServlet {
             session.setAttribute("hopList", hopList);
             session.setAttribute("maltList", maltList);
             session.setAttribute("chemicalList", chemicalList);
-            
+            session.setAttribute("employee", employee);
             getServletContext().getRequestDispatcher("/WEB-INF/recipe.jsp").forward(request, response);
         } catch (BrewDBException ex) {
             Logger.getLogger(RecipeServlet.class.getName()).log(Level.SEVERE, null, ex);
