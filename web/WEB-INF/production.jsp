@@ -90,13 +90,13 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand"> Brew </a>
+                        <a class="navbar-brand">Production</a>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Matthew
+                                ${employee.firstName} ${employee.lastName}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">Logout</button>
+                                <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
                             </div>
                         </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -120,7 +120,6 @@
                     <!-- brew materials tab-->  
                     <div class="tab-pane fade show active" id="production" role="tabpanel" aria-labelledby="home-tab">
 
-                        <h1>Production</h1>
                         <c:choose>
                             <c:when test="${action == 'add'}">
                                 <form action="production?action=nextProduction" method="POST">
@@ -193,49 +192,58 @@
                                 </form>
                             </c:when>
                             <c:otherwise>
-                                <form class ="datepicker" action="production" method="GET">
+                                <form class ="datepicker productionDate" action="production" method="GET">
                                     <h4>View Productions by Date:</h4>
                                     <input type="date" name="productionDate" id="datePicker">
                                     <button type="submit" class="btn btn-outline-primary">Select Date</button>
                                 </form>
-                                <form action="production?action=add" method="POST" class="productionButton">
-                                    <button type="submit" class="btn btn-success">Add Production</button>
-                                    <p class="productionMessage">${message}</p>
-                                    <table class="table">
-                                        <thead class="thead-dark">
-                                        <th>Date</th>
-                                        <th>ProductionType</th>
-                                        <th>Quantity</th>
-                                        <th>SVNumber</th>
-                                        <th>EmployeeID</th>
-                                        <th>Finished Sv Volume</th>
-                                        <th>Gain/Loss +-</th>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="production" items="${prod}">
-                                                <c:if test="${productionDate.equals(production.date)}">
-                                                    <tr>
-                                                        <td><fmt:formatDate value="${production.date}" pattern="MMM-dd-yyy" /></td>
-                                                        <td>${production.productionType}</td>
-                                                        <td>${production.quantity}</td>
-                                                        <td>${production.svNum}</td>
-                                                        <td>${production.employeeId}</td>                                           
-                                                        <td>${production.finishedSvVolume}</td>
-                                                        <td>${production.gainLoss}</td>
-                                                    </tr>
-                                                </c:if>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
+                                <form action="production?action=add" method="POST">
+                                    <button type="submit" class="btn btn-success productionButton">Add Production</button>
                                 </form>
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                    <th>Date</th>
+                                    <th>ProductionType</th>
+                                    <th>Quantity</th>
+                                    <th>SVNumber</th>
+                                    <th>Employee</th>
+                                    <th>Finished Sv Volume</th>
+                                    <th>Gain/Loss +-</th>
+                                    <th></th>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="production" items="${prod}">
+                                            <c:if test="${productionDate.equals(production.date)}">
+                                                <tr>
+                                                    <td><fmt:formatDate value="${production.date}" pattern="MMM-dd-yyy" /></td>
+                                                    <td>${production.productionType}</td>
+                                                    <td>${production.quantity}</td>
+                                                    <td>${production.svNum}</td>
+                                                    <td>
+                                                    <c:forEach var="employee" items="${employees}">
+                                                        <c:if test="${employee.empId.equals(production.employeeId)}">
+                                                            ${employee.firstName} ${employee.lastName}
+                                                        </c:if>   
+                                                    </c:forEach>  
+                                                    </td>
+                                                    <td>${production.finishedSvVolume}</td>
+                                                    <td>${production.gainLoss}</td>
+                                            <form action="production?action=delete" method="POST">
+                                                <input type="hidden" name="delete" value="${production.prodId}">
+                                                <td><button type="submit">Delete</td>
+                                            </form>     
+                                            </tr>
+                                        </c:if>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
                             </c:otherwise>
                         </c:choose>
                     </div>
+                    <!--This is in a new tab for production -->
 
-                    <div class="tab-pane fade" id="newProduction" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tab-pane fade" id="newProduction" role="tabpanel" aria-labelledby="newProduction-tab">
 
-                        <!--This is in a new tab for production -->
-                        <h1>Create new Production Type</h1>
                         <!--This is a form to create a new production type-->
                         <form action="production?action=newProductionType" id="newProductionTypeForm" method="POST">
                             <table border="1" class="table">
@@ -278,6 +286,62 @@
                         </form>
                     </div>
                 </div>
+                <!---------------------------------------------Success Modal-------------------------------------------------->
+                <c:if test="${success!=null}">
+
+                    <div id="myModal" class="modal fade">
+
+                        <div class="modal-dialog modal-confirm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <div style="font-size:5em;">
+                                        <i class="far fa-check-circle"></i>
+                                    </div>
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <h4>Great!</h4>	
+                                    <p>Production submitted successfully.</p>
+                                    <input type ="button" class="btn btn-success"data-dismiss="modal" value="OK"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </c:if>
+
+                <!-------------------------------------------------End Success Modal------------------------------------------->
+
+                <c:if test="${errorMessage!=null}">
+
+                    <div id="myModal" class="modal fade">
+
+                        <div class="modal-dialog modal-confirm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!--                                <div class="icon-box">
+                                                                        <i class="far fa-check-circle"></i>
+                                                                    </div>-->
+                                    <div style="font-size:5em; color:red">
+                                        <i class="fas fa-times-circle"></i>
+                                    </div>
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body text-center">
+
+                                    <h4>Uh oh!</h4>	
+                                    <p>${errorMessage}</p>
+                                    <input type ="button" class="btn btn-success" data-dismiss="modal" value="OK"></button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </c:if>
                 </body>
                 <!--   Core JS Files   -->
                 <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -295,46 +359,44 @@
                 <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
                 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
                 <script src="assets/js/production.js"></script>
-                <script type="text/javascript">
-                                    function addARow()
-                                    {
-//grab the location that we are going to add the input box to
-                                        var form = document.getElementById("newProductionTypeForm");
-                                        var table = form.getElementsByTagName("table") [0];
-
-//generate the elements we are adding
-                                        var tr = document.createElement("tr");
-
-//generate our select box
-                                        var td1 = document.createElement("td");
-//this will be used in for our quantity box
-                                        var td2 = document.createElement("td");
-                                        var usage = document.getElementById("usage");
-                                        var duplicateO = usage.cloneNode(true);
-                                        var duplicate  = duplicateO;
-//usage.setAttribute("value","NONE");
-
-//add to our tr
-                                        td1.appendChild(duplicate);
-                                        tr.appendChild(td1);
-
-//generate our quantity box this uses the previously created td2
-                                        var qty = document.createElement("input");
-                                        qty.setAttribute("type", "number");
-                                        qty.setAttribute("min", "0");
-//                                        qty.setAttribute("value", "0");
-                                        qty.setAttribute("name", "qty");
-                                        qty.setAttribute("id", "qty");
-                                        qty.setAttribute("placeholder", "quantity");
-                                        qty.setAttribute("style", "width:100%");
-
-//add to our tr
-                                        td2.appendChild(qty);
-                                        tr.appendChild(td2);
-//add to page
-                                        table.appendChild(tr);
-                                    }
-                </script>
-
+                <!--                                                function addARow()
+                                                                {
+                                                                    //grab the location that we are going to add the input box to
+                                                                    var form = document.getElementById("newProductionTypeForm");
+                                                                    var table = form.getElementsByTagName("table") [0];
+                
+                                                                    //generate the elements we are adding
+                                                                    var tr = document.createElement("tr");
+                
+                                                                    //generate our select box
+                                                                    var td1 = document.createElement("td");
+                                                                    //this will be used in for our quantity box
+                                                                    var td2 = document.createElement("td");
+                                                                    var usage = document.getElementById("usage");
+                                                                    var duplicateO = usage.cloneNode(true);
+                                                                    var duplicate = duplicateO;
+                                                                    //usage.setAttribute("value","NONE");
+                
+                                                                    //add to our tr
+                                                                    td1.appendChild(duplicate);
+                                                                    tr.appendChild(td1);
+                
+                                                                    //generate our quantity box this uses the previously created td2
+                                                                    var qty = document.createElement("input");
+                                                                    qty.setAttribute("type", "number");
+                                                                    qty.setAttribute("min", "0");
+                                                                    //                                        qty.setAttribute("value", "0");
+                                                                    qty.setAttribute("name", "qty");
+                                                                    qty.setAttribute("id", "qty");
+                                                                    qty.setAttribute("placeholder", "quantity");
+                                                                    qty.setAttribute("style", "width:100%");
+                
+                                                                    //add to our tr
+                                                                    td2.appendChild(qty);
+                                                                    tr.appendChild(td2);
+                                                                    //add to page
+                                                                    table.appendChild(tr);
+                                                                }
+                -->
                 </html>
 
