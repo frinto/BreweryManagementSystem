@@ -101,8 +101,8 @@
                     <div class=" container-fluid  ">
                         <a class="navbar-brand">Brew</a>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Matthew
+                            <button type="button" class="btn btn-secondary dropdown-toggle" style="margin-right: 50px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ${employee.firstName} ${employee.lastName}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
