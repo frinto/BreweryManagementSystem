@@ -86,7 +86,7 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="productionSchedule">
                                 <img src="assets/img/report.png" class="" alt="Norway">
-                                <p>Schedule</p>
+                                <p>Production Schedule</p>
                             </a>
                         </li>
                     </ul>
