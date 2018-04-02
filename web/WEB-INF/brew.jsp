@@ -88,10 +88,17 @@
                         </li>
                         <li>
                             <a class="nav-link" href="productionSchedule">
-                                <img src="assets/img/report.png" class="" alt="Norway">
-                                <p>Production Schedule</p>
+                                <img src="assets/img/schedule.png" class="" alt="Norway">
+                                <p>Schedule</p>
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/employee.png" class="" alt="Norway">
+                                <p>Employees</p>
+                            </a>
+                        </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -100,8 +107,8 @@
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
                         <a class="navbar-brand">Brew</a>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" style="margin-right: 50px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="btn-group" style="margin-right: 50px">
+                            <button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 ${employee.firstName} ${employee.lastName}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
