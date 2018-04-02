@@ -87,8 +87,14 @@
                         </li>
                         <li>
                             <a class="nav-link" href="productionSchedule">
-                                <img src="assets/img/report.png" class="" alt="Norway">
-                                <p>Production Schedule</p>
+                                <img src="assets/img/schedule.png" class="" alt="Norway">
+                                <p>Schedule</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/employee.png" class="" alt="Norway">
+                                <p>Employees</p>
                             </a>
                         </li>
                     </ul>
@@ -99,12 +105,12 @@
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
                         <a class="navbar-brand">Recipes</a>
-                        <div class="btn-group">
+                        <div class="btn-group"  style="margin-right: 50px">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 ${employee.firstName} ${employee.lastName}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button" onclick="window.location.href='login?logout'">Logout</button>
+                                <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button" a href="login?logout">Logout</button>
@@ -134,6 +140,7 @@
                                 <tr>
                                     <th scope="col">Recipe</th>
                                     <th scope="col">Date Created</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -144,6 +151,10 @@
                                     <tr>
                                         <td>${recipe.recipeName}</td>
                                         <td><fmt:formatDate value="${recipe.dateModified}" pattern="MMM-dd-yyy" /></td>
+                                        <td><form action="recipe" METHOD ="POST">
+                                                <input type="submit" value="View" name="viewRecipe">
+                                                <input type="hidden" name="selectedRecipe" value="${recipe.recipeName}">
+                                            </form>
                                     </tr>
 
                                 </c:forEach>
@@ -559,9 +570,9 @@
     <script src="assets/js/brew.js"></script>
     <script src="assets/js/recipe.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            // Javascript method's body can be found in assets/js/demos.js
-        });
+                                    $(document).ready(function () {
+                                        // Javascript method's body can be found in assets/js/demos.js
+                                    });
     </script>
 
 </html>
