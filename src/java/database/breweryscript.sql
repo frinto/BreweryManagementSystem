@@ -109,9 +109,9 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `ProductionMaterial`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `productionMaterial` ;
+DROP TABLE IF EXISTS `productionmaterial` ;
 
-CREATE TABLE IF NOT EXISTS `ProductionMaterial` (
+CREATE TABLE IF NOT EXISTS `productionmaterial` (
   `Name` VARCHAR(50) NOT NULL,
   `qty` INT NULL,
   PRIMARY KEY (`Name`))
@@ -121,13 +121,13 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `ProductionMaterialUsage`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `productionMaterialUsage` ;
+DROP TABLE IF EXISTS `productionmaterialssage` ;
 
-CREATE TABLE IF NOT EXISTS `ProductionMaterialUsage` (
+CREATE TABLE IF NOT EXISTS `productionmaterialusage` (
   `materialQty` INT NULL,
-  `Name` VARCHAR(50) NOT NULL,
-  `ProductionUsage` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`ProductionUsage`, `Name`))
+  `name` VARCHAR(50) NOT NULL,
+  `usage` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`usage`, `name`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
