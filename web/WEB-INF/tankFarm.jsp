@@ -133,11 +133,11 @@
                                 <h2>SV Tanks</h2>
                             </div>
                             <c:if test="${role == 1}">
-                            <div class="col text-right">
-                                <form>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalAddTank" style="margin-top:5%;margin-right:3%">Add A New Tank</button>
-                                </form>
-                            </div>
+                                <div class="col text-right">
+                                    <form>
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalAddTank" style="margin-top:5%;margin-right:3%">Add A New Tank</button>
+                                    </form>
+                                </div>
                             </c:if>
                         </div>
                         <table class="table" style="margin-top: 0%">
@@ -211,11 +211,11 @@
                                         <td>${fv.brand}</td>
                                         <td>${fv.status}</td>
                                         <c:if test="${role == 1}">
-                                        <td>
-                                            <form action="tankFarm?action=editFv" method="POST">
-                                                <button type="submit">Edit</button>
-                                            </form>
-                                        </td>
+                                            <td>
+                                                <form action="tankFarm?action=editFv" method="POST">
+                                                    <button type="submit">Edit</button>
+                                                </form>
+                                            </td>
                                         </c:if>
                                     </tr>
                                 </c:forEach>
@@ -226,6 +226,12 @@
                     <!-- Transfer Tab -->
                     <div class="tab-pane fade" id="transferLog" role="tabpanel" aria-labelledby="transferLog-tab">
 
+                        <!--Selector for the date to filter the date of transfers-->
+                        <form class ="datepicker transferDate" action="tankFarm" method="GET">
+                            <h4>View Transfers by Date:</h4>
+                            <input type="date" name="transferDate" id="datePicker">
+                            <button type="submit" class="btn btn-outline-primary">Select Date</button>
+                        </form>
                         <!-- 'Add A Transfer' button -->
                         <!-- Trigger the Transfer Modal with a button -->
                         <div class="text-center">
@@ -244,18 +250,26 @@
                                     <th>SV</th>
                                     <th>Volume</th>
                                     <th>Correction</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <c:forEach var="transfer" items="${transfers}">
-                                    <tr>
-                                        <td><fmt:formatDate value="${transfer.date}" pattern="MMM-dd-yyy" /></td>
-                                        <td>${transfer.brand}</td>
-                                        <td>${transfer.fromFv}</td>
-                                        <td>${transfer.toSv}</td>
-                                        <td>${transfer.volume}</td>
-                                        <td>${transfer.correction}</td>
-                                    </tr>
+                                    <c:if test="${transferDate.equals(transfer.date)}">
+                                        <tr>
+                                            <td><fmt:formatDate value="${transfer.date}" pattern="MMM-dd-yyy" /></td>
+                                            <td>${transfer.brand}</td>
+                                            <td>${transfer.fromFv}</td>
+                                            <td>${transfer.toSv}</td>
+                                            <td>${transfer.volume}</td>
+                                            <td>${transfer.correction}</td>
+                                            <td>
+                                                <form action="tankFarm?action=editTransfer" method="POST">
+                                                    <button type="submit">Edit</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </c:if>
                                 </c:forEach>
                             </tbody>
                         </table>
@@ -368,6 +382,7 @@
     <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
     <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
     <script src="assets/js/demo.js"></script>
+    <script src="assets/js/transfer.js"></script>
 
     <!-- script to open Transfer Tab if requested from back-end based on loadTransferTab being set-->
     <c:if test="${loadTransferTab != null}">
