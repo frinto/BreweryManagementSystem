@@ -43,3 +43,13 @@ function addARow() {
     //add to page
     table.appendChild(tr);
 }
+function removeARow() {
+    var form = document.getElementById("newTypeTable");
+    if (form.lastChild === form.getElementsByTagName("tbody") [0]) {
+        
+    }
+    else{
+        form.removeChild(form.lastChild);
+    }
+//    form.removeChild(form.lastChild);
+}
