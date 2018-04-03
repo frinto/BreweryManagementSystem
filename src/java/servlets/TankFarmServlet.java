@@ -100,13 +100,78 @@ public class TankFarmServlet extends HttpServlet
         
         //----------- EDIT A SV TANK -----------//
         if (action!=null && action.equals("editSV")) {
-            
+            String svId = request.getParameter("svId");
+            try {
+                Sv sv = tankDB.getSV(Integer.parseInt(svId));
+                request.setAttribute("sv", sv);
+                request.setAttribute("action", "editSv");
+            } catch (BrewDBException ex) {
+                Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
         
         //----------- EDIT A FV TANK -----------//
         if (action!=null && action.equals("editFV")) {
+            String fvId = request.getParameter("fvId");
+            try {
+                Fv fv = tankDB.getFV(Integer.parseInt(fvId));
+                request.setAttribute("fv", fv);
+                request.setAttribute("action", "editFv");
+            } catch (BrewDBException ex) {
+                Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
+        }
+        
+        //----------- UPDATE A SV TANK -----------//
+        if (action!=null && action.equals("updateSV")) {
+            String svId = request.getParameter("newSvId");
+            String svVol = request.getParameter("newSvVolume");
+            String svCap = request.getParameter("newSvCapacity");
+            String svBrew1 = request.getParameter("newSvBrew1");
+            String svBrew2 = request.getParameter("newSvBrew2");
+            String svBrew3 = request.getParameter("newSvBrew3");
+            String svBrand = request.getParameter("newSvBrand");
+            String svStatus = request.getParameter("newSvStatus");
+            
+            Sv sv = new Sv(Integer.parseInt(svId),Integer.parseInt(svCap));
+            sv.setVolume(Double.parseDouble(svVol));
+            sv.setBrew1(Integer.parseInt(svBrew1));
+            sv.setBrew2(Integer.parseInt(svBrew2));
+            sv.setBrew3(Integer.parseInt(svBrew3));
+            sv.setBrand(svBrand);
+            sv.setStatus(svStatus.toUpperCase().charAt(0));
+            try {
+                tankDB.updateSV(sv);
+            } catch (BrewDBException ex) {
+                Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        //----------- UPDATE A FV TANK -----------//
+        if (action!=null && action.equals("updateFV")) {
+            String fvId = request.getParameter("newFvId");
+            String fvVol = request.getParameter("newFvVolume");
+            String fvCap = request.getParameter("newFvCapacity");
+            String fvBrew1 = request.getParameter("newFvBrew1");
+            String fvBrew2 = request.getParameter("newFvBrew2");
+            String fvBrew3 = request.getParameter("newFvBrew3");
+            String fvBrand = request.getParameter("newFvBrand");
+            String fvStatus = request.getParameter("newFvStatus");
+            
+            Fv fv = new Fv(Integer.parseInt(fvId),Integer.parseInt(fvCap));
+            fv.setVolume(Double.parseDouble(fvVol));
+            fv.setBrew1(Integer.parseInt(fvBrew1));
+            fv.setBrew2(Integer.parseInt(fvBrew2));
+            fv.setBrew3(Integer.parseInt(fvBrew3));
+            fv.setBrand(fvBrand);
+            fv.setStatus(fvStatus.toUpperCase().charAt(0));
+            try {
+                tankDB.updateFV(fv);
+            } catch (BrewDBException ex) {
+                Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
         
@@ -213,10 +278,6 @@ public class TankFarmServlet extends HttpServlet
             } catch (ParseException | BrewDBException ex) {
                 Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        //This enables you to edit a transfer
-        if (action!=null && action.equals("editTransfer")) {
-            
         }
         setTodaysDate(request);
         retrieveAllTransfers(request);
