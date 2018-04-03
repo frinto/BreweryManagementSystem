@@ -83,6 +83,20 @@
                                 <p>Reports</p>
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Production Schedule</p>
+                            </a>
+                        </li>
+                        <c:if test="${currentEmployee.roleId == 1}">
+                            <li>
+                                <a class="nav-link" href="manageEmployee">
+                                    <img src="assets/img/report.png" class="" alt="Norway">
+                                    <p>Manage Employees</p>
+                                </a>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
@@ -220,11 +234,11 @@
                                                     <td>${production.quantity}</td>
                                                     <td>${production.svNum}</td>
                                                     <td>
-                                                    <c:forEach var="employee" items="${employees}">
-                                                        <c:if test="${employee.empId.equals(production.employeeId)}">
-                                                            ${employee.firstName} ${employee.lastName}
-                                                        </c:if>   
-                                                    </c:forEach>  
+                                                        <c:forEach var="employee" items="${employees}">
+                                                            <c:if test="${employee.empId.equals(production.employeeId)}">
+                                                                ${employee.firstName} ${employee.lastName}
+                                                            </c:if>   
+                                                        </c:forEach>  
                                                     </td>
                                                     <td>${production.finishedSvVolume}</td>
                                                     <td>${production.gainLoss}</td>

@@ -83,6 +83,20 @@
                                 <p>Reports</p>
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Production Schedule</p>
+                            </a>
+                        </li>
+                        <c:if test="${currentEmployee.roleId == 1}">
+                            <li>
+                                <a class="nav-link" href="manageEmployee">
+                                    <img src="assets/img/report.png" class="" alt="Norway">
+                                    <p>Manage Employees</p>
+                                </a>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
@@ -311,7 +325,7 @@
                                         var td2 = document.createElement("td");
                                         var usage = document.getElementById("usage");
                                         var duplicateO = usage.cloneNode(true);
-                                        var duplicate  = duplicateO;
+                                        var duplicate = duplicateO;
 //usage.setAttribute("value","NONE");
 
 //add to our tr

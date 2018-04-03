@@ -87,10 +87,19 @@
                         </li>
                         <li>
                             <a class="nav-link" href="productionSchedule">
-                                <img src="assets/img/report.png" class="" alt="Norway">
-                                <p>Production Schedule</p>
+                                <img src="assets/img/schedule.png" class="" alt="Norway">
+                                <p>Schedule</p>
                             </a>
                         </li>
+
+                        <c:if test="${currentEmployee.roleId == 1}">
+                            <li>
+                                <a class="nav-link" href="manageEmployee">
+                                    <img src="assets/img/employee.png" class="" alt="Norway">
+                                    <p>Manage Employees</p>
+                                </a>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
@@ -99,12 +108,12 @@
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
                         <a class="navbar-brand">Recipes</a>
-                        <div class="btn-group">
+                        <div class="btn-group"  style="margin-right: 50px">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 ${employee.firstName} ${employee.lastName}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button" onclick="window.location.href='login?logout'">Logout</button>
+                                <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button" a href="login?logout">Logout</button>
@@ -124,7 +133,7 @@
 
 
 
-                    <c:if test="${newRecipe==null}">
+                    <c:if test="${newRecipe==null&& recipe==null}">
 
                         <form action="recipe" method ="GET" class ="recipeButton">
                             <button type="submit" class="btn btn-success" name="newRecipe">Add a Recipe</button>
@@ -134,6 +143,7 @@
                                 <tr>
                                     <th scope="col">Recipe</th>
                                     <th scope="col">Date Created</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -144,6 +154,10 @@
                                     <tr>
                                         <td>${recipe.recipeName}</td>
                                         <td><fmt:formatDate value="${recipe.dateModified}" pattern="MMM-dd-yyy" /></td>
+                                        <td><form action="recipe" METHOD ="POST">
+                                                <input type="submit" value="View" name="viewRecipe">
+                                                <input type="hidden" name="selectedRecipe" value="${recipe.recipeName}">
+                                            </form>
                                     </tr>
 
                                 </c:forEach>
@@ -526,43 +540,355 @@
                             </div>
                         </form>
                     </c:if>
+                    <c:if test="${recipe!=null}">
+                        <h1 class="leftSpacingh1">Viewing Recipe : ${recipe.recipeName}</h1>
+                        <div class="cancelButton">
+                            <form action ="recipe" method ="GET">
+                                <button type="submit" class="btn btn-danger" name="cancelRecipe">Back</button>
+                            </form>
+                        </div>
+                          
+                          
+                           <h3 class ="brewSteps">Raw Materials</h3>
+
+                            <table class="table">
+
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Recipe Attribute</th>
+                                        <th scope="col">Units</th>
+                                        <th scope="col">Material Name</th>
+                                        <th scope="col">Material Amount</th>
+                                    </tr>
+                                </thead>
+
+                                <tr>
+                                    <th scope="row">Base Malt</th>
+                                    <td>kg</td>
+                                    <td>
+                                        ${recipe.baseMalt}
+                                    </td>
+                                    <td>${recipe.baseMaltAmt}</td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Second Malt</th>
+                                    <td>kg</td>
+                                    <td>
+                                        ${recipe.secondMalt}
+                                    </td>
+                                    <td>${recipe.secondMaltAmt}</td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Third Malt</th>
+                                    <td>kg</td>
+                                    <td>
+                                        ${recipe.thirdMalt}
+                                    </td>
+                                    <td>${recipethirdMaltAmt}</td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Fourth Malt</th>
+                                    <td>kg</td>
+                                    <td>
+                                        ${recipe.fourthMalt}
+                                    </td>
+                                    <td>${recipe.fourthMaltAmt}</td>
+                                </tr>
+
+                                <th colspan="4" style ="text-align:center">****HOPS****</th>
+
+
+                                <tr>
+                                    <th scope="row">First Hop</th>
+                                    <td>kg</td>
+                                    <td>
+                                        ${recipe.firstHop}
+                                    </td>
+                                    <td>${recipe.firstHopAmt}"</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Second Hop</th>
+                                    <td>kg</td>
+                                    <td>
+                                        ${recipe.secondHop}
+                                    </td>
+                                    <td>${recipe.secondHopAmt}</td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">Third Hop</th>
+                                    <td>kg</td>
+                                    <td>
+                                        ${recipe.thirdHop}
+                                    </td>
+                                    <td>${recipe.thirdHopAmt}</td>
+                                </tr>
+
+                                </tbody>
+
+                            </table>
+
+                            <h3 class ="brewSteps">Mash Chemistry</h3>
+
+                            <table class="table">
+
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Units</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+
+                                <tr>
+                                    <th scope="row">Sodium Chloride Amount</th>
+                                    <td>mg</td>
+                                    <td>${recipe.sodiumChlorideAmt}</td>
+
+
+                                </tr>
+
+
+                                <tr>
+                                    <th scope="row">Gypsum Amount</th>
+                                    <td>mg</td>
+                                    <td>${recipe.gypsumAmt}</td>
+
+
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Calcium Chloride Amount</th>
+                                    <td>mg</td>
+                                    <td>${recipe.calciumChlorideAmt}</td>
+
+
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Phosphoric Acid Amount</th>
+                                    <td>ml</td>
+                                    <td>${recipe.phosphAcidAmt}</td>
+
+
+                                </tr>
+
+
+                            </table>
+
+
+                            <h3 class ="brewSteps">Mash Tun</h3>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Recipe Attribute</th>
+                                        <th scope="col">Units</th>
+                                        <th scope="col">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Mash-In Temperature</th>
+                                        <td>oC</td>
+                                        <td>${recipe.mashInTemp}</td>
+
+
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Mash-In Time</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.mashInTime}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Mash-In Water</th>
+                                        <td>Litres</td>
+                                        <td>${recipe.mashWaterVolume}</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Rest Time</th>
+                                        <td>Minutes</td>
+
+                                        <td>${recipe.restTime}</td>
+                                    </tr>
+                                    <tr>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Raise To Temperature</th>
+                                        <td>oC</td>
+                                        <td>${recipe.raiseToTemp}</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">In Time</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.inTime}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Total Mash Time</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.totalMashTime}</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                            <h3 class ="brewSteps">Lauter Tun/Kettle</h3>
+
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Recipe Attribute</th>
+                                        <th scope="col">Units</th>
+                                        <th scope="col">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Underlet</th>
+                                        <td>Litres</td>
+                                        <td>${recipe.underletLitres}</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Rest</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.rest}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Vorlauf</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.vorlaufTime}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">First Wort Gravity</th>
+                                        <td>oP</td>
+                                        <td>${recipe.firstWortGrav}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Run-Off</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.runOffTime}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Sparge Volume</th>
+                                        <td>Hectolitres</td>
+                                        <td>${recipe.spargVol}</td>
+
+
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Sparge Temperature</th>
+                                        <td>oC</td>
+                                        <td>${recipe.spargTemp}</td>
+
+
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Last Runnings Gravity</th>
+                                        <td>oP</td>
+                                        <td>${recipe.lastRunningsGrav}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Kettle Full Volume</th>
+                                        <td>Hectolitres</td>
+                                        <td>${recipe.kettleFullVol}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Kettle Full Gravity</th>
+                                        <td>oP</td>
+                                        <td>${recipe.kettleFullGrav}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Boil Time</th>
+                                        <td>Minutes</td>
+                                        <td>${recipe.boilTime}</td>
+                                    </tr>
+
+                                <th scope="row">Kettle Strikeout Volume</th>
+                                <td>Hectolitres</td>
+                                <td>${recipe.strikeOutVol}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Kettle Strikeout Gravity</th>
+                                    <td>oP</td>
+                                    <td>${recipe.strikeOutGrav}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Whirlpool Time</th>
+                                    <td>Minutes</td>
+                                    <td>${recipe.whirlPoolTime}</td>
+
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Cool-in Temp</th>
+                                    <td>oC</td>
+                                    <td>${recipe.coolInTemp}</td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">Oxygen Rate</th>
+                                    <td>Litres Per Minute</td>
+                                    <td>${recipe.oxygenRate}</td>
+
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                    </c:if>
 
 
 
 
-                </div>
-                <br>
-                <br>
-                <br>
+
+                          </div>
+                          <br>
+                          <br>
+                          <br>
 
 
 
 
 
 
-            </div>
-    </body>
-    <!--   Core JS Files   -->
-    <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-    <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
-    <script src="assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-    <script src="assets/js/plugins/bootstrap-switch.js"></script>
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-    <!--  Chartist Plugin  -->
-    <script src="assets/js/plugins/chartist.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="assets/js/plugins/bootstrap-notify.js"></script>
-    <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-    <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
-    <script src="assets/js/brew.js"></script>
-    <script src="assets/js/recipe.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Javascript method's body can be found in assets/js/demos.js
-        });
-    </script>
+                          </div>
+                          </body>
+                          <!--   Core JS Files   -->
+                          <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+                        <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+                        <script src="assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+                        <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+                        <script src="assets/js/plugins/bootstrap-switch.js"></script>
+                        <!--  Google Maps Plugin    -->
+                        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+                        <!--  Chartist Plugin  -->
+                        <script src="assets/js/plugins/chartist.min.js"></script>
+                        <!--  Notifications Plugin    -->
+                        <script src="assets/js/plugins/bootstrap-notify.js"></script>
+                        <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+                        <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
+                        <script src="assets/js/brew.js"></script>
+                        <script src="assets/js/recipe.js"></script>
+                        <script type="text/javascript">
+                                                        $(document).ready(function () {
+                                                            // Javascript method's body can be found in assets/js/demos.js
+                                                        });
+                        </script>
 
-</html>
+                        </html>
 
