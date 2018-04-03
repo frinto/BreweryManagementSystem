@@ -103,7 +103,7 @@ public class RecipeServlet extends HttpServlet {
         {
             try {
                 Recipe recipe = recipeDb.getRecipe(viewRecipe);
-                request.setAttribute("recipe", recipe);
+                request.setAttribute("viewRecipe", recipe);
                 getServletContext().getRequestDispatcher("/WEB-INF/recipe.jsp").forward(request, response);
 
             } catch (BrewDBException ex) {
