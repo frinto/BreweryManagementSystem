@@ -22,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,8 +34,33 @@ public class TankFarmServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        HttpSession session = request.getSession();
         //set current date in user input field
         setTodaysDate(request);
+        
+        String startDateStr = request.getParameter("transferDate");
+        //Formats the date so it follows the standard.
+        if (startDateStr == null) {
+
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String startDate = sdf.format(new Date());
+                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+
+                session.setAttribute("transferDate", date);
+            } catch (ParseException ex) {
+                Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (startDateStr != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date startDate = sdf.parse(startDateStr);
+                session.setAttribute("transferDate", startDate);
+            } catch (ParseException ex) {
+                Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
         //retrieve all transfers and tanks from database. This is for user display
         retrieveAllTransfers(request);
@@ -187,6 +213,10 @@ public class TankFarmServlet extends HttpServlet
             } catch (ParseException | BrewDBException ex) {
                 Logger.getLogger(TankFarmServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        //This enables you to edit a transfer
+        if (action!=null && action.equals("editTransfer")) {
+            
         }
         setTodaysDate(request);
         retrieveAllTransfers(request);
