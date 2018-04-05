@@ -33,6 +33,13 @@ import javax.servlet.http.HttpSession;
  */
 public class BrewServlet extends HttpServlet {
 
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -280,6 +287,26 @@ public class BrewServlet extends HttpServlet {
 
 //    --------------------------------------------Helper Methods---------------------------------------------------------
     //Method to save user input in case of an error
+    /**
+     * Method saves user input if the user has made an error.  Please see domain model
+     * class "Brew" for parameter details
+     * @param request
+     * @param mashInTime
+     * @param restTime
+     * @param inTime
+     * @param totalMashTime
+     * @param underletTime
+     * @param lauterTime
+     * @param vorlaufTime
+     * @param firstWortGrav
+     * @param runOffTime
+     * @param lastRunnings
+     * @param kettleFullVol
+     * @param kettleFullGrav
+     * @param strikeOutGrav
+     * @param kettleStrikeOutVol
+     * @param finalVolume 
+     */
     private void saveInput(HttpServletRequest request, float mashInTime, float restTime, float inTime, float totalMashTime,
             float underletTime, float lauterTime, float vorlaufTime, float firstWortGrav, float runOffTime,
             float lastRunnings, float kettleFullVol, float kettleFullGrav, float strikeOutGrav, float kettleStrikeOutVol,

@@ -18,7 +18,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * This class represents a sv object (storage tank).  A storage tank stores beer after it has been 
+ * fermented and is then transfered/filtered.
  * @author 553817
  */
 @Entity
@@ -66,6 +67,11 @@ public class Sv implements Serializable {
         this.svId = svId;
     }
 
+    /**
+     * Constructs an sv object
+     * @param svId The identification number of the storage vessel
+     * @param capacity Capacity in litres of the storage vessel
+     */
     public Sv(Integer svId, int capacity) {
         this.svId = svId;
         this.capacity = capacity;
