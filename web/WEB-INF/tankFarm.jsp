@@ -88,6 +88,14 @@
                                 <p>Production Schedule</p>
                             </a>
                         </li>
+                        <c:if test="${currentEmployee.roleId == 1}">
+                            <li>
+                                <a class="nav-link" href="manageEmployee">
+                                    <img src="assets/img/report.png" class="" alt="Norway">
+                                    <p>Manage Employees</p>
+                                </a>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
@@ -127,105 +135,194 @@
                 <!-- Tank Tab Content -->
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="tankStatus" role="tabpanel" aria-labelledby="tankStatus-tab">
-                        ${tankTabMessage}
-                        <div class="row">
-                            <div class="col text-center">
-                                <h2>SV Tanks</h2>
-                            </div>
-                            <c:if test="${role == 1}">
-                            <div class="col text-right">
-                                <form>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalAddTank" style="margin-top:5%;margin-right:3%">Add A New Tank</button>
+                        <c:choose>
+                            <c:when test="${action == 'editSv'}">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <h2>Edit SV Tank</h2>
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                </div>
+                                <form action="tankFarm?action=updateSV" method="POST">
+                                    <table class="table" style="margin-top: 0%">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>SV ID</th>
+                                                <th>Volume</th>
+                                                <th>Capacity</th>
+                                                <th>Brew 1</th>
+                                                <th>Brew 2</th>
+                                                <th>Brew 3</th>
+                                                <th>Brand</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="hidden" name="newSvId" value="${sv.svId}">${sv.svId}</td>
+                                                <td><input type="number" name="newSvVolume" value="${sv.volume}"></td>
+                                                <td><input type="number" name="newSvCapacity" value="${sv.capacity}"></td>
+                                                <td><input type="number" name="newSvBrew1" value="${sv.brew1}"></td>
+                                                <td><input type="number" name="newSvBrew2" value="${sv.brew2}"></td>
+                                                <td><input type="number" name="newSvBrew3" value="${sv.brew3}"></td>
+                                                <td><input type="text" name="newSvBrand" value="${sv.brand}"></td>
+                                                <td><input type="text" name="newSvStatus" value="${sv.status}"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button type="submit" class="btn btn-success">Submit</button>
                                 </form>
-                            </div>
-                            </c:if>
-                        </div>
-                        <table class="table" style="margin-top: 0%">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>SV ID</th>
-                                    <th>Volume</th>
-                                    <th>Capacity</th>
-                                    <th>Brew 1</th>
-                                    <th>Brew 2</th>
-                                    <th>Brew 3</th>
-                                    <th>Brand</th>
-                                    <th>Status</th>
-                                        <c:if test="${role == 1}">
-                                        <th></th>
-                                        </c:if>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach var="sv" items="${svs}">
-                                    <tr>
-                                        <td>${sv.svId}</td>
-                                        <td>${sv.volume}</td>
-                                        <td>${sv.capacity}</td>
-                                        <td>${sv.brew1}</td>
-                                        <td>${sv.brew2}</td>
-                                        <td>${sv.brew3}</td>
-                                        <td>${sv.brand}</td>
-                                        <td>${sv.status}</td>
-                                        <c:if test="${role == 1}">
-                                            <td>
-                                                <form action="tankFarm?action=editSv" method="POST">
-                                                    <button type="submit">Edit</button>
-                                                </form>
-                                            </td>
-                                        </c:if>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                        <div class="row">
-                            <div class="col text-center">
-                                <h2>FV Tanks</h2>
-                            </div>
-                            <div class="col">
-                            </div>
-                        </div>
-                        <table class="table" style="margin-top: 0%">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>FV ID</th>
-                                    <th>Volume</th>
-                                    <th>Capacity</th>
-                                    <th>Brew 1</th>
-                                    <th>Brew 2</th>
-                                    <th>Brew 3</th>
-                                    <th>Brand</th>
-                                    <th>Status</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach var="fv" items="${fvs}">
-                                    <tr>
-                                        <td>${fv.fvId}</td>
-                                        <td>${fv.volume}</td>
-                                        <td>${fv.capacity}</td>
-                                        <td>${fv.brew1}</td>
-                                        <td>${fv.brew2}</td>
-                                        <td>${fv.brew3}</td>
-                                        <td>${fv.brand}</td>
-                                        <td>${fv.status}</td>
-                                        <c:if test="${role == 1}">
-                                        <td>
-                                            <form action="tankFarm?action=editFv" method="POST">
-                                                <button type="submit">Edit</button>
+                            </c:when>
+                            <c:when test="${action == 'editFv'}">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <h2>Edit FV Tank</h2>
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                </div>
+                                <form action="tankFarm?action=updateFV" method="POST">
+                                    <table class="table" style="margin-top: 0%">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>FV ID</th>
+                                                <th>Volume</th>
+                                                <th>Capacity</th>
+                                                <th>Brew 1</th>
+                                                <th>Brew 2</th>
+                                                <th>Brew 3</th>
+                                                <th>Brand</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="hidden" name="newFvId" value="${fv.fvId}">${fv.fvId}</td>
+                                                <td><input type="number" name="newFvVolume" value="${fv.volume}"></td>
+                                                <td><input type="number" name="newFvCapacity" value="${fv.capacity}"></td>
+                                                <td><input type="number" name="newFvBrew1" value="${fv.brew1}"></td>
+                                                <td><input type="number" name="newFvBrew2" value="${fv.brew2}"></td>
+                                                <td><input type="number" name="newFvBrew3" value="${fv.brew3}"></td>
+                                                <td><input type="text" name="newFvBrand" value="${fv.brand}"></td>
+                                                <td><input type="text" name="newFvStatus" value="${fv.status}"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </form>
+                            </c:when>
+                            <c:otherwise>
+                                ${tankTabMessage}
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <h2>SV Tanks</h2>
+                                    </div>
+                                    <c:if test="${role == 1}">
+                                        <div class="col text-right">
+                                            <form>
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalAddTank" style="margin-top:5%;margin-right:3%">Add A New Tank</button>
                                             </form>
-                                        </td>
-                                        </c:if>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
+                                        </div>
+                                    </c:if>
+                                </div>
+                                <table class="table" style="margin-top: 0%">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>SV ID</th>
+                                            <th>Volume</th>
+                                            <th>Capacity</th>
+                                            <th>Brew 1</th>
+                                            <th>Brew 2</th>
+                                            <th>Brew 3</th>
+                                            <th>Brand</th>
+                                            <th>Status</th>
+                                                <c:if test="${role == 1}">
+                                                <th></th>
+                                                </c:if>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="sv" items="${svs}">
+                                            <tr>
+                                                <td>${sv.svId}</td>
+                                                <td>${sv.volume}</td>
+                                                <td>${sv.capacity}</td>
+                                                <td>${sv.brew1}</td>
+                                                <td>${sv.brew2}</td>
+                                                <td>${sv.brew3}</td>
+                                                <td>${sv.brand}</td>
+                                                <td>${sv.status}</td>
+                                                <c:if test="${role == 1}">
+                                                    <td>
+                                                        <form action="tankFarm?action=editSV" method="POST">
+                                                            <input type="hidden" name="svId" value="${sv.svId}">
+                                                            <button type="submit">Edit</button>
+                                                        </form>
+                                                    </td>
+                                                </c:if>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <h2>FV Tanks</h2>
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                </div>
+                                <table class="table" style="margin-top: 0%">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>FV ID</th>
+                                            <th>Volume</th>
+                                            <th>Capacity</th>
+                                            <th>Brew 1</th>
+                                            <th>Brew 2</th>
+                                            <th>Brew 3</th>
+                                            <th>Brand</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="fv" items="${fvs}">
+                                            <tr>
+                                                <td>${fv.fvId}</td>
+                                                <td>${fv.volume}</td>
+                                                <td>${fv.capacity}</td>
+                                                <td>${fv.brew1}</td>
+                                                <td>${fv.brew2}</td>
+                                                <td>${fv.brew3}</td>
+                                                <td>${fv.brand}</td>
+                                                <td>${fv.status}</td>
+                                                <c:if test="${role == 1}">
+                                                    <td>
+                                                        <form action="tankFarm?action=editFV" method="POST">
+                                                            <input type="hidden" name="fvId" value="${fv.fvId}">
+                                                            <button type="submit">Edit</button>
+                                                        </form>
+                                                    </td>
+                                                </c:if>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
 
                     <!-- Transfer Tab -->
                     <div class="tab-pane fade" id="transferLog" role="tabpanel" aria-labelledby="transferLog-tab">
 
+                        <!--Selector for the date to filter the date of transfers-->
+                        <form class ="datepicker transferDate" action="tankFarm" method="GET">
+                            <h4>View Transfers by Date:</h4>
+                            <input type="date" name="transferDate" id="datePicker">
+                            <button type="submit" class="btn btn-outline-primary">Select Date</button>
+                        </form>
                         <!-- 'Add A Transfer' button -->
                         <!-- Trigger the Transfer Modal with a button -->
                         <div class="text-center">
@@ -248,14 +345,21 @@
                             </thead>
                             <tbody>
                                 <c:forEach var="transfer" items="${transfers}">
-                                    <tr>
-                                        <td><fmt:formatDate value="${transfer.date}" pattern="MMM-dd-yyy" /></td>
-                                        <td>${transfer.brand}</td>
-                                        <td>${transfer.fromFv}</td>
-                                        <td>${transfer.toSv}</td>
-                                        <td>${transfer.volume}</td>
-                                        <td>${transfer.correction}</td>
-                                    </tr>
+                                    <c:if test="${transferDate.equals(transfer.date)}">
+                                        <tr>
+                                            <td><fmt:formatDate value="${transfer.date}" pattern="MMM-dd-yyy" /></td>
+                                            <td>${transfer.brand}</td>
+                                            <td>${transfer.fromFv}</td>
+                                            <td>${transfer.toSv}</td>
+                                            <td>${transfer.volume}</td>
+                                            <td>${transfer.correction}</td>
+                                            <td>
+                                                <form action="tankFarm?action=editTransfer" method="POST">
+                                                    <button type="submit">Edit</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </c:if>
                                 </c:forEach>
                             </tbody>
                         </table>
@@ -368,6 +472,7 @@
     <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
     <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
     <script src="assets/js/demo.js"></script>
+    <script src="assets/js/transfer.js"></script>
 
     <!-- script to open Transfer Tab if requested from back-end based on loadTransferTab being set-->
     <c:if test="${loadTransferTab != null}">

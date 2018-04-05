@@ -83,6 +83,20 @@
                                 <p>Reports</p>
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-link" href="productionSchedule">
+                                <img src="assets/img/report.png" class="" alt="Norway">
+                                <p>Production Schedule</p>
+                            </a>
+                        </li>
+                        <c:if test="${currentEmployee.roleId == 1}">
+                            <li>
+                                <a class="nav-link" href="manageEmployee">
+                                    <img src="assets/img/report.png" class="" alt="Norway">
+                                    <p>Manage Employees</p>
+                                </a>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
@@ -192,14 +206,17 @@
                                 </form>
                             </c:when>
                             <c:otherwise>
-                                <form class ="datepicker productionDate" action="production" method="GET">
-                                    <h4>View Productions by Date:</h4>
-                                    <input type="date" name="productionDate" id="datePicker">
-                                    <button type="submit" class="btn btn-outline-primary">Select Date</button>
-                                </form>
-                                <form action="production?action=add" method="POST">
-                                    <button type="submit" class="btn btn-success productionButton">Add Production</button>
-                                </form>
+                                <div class="text-center">
+                                    <form class ="" action="production" method="GET">
+                                        <h4>View Productions by Date:</h4>
+                                        <input type="date" name="productionDate" id="datePicker">
+                                        <button type="submit" class="btn btn-outline-primary">Select Date</button>
+                                    </form>
+                                    <form action="production?action=add" method="POST">
+                                        <button type="submit" class="btn btn-success productionButton">Add Production</button>
+                                    </form>
+                                </div>
+
                                 <table class="table">
                                     <thead class="thead-dark">
                                     <th>Date</th>
@@ -220,11 +237,11 @@
                                                     <td>${production.quantity}</td>
                                                     <td>${production.svNum}</td>
                                                     <td>
-                                                    <c:forEach var="employee" items="${employees}">
-                                                        <c:if test="${employee.empId.equals(production.employeeId)}">
-                                                            ${employee.firstName} ${employee.lastName}
-                                                        </c:if>   
-                                                    </c:forEach>  
+                                                        <c:forEach var="employee" items="${employees}">
+                                                            <c:if test="${employee.empId.equals(production.employeeId)}">
+                                                                ${employee.firstName} ${employee.lastName}
+                                                            </c:if>   
+                                                        </c:forEach>  
                                                     </td>
                                                     <td>${production.finishedSvVolume}</td>
                                                     <td>${production.gainLoss}</td>
@@ -246,7 +263,7 @@
 
                         <!--This is a form to create a new production type-->
                         <form action="production?action=newProductionType" id="newProductionTypeForm" method="POST">
-                            <table border="1" class="table">
+                            <table border="1" class="table" id="newTypeTable">
                                 <thead>
                                     <tr class="thead-dark">
                                         <th> </th>
@@ -275,12 +292,13 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input style="width:100%" type="number" min="0"  name="qty" id="qty" value="${qty}" placeholder="quantity">
+                                        <input style="width:100%" type="number" min="0"  name="qty" id="qty" value="${qty}" placeholder="quantity" required="true">
                                     </td>
                                 </tr>
                             </table>
                             <table>
                                 <input type="button" onclick="addARow()" value="Add a Row">
+                                <input type="button" onclick="removeARow()" value="Remove a Row">
                                 <input type="submit" value="submit">
                             </table>
                         </form>

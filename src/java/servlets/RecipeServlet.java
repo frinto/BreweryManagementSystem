@@ -97,7 +97,23 @@ public class RecipeServlet extends HttpServlet {
         
         
         HttpSession session = request.getSession();
+        RecipeDB recipeDb = new RecipeDB();
+        String viewRecipe = request.getParameter("selectedRecipe");
+        if(viewRecipe!=null)
+        {
+            try {
+                Recipe recipe = recipeDb.getRecipe(viewRecipe);
+                request.setAttribute("viewRecipe", recipe);
+                getServletContext().getRequestDispatcher("/WEB-INF/recipe.jsp").forward(request, response);
+
+            } catch (BrewDBException ex) {
+                Logger.getLogger(RecipeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(viewRecipe==null)
+        {
         String newRecipe = request.getParameter("newRecipe");
+        
         if(newRecipe!=null)
         {
             session.setAttribute("newRecipe", newRecipe);
@@ -218,7 +234,7 @@ public class RecipeServlet extends HttpServlet {
         } catch (BrewDBException ex) {
             Logger.getLogger(RecipeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+        }
         
 
         
