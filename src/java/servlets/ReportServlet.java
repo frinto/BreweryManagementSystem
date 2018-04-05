@@ -93,16 +93,14 @@ public class ReportServlet extends HttpServlet {
         List<Brew> brewList;
         try {
             brewList = brewDB.getBrewByDateRange(previousWeekDate, todaysDate);
-            List<String> currentRecipes;
-            Set<String> currentUniqueRecipes = new HashSet<>();
-            ArrayList<Double> brewVolumeList = new ArrayList<>();
+            Set<String> currentRecipes = new HashSet<>();
             Map<String, Double> brewMap = new HashMap<>();
             
             for (Brew brew : brewList){
-                currentUniqueRecipes.add(brew.getRecipeName());
+                currentRecipes.add(brew.getRecipeName());
             }
             
-            for (String recipe : currentUniqueRecipes) {
+            for (String recipe : currentRecipes) {
                 
                 double volume = 0;
                 
@@ -111,7 +109,6 @@ public class ReportServlet extends HttpServlet {
                     if (recipe.equals(brew.getRecipeName())) {
                         volume = volume + brew.getAllInVolume();
                     }
-                    
                 }
                 brewMap.put(recipe,volume);
             }
@@ -120,8 +117,6 @@ public class ReportServlet extends HttpServlet {
             Logger.getLogger(ReportServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
-        request.setAttribute("reportData", "greetings from the backend!");
         getServletContext().getRequestDispatcher("/WEB-INF/reports.jsp").forward(request, response);
     }
 
