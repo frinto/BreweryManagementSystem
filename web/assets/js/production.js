@@ -32,6 +32,7 @@ function addARow() {
     qty.setAttribute("type", "number");
     qty.setAttribute("min", "0");
     //                                        qty.setAttribute("value", "0");
+    qty.setAttribute("required", "true");
     qty.setAttribute("name", "qty");
     qty.setAttribute("id", "qty");
     qty.setAttribute("placeholder", "quantity");

@@ -292,7 +292,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input style="width:100%" type="number" min="0"  name="qty" id="qty" value="${qty}" placeholder="quantity">
+                                        <input style="width:100%" type="number" min="0"  name="qty" id="qty" value="${qty}" placeholder="quantity" required="true">
                                     </td>
                                 </tr>
                             </table>
