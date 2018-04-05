@@ -51,8 +51,8 @@
 
         // Set chart options
         var optionsFinishedInventory = {'title':titleFinishedInventory,
-                       'width':600,
-                       'height':600};
+                       'width':400,
+                       'height':400};
 
         // Instantiate and draw our chart, passing in some options.
         var chartFinishedInventory = new google.visualization.PieChart(document.getElementById('chart_finishedInventory'));
@@ -76,7 +76,7 @@
         var options2 = {'title':"Weekly Production of Individual Items",
                        'width':600,
                        'height':600};
-        var chartProduction = new google.visualization.BarChart(document.getElementById('chart_production'));
+        var chartProduction = new google.visualization.ColumnChart(document.getElementById('chart_production'));
         chartProduction.draw(data2,options2);
         //-------------------END OF Weekly Production of Individual Items CHART------------------------------------------------------
         
@@ -96,9 +96,9 @@
 
         // Set chart options
         var brewVolumeOptions = {'title':"Weekly Total Volume of Brews",
-                       'width':600,
-                       'height':600};
-        var chartProduction = new google.visualization.BarChart(document.getElementById('chart_brewVolume'));
+                       'width':500,
+                       'height':500};
+        var chartProduction = new google.visualization.ColumnChart(document.getElementById('chart_brewVolume'));
         chartProduction.draw(brewVolumeData,brewVolumeOptions);
         //-------------------END OF Weekly Total Volume of Brews CHART------------------------------------------------------
         
@@ -250,16 +250,19 @@
                 </nav>
 
                 <!--End nav bar-------------------------------------------------------------------------->
-        
-          <div id="chart_production"></div>
           
-          <div id="chart_brewVolume"></div>
+          <!--- Displaying the Charts along with their Titles and Customizable options ------>     
+                
           
-          <div id="chart_finishedInventory"></div>
+              <div id="chart_production" align="center"></div>
+            
+              <div id="chart_brewVolume" align="center"></div>
+            
+          <div id="chart_finishedInventory" align="center"></div>
           
-          <div id="chart_productionMaterials"></div>
+          <div id="chart_productionMaterials" align="center"></div>
           
-          <div id="chart_brewMaterials"></div>
+          <div id="chart_brewMaterials" align="center"></div>
 
                 
         </div>
