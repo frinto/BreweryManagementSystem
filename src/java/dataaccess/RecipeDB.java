@@ -6,9 +6,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-
+/**
+ * This class represents methods for interacting with the database with recipes.
+ * @author 553817
+ */
 public class RecipeDB {
 
+    /**
+     * This method persists recipes to the database 
+     * @param recipe the recipe to be added to database
+     * @return 1 if addition was successful
+     * @throws BrewDBException 
+     */
     public int insert(Recipe recipe) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -26,6 +35,12 @@ public class RecipeDB {
             em.close();
         }
     }
+    /**
+     * Method to update an existing recipe in the database
+     * @param recipe existing recipe to be updated
+     * @return 1 if update is successful
+     * @throws BrewDBException 
+     */
 
     public int update(Recipe recipe) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -45,6 +60,11 @@ public class RecipeDB {
         }
     }
 
+    /**
+     * Method to retrieve a list of all recipes in the database
+     * @return list of existing recipes from database
+     * @throws BrewDBException 
+     */
     public List<Recipe> getAll() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -59,6 +79,12 @@ public class RecipeDB {
         }
     }
 
+    /**
+     * Method to retrieve recipe by specific name
+     * @param recipeName the name of recipe to be retrieved from database
+     * @return the recipe object from database
+     * @throws BrewDBException 
+     */
     public Recipe getRecipe(String recipeName) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
@@ -72,6 +98,12 @@ public class RecipeDB {
         }
     }
 
+    /**
+     * Method to delete a recipe from the database
+     * @param recipe object to be deleted
+     * @return 1 if deletion successful
+     * @throws BrewDBException 
+     */
     public int delete(Recipe recipe) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -90,20 +122,5 @@ public class RecipeDB {
         }
     }
 
-    //Leftover from NotesDB project, may be useful as future example
-    
-//    public List<User> getUsersByCompany(Company company) throws RecipeDBException {
-//        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-//        
-//        try {
-//            List<User> users = em.createNamedQuery("User.findByCompany", User.class).setParameter("company", company).getResultList();
-//            return users;
-//        } catch (Exception ex) {
-//            Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
-//            throw new RecipeDBException("Error getting Users");
-//        } finally {
-//            em.close();
-//        }
-//    }
 
 }

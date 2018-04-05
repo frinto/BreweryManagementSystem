@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * This entity class represents the recordable stages of a brewing process.
  * @author 553817
  */
 @Entity
@@ -72,6 +72,53 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Recipe.findByFourthMaltAmt", query = "SELECT r FROM Recipe r WHERE r.fourthMaltAmt = :fourthMaltAmt")})
 public class Recipe implements Serializable {
 
+    /**
+     * Constructs a recipe object.
+     * 
+     * @param recipeName Name of the recipe 
+     * @param dateModified date of creation/modification/
+     * @param mashInTemp target temperature to mash in
+     * @param mashInTime target time to mash in
+     * @param mashWaterVolume target volume of water required for mash in
+     * @param restTime time of rest between mash in and temperature raise
+     * @param raiseToTemp temperature the mash is raised to after mash in
+     * @param inTime 
+     * @param totalMashTime total time for mash in
+     * @param underletLitres the amount of water in litres required for underlet
+     * @param rest rest time after underlet
+     * @param vorlaufTime amount of time required for vorlauf
+     * @param firstWortGrav target gravity for the first measurement
+     * @param runOffTime - target value for run off time
+     * @param spargVol - volume of water needed for sparge
+     * @param spargTemp target temperature for duration of sparge
+     * @param lastRunningsGrav gravity of the last bit of wort before kettle is full
+     * @param kettleFullVol total volume when done sparging
+     * @param kettleFullGrav gravity of wort when kettle is full
+     * @param boilTime boil time of specific recipe
+     * @param strikeOutVol target volume when striking out (to a fermenter)
+     * @param strikeOutGrav target gravity when striking out
+     * @param whirlPoolTime time needed for whirlpool
+     * @param coolInTemp target temperature of wort when striking out
+     * @param oxygenRate target rate of oxygen into the wort while striking out
+     * @param gypsumAmt amount in mg of gypsum added to brew
+     * @param calciumChlorideAmt amount in mg of calcium chloride added to brew
+     * @param sodiumChlorideAmt amount in mg of sodium chloride added to brew
+     * @param phosphAcidAmt amount in mg of phosphoric acid added to brew
+     * @param firstHop name of the first hop variety
+     * @param firstHopAmt amount in kg of first hop addition
+     * @param secondHop name of second hop variety
+     * @param secondHopAmt amount in kg of first hop addition
+     * @param thirdHop name of third hop variety
+     * @param thirdHopAmt amount in kg of third hop addition
+     * @param baseMalt name of base malt variety
+     * @param baseMaltAmt amount in kg of base malt
+     * @param secondMalt name of second malt variety
+     * @param secondMaltAmt amount in kg of second malt
+     * @param thirdMalt name of third malt variety
+     * @param thirdMaltAmt amount in kg of third malt
+     * @param fourthMalt name of fourth malt variety
+     * @param fourthMaltAmt amount in kg of fourth malt.
+     */
     public Recipe(String recipeName, Date dateModified, Float mashInTemp, Float mashInTime, Float mashWaterVolume, Float restTime, Float raiseToTemp, Float inTime, Float totalMashTime, Float underletLitres, Float rest, Float vorlaufTime, Float firstWortGrav, Float runOffTime, Float spargVol, Float spargTemp, Float lastRunningsGrav, Float kettleFullVol, Float kettleFullGrav, Float boilTime, Float strikeOutVol, Float strikeOutGrav, Float whirlPoolTime, Float coolInTemp, Float oxygenRate, Float gypsumAmt, Float calciumChlorideAmt, Float sodiumChlorideAmt, Float phosphAcidAmt, String firstHop, Float firstHopAmt, String secondHop, Float secondHopAmt, String thirdHop, Float thirdHopAmt, String baseMalt, Float baseMaltAmt, String secondMalt, Float secondMaltAmt, String thirdMalt, Float thirdMaltAmt, String fourthMalt, Float fourthMaltAmt) {
         this.recipeName = recipeName;
         this.dateModified = dateModified;
