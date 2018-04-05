@@ -133,14 +133,14 @@
                                     <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                                 </p>-->
 
-                <div class = "brews">
-
-                    <form class ="datepicker" action="delivery" method="GET">
+                <!--<div class = "brews">-->
+<div class="text-center">
+                    <form class ="" action="delivery" method="GET">
                         <h4>View Deliveries by Date:</h4>
                         <input type="date" name="deliveryDate" id="datePicker" value="${dateToday}">
                         <button type="submit" class="btn btn-outline-primary">Select Date</button>
                     </form>
-                    <div class="text-center">
+                    
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add A Delivery</button>
                     </div>
 
@@ -221,7 +221,7 @@
                             </c:forEach>
                         </tbody>
                     </table>
-                </div>
+                <!--</div>-->
             </div>
         </div>
     </body>

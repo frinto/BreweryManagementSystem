@@ -18,7 +18,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * This entity class represents an fv or "fermenting vessel".  This is the vessel that holds
+ * fermenting beer after it has been brewed 
  * @author 553817
  */
 @Entity
@@ -66,6 +67,12 @@ public class Fv implements Serializable {
         this.fvId = fvId;
     }
 
+    /**
+     * 
+     * @param fvId The identification number for a specific fermenting vessel.  A fermenting vessel
+     * is the vessel to which wort is put into after a brew so that it can ferment to make beer.
+     * @param capacity The volume capacity of a specific fermenting vessel
+     */
     public Fv(Integer fvId, int capacity) {
         this.fvId = fvId;
         this.capacity = capacity;

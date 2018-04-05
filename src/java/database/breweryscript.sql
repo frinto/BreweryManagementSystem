@@ -126,8 +126,8 @@ DROP TABLE IF EXISTS `productionmaterialssage` ;
 CREATE TABLE IF NOT EXISTS `productionmaterialusage` (
   `materialQty` INT NULL,
   `name` VARCHAR(50) NOT NULL,
-  `productionUsage` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`productionUsage`, `name`))
+  `productionusage` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`productionusage`, `name`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;

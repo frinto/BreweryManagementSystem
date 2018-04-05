@@ -39,8 +39,13 @@ public class BrewServlet extends HttpServlet {
 
         try {
             //Get list of recipes from database to display in dropdown menu
-
+            /**
+             * Constructs default recipeDB object for database
+             */
             RecipeDB recipeDB = new RecipeDB();
+            /**
+             * Constructs tankDB object for database connection
+             */
             TankDB tankDB = new TankDB();
             BrewDB brewDB = new BrewDB();
             HttpSession session = request.getSession();

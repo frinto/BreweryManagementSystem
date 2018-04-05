@@ -32,6 +32,7 @@ function addARow() {
     qty.setAttribute("type", "number");
     qty.setAttribute("min", "0");
     //                                        qty.setAttribute("value", "0");
+    qty.setAttribute("required", "true");
     qty.setAttribute("name", "qty");
     qty.setAttribute("id", "qty");
     qty.setAttribute("placeholder", "quantity");
@@ -42,4 +43,14 @@ function addARow() {
     tr.appendChild(td2);
     //add to page
     table.appendChild(tr);
+}
+function removeARow() {
+    var form = document.getElementById("newTypeTable");
+    if (form.lastChild === form.getElementsByTagName("tbody") [0]) {
+        
+    }
+    else{
+        form.removeChild(form.lastChild);
+    }
+//    form.removeChild(form.lastChild);
 }
