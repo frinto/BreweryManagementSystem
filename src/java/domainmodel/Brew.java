@@ -59,86 +59,118 @@ public class Brew implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-
-    @Column(name = "brewId")
     /**
      *Identification number for brew (unique)
      */
+    @Column(name = "brewId")
     private Integer brewId;
-    @Column(name = "date")
-    @Temporal(TemporalType.DATE)
-    /**
+        /**
      * date that the beer was brewed on
      */
+    @Column(name = "date")
+    @Temporal(TemporalType.DATE)
+
     private Date date;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "mashInTime")
-    /**
+        /**
      * The time it took to mash in. 
      * Mashing in is the process of getting the required barley for a single brew
      * into the first vessel along with hot water.
      */
+    @Column(name = "mashInTime")
     private Float mashInTime;
-    @Column(name = "restTime")
-    /**
+        /**
      * rest time in minutes.  The rest is neccesary in the brew to wait for the starches in the
      * grain to be converted to sugar for fermentation.
      */
+    @Column(name = "restTime")
     private Float restTime;
+    /**
+     * Total time for whole mash to take place
+     */
     @Column(name = "inTime")
     private Float inTime;
-    @Column(name = "totalMashTime")
-    /**
+        /**
      * total mash time is the total time it took to complete the mash. 
      */
+    @Column(name = "totalMashTime")
     private Float totalMashTime;
-    @Column(name = "underletTime")
-    /**
+        /**
      * underlet time in minutes.  This is the process where a brewer will "punch up"
      * the mash in the mash tun vessel in order to loosen the grain from the bottom of the
      * vessel
      */
+    @Column(name = "underletTime")
     private Float underletTime;
-    @Column(name = "lauterRestTime")
-    /**
+        /**
      * rest time in minutes after the underlet and before the vorlauf
      */
+    @Column(name = "lauterRestTime")
     private Float lauterRestTime;
-    @Column(name = "vorlaufTime")
-    /**
+        /**
      * Time in minutes that the vorlauf occurs.  Vorlauf is the process of 
      * clarifying the wort being drawn out of the mash tun.
      */
+    @Column(name = "vorlaufTime")
     private Float vorlaufTime;
-    @Column(name = "firstWortGravity")
-    /**
+        /**
      * The first measurement of the gravity of the wort.  Gravity is a measurement of the 
      * comparison in density to that of water.  
      */
+    @Column(name = "firstWortGravity")
     private Float firstWortGravity;
-    @Column(name = "runOffTime")
-    /**
-     * The time in minutes it takes to 
+        /**
+     * total time it took to fill the kettle with the wort extract from the 
+     * mash tun.
      */
+    @Column(name = "runOffTime")
     private Float runOffTime;
+    /**
+     * the gravity measurement of the last bit of wort that is headed
+     * to the kettle
+     */
     @Column(name = "lastRunningsGravity")
     private Float lastRunningsGravity;
+    /**
+     * The volume of wort in the kettle after run off.
+     */
     @Column(name = "kettleFullVol")
     private Float kettleFullVol;
+    /**
+     * The gravity of the wort after run off.
+     */
     @Column(name = "kettleFullGravity")
     private Float kettleFullGravity;
+    /**
+     * The volume of the wort that is being siphoned to a fermenting vessel
+     */
     @Column(name = "kettleStrikeOutVol")
     private Float kettleStrikeOutVol;
+    /**
+     * The gravity of the wort that is being siphoned to a fermenting vessel
+     */
     @Column(name = "kettleStrikeOutGravity")
     private Float kettleStrikeOutGravity;
+    /**
+     * Total volume that has been transfered to a fermenting vessel
+     */
     @Column(name = "allInVolume")
     private Float allInVolume;
+    /**
+     * id of the employee who completed the brew
+     */
     @Basic(optional = false)
     @Column(name = "empId")
     private int empId;
+    /**
+     * the fermenting vessel number to which the brew has been transfered into
+     */
     @Basic(optional = false)
     @Column(name = "fvId")
     private int fvId;
+    /**
+     * The name of the recipe being brewed
+     */
     @Basic(optional = false)
     @Column(name = "recipeName")
     private String recipeName;
@@ -159,34 +191,26 @@ public class Brew implements Serializable {
     /**
      * 
      * 
-     * @param brewId - Number representing the current brew for the year
-     * @param date - Date the beer was brewed on
-     * @param mashInTime - The time it took to completely mash in.  A mash in consists of mixing the grain 
-     * with hot water in the mash tun vessel.
-     * @param restTime - The rest time after the mash in.  This is used to let the grain rest
-     * and let the starches in the grain convert to sugar
-     * @param inTime - 
-     * @param totalMashTime - Total time for whole mash to take place
-     * @param underletTime - Time it took to perform underlet.  An underlet frees up the mash bed in the
-     * mash tun by pumping water underneath the grain bed.
-     * 
-     * @param lauterRestTime - Time in minutes of rest after lautering
-     * @param vorlaufTime - Time it took to vorlauf beer. A vorlauf is the process of clarifying the wort
-     * being drawn out of the mash tun.
-     * @param firstWortGravity First gravity reading of the wort.  Gravity measures the comparison of the wort
-     * density to the density of water
-     * @param runOffTime - total time it took to fill the kettle with the wort extract from the 
-     * mash tun.
-     * @param lastRunningsGravity - the gravity measurement of the last bit of wort that is headed
-     * to the kettle
-     * @param kettleFullVol The volume of wort in the kettle after run off.
-     * @param kettleFullGravity The gravity of the wort after run off.
-     * @param kettleStrikeOutVol The volume after the boil that is being siphoned to a fermenting vessel
-     * @param kettleStrikeOutGravity The gravity of the wort that is being siphoned to a fermenting vessel
-     * @param allInVolume Total volume that has been transfered to a fermenting vessel
-     * @param empId id of the employee who completed the brew
-     * @param fvId the fermenting vessel number to which the brew has been transfered into
-     * @param recipeName the name of the recipe that has been brewed
+     * @param brewId holds value for brew id
+     * @param date holds value of date
+     * @param mashInTime holds value of mash in time
+     * @param restTime holds value of rest time
+     * @param inTime holds value of in time
+     * @param totalMashTime holds value of total mash in time
+     * @param underletTime holds value of underlet time
+     * @param lauterRestTime holds value of lauter rest time
+     * @param vorlaufTime holds value of vorlauf time
+     * @param firstWortGravity holds value of first wort gravity
+     * @param runOffTime holds value of run off time
+     * @param lastRunningsGravity holds value of last runnings gravity 
+     * @param kettleFullVol holds value of the kettle full volume
+     * @param kettleFullGravity holds the value of kettle full gravity
+     * @param kettleStrikeOutVol holds value of kettle strike out volume
+     * @param kettleStrikeOutGravity holds value of kettle strike out gravity
+     * @param allInVolume holds value of all in volume
+     * @param empId holds value of employee id
+     * @param fvId holds value of the fermenter id
+     * @param recipeName holds value of recipe name
      */
      public Brew(Integer brewId,Date date, float mashInTime,
             float restTime, float inTime, float totalMashTime,

@@ -41,22 +41,46 @@ public class Fv implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    /**
+     * The id of the fermenter
+     */
     @Column(name = "fvId")
     private Integer fvId;
     @Basic(optional = false)
+    /**
+     * The capactity in litres for the fermenter
+     */
     @Column(name = "capacity")
     private int capacity;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    /**
+     * The volume of beer that is currently in a fermenter
+     */
     @Column(name = "volume")
     private Double volume;
+    /**
+     * Brew 1 of 3 potential brews in a fermenter
+     */
     @Column(name = "brew1")
     private Integer brew1;
+    /**
+     * brew 2 of 3 potential brews in a fermenter
+     */
     @Column(name = "brew2")
     private Integer brew2;
+    /**
+     * brew 3 of 3 potential brews in a fermenter
+     */
     @Column(name = "brew3")
     private Integer brew3;
+    /**
+     * The brand (recipe name) of the current beer occupying a fermenter
+     */
     @Column(name = "brand")
     private String brand;
+    /**
+     * The current status of the fermenter
+     */
     @Column(name = "status")
     private Character status;
 

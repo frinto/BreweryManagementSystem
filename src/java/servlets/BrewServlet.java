@@ -178,6 +178,7 @@ public class BrewServlet extends HttpServlet {
         String success = "success";
 
         //Variables parsed from user input for new brew form
+        //See documentation for descriptions
         float mashInTime = Float.parseFloat(request.getParameter("mashInTime"));
         float restTime = Float.parseFloat(request.getParameter("restTime"));
         float inTime = Float.parseFloat(request.getParameter("inTime"));

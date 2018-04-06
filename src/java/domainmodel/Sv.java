@@ -41,22 +41,46 @@ public class Sv implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    /**
+     * The id of the storage tank.
+     */
     @Column(name = "svId")
     private Integer svId;
     @Basic(optional = false)
+    /**
+     * The capactiy, in litres, of the storage tank
+     */
     @Column(name = "capacity")
     private int capacity;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    /**
+     * The volume of beer that is currently in the storage tank
+     */
     @Column(name = "volume")
     private Double volume;
+    /**
+     * Brew 1 of the three potential brews that could be in a storage tank
+     */
     @Column(name = "brew1")
     private Integer brew1;
+    /**
+     * Brew 2 of the three potential brews that could be in storage tank
+     */
     @Column(name = "brew2")
     private Integer brew2;
+    /**
+     * Brew 3 of the three potential brews that could be in a storage tank
+     */
     @Column(name = "brew3")
     private Integer brew3;
+    /**
+     * The brand (recipe name) of the beer that is currently in the storage tank
+     */
     @Column(name = "brand")
     private String brand;
+    /**
+     * The status of the storage tank
+     */
     @Column(name = "status")
     private Character status;
 
