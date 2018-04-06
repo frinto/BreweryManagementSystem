@@ -15,11 +15,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 /**
- *
- * @author root
+ * this class represents all the operations for the database for 
+ * raw inventory.
+ * 
+ * @author Huy Le
  */
 public class RawInventoryDB {
     
+    /**
+     * this method inserts the brew material into the database
+     * @param brewMaterial type Brewmaterials it represents the brew material
+     * to be inserted
+     * @return 1 if sucessfully inserted into the database.
+     * @throws BrewDBException 
+     */
     public int insertInventoryBrewMaterial(Brewmaterials brewMaterial) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -38,6 +47,11 @@ public class RawInventoryDB {
         }
     }
 
+    /**
+     * this method gets a list of all the brew materials in the database.
+     * @return type List of brew materials in the database.
+     * @throws BrewDBException 
+     */
     public List<Brewmaterials> getAllInventoryBrewMaterial() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -52,7 +66,13 @@ public class RawInventoryDB {
         }
     }
 
-    
+    /**
+     * this method update the specified brew materials.
+     * @param brewmaterial type Brewmaterials it represents the brew material
+     * to be updated.
+     * @return 1 if the brew material was updated successfully.
+     * @throws BrewDBException 
+     */
     public int updateBrewMaterials(Brewmaterials brewmaterial) throws BrewDBException
     {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -74,6 +94,13 @@ public class RawInventoryDB {
     
     //***********************PRODUCTION MATERIALS/////////////////////////////////////////////////
     
+    /**
+     * this method inserts production material into the database.
+     * @param productionMaterial type Productionmaterial it represents
+     * the production material to be inserted into the database.
+     * @return 1 if successfully inserted into the database.
+     * @throws BrewDBException 
+     */
     public int insertInventoryProductionMaterial(Productionmaterial productionMaterial) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -92,6 +119,11 @@ public class RawInventoryDB {
         }
     }
 
+    /**
+     * gets a list of all production material in the database.
+     * @return type List a list of all the production materials in the database.
+     * @throws BrewDBException 
+     */
     public List<Productionmaterial> getAllInventoryProductionMaterial() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -106,7 +138,13 @@ public class RawInventoryDB {
         }
     }
 
-    
+    /**
+     * this method updates the specified production material in the database.
+     * @param productionmaterial type Productionmaterial which represents
+     * the production material to be updated.
+     * @return 1 if the update was successful.
+     * @throws BrewDBException 
+     */
     public int updateProductionMaterials(Productionmaterial productionmaterial) throws BrewDBException
     {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

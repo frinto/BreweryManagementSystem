@@ -13,11 +13,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 /**
- *
- * @author root
+ * this class deals with the database operations for finishedInventory
+ * 
+ * @author Huy Le
  */
 public class FinishedInventoryDB {
 
+    /**
+     * this method inserts a finished product into the database.
+     * 
+     * @param finishedProduct type Finishedproduct it is the product
+     * to be inserted into the database.
+     * @return 1 if the finished product was inserted successfully.
+     * @throws BrewDBException 
+     */
     public int insertInventory(Finishedproduct finishedProduct) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -36,6 +45,11 @@ public class FinishedInventoryDB {
         }
     }
 
+    /**
+     * this method grabs a list of all the finished inventory in the database.
+     * @return type List which represents a list of all the finished product.
+     * @throws BrewDBException 
+     */
     public List<Finishedproduct> getAllInventory() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -50,7 +64,13 @@ public class FinishedInventoryDB {
         }
     }
 
-    
+    /**
+     * this method updates the specified finished product.
+     * @param finishedproduct type Finishedproduct it is the finished product
+     * to be updated.
+     * @return 1 if it was updated successfully.
+     * @throws BrewDBException 
+     */
     public int update(Finishedproduct finishedproduct) throws BrewDBException
     {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
