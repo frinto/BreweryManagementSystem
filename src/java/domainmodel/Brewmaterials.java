@@ -16,8 +16,17 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author 553817
+ * This class represents the brew materials 
+ * 
+ * Upon instantiation this class will contain all attributes and 
+ * operations used for brew materials
+ * 
+ * brew materials is used in raw inventory to keep track of all counts
+ * of brew materials in the inventory
+ * 
+ * it is used by other classes as well that will update its quantity.
+ * 
+ * @author Huy Le
  */
 @Entity
 @Table(name = "brewmaterials")
@@ -30,22 +39,50 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Brewmaterials.findByType", query = "SELECT b FROM Brewmaterials b WHERE b.type = :type")})
 public class Brewmaterials implements Serializable {
 
+    /**
+     * this represents the serial version unique identifier
+     * It is of type long.
+     */
     private static final long serialVersionUID = 1L;
+     /**
+     * this represents the name of the brew materials
+     * it is of type String.
+     */
     @Id
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
+     /**
+     * this represents the quantity of the brew materials
+     * It is of type Double.
+     */
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "qty")
     private Double qty;
+     /**
+     * this represents the unit of measurement for this brew material
+     * it is of type String.
+     */
     @Column(name = "units")
     private String units;
+        /**
+     * this represents the type of brew materials
+     * It is of type String.
+     */
     @Column(name = "type")
     private String type;
 
+    
+    /**
+     * default constructor for brew materials.
+     */
     public Brewmaterials() {
     }
 
+    /**
+     * constructor that initializes the name
+     * @param name type String it represents the name of the brew material.
+     */
     public Brewmaterials(String name) {
         this.name = name;
     }

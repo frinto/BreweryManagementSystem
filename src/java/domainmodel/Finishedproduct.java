@@ -16,8 +16,18 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author 553817
+ * This class implements the finished product object
+ * it is responsible for creation and working with finished product which is used
+ * for finished inventory
+ * 
+ * Upon instantiation a Finishedproduct object will be created for use inside the 
+ * FinishedInventoryDB class to save this object to the database
+ * 
+ * Its state will be saved and all attributes that pertain to this class will be
+ * saved in addition several operations can be used for working with this 
+ * class including getters and setters.
+ * 
+ * @author Huy Le
  */
 @Entity
 @Table(name = "finishedproduct")
@@ -29,24 +39,56 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Finishedproduct.findByVolumePerUnit", query = "SELECT f FROM Finishedproduct f WHERE f.volumePerUnit = :volumePerUnit")})
 public class Finishedproduct implements Serializable {
 
+    /**
+     * This is the serial version UID auto generated from domain model generator.
+     * It is of type long.
+     */
     private static final long serialVersionUID = 1L;
+        /**
+     * the product name of the the finished product.
+     * it is of type String.
+     */
     @Id
     @Basic(optional = false)
     @Column(name = "productName")
     private String productName;
+        /**
+     * the quantity of the finished product.
+     * it is of type Integer.
+     */
     @Column(name = "qty")
     private Integer qty;
+     /**
+     * the volume per unit of the finished product.
+     * it is of type double.
+     */
     @Basic(optional = false)
     @Column(name = "volumePerUnit")
     private double volumePerUnit;
 
+    /**
+     * default constructor for finished product.
+     */
     public Finishedproduct() {
     }
 
+    /**
+     * upon creation this constructor will initialize the productName of this 
+     * class with the value inputed in the parameter productName.
+     * @param productName String type that represents the product name 
+     * of this object.
+     */
     public Finishedproduct(String productName) {
         this.productName = productName;
     }
 
+    /**
+     * upon creation this constructor will initialize the productName and 
+     * volumePerUnit with the values specified in its arguments.
+     * @param productName type String it is the product name of this class.
+     * @param volumePerUnit type double represents the volume per unit 
+     * value of this class.
+     */
     public Finishedproduct(String productName, double volumePerUnit) {
         this.productName = productName;
         this.volumePerUnit = volumePerUnit;

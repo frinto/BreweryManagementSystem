@@ -16,8 +16,15 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author 740991
+ * this class represents production materials used in village brewery
+ * 
+ * upon its creation it contains all attributes and operations for production
+ * materials
+ * 
+ * production materials is used for raw inventory but is also accessed by other
+ * classes such as database classes.
+ * 
+ * @author Huy Le
  */
 @Entity
 @Table(name = "productionmaterial")
@@ -28,17 +35,36 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Productionmaterial.findByQty", query = "SELECT p FROM Productionmaterial p WHERE p.qty = :qty")})
 public class Productionmaterial implements Serializable {
 
+    /**
+     * Type long it represents the serial version unique identifier.
+     */
     private static final long serialVersionUID = 1L;
+     /**
+     * Type String it represents the name of the production material.
+     */
     @Id
     @Basic(optional = false)
     @Column(name = "Name")
     private String name;
+      /**
+     * Type Integer it represents the quantity of the production material.
+     */
     @Column(name = "qty")
     private Integer qty;
 
+    /**
+     * default constructor for production material,
+     * upon instantiation it will create a production material with
+     * attributes set as default state.
+     */
     public Productionmaterial() {
     }
 
+    /**
+     * constructor for production material
+     * upon creation it will initialize the name attribute of this object.
+     * @param name type String it represents the name of this object.
+     */
     public Productionmaterial(String name) {
         this.name = name;
     }
