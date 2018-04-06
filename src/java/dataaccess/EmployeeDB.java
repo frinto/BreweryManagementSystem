@@ -8,8 +8,20 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+/**
+ * This class deals with the database operations for employee.
+ * 
+ * @author Huy Le
+ */
 public class EmployeeDB {
 
+    /**
+     * This method inserts employee into the database.
+     * 
+     * @param employee type Employee it represents the employee to be inserted.
+     * @return 1 if employee inserted sucessfully into database.
+     * @throws BrewDBException 
+     */
     public int insert(Employee employee) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -28,6 +40,13 @@ public class EmployeeDB {
         }
     }
 
+    /**
+     * Update the specified employee in the database.
+     * 
+     * @param employee type Employee it represents the employee to be updated
+     * @return 1 if the employee was successfully updated.
+     * @throws BrewDBException 
+     */
     public int update(Employee employee) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -46,6 +65,11 @@ public class EmployeeDB {
         }
     }
 
+    /**
+     * this method grabs all the employees in the database and returns a list
+     * @return type List which contains a list of all employees in the database.
+     * @throws BrewDBException 
+     */
     public List<Employee> getAll() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -80,6 +104,12 @@ public class EmployeeDB {
         }
     }
 
+    /**
+     * deletes the specified employee
+     * @param employee type Employee it represents the employee to be deleted.
+     * @return 1 if the employee was deleted sucessfully.
+     * @throws BrewDBException 
+     */
     public int delete(Employee employee) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -98,22 +128,12 @@ public class EmployeeDB {
         }
     }
 
-    //Leftover from NotesDB project, may be useful as future example
-    
-//    public List<User> getUsersByCompany(Company company) throws BrewDBException {
-//        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-//        
-//        try {
-//            List<User> users = em.createNamedQuery("User.findByCompany", User.class).setParameter("company", company).getResultList();
-//            return users;
-//        } catch (Exception ex) {
-//            Logger.getLogger(EmployeeDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
-//            throw new BrewDBException("Error getting Users");
-//        } finally {
-//            em.close();
-//        }
-//    }
-    
+    /**
+     * grabs the employee by a specified email
+     * @param email type String it represents the email of the employee
+     * @return type Employee of the employee with the specified email
+     * @throws BrewDBException 
+     */
     public Employee getByEmail(String email) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -128,6 +148,14 @@ public class EmployeeDB {
         }
     }
     
+    /**
+     * gets the employee based on the uuid
+     * @param resetPasswordUUID type String that represents the reset password
+     * unique id of the employee.
+     * @return type Employee of the employee with the specified reset password
+     * uuid.
+     * @throws BrewDBException 
+     */
     public Employee getUuid(String resetPasswordUUID) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {

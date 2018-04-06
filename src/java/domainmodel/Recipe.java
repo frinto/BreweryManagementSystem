@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * This entity class represents the recordable stages of a brewing process.
  * @author 553817
  */
 @Entity
@@ -121,92 +121,223 @@ public class Recipe implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    /**
+     * name of the recipe
+     */
     @Column(name = "recipeName")
     private String recipeName;
+    /**
+     * Date that the recipe is created/modified
+     */
     @Column(name = "dateModified")
     @Temporal(TemporalType.DATE)
     private Date dateModified;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    /**
+     * target temperature to mash in
+     */
     @Column(name = "mashInTemp")
     private Float mashInTemp;
+    /**
+     * target temperature to mash in
+     */
     @Column(name = "mashInTime")
     private Float mashInTime;
+    /**
+     * target time to mash in
+     */
     @Column(name = "mashWaterVolume")
     private Float mashWaterVolume;
+    /**
+     * Target rest time for brew
+     */
     @Column(name = "restTime")
     private Float restTime;
+    /**
+     * Target temperature to raise after mash in
+     */
     @Column(name = "raiseToTemp")
     private Float raiseToTemp;
+    /**
+     * Target time for in time
+     */
     @Column(name = "inTime")
     private Float inTime;
+    /**
+     * target time for the total mash in time
+     */
     @Column(name = "totalMashTime")
     private Float totalMashTime;
+    /**
+     * Target volume for amount of water used in underlet
+     */
     @Column(name = "underletLitres")
     private Float underletLitres;
+    /**
+     * Target time to rest after underlet
+     */
     @Column(name = "rest")
     private Float rest;
+    /**
+     * Target time used for vorlauf
+     */
     @Column(name = "vorlaufTime")
     private Float vorlaufTime;
+    /**
+     * Target first wort gravity
+     */
     @Column(name = "firstWortGrav")
     private Float firstWortGrav;
+    /**
+     * Target time it takes to sparge 
+     */
     @Column(name = "runOffTime")
     private Float runOffTime;
+    /**
+     * Target water volume that the sparge will take
+     */
     @Column(name = "spargVol")
     private Float spargVol;
+    /**
+     * Target temperature of water during sparge
+     */
     @Column(name = "spargTemp")
     private Float spargTemp;
+    /**
+     * Target gravity reading of the last runnings of the sparge
+     */
     @Column(name = "lastRunningsGrav")
     private Float lastRunningsGrav;
+    /**
+     * Target kettle full volume after sparge
+     */
     @Column(name = "kettleFullVol")
     private Float kettleFullVol;
+    /**
+     * target gravity of kettle after sparge
+     */
     @Column(name = "kettleFullGrav")
     private Float kettleFullGrav;
+    /**
+     * Required boil time for wort in kettle
+     */
     @Column(name = "boilTime")
     private Float boilTime;
+    /**
+     * Target strike out volume (volume before move to fermenter)
+     */
     @Column(name = "strikeOutVol")
     private Float strikeOutVol;
+    /**
+     * Target for the strike out gravity while wort is on its way to ferementer
+     */
     @Column(name = "strikeOutGrav")
     private Float strikeOutGrav;
+    /**
+     * Time spent in whirlpool.  Whirpooling involves spinning the wort around in the kettle before exit to 
+     * fermenter.  This acts as an initial filter for any substances left over in the wort
+     */
     @Column(name = "whirlPoolTime")
     private Float whirlPoolTime;
+    /**
+     * Cooling in is the process of moving the wort to the fermenter.  This is the target value of the temperature
+     * as it is moved.
+     */
     @Column(name = "coolInTemp")
     private Float coolInTemp;
+    /**
+     * Oxygen is injected into the wort on its way out of the kettle.  This is the measure of oxygen injected per litre
+     */
     @Column(name = "oxygenRate")
     private Float oxygenRate;
+    /**
+     * gypsum amount added to the brew
+     */
     @Column(name = "gypsumAmt")
     private Float gypsumAmt;
+    /**
+     * Calcium chloride amount added to brew
+     */
     @Column(name = "calciumChlorideAmt")
     private Float calciumChlorideAmt;
+    /**
+     * Sodium Chloride amount added to brew
+     */
     @Column(name = "sodiumChlorideAmt")
     private Float sodiumChlorideAmt;
+    /**
+     * Amount of phosphoric acid added to brew
+     */
     @Column(name = "phosphAcidAmt")
     private Float phosphAcidAmt;
+    /**
+     * Hop variety first added to kettle
+     */
     @Column(name = "firstHop")
     private String firstHop;
+    /**
+     * First hop amount
+     */
     @Column(name = "firstHopAmt")
     private Float firstHopAmt;
+    /**
+     * Second hop variety added to kettle
+     */
     @Column(name = "secondHop")
     private String secondHop;
+    /**
+     * Second hop amount
+     */
     @Column(name = "secondHopAmt")
     private Float secondHopAmt;
+    /**
+     * Third hop variety added to kettle
+     */
     @Column(name = "thirdHop")
     private String thirdHop;
+    /**
+     * Third hop amount
+     */
     @Column(name = "thirdHopAmt")
     private Float thirdHopAmt;
+    /**
+     * Variety of base malt for brew
+     */
     @Column(name = "baseMalt")
     private String baseMalt;
+    /**
+     * amount of base malt for brew
+     */
     @Column(name = "baseMaltAmt")
     private Float baseMaltAmt;
+    /**
+     * Second malt variety for brew, if exists
+     */
     @Column(name = "secondMalt")
     private String secondMalt;
+    /**
+     * second malt amount
+     */
     @Column(name = "secondMaltAmt")
     private Float secondMaltAmt;
+    /**
+     * Third malt variety, if used
+     */
     @Column(name = "thirdMalt")
     private String thirdMalt;
+    /**
+     * Third malt amount
+     */
     @Column(name = "thirdMaltAmt")
     private Float thirdMaltAmt;
+    /**
+     * fourth malt variety, if used
+     */
     @Column(name = "fourthMalt")
     private String fourthMalt;
+    /**
+     * fourth malt amount
+     */
     @Column(name = "fourthMaltAmt")
     private Float fourthMaltAmt;
 

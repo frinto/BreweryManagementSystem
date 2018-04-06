@@ -11,8 +11,17 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * This class represents the brew materials 
  * 
- * @author 553817
+ * Upon instantiation this class will contain all attributes and 
+ * operations used for brew materials
+ * 
+ * brew materials is used in raw inventory to keep track of all counts
+ * of brew materials in the inventory
+ * 
+ * it is used by other classes as well that will update its quantity.
+ * 
+ * @author Huy Le
  */
 @Entity
 @Table(name = "brewmaterials")
@@ -25,7 +34,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Brewmaterials.findByType", query = "SELECT b FROM Brewmaterials b WHERE b.type = :type")})
 public class Brewmaterials implements Serializable {
 
+    /**
+     * this represents the serial version unique identifier
+     */
     private static final long serialVersionUID = 1L;
+     /**
+     * this represents the name of the brew materials
+     */
     @Id
     @Basic(optional = false)
     /**
@@ -33,24 +48,24 @@ public class Brewmaterials implements Serializable {
      */
     @Column(name = "name")
     private String name;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    /**
-     * amount of a brew material
+     /**
+     * this represents the amount of the brew material
      */
     @Column(name = "qty")
     private Double qty;
-    /**
-     * unit of weight of the brew material
+     /**
+     * this represents the unit of measurement for this brew material
      */
     @Column(name = "units")
     private String units;
     /**
-     * type of brew material
+     * this represents the type of brew material
      */
     @Column(name = "type")
     private String type;
+
     /**
-     * Default constructor
+     * default constructor for brew materials.
      */
     public Brewmaterials() {
     }

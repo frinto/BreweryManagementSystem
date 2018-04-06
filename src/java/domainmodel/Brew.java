@@ -52,54 +52,125 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Brew.findByDateRange", query = "SELECT p FROM Brew p WHERE p.date > :minDate AND p.date < :maxDate")
 //    , @NamedQuery(name = "Brew.findMonthVolumeByRecipe", query = "SELECT SUM(b.allInVolume) FROM Brew b WHERE b.recipeName = :recipeName AND MONTH(date) = :monthNum AND YEAR(date) = :yearNum")
 })
+
 public class Brew implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    /**
+     *Identification number for brew (unique)
+     */
     @Column(name = "brewId")
     private Integer brewId;
+        /**
+     * date that the beer was brewed on
+     */
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
+
     private Date date;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+        /**
+     * The time it took to mash in. 
+     * Mashing in is the process of getting the required barley for a single brew
+     * into the first vessel along with hot water.
+     */
     @Column(name = "mashInTime")
     private Float mashInTime;
+        /**
+     * rest time in minutes.  The rest is neccesary in the brew to wait for the starches in the
+     * grain to be converted to sugar for fermentation.
+     */
     @Column(name = "restTime")
     private Float restTime;
+    /**
+     * Total time for whole mash to take place
+     */
     @Column(name = "inTime")
     private Float inTime;
+        /**
+     * total mash time is the total time it took to complete the mash. 
+     */
     @Column(name = "totalMashTime")
     private Float totalMashTime;
+        /**
+     * underlet time in minutes.  This is the process where a brewer will "punch up"
+     * the mash in the mash tun vessel in order to loosen the grain from the bottom of the
+     * vessel
+     */
     @Column(name = "underletTime")
     private Float underletTime;
+        /**
+     * rest time in minutes after the underlet and before the vorlauf
+     */
     @Column(name = "lauterRestTime")
     private Float lauterRestTime;
+        /**
+     * Time in minutes that the vorlauf occurs.  Vorlauf is the process of 
+     * clarifying the wort being drawn out of the mash tun.
+     */
     @Column(name = "vorlaufTime")
     private Float vorlaufTime;
+        /**
+     * The first measurement of the gravity of the wort.  Gravity is a measurement of the 
+     * comparison in density to that of water.  
+     */
     @Column(name = "firstWortGravity")
     private Float firstWortGravity;
+        /**
+     * total time it took to fill the kettle with the wort extract from the 
+     * mash tun.
+     */
     @Column(name = "runOffTime")
     private Float runOffTime;
+    /**
+     * the gravity measurement of the last bit of wort that is headed
+     * to the kettle
+     */
     @Column(name = "lastRunningsGravity")
     private Float lastRunningsGravity;
+    /**
+     * The volume of wort in the kettle after run off.
+     */
     @Column(name = "kettleFullVol")
     private Float kettleFullVol;
+    /**
+     * The gravity of the wort after run off.
+     */
     @Column(name = "kettleFullGravity")
     private Float kettleFullGravity;
+    /**
+     * The volume of the wort that is being siphoned to a fermenting vessel
+     */
     @Column(name = "kettleStrikeOutVol")
     private Float kettleStrikeOutVol;
+    /**
+     * The gravity of the wort that is being siphoned to a fermenting vessel
+     */
     @Column(name = "kettleStrikeOutGravity")
     private Float kettleStrikeOutGravity;
+    /**
+     * Total volume that has been transfered to a fermenting vessel
+     */
     @Column(name = "allInVolume")
     private Float allInVolume;
+    /**
+     * id of the employee who completed the brew
+     */
     @Basic(optional = false)
     @Column(name = "empId")
     private int empId;
+    /**
+     * the fermenting vessel number to which the brew has been transfered into
+     */
     @Basic(optional = false)
     @Column(name = "fvId")
     private int fvId;
+    /**
+     * The name of the recipe being brewed
+     */
     @Basic(optional = false)
     @Column(name = "recipeName")
     private String recipeName;
@@ -117,6 +188,30 @@ public class Brew implements Serializable {
         this.fvId = fvId;
         this.recipeName = recipeName;
     }
+    /**
+     * 
+     * 
+     * @param brewId holds value for brew id
+     * @param date holds value of date
+     * @param mashInTime holds value of mash in time
+     * @param restTime holds value of rest time
+     * @param inTime holds value of in time
+     * @param totalMashTime holds value of total mash in time
+     * @param underletTime holds value of underlet time
+     * @param lauterRestTime holds value of lauter rest time
+     * @param vorlaufTime holds value of vorlauf time
+     * @param firstWortGravity holds value of first wort gravity
+     * @param runOffTime holds value of run off time
+     * @param lastRunningsGravity holds value of last runnings gravity 
+     * @param kettleFullVol holds value of the kettle full volume
+     * @param kettleFullGravity holds the value of kettle full gravity
+     * @param kettleStrikeOutVol holds value of kettle strike out volume
+     * @param kettleStrikeOutGravity holds value of kettle strike out gravity
+     * @param allInVolume holds value of all in volume
+     * @param empId holds value of employee id
+     * @param fvId holds value of the fermenter id
+     * @param recipeName holds value of recipe name
+     */
      public Brew(Integer brewId,Date date, float mashInTime,
             float restTime, float inTime, float totalMashTime,
             float underletTime, float lauterRestTime,

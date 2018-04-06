@@ -15,11 +15,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 /**
- *
+ * This class deals with persisting, deleting, retrieving and updating storage vessels and fermenting
+ * vessels
  * @author 727525
  */
 public class TankDB {
 
+    /**
+     * Method to insert new fermenting vessel to database
+     * @param fv fv object to be added
+     * @return the fv object that has been added
+     * @throws BrewDBException 
+     */
     public Fv insertFV(Fv fv) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -37,6 +44,12 @@ public class TankDB {
             em.close();
         }
     }
+    /**
+     * Method to insert storage vessel to database
+     * @param sv sv object to store
+     * @return sv object 
+     * @throws BrewDBException 
+     */
     
     public Sv insertSV(Sv sv) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -55,6 +68,12 @@ public class TankDB {
             em.close();
         }
     }
+    /**
+     * 
+     * @param fv
+     * @return
+     * @throws BrewDBException 
+     */
     
     public int updateFV(Fv fv) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

@@ -9,7 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 /**
- * Contains methods that allow inserting, accessing, updating, and deleting raw inventory data in the database.  
+ * Contains methods that allow inserting, accessing, updating, and deleting 
+ * raw inventory data in the database.  
+ * 
+ * @author Huy Le
  */
 public class RawInventoryDB {
     /**

@@ -33,14 +33,26 @@ import javax.servlet.http.HttpSession;
  */
 public class BrewServlet extends HttpServlet {
 
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         try {
             //Get list of recipes from database to display in dropdown menu
-
+            /**
+             * Constructs default recipeDB object for database
+             */
             RecipeDB recipeDB = new RecipeDB();
+            /**
+             * Constructs tankDB object for database connection
+             */
             TankDB tankDB = new TankDB();
             BrewDB brewDB = new BrewDB();
             HttpSession session = request.getSession();
@@ -166,6 +178,7 @@ public class BrewServlet extends HttpServlet {
         String success = "success";
 
         //Variables parsed from user input for new brew form
+        //See documentation for descriptions
         float mashInTime = Float.parseFloat(request.getParameter("mashInTime"));
         float restTime = Float.parseFloat(request.getParameter("restTime"));
         float inTime = Float.parseFloat(request.getParameter("inTime"));
@@ -275,6 +288,26 @@ public class BrewServlet extends HttpServlet {
 
 //    --------------------------------------------Helper Methods---------------------------------------------------------
     //Method to save user input in case of an error
+    /**
+     * Method saves user input if the user has made an error.  Please see domain model
+     * class "Brew" for parameter details
+     * @param request
+     * @param mashInTime
+     * @param restTime
+     * @param inTime
+     * @param totalMashTime
+     * @param underletTime
+     * @param lauterTime
+     * @param vorlaufTime
+     * @param firstWortGrav
+     * @param runOffTime
+     * @param lastRunnings
+     * @param kettleFullVol
+     * @param kettleFullGrav
+     * @param strikeOutGrav
+     * @param kettleStrikeOutVol
+     * @param finalVolume 
+     */
     private void saveInput(HttpServletRequest request, float mashInTime, float restTime, float inTime, float totalMashTime,
             float underletTime, float lauterTime, float vorlaufTime, float firstWortGrav, float runOffTime,
             float lastRunnings, float kettleFullVol, float kettleFullGrav, float strikeOutGrav, float kettleStrikeOutVol,

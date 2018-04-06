@@ -89,14 +89,14 @@
                     </li>
                     <li>
                         <a class="nav-link" href="productionSchedule">
-                            <img src="assets/img/report.png" class="" alt="Norway">
-                            <p>Production Schedule</p>
+                            <img src="assets/img/schedule.png" class="" alt="Norway">
+                            <p>Schedule</p>
                         </a>
                     </li>
                     <c:if test="${currentEmployee.roleId == 1}">
                             <li class="nav-item active">
                                 <a class="nav-link" href="manageEmployee">
-                                    <img src="assets/img/report.png" class="" alt="Norway">
+                                    <img src="assets/img/employee.png" class="" alt="Norway">
                                     <p>Manage Employees</p>
                                 </a>
                             </li>

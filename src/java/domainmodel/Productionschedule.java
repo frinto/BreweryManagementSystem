@@ -19,8 +19,13 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * This class is the production schedule which is used
+ * for managing and tracking information for everything in production
+ * 
+ * upon creation of this class it will contain all attributes and
+ * operations used for production schedule including getters and setters.
  *
- * @author root
+ * @author Huy Le
  */
 @Entity
 @Table(name = "productionschedule")
@@ -39,34 +44,76 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Productionschedule.findByCan", query = "SELECT p FROM Productionschedule p WHERE p.can = :can")})
 public class Productionschedule implements Serializable {
 
+    /**
+     * type long it represents the serial version unique identifier.
+     */
     private static final long serialVersionUID = 1L;
+    /**
+     * type Date it represents the date of the production scehdule.
+     */
     @Id
     @Basic(optional = false)
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
+    /**
+     * type String it tracks information about brew.
+     */
     @Column(name = "brew")
     private String brew;
+    /**
+     * type String it tracks information about fv.
+     */
     @Column(name = "fv")
     private String fv;
+    /**
+     * type String it tracks information about yeast.
+     */
     @Column(name = "yst")
     private String yst;
+    /**
+     * type String it tracks information about transfer.
+     */
     @Column(name = "transfer")
     private String transfer;
+       /**
+     * type String it tracks information about fuge.
+     */
     @Column(name = "fuge")
     private String fuge;
+     /**
+     * type String it tracks information about clean.
+     */
     @Column(name = "clean")
     private String clean;
+    /**
+     * type String it tracks information about keg.
+     */
     @Column(name = "keg")
     private String keg;
+     /**
+     * type String it tracks information about bottles.
+     */
     @Column(name = "bottle")
     private String bottle;
+     /**
+     * type String it tracks information about can.
+     */
     @Column(name = "can")
     private String can;
 
+    /**
+     * default constructor for production schedule
+     * upon creation it will set all attributes to default values.
+     */
     public Productionschedule() {
     }
 
+    /**
+     * constructor for production schedule upon creation it will
+     * initialize the date attribute of this object.
+     * @param date type Date it represents the date of the production schedule.
+     */
     public Productionschedule(Date date) {
         this.date = date;
     }

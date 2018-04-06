@@ -11,7 +11,12 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 public class BrewMaterialsDB {
-
+/**
+ * Method to persist a brewing material to database
+ * @param brewmaterial the brew material object to persist
+ * @return 1 if the action was successful
+ * @throws BrewDBException 
+ */
     public int insert(Brewmaterials brewmaterial) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -29,6 +34,12 @@ public class BrewMaterialsDB {
             em.close();
         }
     }
+    /**
+     * Method to update a brew material object 
+     * @param brewmaterial the brew material to update
+     * @return 1 if the update was successful
+     * @throws BrewDBException 
+     */
 
     public int update(Brewmaterials brewmaterial) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -47,6 +58,11 @@ public class BrewMaterialsDB {
             em.close();
         }
     }
+    /**
+     * Method to get a list of all brew materials in the database
+     * @return list of brew materials
+     * @throws BrewDBException 
+     */
 
     public List<Brewmaterials> getAll() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -61,6 +77,11 @@ public class BrewMaterialsDB {
             em.close();
         }
     }
+    /**
+     * Method to specifically return a list of brew materials with a type of "hops"
+     * @return list of hops
+     * @throws BrewDBException 
+     */
     
     public List<Brewmaterials> getHops() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -77,6 +98,11 @@ public class BrewMaterialsDB {
             em.close();
         }
     }
+    /**
+     * Method to return a list of brew materials of type "malt"
+     * @return list of malt
+     * @throws BrewDBException 
+     */
     public List<Brewmaterials> getMalt() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -92,6 +118,11 @@ public class BrewMaterialsDB {
             em.close();
         }
     }
+    /**
+     * Method to return list of brew materials of type "chemical"
+     * @return list of chemicals
+     * @throws BrewDBException 
+     */
     
     public List<Brewmaterials> getChemicals() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -110,11 +141,11 @@ public class BrewMaterialsDB {
     }
 
     /**
-     * Get a single user by their username.
+     * Get a single brew material by its name
      *
-     * @param username The unique username.
-     * @return A User object if found, null otherwise.
-     * @throws NotesDBException
+     * @param name name of brew material
+     * @return a brew material object
+     * @throws BrewDBException
      */
     public Brewmaterials getbrewmaterials(String name) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

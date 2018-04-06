@@ -18,7 +18,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * This entity class represents an fv or "fermenting vessel".  This is the vessel that holds
+ * fermenting beer after it has been brewed 
  * @author 553817
  */
 @Entity
@@ -40,22 +41,46 @@ public class Fv implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    /**
+     * The id of the fermenter
+     */
     @Column(name = "fvId")
     private Integer fvId;
     @Basic(optional = false)
+    /**
+     * The capactity in litres for the fermenter
+     */
     @Column(name = "capacity")
     private int capacity;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    /**
+     * The volume of beer that is currently in a fermenter
+     */
     @Column(name = "volume")
     private Double volume;
+    /**
+     * Brew 1 of 3 potential brews in a fermenter
+     */
     @Column(name = "brew1")
     private Integer brew1;
+    /**
+     * brew 2 of 3 potential brews in a fermenter
+     */
     @Column(name = "brew2")
     private Integer brew2;
+    /**
+     * brew 3 of 3 potential brews in a fermenter
+     */
     @Column(name = "brew3")
     private Integer brew3;
+    /**
+     * The brand (recipe name) of the current beer occupying a fermenter
+     */
     @Column(name = "brand")
     private String brand;
+    /**
+     * The current status of the fermenter
+     */
     @Column(name = "status")
     private Character status;
 
@@ -66,6 +91,12 @@ public class Fv implements Serializable {
         this.fvId = fvId;
     }
 
+    /**
+     * 
+     * @param fvId The identification number for a specific fermenting vessel.  A fermenting vessel
+     * is the vessel to which wort is put into after a brew so that it can ferment to make beer.
+     * @param capacity The volume capacity of a specific fermenting vessel
+     */
     public Fv(Integer fvId, int capacity) {
         this.fvId = fvId;
         this.capacity = capacity;

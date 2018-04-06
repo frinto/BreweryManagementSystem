@@ -12,11 +12,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 /**
- *
- * @author root
+ * this class deals with all the database operations for production schedule.
+ * 
+ * @author Huy Le
  */
 public class ProductionScheduleDB {
 
+    /**
+     * gets a list of all the production schedule in the database.
+     * @return type List a list of all the production material.
+     * @throws BrewDBException 
+     */
     public List<Productionschedule> getAll() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -31,6 +37,13 @@ public class ProductionScheduleDB {
         }
     }
     
+    /**
+     * this method updates the production schedule in the database.
+     * @param productionschedule type Productionschedule which represents
+     * the production schedule to be updated.
+     * @return 1 if the update was successful.
+     * @throws BrewDBException 
+     */
     public int update(Productionschedule productionschedule) throws BrewDBException
     {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

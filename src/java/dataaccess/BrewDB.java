@@ -15,6 +15,12 @@ import javax.persistence.EntityTransaction;
 
 public class BrewDB {
 
+    /**
+     * This method persists a brew object to the database
+     * @param brew
+     * @return brew that was inserted to database
+     * @throws BrewDBException 
+     */
     public Brew insert(Brew brew) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -33,6 +39,12 @@ public class BrewDB {
         }
     }
 
+    /**
+     * Updates an existing brew object from the database
+     * @param brew
+     * @return 1 if successful (for rows updated)
+     * @throws BrewDBException 
+     */
     public int update(Brew brew) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -50,6 +62,11 @@ public class BrewDB {
             em.close();
         }
     }
+    /**
+     * gets all brews from database and stores them in a list.
+     * @return list of brews from database
+     * @throws BrewDBException 
+     */
 
     public List<Brew> getAll() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -64,6 +81,12 @@ public class BrewDB {
             em.close();
         }
     }
+    /**
+     * Method to get a single brew by the brew number
+     * @param brewNum the brew number of the specific brew to find
+     * @return the brew matched to the brew number parameter
+     * @throws BrewDBException 
+     */
 
     public Brew getBrew(String brewNum) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -78,6 +101,12 @@ public class BrewDB {
         }
     }
 
+    /**
+     * This method deletes a brew that has been passed into it from the database
+     * @param brew the brew to be deleted
+     * @return 1 if deletion was successful
+     * @throws BrewDBException 
+     */
     public int delete(Brew brew) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -112,6 +141,13 @@ public class BrewDB {
 //        }
 //    }
 
+    /**
+     * Method to get a list of brews by a given date range
+     * @param minDate min date selected
+     * @param maxDate max date selected
+     * @return list of brews between the two selected parameter dates
+     * @throws BrewDBException 
+     */
     public List<Brew> getBrewByDateRange(Date minDate, Date maxDate) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {

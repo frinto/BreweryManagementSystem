@@ -41,8 +41,8 @@
         <servlet-class>servlets.SuccessServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ReportServlet</servlet-name>
-        <servlet-class>servlets.ReportServlet</servlet-class>
+        <servlet-name>ReportProductionServlet</servlet-name>
+        <servlet-class>servlets.ReportProductionServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -105,7 +105,7 @@
         <url-pattern>/successmodal</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ReportServlet</servlet-name>
+        <servlet-name>ReportProductionServlet</servlet-name>
         <url-pattern>/reports</url-pattern>
     </servlet-mapping>
     <servlet>
