@@ -32,7 +32,9 @@
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <image src ="assets/img/logo.png">
+
                     </div>
+
                     <ul class="nav">
                         <li>
                             <a class="nav-link" href="tankFarm">
@@ -85,14 +87,14 @@
                         </li>
                         <li>
                             <a class="nav-link" href="productionSchedule">
-                                <img src="assets/img/report.png" class="" alt="Norway">
-                                <p>Production Schedule</p>
+                                <img src="assets/img/schedule.png" class="" alt="Norway">
+                                <p>Schedule</p>
                             </a>
                         </li>
                         <c:if test="${currentEmployee.roleId == 1}">
                             <li>
                                 <a class="nav-link" href="manageEmployee">
-                                    <img src="assets/img/report.png" class="" alt="Norway">
+                                    <img src="assets/img/employee.png" class="" alt="Norway">
                                     <p>Manage Employees</p>
                                 </a>
                             </li>
@@ -105,9 +107,9 @@
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
                         <a class="navbar-brand">Production</a>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                ${employee.firstName} ${employee.lastName}
+                        <div class="btn-group" style="margin-right: 50px">
+                            <button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ${currentEmployee.firstName} ${currentEmployee.lastName}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
@@ -122,6 +124,7 @@
                 </nav>
 
                 <!--End nav bar-------------------------------------------------------------------------->
+
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#production" role="tab" aria-controls="home" aria-selected="true">Production</a>
