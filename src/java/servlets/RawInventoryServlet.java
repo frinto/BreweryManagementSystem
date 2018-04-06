@@ -21,8 +21,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author root
+ * This class contains the back end logic for raw inventory page
+ * 
+ * this page includes brew materials and production materials operations
+ * include things like updating quantities, editing and adding raw inventory.
+ * 
+ * @author Huy le
  */
 @WebServlet(name = "RawInventoryServlet", urlPatterns = {"/RawInventoryServlet"})
 public class RawInventoryServlet extends HttpServlet {

@@ -20,8 +20,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author root
+ * this class contains the back end logic for managing employees, it contains
+ * operations such as editing, adding and setting the employee as inactive
+ * therefore doing a logical delete.
+ * 
+ * 
+ * 
+ * @author Huy Le
  */
 @WebServlet(name = "ManageEmployeeServlet", urlPatterns = {"/ManageEmployeeServlet"})
 public class ManageEmployeeServlet extends HttpServlet {

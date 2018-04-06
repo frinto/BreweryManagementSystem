@@ -20,8 +20,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author root
+ * This class contains the back end logic for the finished inventory page
+ * 
+ * it deals with updating quantities, and adding new finished product with new quantities.
+ * 
+ * @author Huy Le
  */
 @WebServlet(name = "FinishedInventoryServlet", urlPatterns = {"/FinishedInventoryServlet"})
 public class FinishedInventoryServlet extends HttpServlet {

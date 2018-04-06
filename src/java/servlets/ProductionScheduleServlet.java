@@ -20,8 +20,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author root
+ * this class contains the back end logic for production schedule
+ * 
+ * it contains operations for handling user input, also has logic for
+ * the edit tool bar and allows for erasing of all text areas through a button.
+ * 
+ * @author Huy Le
  */
 @WebServlet(name = "ProductionScheduleServlet", urlPatterns = {"/ProductionScheduleServlet"})
 public class ProductionScheduleServlet extends HttpServlet {
