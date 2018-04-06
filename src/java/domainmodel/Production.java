@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domainmodel;
 
 import java.io.Serializable;
@@ -21,7 +16,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * 
  * @author 553817
  */
 @Entity
@@ -45,41 +40,85 @@ public class Production implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    /**
+     * Unique id of a production
+     */
     @Column(name = "prodId")
     private Integer prodId;
     @Basic(optional = false)
+    /**
+     * Amount of finished goods that should be produced
+     */
     @Column(name = "quantity")
     private int quantity;
     @Basic(optional = false)
+    /**
+     * Date the production was submitted
+     */
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     @Basic(optional = false)
+    /**
+     * Id of the employee that submitted the production
+     */
     @Column(name = "employeeId")
     private int employeeId;
     @Basic(optional = false)
+    /**
+     * Number of the storage vessel that the production will take from
+     */
     @Column(name = "svNum")
     private int svNum;
     @Basic(optional = false)
+    /**
+     * Type of production that will be produced
+     */
     @Column(name = "productionType")
     private String productionType;
     @Basic(optional = false)
+    /**
+     * Expected volume amount that should be taken away from the selected storage vessel
+     */
     @Column(name = "expectedSvVolume")
     private double expectedSvVolume;
     @Basic(optional = false)
+    /**
+     * Actual volume amount that is taken away from the storage vessel
+     */
     @Column(name = "finishedSvVolume")
     private double finishedSvVolume;
     @Basic(optional = false)
+    /**
+     * Calculated value from the actual volume amount minus the expected volume amount
+     */
     @Column(name = "gainLoss")
     private double gainLoss;
-
+    /**
+     * Default constructor
+     */
     public Production() {
     }
-
+    /**
+     * Constructs a Production with an id
+     * @param prodId id of the production
+     */
     public Production(Integer prodId) {
         this.prodId = prodId;
     }
-
+    /**
+     * Constructs a Production with an prodId, quantity, date, employeeId, 
+     * svNum, productionType, expectedSvVolume, finishedSvVolume, and gainLoss
+     * @param prodId unique id to identify a production
+     * @param quantity amount of finished product that will be produced
+     * @param date date when a production is submitted
+     * @param employeeId id of the employee who submitted a production
+     * @param svNum number of the storage vessel
+     * @param productionType type of production
+     * @param expectedSvVolume expected volume left in the specified storage vessel
+     * @param finishedSvVolume actual volume left in the specified storage vessel
+     * @param gainLoss volume gained or loss during a production
+     */
     public Production(Integer prodId, int quantity, Date date, int employeeId, int svNum, String productionType, double expectedSvVolume, double finishedSvVolume, double gainLoss) {
         this.prodId = prodId;
         this.quantity = quantity;
@@ -163,7 +202,7 @@ public class Production implements Serializable {
     public void setGainLoss(double gainLoss) {
         this.gainLoss = gainLoss;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;

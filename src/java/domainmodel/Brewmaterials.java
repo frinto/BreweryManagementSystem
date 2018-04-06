@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domainmodel;
 
 import java.io.Serializable;
@@ -16,7 +11,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * 
  * @author 553817
  */
 @Entity
@@ -33,19 +28,36 @@ public class Brewmaterials implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    /**
+     * name of the brew material
+     */
     @Column(name = "name")
     private String name;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    /**
+     * amount of a brew material
+     */
     @Column(name = "qty")
     private Double qty;
+    /**
+     * unit of weight of the brew material
+     */
     @Column(name = "units")
     private String units;
+    /**
+     * type of brew material
+     */
     @Column(name = "type")
     private String type;
-
+    /**
+     * Default constructor
+     */
     public Brewmaterials() {
     }
-
+    /**
+     * Constructs a brew material with a name
+     * @param name name of the brew material
+     */
     public Brewmaterials(String name) {
         this.name = name;
     }
