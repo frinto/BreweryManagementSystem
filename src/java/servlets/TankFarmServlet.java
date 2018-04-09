@@ -205,9 +205,21 @@ public class TankFarmServlet extends HttpServlet
                     throw new BrewDBException();
                 }
                 
-                //ensure user input is valid
+                //ensure the user input tank ID's are existing tanks
                 Sv sv = tankDB.getSV(toSV);
+                if (sv == null) {
+                    saveUserInput(request, toSV, fromFV, volume, isEmpty);
+                    request.setAttribute("transferAddMessage", "SV " + toSV + " does not exist.");
+                    throw new BrewDBException("");
+                }
                 Fv fv = tankDB.getFV(fromFV);
+                if (fv == null) {
+                    //save user input values for page reload
+                    saveUserInput(request, toSV, fromFV, volume, isEmpty);
+                    request.setAttribute("transferAddMessage", "FV " + fromFV + " does not exist.");
+                    throw new BrewDBException("");
+                }
+                
                 double currentSvVolume = sv.getVolume();
                 double currentFvVolume = fv.getVolume();
                 int svCapacity = sv.getCapacity();
