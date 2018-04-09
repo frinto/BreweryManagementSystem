@@ -15,8 +15,11 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * This class represents the production materials and what they are composed of, 
+ * 
+ * This uses the PK as well as the production materials table
  *
- * @author 740991
+ * @author Keegan Evans
  */
 @Entity
 @Table(name = "productionmaterialusage")
@@ -28,27 +31,51 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Productionmaterialusage.findByProductionUsage", query = "SELECT p FROM Productionmaterialusage p WHERE p.productionmaterialusagePK.productionUsage = :productionUsage")})
 public class Productionmaterialusage implements Serializable {
 
+    
+    /**
+     * Type long it represents the serial version unique identifier.
+     */
+    
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * This is the PK which is composed of the String name and the String productionUsage 
+     */
     @EmbeddedId
     protected ProductionmaterialusagePK productionmaterialusagePK;
+    
+    /**
+     * This is the int representing the quantity of the material being used for that production
+     */
     @Column(name = "materialQty")
     private Integer materialQty;
 
+    /**
+     * default constructor for productionmaterialusage,
+     * upon instantiation it will create a productionmaterialusage with
+     * attributes set as default state.
+     */
     public Productionmaterialusage() {
     }
 
+    /**
+     * This is a constructor made up of just the primary key
+     * @param productionmaterialusagePK This is the PK which is composed of the String name and the String productionUsage 
+     */
     public Productionmaterialusage(ProductionmaterialusagePK productionmaterialusagePK) {
         this.productionmaterialusagePK = productionmaterialusagePK;
     }
+    
+    /**
+     * This is a constructor made up of the PK as well as the qty 
+     * @param productionmaterialusagePK This is the PK which is composed of the String name and the String productionUsage 
+     * @param qty This is an int representing the quantity of the material being used for that production
+     */
     public Productionmaterialusage(ProductionmaterialusagePK productionmaterialusagePK, int qty) {
         this.productionmaterialusagePK = productionmaterialusagePK;
         this.materialQty = qty;
     }
-
-    public Productionmaterialusage(String name, String productionUsage) {
-        this.productionmaterialusagePK = new ProductionmaterialusagePK(name, productionUsage);
-    }
-
+  
     public ProductionmaterialusagePK getProductionmaterialusagePK() {
         return productionmaterialusagePK;
     }

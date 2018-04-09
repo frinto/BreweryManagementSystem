@@ -231,27 +231,18 @@ public class ProductionServlet extends HttpServlet {
      */
     private void AddNewProductionType(String name, String usage[], int qty[]) throws BrewDBException {
         //im too lazy to not abreviate it
+        //adds the information from the servlet to the finished inventory table as well as the Production material usage table
         ProductionMaterialUsageDB pmuDB = new ProductionMaterialUsageDB();
-        ProductionMaterialDB pmDB = new ProductionMaterialDB();
         FinishedInventoryDB finishedProductDB = new FinishedInventoryDB();
-//        
-//        
         Productionmaterial pm = new Productionmaterial(name);
         pm.setQty(0);
-        pmDB.insert(pm);
         Finishedproduct newFinishedInventory = new Finishedproduct(name);
         newFinishedInventory.setQty(0);
         finishedProductDB.insertInventory(newFinishedInventory);
-//        Test data
-//        ProductionmaterialusagePK pk = new ProductionmaterialusagePK("Beer", "test");
-//        Productionmaterialusage pmu = new Productionmaterialusage(pk);
-//        pmuDB.insert(pmu);
-//        insert data into the table
         for (int i = 0; i < usage.length && i < qty.length; i++) {
             if (!usage[i].equals("NONE") && !name.isEmpty()) {
                 ProductionmaterialusagePK pk = new ProductionmaterialusagePK(name, usage[i]);
                 Productionmaterialusage productionMaterialUsage = new Productionmaterialusage(pk, (int) qty[i]);
-//                Productionmaterialusage productionMaterialUsage = new Productionmaterialusage(name, usage[i], qty[i]);
                 pmuDB.insert(productionMaterialUsage);
             }
         }

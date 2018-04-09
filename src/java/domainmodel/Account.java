@@ -15,8 +15,13 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author 553817
+ * this class represents all accounts for deliveries
+ * 
+ * it contains the phone number, name and address for the account
+ * 
+ * It is only used for deliveries
+ * 
+ * @author Keegan Evans
  */
 @Entity
 @Table(name = "account")
@@ -28,19 +33,46 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Account.findByAddress", query = "SELECT a FROM Account a WHERE a.accountPK.address = :address")})
 public class Account implements Serializable {
 
+    /**
+     * Type long it represents the serial version unique identifier.
+     */
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * This is the primary key for the account and this contains the String company name and String address
+     */
     @EmbeddedId
     protected AccountPK accountPK;
+    
+    /**
+     * This is the company phone number in the format XXX-XXX-XXXX
+     */
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
+    /**
+     * default constructor for Account,
+     * upon instantiation it will create an Account with
+     * attributes set as default state.
+     */
     public Account() {
     }
-
+    /**
+     * This is a constructor for Account
+     * upon creation it will initialize the name attribute of this object.
+     * @param accountPK this is the primary key composed of the String company name and the String address
+     */
     public Account(AccountPK accountPK) {
         this.accountPK = accountPK;
     }
-
+    
+    /**
+     * This is a constructor for Account
+     * upon creation it will initialize the name attribute of this object.
+     * This is the same as creating it through the PK and was just for ease of use during testing
+     * @param companyName This is a String composed representing the name of the company
+     * @param address This is the address for that company location, needed since there could me multiple of the same company with different addresses
+     */
     public Account(String companyName, String address) {
         this.accountPK = new AccountPK(companyName, address);
     }

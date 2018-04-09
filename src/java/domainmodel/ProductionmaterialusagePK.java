@@ -11,22 +11,40 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
+ * This class represents the productionmaterialusagePK and which is used to make a productionmaterialusage object
  *
- * @author 740991
+ * @author Keegan Evans
  */
 @Embeddable
 public class ProductionmaterialusagePK implements Serializable {
 
+    /**
+     * This is a String representing the name of the productionmaterialusage object
+     */
     @Basic(optional = false)
     @Column(name = "Name")
     private String name;
+    
+    /**
+     * This a String usage this is an object from production material that the usage object is composed of
+     */
     @Basic(optional = false)
     @Column(name = "ProductionUsage")
     private String productionUsage;
 
+    /**
+     * default constructor for productionmaterialusagePK,
+     * upon instantiation it will create a productionmaterialusagePK with
+     * attributes set as default state.
+     */
     public ProductionmaterialusagePK() {
     }
 
+    /**
+     * This is a constructor for productionmaterialusagePK that is composed of name and usage
+     * @param name This a String usage this is an object from production material that the usage object is composed of
+     * @param productionUsage This is a String representing the name of the productionmaterialusage object
+     */
     public ProductionmaterialusagePK(String name, String productionUsage) {
         this.name = name;
         this.productionUsage = productionUsage;

@@ -11,22 +11,46 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
- *
- * @author 553817
+ * this class represents the primary key needed to create an account object
+ * 
+ * it contains the name and address for the account
+ * 
+ * It is only used by Account
+ * 
+ * @author Keegan Evans
  */
 @Embeddable
 public class AccountPK implements Serializable {
 
+    /**
+     * This is a String representing the name of the company
+     */
     @Basic(optional = false)
     @Column(name = "companyName")
     private String companyName;
+    
+    /**
+     * This is a String representing the address for the company
+     */
     @Basic(optional = false)
     @Column(name = "address")
     private String address;
-
+    
+    /**
+     * default constructor for AccountPK,
+     * upon instantiation it will create an AccountPK with
+     * attributes set as default state.
+     */
     public AccountPK() {
     }
-
+/**
+     * This is a constructor for AccountPK
+     * upon creation it will initialize the name attribute of this object.
+     * This is the same as creating it through the PK and was just for ease of use during testing
+     * @param companyName This is a String composed representing the name of the company
+     * @param address This is the address for that company location, needed since there could me multiple of the same company with different addresses
+     */
+ 
     public AccountPK(String companyName, String address) {
         this.companyName = companyName;
         this.address = address;
