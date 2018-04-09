@@ -168,8 +168,9 @@
                             </tr>
                         </c:forEach>
                     </table>
-
+                    <c:if test="${role == 1}">
                     <button type="submit" class="btn btn-success">Update Inventory</button>
+                    </c:if>
                 </form>
             </div>
         </div>

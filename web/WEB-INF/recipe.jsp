@@ -132,10 +132,11 @@
 
 
                     <c:if test="${newRecipe==null&& viewRecipe==null}">
-
+                        <c:if test="${role == 1}">
                         <form action="recipe" method ="GET" class ="recipeButton">
                             <button type="submit" class="btn btn-success" name="newRecipe">Add a Recipe</button>
                         </form>
+                        </c:if>
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
