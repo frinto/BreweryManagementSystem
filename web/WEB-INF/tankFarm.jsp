@@ -149,8 +149,8 @@
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>SV ID</th>
-                                                <th>Volume</th>
-                                                <th>Capacity</th>
+                                                <th>Volume (L)</th>
+                                                <th>Capacity (L)</th>
                                                 <th>Brew 1</th>
                                                 <th>Brew 2</th>
                                                 <th>Brew 3</th>
@@ -187,8 +187,8 @@
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>FV ID</th>
-                                                <th>Volume</th>
-                                                <th>Capacity</th>
+                                                <th>Volume (L)</th>
+                                                <th>Capacity (L)</th>
                                                 <th>Brew 1</th>
                                                 <th>Brew 2</th>
                                                 <th>Brew 3</th>
@@ -230,8 +230,8 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>SV ID</th>
-                                            <th>Volume</th>
-                                            <th>Capacity</th>
+                                            <th>Volume (L)</th>
+                                            <th>Capacity (L)</th>
                                             <th>Brew 1</th>
                                             <th>Brew 2</th>
                                             <th>Brew 3</th>
@@ -276,8 +276,8 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>FV ID</th>
-                                            <th>Volume</th>
-                                            <th>Capacity</th>
+                                            <th>Volume (L)</th>
+                                            <th>Capacity (L)</th>
                                             <th>Brew 1</th>
                                             <th>Brew 2</th>
                                             <th>Brew 3</th>
@@ -339,8 +339,8 @@
                                     <th>Brand</th>
                                     <th>FV</th>
                                     <th>SV</th>
-                                    <th>Volume</th>
-                                    <th>Correction</th>
+                                    <th>Volume (L)</th>
+                                    <th>Correction (L)</th>
                                     <c:if test="${role == 1}">
                                     <th></th>
                                     </c:if>
@@ -358,9 +358,7 @@
                                             <td>${transfer.correction}</td>
                                             <c:if test="${role == 1}">
                                             <td>
-                                                <form action="tankFarm?action=editTransfer" method="POST">
-                                                    <button type="submit">Edit</button>
-                                                </form>
+                                                
                                             </td>
                                             </c:if>
                                         </tr>
