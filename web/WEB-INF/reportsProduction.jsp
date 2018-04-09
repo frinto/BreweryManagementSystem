@@ -357,6 +357,42 @@
         });
         // -------------------- END Loss During Brewing CHART --------------------------------------------------- 
         
+        
+        // ----------------------- Loss During Production CHART --------------------------------------------------
+        
+        // Create the data table.
+        var productionLossData = new google.visualization.DataTable();
+        productionLossData.addColumn('string', 'Type');
+        productionLossData.addColumn('number', 'Quantity');
+        
+        <c:forEach var="productionLoss" items="${prodLossWeek}">
+            productionLossData.addRows([
+                ['${productionLoss.productionType}', ${productionLoss.quantity}]
+            ]);
+        </c:forEach>
+        
+        // Set chart options
+        var productionLossOptions = {
+                       'width':800,
+                       'height':500};
+        
+        var chartProductionLoss = new google.visualization.ColumnChart(document.getElementById('chart_productionLoss'));
+        chartProductionLoss.draw(productionLossData,productionLossOptions);
+        
+        $(document).ready(function(){
+            //On change of option, display different data
+            $(".productionLoss-option").change(function() {
+                
+                var text = this.options[this.selectedIndex].text;
+                if (text == "Weekly") {
+                    
+                } else if (text == "Monthly") {
+                    
+                }
+            });
+        });
+        
+        // ----------------------- END Loss During Production CHART -----------------------------------------------
                 
 //        //------------------- Finished Inventory CHART --------------------------------------------------------
 //        
@@ -610,6 +646,26 @@
           </div>
           
           <div id="chart_brewLossVolume" align="center"></div>
+          
+          <div class='row' align='center'>
+            <div class='col-3'></div>  
+            <div class='col-4'>
+                <h4>Volume of Gains/Losses (+/-) during Production</h4>
+            </div>
+            <div class='col-2'>
+              <div class="form-row" style='padding-top: 10%'>
+                <select class="form-control productionLoss-option" >
+                  <option>Weekly</option>
+                  <option>Monthly</option>
+                  <option>Yearly</option>
+                  <option>All Time</option>
+                </select>
+              </div>
+            </div>
+            <div class='col-3'></div>  
+          </div>
+          
+          <div id="chart_productionLoss" align="center"></div>
             
 <!--          <div id="chart_finishedInventory" align="center"></div>
           

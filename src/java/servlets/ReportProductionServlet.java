@@ -221,6 +221,41 @@ public class ReportProductionServlet extends HttpServlet {
             Logger.getLogger(ReportProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        // ------------------------------ Loss During Production Chart ------------------------------- //
+        //prodDB was created previously
+        List<Production> prodLossWeek;
+        List<Production> prodLossMonth;
+        List<Production> prodLossYear;
+        List<Production> prodLossAllTime;
+        try {
+            //Week List
+            prodLossWeek = prodDB.getProdByDateRange(previousWeekDate, todaysDate);
+            Set<String> currentProdTypeWeek = new HashSet<>();
+            Map<String, Double> prodLossMapWeek = new HashMap<>();
+            
+            for (Production production : prodLossWeek){
+                currentProdTypeWeek.add(production.getProductionType());
+            }
+            
+            for (String prodType : currentProdTypeWeek) {
+                
+                double volume = 0;
+                
+                for (Production production : prodLossWeek) {
+                    
+                    if (prodType.equals(production.getProductionType())) {
+                        if (production.getGainLoss() != 0) {
+                            volume = volume + production.getGainLoss();
+                        }
+                    }
+                }
+                prodLossMapWeek.put(prodType,volume);
+            }
+            request.setAttribute("prodLossWeek", prodLossMapWeek);
+            } catch (BrewDBException ex) {
+            Logger.getLogger(ReportProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         // ------------------------------- Total Volume by Brand Chart ---------------------- //
         BrewDB brewDB = new BrewDB();
         List<Brew> brewListWeek;
