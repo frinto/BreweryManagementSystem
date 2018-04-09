@@ -78,6 +78,7 @@
                                 <p>Delivery</p>
                             </a>
                         </li>
+                        
                         <li>
                             <a class="nav-link" href="reports">
                                 <img src="assets/img/report.png" class="" alt="Norway">
@@ -86,14 +87,14 @@
                         </li>
                         <li>
                             <a class="nav-link" href="productionSchedule">
-                                <img src="assets/img/report.png" class="" alt="Norway">
-                                <p>Production Schedule</p>
+                                <img src="assets/img/schedule.png" class="" alt="Norway">
+                                <p>Schedule</p>
                             </a>
                         </li>
                         <c:if test="${currentEmployee.roleId == 1}">
                             <li>
                                 <a class="nav-link" href="manageEmployee">
-                                    <img src="assets/img/report.png" class="" alt="Norway">
+                                    <img src="assets/img/employee.png" class="" alt="Norway">
                                     <p>Manage Employees</p>
                                 </a>
                             </li>
@@ -105,13 +106,13 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand"></a>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Matthew
+                        <a class="navbar-brand">View Delivery</a>
+                        <div class="btn-group" style="margin-right: 50px">
+                            <button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ${currentEmployee.firstName} ${currentEmployee.lastName}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button" onclick="window.location.href='login?logout'">Logout</button>
+                                <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
                             </div>
                         </div>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -163,7 +164,7 @@
                             <c:forEach var="product" items="${products}">
                                 <tr>
                                     <td>${product.productName}</td>
-                                    <td><input style="width:100%" min="0" type="number" name="qty" id="qty" value="${product.qty}" width="99%"></td>
+                                    <td><input style="width:100%" min="0" type="number" name="qty" id="qty" value="${product.qty}" width="99%"b required="true"></td>
                                 </tr>
                             </c:forEach>
                                 

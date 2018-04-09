@@ -12,6 +12,7 @@ import dataaccess.FinishedInventoryDB;
 import dataaccess.ProductDB;
 import domainmodel.Account;
 import domainmodel.Delivery;
+import domainmodel.Employee;
 import domainmodel.Finishedproduct;
 import domainmodel.Product;
 import domainmodel.ProductPK;
@@ -36,7 +37,14 @@ import javax.servlet.http.HttpSession;
  */
 public class DeliveryServlet extends HttpServlet
 {
-
+ /**
+  * This method obtains the deliveries and accounts for the specified date and sends them to the jsp to be shown on the page
+  * 
+  * @param request a request variable from the jsp
+  * @param response a response variable from the jsp
+  * @throws ServletException this occurs if there is an error with the servlet
+  * @throws IOException this occurs if there is an error with reading any data
+  */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -92,7 +100,14 @@ public class DeliveryServlet extends HttpServlet
         }
         getServletContext().getRequestDispatcher("/WEB-INF/delivery.jsp").forward(request, response);
     }
-
+/**
+ * This gives the ability to add a new delivery
+ * 
+ * @param request a request variable from the jsp
+ * @param response a response variable from the jsp
+ * @throws ServletException this occurs if there is an error with the servlet
+ * @throws IOException this occurs if there is an error with reading any data
+ */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
 
@@ -108,13 +123,13 @@ public class DeliveryServlet extends HttpServlet
                     DeliveryDB deliveryDB = new DeliveryDB();
                     String companyName = request.getParameter("companyName");
                     HttpSession session = request.getSession();
-//                    int empId = (int) session.getAttribute("empId");
+                    Employee employee = (Employee) session.getAttribute("currentEmployee");
 //THIS IS HARDCODED SINCE THE LOGIN CURRENTLY DOES NOT WORK FOR SOME REASON THIS CAN BE REMOVED ONCE THE SITE WORKS PROPPERLY TALK TO JESSIE
-                    int empId = 1;
+//                    int empId = 1;
                     String dateS = request.getParameter("date");
                     Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateS);
                     Delivery delivery = new Delivery();
-                    delivery = new Delivery(delivery.getDeliveryId(), companyName, empId, date);
+                    delivery = new Delivery(delivery.getDeliveryId(), companyName, employee.getEmpId(), date);
                     deliveryDB.insert(delivery);
 
                     //Product
@@ -156,7 +171,11 @@ public class DeliveryServlet extends HttpServlet
         }
         response.sendRedirect("delivery");
     }
-
+/**
+ * This grabs the current date and sends it to the jsp
+ * 
+ * @param request 
+ */
     private void setTodaysDate(HttpServletRequest request)
     {
         //set the current date to a variable so the Add A Transfer form has the current date pre-set
