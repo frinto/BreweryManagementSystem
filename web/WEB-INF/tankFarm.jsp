@@ -341,6 +341,9 @@
                                     <th>SV</th>
                                     <th>Volume</th>
                                     <th>Correction</th>
+                                    <c:if test="${role == 1}">
+                                    <th></th>
+                                    </c:if>
                                 </tr>
                             </thead>
                             <tbody>
@@ -353,11 +356,13 @@
                                             <td>${transfer.toSv}</td>
                                             <td>${transfer.volume}</td>
                                             <td>${transfer.correction}</td>
+                                            <c:if test="${role == 1}">
                                             <td>
                                                 <form action="tankFarm?action=editTransfer" method="POST">
                                                     <button type="submit">Edit</button>
                                                 </form>
                                             </td>
+                                            </c:if>
                                         </tr>
                                     </c:if>
                                 </c:forEach>
