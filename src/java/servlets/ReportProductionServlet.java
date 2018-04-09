@@ -11,10 +11,12 @@ import dataaccess.FinishedInventoryDB;
 import domainmodel.Finishedproduct;
 import dataaccess.ProductionDB;
 import dataaccess.RawInventoryDB;
+import dataaccess.TransferDB;
 import domainmodel.Brew;
 import domainmodel.Brewmaterials;
 import domainmodel.Production;
 import domainmodel.Productionmaterial;
+import domainmodel.Transfer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -67,7 +69,7 @@ public class ReportProductionServlet extends HttpServlet {
 
         }
         
-        // ------------------------------------- Dates Used in Various Chars --------------------------- //
+        // ------------------------------------- Dates Used in Various Charts --------------------------- //
         //This is used to produce reports based on the last 7 days
         Calendar calWeek = Calendar.getInstance();
         calWeek.add(Calendar.DATE, -7);
@@ -104,6 +106,117 @@ public class ReportProductionServlet extends HttpServlet {
             request.setAttribute("prodItemListYear", prodItemListYear);
             prodItemListAllTime = prodDB.getAllProduction();
             request.setAttribute("prodItemListAllTime", prodItemListAllTime);
+        } catch (BrewDBException ex) {
+            Logger.getLogger(ReportProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // ------------------------------ Loss During Brewing Chart ------------------------------- //
+        TransferDB transferDB = new TransferDB();
+        List<Transfer> brewLossListWeek;
+        List<Transfer> brewLossListMonth;
+        List<Transfer> brewLossListYear;
+        List<Transfer> brewLossListAllTime;
+        try {
+            //Week List
+            brewLossListWeek = transferDB.getTransfersByDateRange(previousWeekDate, todaysDate);
+            Set<String> currentTransferBrandWeek = new HashSet<>();
+            Map<String, Double> transferMapWeek = new HashMap<>();
+            
+            for (Transfer transfer : brewLossListWeek){
+                currentTransferBrandWeek.add(transfer.getBrand());
+            }
+            
+            for (String transferBrand : currentTransferBrandWeek) {
+                
+                double volume = 0;
+                
+                for (Transfer transfer : brewLossListWeek) {
+                    
+                    if (transferBrand.equals(transfer.getBrand())) {
+                        if (transfer.getCorrection() != null) {
+                            volume = volume + transfer.getCorrection();
+                        }
+                    }
+                }
+                transferMapWeek.put(transferBrand,volume);
+            }
+            request.setAttribute("brewLossVolumeMapWeek", transferMapWeek);
+            
+            //Month List
+            brewLossListMonth = transferDB.getTransfersByDateRange(previousMonthDate, todaysDate);
+            Set<String> currentTransferBrandMonth = new HashSet<>();
+            Map<String, Double> transferMapMonth = new HashMap<>();
+            
+            for (Transfer transfer : brewLossListMonth){
+                currentTransferBrandMonth.add(transfer.getBrand());
+            }
+            
+            for (String transferBrand : currentTransferBrandMonth) {
+                
+                double volume = 0;
+                
+                for (Transfer transfer : brewLossListMonth) {
+                    
+                    if (transferBrand.equals(transfer.getBrand())) {
+                        if (transfer.getCorrection() != null) {
+                            volume = volume + transfer.getCorrection();
+                        }
+                    }
+                }
+                transferMapMonth.put(transferBrand,volume);
+            }
+            request.setAttribute("brewLossVolumeMapMonth", transferMapMonth);
+            
+            //Year List
+            brewLossListYear = transferDB.getTransfersByDateRange(previousYearDate, todaysDate);
+            Set<String> currentTransferBrandYear = new HashSet<>();
+            Map<String, Double> transferMapYear = new HashMap<>();
+            
+            for (Transfer transfer : brewLossListYear){
+                currentTransferBrandYear.add(transfer.getBrand());
+            }
+            
+            for (String transferBrand : currentTransferBrandYear) {
+                
+                double volume = 0;
+                
+                for (Transfer transfer : brewLossListYear) {
+                    
+                    if (transferBrand.equals(transfer.getBrand())) {
+                        if (transfer.getCorrection() != null) {
+                            volume = volume + transfer.getCorrection();
+                        }
+                    }
+                }
+                transferMapYear.put(transferBrand,volume);
+            }
+            request.setAttribute("brewLossVolumeMapYear", transferMapYear);
+            
+            //All Time List
+            brewLossListAllTime = transferDB.getAllTransfer();
+            Set<String> currentTransferBrandAllTime = new HashSet<>();
+            Map<String, Double> transferMapAllTime = new HashMap<>();
+            
+            for (Transfer transfer : brewLossListAllTime){
+                currentTransferBrandAllTime.add(transfer.getBrand());
+            }
+            
+            for (String transferBrand : currentTransferBrandAllTime) {
+                
+                double volume = 0;
+                
+                for (Transfer transfer : brewLossListAllTime) {
+                    
+                    if (transferBrand.equals(transfer.getBrand())) {
+                        if (transfer.getCorrection() != null) {
+                            volume = volume + transfer.getCorrection();
+                        }
+                    }
+                }
+                transferMapAllTime.put(transferBrand,volume);
+            }
+            request.setAttribute("brewLossVolumeMapAllTime", transferMapAllTime);
+            
         } catch (BrewDBException ex) {
             Logger.getLogger(ReportProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -206,6 +319,7 @@ public class ReportProductionServlet extends HttpServlet {
                 brewMapAllTime.put(recipe,volume);
             }
             request.setAttribute("brewVolumeMapAllTime", brewMapAllTime);
+            
         } catch (BrewDBException ex) {
             Logger.getLogger(ReportProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

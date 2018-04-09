@@ -1,6 +1,7 @@
 package dataaccess;
 
 import domainmodel.Transfer;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,5 +44,21 @@ public class TransferDB {
         } finally {
             em.close();
         }
+    }
+    
+    public List<Transfer> getTransfersByDateRange (Date minDate, Date maxDate) throws BrewDBException {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            List<Transfer> transferList = em.createNamedQuery("Transfer.findByDateRange", Transfer.class)
+                    .setParameter("minDate", minDate)
+                    .setParameter("maxDate", maxDate)
+                    .getResultList();
+            return transferList;
+        } catch (Exception ex) {
+            Logger.getLogger(TransferDB.class.getName()).log(Level.SEVERE, "Cannot read transfers", ex);
+            throw new BrewDBException("Error getting tranfer");
+        } finally {
+            em.close();
+        }        
     }
 }

@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Transfer.findByFromFv", query = "SELECT t FROM Transfer t WHERE t.fromFv = :fromFv")
     , @NamedQuery(name = "Transfer.findByToSv", query = "SELECT t FROM Transfer t WHERE t.toSv = :toSv")
     , @NamedQuery(name = "Transfer.findByBrand", query = "SELECT t FROM Transfer t WHERE t.brand = :brand")
-    , @NamedQuery(name = "Transfer.findByCorrection", query = "SELECT t FROM Transfer t WHERE t.correction = :correction")})
+    , @NamedQuery(name = "Transfer.findByCorrection", query = "SELECT t FROM Transfer t WHERE t.correction = :correction")
+    , @NamedQuery(name = "Transfer.findByDateRange", query = "SELECT t FROM Transfer t WHERE t.date > :minDate AND t.date < :maxDate")})
 public class Transfer implements Serializable {
 
     private static final long serialVersionUID = 1L;
