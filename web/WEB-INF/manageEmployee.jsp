@@ -94,13 +94,13 @@
                         </a>
                     </li>
                     <c:if test="${currentEmployee.roleId == 1}">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="manageEmployee">
-                                    <img src="assets/img/employee.png" class="" alt="Norway">
-                                    <p>Manage Employees</p>
-                                </a>
-                            </li>
-                        </c:if>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="manageEmployee">
+                                <img src="assets/img/employee.png" class="" alt="Norway">
+                                <p>Manage Employees</p>
+                            </a>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
         </div>
@@ -109,9 +109,9 @@
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class=" container-fluid  ">
                     <a class="navbar-brand">Manage Employee</a>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Matthew
+                    <div class="btn-group" style="margin-right: 50px">
+                        <button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ${currentEmployee.firstName} ${currentEmployee.lastName}
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
                             <button class="dropdown-item" type="button" onclick="window.location.href = 'login?logout'">Logout</button>
@@ -350,9 +350,9 @@
     <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
     <script src="assets/js/brew.js"></script>
     <script type="text/javascript">
-                                $(document).ready(function () {
-                                    // Javascript method's body can be found in assets/js/demos.js
-                                });
+                                    $(document).ready(function () {
+                                        // Javascript method's body can be found in assets/js/demos.js
+                                    });
     </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 </html>
