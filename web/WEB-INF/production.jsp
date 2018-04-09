@@ -266,9 +266,10 @@
 
                         <!--This is a form to create a new production type-->
                         <form action="production?action=newProductionType" id="newProductionTypeForm" method="POST">
-                            <table border="1" class="table" id="newTypeTable">
+                            <table border="1" class="table">
                                 <thead>
                                     <tr class="thead-dark">
+                                        <th> </th>
                                         <th> </th>
                                         <th> </th>
                                     </tr>
@@ -277,10 +278,21 @@
                                     <th>
                                         Production Name
                                     </th>
-                                    <th>
+                                    <td>
                                         <input style="width:100%" type="text" autofocus="on" name="name" id="name" value="${newProduction}" placeholder="Product name">
-                                    </th>
+                                    </td>
+                                    <td>
+                                        <input style="width:100%" type="int" min="0" name="unit" id="unit"  placeholder="L per unit" required="true">
+                                    </td>
                                 </tr>
+                            </table>
+                            <table border="1" class="table" id="newTypeTable">
+                                <thead>
+                                    <tr class="thead-dark">
+                                        <th>Item</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
                                 <tr>
                                     <td>
                                         <select name="usage" id="usage">
@@ -295,7 +307,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input style="width:100%" type="number" min="0"  name="qty" id="qty" value="${qty}" placeholder="quantity" required="true">
+                                        <input style="width:100%" type="number" min="0"  name="qty" id="qty" placeholder="quantity" required="true">
                                     </td>
                                 </tr>
                             </table>

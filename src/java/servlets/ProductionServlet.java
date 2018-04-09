@@ -200,6 +200,7 @@ public class ProductionServlet extends HttpServlet {
             try {
                 String name = request.getParameter("name");
                 String qtyS[] = request.getParameterValues("qty");
+                int unit = Integer.parseInt(request.getParameter("unit"));
                 int qty[] = new int[qtyS.length];
                 for (int i = 0; i < qtyS.length; i++) {
                     try {
@@ -211,7 +212,7 @@ public class ProductionServlet extends HttpServlet {
                 }
                 String usage[] = request.getParameterValues("usage");
 
-                AddNewProductionType(name, usage, qty);
+                AddNewProductionType(name, usage, qty, unit);
             } catch (BrewDBException ex) {
                 Logger.getLogger(ProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -227,16 +228,17 @@ public class ProductionServlet extends HttpServlet {
      * @param name name is a string representing the new production type to be added to the database
      * @param usage usage is a string representing what the new production type is composed of
      * @param qty qty is an array of integers taken from the page that represents the number of that material needed
+     * @param unit this is an int representing the number of litres per unit 
      * @throws BrewDBException This exception occurs if the item cannot be added to the database 
      */
-    private void AddNewProductionType(String name, String usage[], int qty[]) throws BrewDBException {
+    private void AddNewProductionType(String name, String usage[], int qty[], int unit) throws BrewDBException {
         //im too lazy to not abreviate it
         //adds the information from the servlet to the finished inventory table as well as the Production material usage table
         ProductionMaterialUsageDB pmuDB = new ProductionMaterialUsageDB();
         FinishedInventoryDB finishedProductDB = new FinishedInventoryDB();
         Productionmaterial pm = new Productionmaterial(name);
         pm.setQty(0);
-        Finishedproduct newFinishedInventory = new Finishedproduct(name);
+        Finishedproduct newFinishedInventory = new Finishedproduct(name, unit);
         newFinishedInventory.setQty(0);
         finishedProductDB.insertInventory(newFinishedInventory);
         for (int i = 0; i < usage.length && i < qty.length; i++) {

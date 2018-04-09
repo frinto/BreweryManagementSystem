@@ -9,7 +9,7 @@ $(window).on('load', function () {
 function addARow() {
     //grab the location that we are going to add the input box to
     var form = document.getElementById("newProductionTypeForm");
-    var table = form.getElementsByTagName("table") [0];
+    var table = form.getElementsByTagName("table") [1];
 
     //generate the elements we are adding
     var tr = document.createElement("tr");
@@ -21,7 +21,6 @@ function addARow() {
     var usage = document.getElementById("usage");
     var duplicateO = usage.cloneNode(true);
     var duplicate = duplicateO;
-    //usage.setAttribute("value","NONE");
 
     //add to our tr
     td1.appendChild(duplicate);
@@ -31,7 +30,6 @@ function addARow() {
     var qty = document.createElement("input");
     qty.setAttribute("type", "number");
     qty.setAttribute("min", "0");
-    //                                        qty.setAttribute("value", "0");
     qty.setAttribute("required", "true");
     qty.setAttribute("name", "qty");
     qty.setAttribute("id", "qty");
@@ -52,5 +50,5 @@ function removeARow() {
     else{
         form.removeChild(form.lastChild);
     }
-//    form.removeChild(form.lastChild);
+
 }
