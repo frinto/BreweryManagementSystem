@@ -142,7 +142,6 @@
                                 <th>email</th>
                                 <th>roleId</th>
                                 <th>isActive</th>
-                                <th>resetPasswordUUID</th>
                                 <th></th>
                                 </thead>
                                 <c:forEach var="item" items="${users}">
@@ -155,7 +154,6 @@
                                             <td><c:out value="${item.email}"/></td>
                                             <td><c:out value="${item.roleId}"/></td>
                                             <td><c:out value="${item.isActive}"/></td>
-                                            <td><c:out value="${item.resetPasswordUUID}"/></td>
                                             <td>
                                                 <form action="manageEmployee" method="get">
                                                     <input type="submit" value="Edit"><span class="glyphicon glyphicon-pencil"></span>
@@ -230,14 +228,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">reset Password UUID</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" name="resetPasswordUUID" class=form-control>
-                                        </div>
-                                    </div>
-
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
                                             <div class="pull-right">
@@ -309,14 +299,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">reset Password UUID</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" name="resetPasswordUUID" value="${selectedUser.resetPasswordUUID}" class=form-control>
-                                        </div>
-                                    </div>
-
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
                                             <div class="pull-right">
@@ -350,9 +332,9 @@
     <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
     <script src="assets/js/brew.js"></script>
     <script type="text/javascript">
-                                    $(document).ready(function () {
-                                        // Javascript method's body can be found in assets/js/demos.js
-                                    });
+                                $(document).ready(function () {
+                                    // Javascript method's body can be found in assets/js/demos.js
+                                });
     </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 </html>
