@@ -34,7 +34,14 @@ import javax.servlet.http.HttpSession;
  */
 public class ViewDeliveryServlet extends HttpServlet
 {
-
+/**
+ * This grabs all the information for the selected delivery and sends it to the jsp
+ * 
+ * @param request a request variable from the jsp
+ * @param response a response variable from the jsp
+ * @throws ServletException this occurs if there is an error with the servlet
+ * @throws IOException this occurs if there is an error with reading any data
+ */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -68,7 +75,14 @@ public class ViewDeliveryServlet extends HttpServlet
         }
         getServletContext().getRequestDispatcher("/WEB-INF/viewDelivery.jsp").forward(request, response);
     }
-
+/**
+ * This allows the user to edit a delivery 
+ * 
+ * @param request a request variable from the jsp
+ * @param response a response variable from the jsp
+ * @throws ServletException this occurs if there is an error with the servlet
+ * @throws IOException this occurs if there is an error with reading any data
+ */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
 
@@ -107,8 +121,6 @@ public class ViewDeliveryServlet extends HttpServlet
                             }
                         }
                     }
-                    break;
-                case "remove":
                     break;
             }
             DeliveryDB deliveryDB = new DeliveryDB();

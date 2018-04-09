@@ -221,6 +221,14 @@ public class ProductionServlet extends HttpServlet {
         }
     }
 
+    /**
+     * This method adds a new production type and a to the database as well as a new item under finished goods
+     * 
+     * @param name name is a string representing the new production type to be added to the database
+     * @param usage usage is a string representing what the new production type is composed of
+     * @param qty qty is an array of integers taken from the page that represents the number of that material needed
+     * @throws BrewDBException This exception occurs if the item cannot be added to the database 
+     */
     private void AddNewProductionType(String name, String usage[], int qty[]) throws BrewDBException {
         //im too lazy to not abreviate it
         ProductionMaterialUsageDB pmuDB = new ProductionMaterialUsageDB();
