@@ -143,7 +143,7 @@
                                     <table class="table">
                                         <thead class="thead-dark">
                                         <th>ProductionType</th>
-                                        <th>Quantity</th>
+                                        <th>Quantity(Flats)</th>
                                         <th>SVNumber</th>
                                         </thead>
                                         <tbody>
@@ -176,10 +176,10 @@
                                     <table class="table">
                                         <thead class="thead-dark">
                                         <th>ProductionType</th>
-                                        <th>Quantity</th>
+                                        <th>Quantity(Flats)</th>
                                         <th>SVNumber</th>
-                                        <th>Expected Sv Volume</th>
-                                        <th>Finished Sv Volume</th>
+                                        <th>Expected Sv Volume(L)</th>
+                                        <th>Finished Sv Volume(L)</th>
                                         </thead>
                                         <tbody>
                                             <tr>
@@ -224,11 +224,11 @@
                                     <thead class="thead-dark">
                                     <th>Date</th>
                                     <th>ProductionType</th>
-                                    <th>Quantity</th>
+                                    <th>Quantity(Flats)</th>
                                     <th>SVNumber</th>
                                     <th>Employee</th>
-                                    <th>Finished Sv Volume</th>
-                                    <th>Gain/Loss +-</th>
+                                    <th>Finished Sv Volume(L)</th>
+                                    <th>Gain/Loss(L) +-</th>
                                     <th></th>
                                     </thead>
                                     <tbody>
