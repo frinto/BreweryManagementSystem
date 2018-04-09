@@ -233,7 +233,7 @@
                     
                     var brewVolumeData = new google.visualization.DataTable();
                     brewVolumeData.addColumn('string', 'Type');
-                    brewVolumeData.addColumn('number', 'Volume');
+                    brewVolumeData.addColumn('number', 'Volume (hL)');
 
                     <c:forEach var="brewMap" items="${brewVolumeMapAllTime}">
                         brewVolumeData.addRows([
@@ -253,92 +253,196 @@
         
         //------------------- END Total Volumes by Brand CHART ------------------------------------------------------
         
+        
+        //--------------------- Loss During Brewing CHART -----------------------------------------
+        // Create the data table.
+        var brewLossVolumeData = new google.visualization.DataTable();
+        brewLossVolumeData.addColumn('string', 'Type');
+        brewLossVolumeData.addColumn('number', 'Volume (L)');
+        
+        <c:forEach var="brewLossMap" items="${brewLossVolumeMapWeek}">
+            brewLossVolumeData.addRows([
+                ['${brewLossMap.key}', ${brewLossMap.value}]
+            ]);
+        </c:forEach>
+        
+        // Set chart options
+        var brewLossVolumeOptions = {
+                       'width':800,
+                       'height':500};
+        var chartBrewLossVolume = new google.visualization.ColumnChart(document.getElementById('chart_brewLossVolume'));
+        chartBrewLossVolume.draw(brewLossVolumeData,brewLossVolumeOptions);
+        
+        $(document).ready(function(){
+            //On change of option, display different data
+            $(".brewLossVolume-option").change(function() {
                 
-        //------------------- Finished Inventory CHART --------------------------------------------------------
-        
-        var titleFinishedInventory = '${reportDataFinishedInventory}';
-        
-        // Create the data table.
-        var dataFinishedInventory = new google.visualization.DataTable();
-        dataFinishedInventory.addColumn('string', 'Topping');
-        dataFinishedInventory.addColumn('number', 'Slices');
-        
-        <c:forEach var="productName" items="${finishedProducts}">
-            dataFinishedInventory.addRows([
-                ['${productName.productName}', ${productName.qty}]
-            ]);
-        </c:forEach>
-        
+                var text = this.options[this.selectedIndex].text;
+                if (text == "Weekly") {
+                    
+                    var brewLossVolumeData = new google.visualization.DataTable();
+                    brewLossVolumeData.addColumn('string', 'Type');
+                    brewLossVolumeData.addColumn('number', 'Volume (L)');
 
-        // Set chart options
-        var optionsFinishedInventory = {'title':titleFinishedInventory,
-                       'width':400,
-                       'height':400};
+                    <c:forEach var="brewLossMap" items="${brewLossVolumeMapWeek}">
+                        brewLossVolumeData.addRows([
+                            ['${brewLossMap.key}', ${brewLossMap.value}]
+                        ]);
+                    </c:forEach>
 
-        // Instantiate and draw our chart, passing in some options.
-        var chartFinishedInventory = new google.visualization.PieChart(document.getElementById('chart_finishedInventory'));
-        chartFinishedInventory.draw(dataFinishedInventory, optionsFinishedInventory);
-        
-        //----------------- END Finished Inventory CHART ------------------------------------------------------------------
+                    // Set chart options
+                    var brewLossVolumeOptions = {
+                                   'width':800,
+                                   'height':500};
+                    var chartBrewLossVolume = new google.visualization.ColumnChart(document.getElementById('chart_brewLossVolume'));
+                    chartBrewLossVolume.draw(brewLossVolumeData,brewLossVolumeOptions);
+                    
+                } else if (text == "Monthly") {
+                    
+                    var brewLossVolumeData = new google.visualization.DataTable();
+                    brewLossVolumeData.addColumn('string', 'Type');
+                    brewLossVolumeData.addColumn('number', 'Volume (L)');
 
-        
-        
-        
-        
-        //----------------START PROD MAT CHART----------------------------------------------------------------------
-        
-        var titleProductionMaterials = '${reportDataProductionMaterials}';
-        
-        // Create the data table.
-        var dataProductionMaterials = new google.visualization.DataTable();
-        dataProductionMaterials.addColumn('string', 'Topping');
-        dataProductionMaterials.addColumn('number', 'Slices');
-        
-        <c:forEach var="prodMatList" items="${productionMaterials}">
-            dataProductionMaterials.addRows([
-                ['${prodMatList.name}', ${prodMatList.qty}]
-            ]);
-        </c:forEach>
-        
+                    <c:forEach var="brewLossMap" items="${brewLossVolumeMapMonth}">
+                        brewLossVolumeData.addRows([
+                            ['${brewLossMap.key}', ${brewLossMap.value}]
+                        ]);
+                    </c:forEach>
 
-        // Set chart options
-        var optionsProductionMaterials = {'title':titleProductionMaterials,
-                       'width':600,
-                       'height':600};
+                    // Set chart options
+                    var brewLossVolumeOptions = {
+                                   'width':800,
+                                   'height':500};
+                    var chartBrewLossVolume = new google.visualization.ColumnChart(document.getElementById('chart_brewLossVolume'));
+                    chartBrewLossVolume.draw(brewLossVolumeData,brewLossVolumeOptions);
+                    
+                } else if (text == "Yearly") {
+                    
+                    var brewLossVolumeData = new google.visualization.DataTable();
+                    brewLossVolumeData.addColumn('string', 'Type');
+                    brewLossVolumeData.addColumn('number', 'Volume (L)');
 
-        // Instantiate and draw our chart, passing in some options.
-        var chartProdMat = new google.visualization.PieChart(document.getElementById('chart_productionMaterials'));
-        chartProdMat.draw(dataProductionMaterials, optionsProductionMaterials);
-        
-        //-----------------END PROD MAT CHART------------------------------------------------------------------
-        
-        
-        //---------------------Start brew materials-----------------------------------------------------------------------
-        
-        var titleBrewMaterials = '${reportDataBrewMaterials}';
-        
-        // Create the data table.
-        var dataBrewMaterials = new google.visualization.DataTable();
-        dataBrewMaterials.addColumn('string', 'Topping');
-        dataBrewMaterials.addColumn('number', 'Slices');
-        
-        <c:forEach var="brewList" items="${brewMaterials}">
-            dataBrewMaterials.addRows([
-                ['${brewList.name}', ${brewList.qty}]
-            ]);
-        </c:forEach>
-        
+                    <c:forEach var="brewLossMap" items="${brewLossVolumeMapYear}">
+                        brewLossVolumeData.addRows([
+                            ['${brewLossMap.key}', ${brewLossMap.value}]
+                        ]);
+                    </c:forEach>
 
-        // Set chart options
-        var optionsBrewMaterials = {'title':titleBrewMaterials,
-                       'width':600,
-                       'height':600};
+                    // Set chart options
+                    var brewLossVolumeOptions = {
+                                   'width':800,
+                                   'height':500};
+                    var chartBrewLossVolume = new google.visualization.ColumnChart(document.getElementById('chart_brewLossVolume'));
+                    chartBrewLossVolume.draw(brewLossVolumeData,brewLossVolumeOptions);
+                } else if (text == "All Time") {
+                    
+                    var brewLossVolumeData = new google.visualization.DataTable();
+                    brewLossVolumeData.addColumn('string', 'Type');
+                    brewLossVolumeData.addColumn('number', 'Volume (L)');
 
-        // Instantiate and draw our chart, passing in some options.
-        var chartBrewMat = new google.visualization.PieChart(document.getElementById('chart_brewMaterials'));
-        chartBrewMat.draw(dataBrewMaterials, optionsBrewMaterials);
+                    <c:forEach var="brewLossMap" items="${brewLossVolumeMapAllTime}">
+                        brewLossVolumeData.addRows([
+                            ['${brewLossMap.key}', ${brewLossMap.value}]
+                        ]);
+                    </c:forEach>
+
+                    // Set chart options
+                    var brewLossVolumeOptions = {
+                                   'width':800,
+                                   'height':500};
+                    var chartBrewLossVolume = new google.visualization.ColumnChart(document.getElementById('chart_brewLossVolume'));
+                    chartBrewLossVolume.draw(brewLossVolumeData,brewLossVolumeOptions);
+                }
+            });
+        });
+        // -------------------- END Loss During Brewing CHART --------------------------------------------------- 
         
-        //-----------------------END BREW MATERIALS-------------------------------------------------------------------
+                
+//        //------------------- Finished Inventory CHART --------------------------------------------------------
+//        
+//        var titleFinishedInventory = '${reportDataFinishedInventory}';
+//        
+//        // Create the data table.
+//        var dataFinishedInventory = new google.visualization.DataTable();
+//        dataFinishedInventory.addColumn('string', 'Topping');
+//        dataFinishedInventory.addColumn('number', 'Slices');
+//        
+//        <c:forEach var="productName" items="${finishedProducts}">
+//            dataFinishedInventory.addRows([
+//                ['${productName.productName}', ${productName.qty}]
+//            ]);
+//        </c:forEach>
+//        
+//
+//        // Set chart options
+//        var optionsFinishedInventory = {'title':titleFinishedInventory,
+//                       'width':400,
+//                       'height':400};
+//
+//        // Instantiate and draw our chart, passing in some options.
+//        var chartFinishedInventory = new google.visualization.PieChart(document.getElementById('chart_finishedInventory'));
+//        chartFinishedInventory.draw(dataFinishedInventory, optionsFinishedInventory);
+//        
+//        //----------------- END Finished Inventory CHART ------------------------------------------------------------------
+//
+//        
+//        
+//        
+//        
+//        //----------------START PROD MAT CHART----------------------------------------------------------------------
+//        
+//        var titleProductionMaterials = '${reportDataProductionMaterials}';
+//        
+//        // Create the data table.
+//        var dataProductionMaterials = new google.visualization.DataTable();
+//        dataProductionMaterials.addColumn('string', 'Topping');
+//        dataProductionMaterials.addColumn('number', 'Slices');
+//        
+//        <c:forEach var="prodMatList" items="${productionMaterials}">
+//            dataProductionMaterials.addRows([
+//                ['${prodMatList.name}', ${prodMatList.qty}]
+//            ]);
+//        </c:forEach>
+//        
+//
+//        // Set chart options
+//        var optionsProductionMaterials = {'title':titleProductionMaterials,
+//                       'width':600,
+//                       'height':600};
+//
+//        // Instantiate and draw our chart, passing in some options.
+//        var chartProdMat = new google.visualization.PieChart(document.getElementById('chart_productionMaterials'));
+//        chartProdMat.draw(dataProductionMaterials, optionsProductionMaterials);
+//        
+//        //-----------------END PROD MAT CHART------------------------------------------------------------------
+//        
+//        
+//        //---------------------Start brew materials-----------------------------------------------------------------------
+//        
+//        var titleBrewMaterials = '${reportDataBrewMaterials}';
+//        
+//        // Create the data table.
+//        var dataBrewMaterials = new google.visualization.DataTable();
+//        dataBrewMaterials.addColumn('string', 'Topping');
+//        dataBrewMaterials.addColumn('number', 'Slices');
+//        
+//        <c:forEach var="brewList" items="${brewMaterials}">
+//            dataBrewMaterials.addRows([
+//                ['${brewList.name}', ${brewList.qty}]
+//            ]);
+//        </c:forEach>
+//        
+//
+//        // Set chart options
+//        var optionsBrewMaterials = {'title':titleBrewMaterials,
+//                       'width':600,
+//                       'height':600};
+//
+//        // Instantiate and draw our chart, passing in some options.
+//        var chartBrewMat = new google.visualization.PieChart(document.getElementById('chart_brewMaterials'));
+//        chartBrewMat.draw(dataBrewMaterials, optionsBrewMaterials);
+//        
+//        //-----------------------END BREW MATERIALS-------------------------------------------------------------------
         
       }
         </script>
@@ -485,12 +589,33 @@
           </div>
           
           <div id="chart_brewVolume" align="center"></div>
+          
+          <hr>
+          <div class='row' align='center'>
+            <div class='col-3'></div>  
+            <div class='col-4'>
+                <h4>Volume of Gains/Losses (+/-) from FV to SV</h4>
+            </div>
+            <div class='col-2'>
+                <div class="form-group" style='padding-top: 18%'>
+                    <select class="form-control brewLossVolume-option">
+                      <option>Weekly</option>
+                      <option>Monthly</option>
+                      <option>Yearly</option>
+                      <option>All Time</option>
+                    </select>
+                  </div>
+            </div>
+            <div class='col-3'></div>  
+          </div>
+          
+          <div id="chart_brewLossVolume" align="center"></div>
             
-          <div id="chart_finishedInventory" align="center"></div>
+<!--          <div id="chart_finishedInventory" align="center"></div>
           
           <div id="chart_productionMaterials" align="center"></div>
           
-          <div id="chart_brewMaterials" align="center"></div>
+          <div id="chart_brewMaterials" align="center"></div>-->
 
                 
         </div>
