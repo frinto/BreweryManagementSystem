@@ -104,7 +104,7 @@
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class=" container-fluid  ">
-                        <a class="navbar-brand">Finnished Inventory</a>
+                        <a class="navbar-brand">Finished Inventory</a>
                         <div class="btn-group" style="margin-right: 50px">
                             <button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 ${currentEmployee.firstName} ${currentEmployee.lastName}
