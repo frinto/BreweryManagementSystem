@@ -20,12 +20,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * This servlet handles the Tank Farm page. This controls all information about about tanks and their volumes/statuses. It also handles the transfer of beer between FV Tanks and SV Tanks.
  * @author Martin Czerwinski
  */
 public class TankFarmServlet extends HttpServlet
 {
-
+    /**
+     * Handles the HTTP <code>GET</code> method. This will retrieve Lists of FV Tanks, SV Tanks, and Transfer records. These lists will populate the corresponding tables on the front end.
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
@@ -64,7 +70,13 @@ public class TankFarmServlet extends HttpServlet
         getServletContext().getRequestDispatcher("/WEB-INF/tankFarm.jsp").forward(request, response);
     }
     
-    
+    /**
+     * Handles the HTTP <code>POST</code> method. This method handles creation and editing of all Tanks. It also manages the creation of new Transfer records, a process which also edits the Tank objects by updating their volumes.
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
