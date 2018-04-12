@@ -69,14 +69,98 @@ public class ReportProductionServlet extends HttpServlet {
         List<Production> prodItemListYear;
         List<Production> prodItemListAllTime;
         try {
+            //Weekly Production
             prodItemListWeek = prodDB.getProdByDateRange(previousWeekDate, todaysDate);
-            request.setAttribute("prodItemListWeek", prodItemListWeek);
+            Set<String> currentProdWeek = new HashSet<>();
+            Map<String, Integer> prodMapWeek = new HashMap<>();
+            
+            for (Production production : prodItemListWeek){
+                currentProdWeek.add(production.getProductionType());
+            }
+            
+            for (String prodType : currentProdWeek) {
+                
+                int amount = 0;
+                
+                for (Production production : prodItemListWeek) {
+                    
+                    if (prodType.equals(production.getProductionType())) {
+                        amount = amount + production.getQuantity();
+                    }
+                }
+                prodMapWeek.put(prodType,amount);
+            }
+            request.setAttribute("prodItemListWeek", prodMapWeek);
+            
+            //Monthly Production
             prodItemListMonth = prodDB.getProdByDateRange(previousMonthDate, todaysDate);
-            request.setAttribute("prodItemListMonth", prodItemListMonth);
+            Set<String> currentProdMonth = new HashSet<>();
+            Map<String, Integer> prodMapMonth = new HashMap<>();
+            
+            for (Production production : prodItemListMonth){
+                currentProdMonth.add(production.getProductionType());
+            }
+            
+            for (String prodType : currentProdMonth) {
+                
+                int amount = 0;
+                
+                for (Production production : prodItemListMonth) {
+                    
+                    if (prodType.equals(production.getProductionType())) {
+                        amount = amount + production.getQuantity();
+                    }
+                }
+                prodMapMonth.put(prodType,amount);
+            }
+            request.setAttribute("prodItemListMonth", prodMapMonth);
+            
+            //Yearly Production
             prodItemListYear = prodDB.getProdByDateRange(previousYearDate, todaysDate);
-            request.setAttribute("prodItemListYear", prodItemListYear);
+            Set<String> currentProdYear = new HashSet<>();
+            Map<String, Integer> prodMapYear = new HashMap<>();
+            
+            for (Production production : prodItemListYear){
+                currentProdYear.add(production.getProductionType());
+            }
+            
+            for (String prodType : currentProdYear) {
+                
+                int amount = 0;
+                
+                for (Production production : prodItemListYear) {
+                    
+                    if (prodType.equals(production.getProductionType())) {
+                        amount = amount + production.getQuantity();
+                    }
+                }
+                prodMapYear.put(prodType,amount);
+            }
+            request.setAttribute("prodItemListYear", prodMapYear);
+            
+            //All Time Production
             prodItemListAllTime = prodDB.getAllProduction();
-            request.setAttribute("prodItemListAllTime", prodItemListAllTime);
+            Set<String> currentProdAllTime = new HashSet<>();
+            Map<String, Integer> prodMapAllTime = new HashMap<>();
+            
+            for (Production production : prodItemListAllTime){
+                currentProdAllTime.add(production.getProductionType());
+            }
+            
+            for (String prodType : currentProdAllTime) {
+                
+                int amount = 0;
+                
+                for (Production production : prodItemListAllTime) {
+                    
+                    if (prodType.equals(production.getProductionType())) {
+                        amount = amount + production.getQuantity();
+                    }
+                }
+                prodMapAllTime.put(prodType,amount);
+            }
+            request.setAttribute("prodItemListAllTime", prodMapAllTime);
+            
         } catch (BrewDBException ex) {
             Logger.getLogger(ReportProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

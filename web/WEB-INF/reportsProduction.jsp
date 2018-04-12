@@ -70,7 +70,7 @@
 
                     <c:forEach var="production" items="${prodItemListWeek}">
                         productionData.addRows([
-                            ['${production.productionType}', ${production.quantity}]
+                            ['${production.key}', ${production.value}]
                         ]);
                     </c:forEach>
 
@@ -90,7 +90,7 @@
 
                     <c:forEach var="production" items="${prodItemListMonth}">
                         productionData.addRows([
-                            ['${production.productionType}', ${production.quantity}]
+                            ['${production.key}', ${production.value}]
                         ]);
                     </c:forEach>
 
@@ -110,7 +110,7 @@
 
                     <c:forEach var="production" items="${prodItemListYear}">
                         productionData.addRows([
-                            ['${production.productionType}', ${production.quantity}]
+                            ['${production.key}', ${production.value}]
                         ]);
                     </c:forEach>
 
@@ -130,7 +130,7 @@
 
                     <c:forEach var="production" items="${prodItemListAllTime}">
                         productionData.addRows([
-                            ['${production.productionType}', ${production.quantity}]
+                            ['${production.key}', ${production.value}]
                         ]);
                     </c:forEach>
 
