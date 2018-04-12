@@ -170,147 +170,123 @@
                 </div>
 
                 <form action="manageEmployee" method="get">
-                    <input type="submit" value="Add"><span class="glyphicon glyphicon-pencil"></span>
+                    <input type="submit" value="Add" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>
                     <input type="hidden" name="action" value="viewAdd">
                     <input type="hidden" name="selectedUserAdd" value="value">
                 </form>
+                <hr>
 
 
 
                 <c:if test="${selectedUserAdd != null}">
                     <div class="row">
-                        <div class="col-md-4">
                             <form action="manageEmployee" method="post" class="form-horizontal" role="form">
                                 <fieldset>
 
                                     <!-- Form Name -->
                                     <legend>Add User</legend>
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">First name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="firstName"  class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">Last Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="lastName"  class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">password</label>
-                                        <div class="col-sm-4">
-                                            <input type="password" name="password"  class=form-control>
-                                        </div>
-
-                                        <label class="col-sm-2 control-label" for="textinput">email</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="email"  class=form-control>
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">Role ID</label>
-                                        <div class="col-sm-4">
-                                            <input type="number" name="roleId"   class=form-control>
-                                        </div>
-
-                                        <label class="col-sm-2 control-label" for="textinput">isActive</label>
-                                        <div class="col-sm-4">
-                                            <input type="number" name="isActive"  class=form-control>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <div class="pull-right">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <!-- Text input-->
+                                                <label for="textinput">First Name</label>
+                                                <input type="text" name="firstName"  class="form-control">
+                                            </td>
+                                            <td
+                                                <!-- Text input-->
+                                                <label for="textinput">Last Name</label>
+                                                <input type="text" name="lastName"  class="form-control">
+                                            </td>
+                                            <td>
+                                                <!-- Text input-->
+                                                <label for="textinput">Password</label>
+                                                <input type="password" name="password"  class=form-control>
+                                            </td>
+                                            <td>
+                                                <label for="textinput">Email</label>
+                                                <input type="text" name="email"  class=form-control>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <!-- Text input-->
+                                                <label for="textinput">Role ID</label>
+                                                <input type="number" name="roleId"   class=form-control>
+                                            </td>
+                                            <td>
+                                                <label for="textinput">Active (Enter 0 to deactivate, enter 1 to activate)</label>
+                                                <input type="number" name="isActive"  class=form-control>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
                                                 <input type="hidden" name="action" value="add">
-                                                <input type="submit" value="Add User"  class="btn btn-primary">
-                                            </div>
-                                        </div>
-                                    </div>
+                                                <input type="submit" value="Add User" class="btn btn-primary">
+                                            </td>
+                                        </tr>
 
                                 </fieldset>
                             </form>
-                        </div><!-- /.col-lg-12 -->
                     </c:if>
                     <c:if test="${selectedUser != null}">
-                        <div class="col-md-4">
                             <form action="manageEmployee" method="post" class="form-horizontal" role="form">
                                 <fieldset>
 
                                     <!-- Form Name -->
                                     <legend>Edit User</legend>
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">empId</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="empId" value="${selectedUser.empId}" readonly class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">First name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="firstName" value="${selectedUser.firstName}" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">Last Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="lastName" value="${selectedUser.lastName}" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">password</label>
-                                        <div class="col-sm-4">
-                                            <input type="password" name="password" value="${selectedUser.password}" class=form-control>
-                                        </div>
-
-                                        <label class="col-sm-2 control-label" for="textinput">email</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="email" value="${selectedUser.email}" class=form-control>
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="textinput">Role ID</label>
-                                        <div class="col-sm-4">
-                                            <input type="number" name="roleId"  value="${selectedUser.roleId}" class=form-control>
-                                        </div>
-
-                                        <label class="col-sm-2 control-label" for="textinput">isActive</label>
-                                        <div class="col-sm-4">
-                                            <input type="number" name="isActive" value="${selectedUser.isActive}" class=form-control>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <div class="pull-right">
-                                                <input type="hidden" name="action" value="edit">
-                                                <input type="submit" value="Save" class="btn btn-primary">
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                            <!-- Text input-->
+                                                <label class="control-label" for="textinput">Employee ID</label>
+                                                    <input type="text" name="empId" value="${selectedUser.empId}" readonly class="form-control">
+                                            </td>
+                                        
+                                            <td>
+                                            <!-- Text input-->
+                                                <label class="control-label" for="textinput">First Name</label>
+                                                    <input type="text" name="firstName" value="${selectedUser.firstName}" class="form-control">
+                                            </td>
+                                            
+                                            <td>
+                                            <!-- Text input-->
+                                                <label class="control-label" for="textinput">Last Name</label>
+                                                    <input type="text" name="lastName" value="${selectedUser.lastName}" class="form-control">
+                                            </td>
+                                            <td>
+                                            <!-- Text input-->
+                                                <label class="control-label" for="textinput">Password</label>
+                                                    <input type="password" name="password" value="${selectedUser.password}" class=form-control>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <label class="control-label" for="textinput">Email</label>
+                                                <input type="text" name="email" value="${selectedUser.email}" class=form-control>
+                                            </td>
+                                        
+                                            <td>
+                                            <!-- Text input-->
+                                                <label class="control-label" for="textinput">Role ID</label>
+                                                    <input type="number" name="roleId"  value="${selectedUser.roleId}" class=form-control>
+                                            </td>
+                                            <td>
+                                                <label class="control-label" for="textinput">Active (Enter 0 to deactivate, enter 1 to activate)</label>
+                                                    <input type="number" name="isActive" value="${selectedUser.isActive}" class=form-control>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <input type="hidden" name="action" value="edit">
+                                                    <input type="submit" value="Save" class="btn btn-primary">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
 
                                 </fieldset>
                             </form>
-                        </div><!-- /.col-lg-12 -->
                     </c:if>
                 </div><!-- /.row -->
             </div><br>
