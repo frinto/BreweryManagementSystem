@@ -723,6 +723,7 @@
           
           <div id="chart_brewLossVolume" align="center"></div>
           
+          <hr>
           <div class='row' align='center'>
             <div class='col-3'></div>  
             <div class='col-4'>
