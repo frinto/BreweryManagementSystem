@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domainmodel;
 
 import java.io.Serializable;
@@ -21,8 +16,8 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author 553817
+ * This object represents a transfer of volume between a Fermenting Vessel and Storage Vessel. It is a representation of the Transfer table in our database. 
+ * @author Martin Czerwinski
  */
 @Entity
 @Table(name = "transfer")
@@ -40,25 +35,52 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Transfer implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    /**
+     * The ID of the transfer record used as a primary key.
+     */
     @Column(name = "transferId")
     private Integer transferId;
+    
+    /**
+     * The date the transfer occurred.
+     */
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    
+    /**
+     * The volume that was transfered.
+     */
     @Column(name = "volume")
     private Double volume;
+    
     @Basic(optional = false)
+    /**
+     * The Fermenting Vessel that beer was transfered from.
+     */
     @Column(name = "fromFv")
     private int fromFv;
+    
     @Basic(optional = false)
+    /**
+     * The Storage Vessel that beer was transfered to.
+     */
     @Column(name = "toSv")
     private int toSv;
+    
+    /**
+     * The brand of beer transfered.
+     */
     @Column(name = "brand")
     private String brand;
+    
+    /**
+     * The amount of beer gained or lost during the transfer. A positive number indicates that more beer was brewed than expected, while negative indicates less. This factor will only occur when the Fermenting Vessel is being emptied.
+     */
     @Column(name = "correction")
     private Double correction;
 
