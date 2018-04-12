@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import domainmodel.Employee;
@@ -17,7 +12,7 @@ import javax.persistence.EntityTransaction;
 /**
  * This class deals with persisting, deleting, retrieving and updating storage vessels and fermenting
  * vessels
- * @author 727525
+ * @author Martin Czerwinski, Jesse Trieu, Huy Le
  */
 public class TankDB {
 
@@ -69,9 +64,9 @@ public class TankDB {
         }
     }
     /**
-     * 
-     * @param fv
-     * @return
+     * update the fields of an FV Tank
+     * @param fv the updated FV object
+     * @return integer 1 indicates success
      * @throws BrewDBException 
      */
     
@@ -93,6 +88,12 @@ public class TankDB {
         }
     }
     
+    /**
+     * update the fields of SV Tank
+     * @param sv the updated SV object
+     * @return integer 1 indicates success
+     * @throws BrewDBException 
+     */
     public int updateSV(Sv sv) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -110,7 +111,12 @@ public class TankDB {
             em.close();
         }
     }
-
+    
+    /**
+     * Retrieves all the FV Tank records from the database
+     * @return a List of FV objects
+     * @throws BrewDBException 
+     */
     public List<Fv> getAllFV() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -125,6 +131,11 @@ public class TankDB {
         }
     }
     
+    /**
+     * Retrieves all the SV Tank records from the database
+     * @return a List of SV objects
+     * @throws BrewDBException 
+     */
     public List<Sv> getAllSV() throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -139,6 +150,12 @@ public class TankDB {
         }
     }
     
+    /**
+     * find an FV object by its primary key, FV ID
+     * @param fvId the FV ID to search for
+     * @return the corresponding FV object
+     * @throws BrewDBException 
+     */
     public Fv getFV(Integer fvId) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
@@ -152,6 +169,12 @@ public class TankDB {
         }
     }
     
+    /**
+     * find an SV object by its primary key, SV ID
+     * @param svId the SV ID to search for
+     * @return the corresponding SV object
+     * @throws BrewDBException 
+     */
     public Sv getSV(Integer svId) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
@@ -164,7 +187,13 @@ public class TankDB {
             em.close();
         }
     }
-
+    
+    /**
+     * remove an FV object from the database
+     * @param fv the FV object to be removed
+     * @return integer 1 indicates success
+     * @throws BrewDBException 
+     */
     public int deleteFV(Fv fv) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -183,6 +212,12 @@ public class TankDB {
         }
     }
     
+    /**
+     * remove an SV object from the database
+     * @param sv the SV object to be removed
+     * @return integer 1 indicates success
+     * @throws BrewDBException 
+     */
     public int deleteSV(Sv sv) throws BrewDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();

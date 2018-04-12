@@ -2,13 +2,16 @@ package businesslogic;
 
 import dataaccess.BrewDBException;
 import dataaccess.EmployeeDB;
-import domainmodel.Role;
 import domainmodel.Employee;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class is only ever used in the WebMailService class. It is a fourth tier added to our three tier system. This is the only scenario where our system uses four tiers.
+ * @author Martin Czerwinski
+ */
 public class EmployeeService {
 
     private EmployeeDB employeeDB;

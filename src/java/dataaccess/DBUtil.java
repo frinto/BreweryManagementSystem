@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 /**
@@ -12,7 +7,10 @@ package dataaccess;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-
+/**
+ * Handles the creation of a singleton Entity Manager Factory. This ensures this is only ever one connection to the database at a time, so multiple users can work on the application.
+ * @author 727525
+ */
 public class DBUtil {
 
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("BreweryManagementSystemPU");

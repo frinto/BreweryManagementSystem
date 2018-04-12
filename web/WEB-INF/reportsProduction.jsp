@@ -363,11 +363,11 @@
         // Create the data table.
         var productionLossData = new google.visualization.DataTable();
         productionLossData.addColumn('string', 'Type');
-        productionLossData.addColumn('number', 'Quantity');
+        productionLossData.addColumn('number', 'Volume (L)');
         
         <c:forEach var="productionLoss" items="${prodLossWeek}">
             productionLossData.addRows([
-                ['${productionLoss.productionType}', ${productionLoss.quantity}]
+                ['${productionLoss.key}', ${productionLoss.value}]
             ]);
         </c:forEach>
         
@@ -386,7 +386,83 @@
                 var text = this.options[this.selectedIndex].text;
                 if (text == "Weekly") {
                     
+                    var productionLossData = new google.visualization.DataTable();
+                    productionLossData.addColumn('string', 'Type');
+                    productionLossData.addColumn('number', 'Volume (L)');
+
+                    <c:forEach var="productionLoss" items="${prodLossWeek}">
+                        productionLossData.addRows([
+                            ['${productionLoss.key}', ${productionLoss.value}]
+                        ]);
+                    </c:forEach>
+
+                    // Set chart options
+                    var productionLossOptions = {
+                                   'width':800,
+                                   'height':500};
+
+                    var chartProductionLoss = new google.visualization.ColumnChart(document.getElementById('chart_productionLoss'));
+                    chartProductionLoss.draw(productionLossData,productionLossOptions);
+                    
                 } else if (text == "Monthly") {
+                    
+                    var productionLossData = new google.visualization.DataTable();
+                    productionLossData.addColumn('string', 'Type');
+                    productionLossData.addColumn('number', 'Volume (L)');
+
+                    <c:forEach var="productionLoss" items="${prodLossMonth}">
+                        productionLossData.addRows([
+                            ['${productionLoss.key}', ${productionLoss.value}]
+                        ]);
+                    </c:forEach>
+
+                    // Set chart options
+                    var productionLossOptions = {
+                                   'width':800,
+                                   'height':500};
+
+                    var chartProductionLoss = new google.visualization.ColumnChart(document.getElementById('chart_productionLoss'));
+                    chartProductionLoss.draw(productionLossData,productionLossOptions);
+                    
+                } else if (text == "Yearly") {
+                    
+                    var productionLossData = new google.visualization.DataTable();
+                    productionLossData.addColumn('string', 'Type');
+                    productionLossData.addColumn('number', 'Volume (L)');
+
+                    <c:forEach var="productionLoss" items="${prodLossYear}">
+                        productionLossData.addRows([
+                            ['${productionLoss.key}', ${productionLoss.value}]
+                        ]);
+                    </c:forEach>
+
+                    // Set chart options
+                    var productionLossOptions = {
+                                   'width':800,
+                                   'height':500};
+
+                    var chartProductionLoss = new google.visualization.ColumnChart(document.getElementById('chart_productionLoss'));
+                    chartProductionLoss.draw(productionLossData,productionLossOptions);
+                    
+                } else if (text == "AllTime") {
+                    
+                    var productionLossData = new google.visualization.DataTable();
+                    productionLossData.addColumn('string', 'Type');
+                    productionLossData.addColumn('number', 'Volume (L)');
+
+                    <c:forEach var="productionLoss" items="${prodLossAllTime}">
+                        productionLossData.addRows([
+                            ['${productionLoss.key}', ${productionLoss.value}]
+                        ]);
+                    </c:forEach>
+
+                    // Set chart options
+                    var productionLossOptions = {
+                                   'width':800,
+                                   'height':500};
+
+                    var chartProductionLoss = new google.visualization.ColumnChart(document.getElementById('chart_productionLoss'));
+                    chartProductionLoss.draw(productionLossData,productionLossOptions);
                     
                 }
             });

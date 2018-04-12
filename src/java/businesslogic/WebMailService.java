@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package businesslogic;
 
 
@@ -24,9 +19,23 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-
+/**
+ * This class manages sending an email to a user. It is used by the ResetPasswordServlet to send an email to an existing user's email address.
+ * @author Martin Czerwinski
+ */
 public class WebMailService {
-
+    
+    /**
+     * This method creates the information in our email message by taking in a template parameter and contents parameter and organizing these into a body. This body is specifically designed to be used as a Reset Password email.
+     * @param to
+     * @param subject
+     * @param template
+     * @param contents
+     * @throws MessagingException
+     * @throws NamingException
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public static void sendMail(String to, String subject, String template, HashMap<String, String> contents) throws MessagingException, NamingException, FileNotFoundException, IOException {
         String body = "";
         StringBuilder st = new StringBuilder();
@@ -47,7 +56,15 @@ public class WebMailService {
         sendMail(to, subject, body, true);
     } 
     
-    
+    /**
+     * This method is used by the previous sendMail method to send mail using the Transport class. This is a generic method that could be used to send any format of email that is passed to it.
+     * @param to
+     * @param subject
+     * @param body
+     * @param bodyIsHTML
+     * @throws MessagingException
+     * @throws NamingException 
+     */
     public static void sendMail(String to, String subject, String body, boolean bodyIsHTML) throws MessagingException, NamingException {
         Context env = (Context) new InitialContext().lookup("java:comp/env");
         String username = (String) env.lookup("webmail-username");

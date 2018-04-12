@@ -77,7 +77,6 @@ public class TankFarmServlet extends HttpServlet
         
         TankDB tankDB = new TankDB();
         
-        //possible need to clear user messages (?)
         
         //----------- ADD A NEW TANK -----------//
         if (action!=null && action.equals("addTank")) {
@@ -298,7 +297,10 @@ public class TankFarmServlet extends HttpServlet
     }
     
     // ----------------------- HELPER METHODS ----------------------------------- //
-    
+    /**
+     * Helper Method to create a parameter named "dateToday" for the current request. This date variable is in the format "yyyy-MM-dd".
+     * @param request 
+     */
     private void setTodaysDate(HttpServletRequest request) {
         //set the current date to a variable so the Add A Transfer form has the current date pre-set
         //this is the required format to pre-set a date value in a date input field
@@ -307,7 +309,10 @@ public class TankFarmServlet extends HttpServlet
         request.setAttribute("dateToday", dateToday);
     }
     
-    
+    /**
+     * Helper Method to create a parameter named "transfers" that contains a list of all the Transfer records in the database.
+     * @param request 
+     */
     private void retrieveAllTransfers(HttpServletRequest request) {
         TransferDB transferDB = new TransferDB();
         try {
@@ -320,8 +325,14 @@ public class TankFarmServlet extends HttpServlet
             request.setAttribute("transferTabMessage", "Error retrieving transfers from database");
         }
     }
-    
-    //this method saves user input and makes the modal appear on page load
+    /**
+     * this method saves user input and makes the Add Transfer modal appear on page load
+     * @param request
+     * @param toSV
+     * @param fromFV
+     * @param volume
+     * @param isEmpty 
+     */
     private void saveUserInput(HttpServletRequest request, int toSV, int fromFV, double volume, String isEmpty) {
         request.setAttribute("inputSV", toSV);
         request.setAttribute("inputFV", fromFV);
@@ -332,7 +343,10 @@ public class TankFarmServlet extends HttpServlet
         //causes Modal menu to popup on page load
         request.setAttribute("loadAddTransfer", "notNull");
     }
-
+    /**
+     * Helper Method to create a parameter named "svs" and a parameter named "fvs". These parameters contain a list of all the SV and FV Tanks respectively. that contains a list of all the Transfer records in the database.
+     * @param request 
+     */
     private void retrieveAllTanks(HttpServletRequest request) {
         TankDB tankDB = new TankDB();
         try {

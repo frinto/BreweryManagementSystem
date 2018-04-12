@@ -1,26 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import dataaccess.BrewDB;
 import dataaccess.BrewDBException;
-import dataaccess.FinishedInventoryDB;
-import domainmodel.Finishedproduct;
 import dataaccess.ProductionDB;
-import dataaccess.RawInventoryDB;
 import dataaccess.TransferDB;
 import domainmodel.Brew;
-import domainmodel.Brewmaterials;
 import domainmodel.Production;
-import domainmodel.Productionmaterial;
 import domainmodel.Transfer;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,38 +23,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author 727525
+ * This is the servlet used to display the Reports page. It creates HashMap variables that are set as parameters to be used by Google Charts API to create our bar graphs.
+ * @author Martin Czerwinski
  */
 public class ReportProductionServlet extends HttpServlet {
-
+    
+    /**
+     * Handles the HTTP <code>GET</code> method. All of the data for the charts is sent to the users web browser on page load.
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        FinishedInventoryDB finishedDatabase = new FinishedInventoryDB();
-        RawInventoryDB rawInventoryDatabase = new RawInventoryDB();
-
-        try {
-            List<Finishedproduct> finishedProducts = finishedDatabase.getAllInventory();
-            request.setAttribute("reportDataFinishedInventory", "Finished Inventory"); //title of chart
-            request.setAttribute("finishedProducts", finishedProducts);
-            
-            List<Productionmaterial> productionMaterials = rawInventoryDatabase.getAllInventoryProductionMaterial();
-            request.setAttribute("reportDataProductionMaterials", "Production Materials"); // title of chart
-            request.setAttribute("productionMaterials", productionMaterials);
-            
-            List<Brewmaterials> brewMaterials = rawInventoryDatabase.getAllInventoryBrewMaterial();
-            request.setAttribute("reportDataBrewMaterials", "Brew Materials"); // title of chart
-            request.setAttribute("brewMaterials", brewMaterials);
-            
-            
-
-        } catch (BrewDBException ex) {
-            Logger.getLogger(FinishedInventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("message", "error retrieving finished product list from database");
-
-        }
         
         // ------------------------------------- Dates Used in Various Charts --------------------------- //
         //This is used to produce reports based on the last 7 days
@@ -109,6 +80,115 @@ public class ReportProductionServlet extends HttpServlet {
         } catch (BrewDBException ex) {
             Logger.getLogger(ReportProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        // ----------------------------- END Production of Finished Inventory Charts ------------------ //
+        
+        
+        // ------------------------------- Total Volume by Brand Chart ---------------------- //
+        BrewDB brewDB = new BrewDB();
+        List<Brew> brewListWeek;
+        List<Brew> brewListMonth;
+        List<Brew> brewListYear;
+        List<Brew> brewListAllTime;
+        try {
+            //Week List
+            brewListWeek = brewDB.getBrewByDateRange(previousWeekDate, todaysDate);
+            Set<String> currentRecipesWeek = new HashSet<>();
+            Map<String, Double> brewMapWeek = new HashMap<>();
+            
+            for (Brew brew : brewListWeek){
+                currentRecipesWeek.add(brew.getRecipeName());
+            }
+            
+            for (String recipe : currentRecipesWeek) {
+                
+                double volume = 0;
+                
+                for (Brew brew : brewListWeek) {
+                    
+                    if (recipe.equals(brew.getRecipeName())) {
+                        volume = volume + brew.getAllInVolume();
+                    }
+                }
+                brewMapWeek.put(recipe,volume);
+            }
+            request.setAttribute("brewVolumeMapWeek", brewMapWeek);
+            
+            //Month List
+            brewListMonth = brewDB.getBrewByDateRange(previousMonthDate, todaysDate);
+            Set<String> currentRecipesMonth = new HashSet<>();
+            Map<String, Double> brewMapMonth = new HashMap<>();
+            
+            for (Brew brew : brewListMonth){
+                currentRecipesMonth.add(brew.getRecipeName());
+            }
+            
+            for (String recipe : currentRecipesMonth) {
+                
+                double volume = 0;
+                
+                for (Brew brew : brewListMonth) {
+                    
+                    if (recipe.equals(brew.getRecipeName())) {
+                        volume = volume + brew.getAllInVolume();
+                    }
+                }
+                brewMapMonth.put(recipe,volume);
+            }
+            request.setAttribute("brewVolumeMapMonth", brewMapMonth);
+            
+            //Year List
+            brewListYear = brewDB.getBrewByDateRange(previousYearDate, todaysDate);
+            Set<String> currentRecipesYear = new HashSet<>();
+            Map<String, Double> brewMapYear = new HashMap<>();
+            
+            for (Brew brew : brewListYear){
+                currentRecipesYear.add(brew.getRecipeName());
+            }
+            
+            for (String recipe : currentRecipesYear) {
+                
+                double volume = 0;
+                
+                for (Brew brew : brewListYear) {
+                    
+                    if (recipe.equals(brew.getRecipeName())) {
+                        volume = volume + brew.getAllInVolume();
+                    }
+                }
+                brewMapYear.put(recipe,volume);
+            }
+            request.setAttribute("brewVolumeMapYear", brewMapYear);
+            
+            //All Time List
+            brewListAllTime = brewDB.getAll();
+            Set<String> currentRecipesAllTime = new HashSet<>();
+            Map<String, Double> brewMapAllTime = new HashMap<>();
+            
+            for (Brew brew : brewListAllTime){
+                currentRecipesAllTime.add(brew.getRecipeName());
+            }
+            
+            for (String recipe : currentRecipesAllTime) {
+                
+                double volume = 0;
+                
+                for (Brew brew : brewListAllTime) {
+                    
+                    if (recipe.equals(brew.getRecipeName())) {
+                        volume = volume + brew.getAllInVolume();
+                    }
+                }
+                brewMapAllTime.put(recipe,volume);
+            }
+            request.setAttribute("brewVolumeMapAllTime", brewMapAllTime);
+            
+        } catch (BrewDBException ex) {
+            Logger.getLogger(ReportProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // ----------------------------- Total Volume by Brand Chart --------------------------- //
+        
         
         // ------------------------------ Loss During Brewing Chart ------------------------------- //
         TransferDB transferDB = new TransferDB();
@@ -221,6 +301,9 @@ public class ReportProductionServlet extends HttpServlet {
             Logger.getLogger(ReportProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        // ------------------------------ END Loss During Brewing Chart ------------------------------ //
+        
+        
         // ------------------------------ Loss During Production Chart ------------------------------- //
         //prodDB was created previously
         List<Production> prodLossWeek;
@@ -252,118 +335,93 @@ public class ReportProductionServlet extends HttpServlet {
                 prodLossMapWeek.put(prodType,volume);
             }
             request.setAttribute("prodLossWeek", prodLossMapWeek);
+            
+            //Month List
+            prodLossMonth = prodDB.getProdByDateRange(previousMonthDate, todaysDate);
+            Set<String> currentProdTypeMonth = new HashSet<>();
+            Map<String, Double> prodLossMapMonth = new HashMap<>();
+            
+            for (Production production : prodLossMonth){
+                currentProdTypeMonth.add(production.getProductionType());
+            }
+            
+            for (String prodType : currentProdTypeMonth) {
+                
+                double volume = 0;
+                
+                for (Production production : prodLossMonth) {
+                    
+                    if (prodType.equals(production.getProductionType())) {
+                        if (production.getGainLoss() != 0) {
+                            volume = volume + production.getGainLoss();
+                        }
+                    }
+                }
+                prodLossMapMonth.put(prodType,volume);
+            }
+            request.setAttribute("prodLossMonth", prodLossMapMonth);
+            
+            //Year List
+            prodLossYear = prodDB.getProdByDateRange(previousYearDate, todaysDate);
+            Set<String> currentProdTypeYear = new HashSet<>();
+            Map<String, Double> prodLossMapYear = new HashMap<>();
+            
+            for (Production production : prodLossYear){
+                currentProdTypeYear.add(production.getProductionType());
+            }
+            
+            for (String prodType : currentProdTypeYear) {
+                
+                double volume = 0;
+                
+                for (Production production : prodLossYear) {
+                    
+                    if (prodType.equals(production.getProductionType())) {
+                        if (production.getGainLoss() != 0) {
+                            volume = volume + production.getGainLoss();
+                        }
+                    }
+                }
+                prodLossMapYear.put(prodType,volume);
+            }
+            request.setAttribute("prodLossYear", prodLossMapYear);
+            
+            //All Time List
+            prodLossAllTime = prodDB.getAllProduction();
+            Set<String> currentProdTypeAllTime = new HashSet<>();
+            Map<String, Double> prodLossMapAllTime = new HashMap<>();
+            
+            for (Production production : prodLossAllTime){
+                currentProdTypeAllTime.add(production.getProductionType());
+            }
+            
+            for (String prodType : currentProdTypeAllTime) {
+                
+                double volume = 0;
+                
+                for (Production production : prodLossAllTime) {
+                    
+                    if (prodType.equals(production.getProductionType())) {
+                        if (production.getGainLoss() != 0) {
+                            volume = volume + production.getGainLoss();
+                        }
+                    }
+                }
+                prodLossMapAllTime.put(prodType,volume);
+            }
+            request.setAttribute("prodLossAllTime", prodLossMapAllTime);
+            
             } catch (BrewDBException ex) {
             Logger.getLogger(ReportProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        // ------------------------------- Total Volume by Brand Chart ---------------------- //
-        BrewDB brewDB = new BrewDB();
-        List<Brew> brewListWeek;
-        List<Brew> brewListMonth;
-        List<Brew> brewListYear;
-        List<Brew> brewListAllTime;
-        try {
-            //Week List
-            brewListWeek = brewDB.getBrewByDateRange(previousWeekDate, todaysDate);
-            Set<String> currentRecipesWeek = new HashSet<>();
-            Map<String, Double> brewMapWeek = new HashMap<>();
-            
-            for (Brew brew : brewListWeek){
-                currentRecipesWeek.add(brew.getRecipeName());
-            }
-            
-            for (String recipe : currentRecipesWeek) {
-                
-                double volume = 0;
-                
-                for (Brew brew : brewListWeek) {
-                    
-                    if (recipe.equals(brew.getRecipeName())) {
-                        volume = volume + brew.getAllInVolume();
-                    }
-                }
-                brewMapWeek.put(recipe,volume);
-            }
-            request.setAttribute("brewVolumeMapWeek", brewMapWeek);
-            
-            //Month List
-            brewListMonth = brewDB.getBrewByDateRange(previousMonthDate, todaysDate);
-            Set<String> currentRecipesMonth = new HashSet<>();
-            Map<String, Double> brewMapMonth = new HashMap<>();
-            
-            for (Brew brew : brewListMonth){
-                currentRecipesMonth.add(brew.getRecipeName());
-            }
-            
-            for (String recipe : currentRecipesMonth) {
-                
-                double volume = 0;
-                
-                for (Brew brew : brewListMonth) {
-                    
-                    if (recipe.equals(brew.getRecipeName())) {
-                        volume = volume + brew.getAllInVolume();
-                    }
-                }
-                brewMapMonth.put(recipe,volume);
-            }
-            request.setAttribute("brewVolumeMapMonth", brewMapMonth);
-            
-            //Year List
-            brewListYear = brewDB.getBrewByDateRange(previousYearDate, todaysDate);
-            Set<String> currentRecipesYear = new HashSet<>();
-            Map<String, Double> brewMapYear = new HashMap<>();
-            
-            for (Brew brew : brewListYear){
-                currentRecipesYear.add(brew.getRecipeName());
-            }
-            
-            for (String recipe : currentRecipesYear) {
-                
-                double volume = 0;
-                
-                for (Brew brew : brewListYear) {
-                    
-                    if (recipe.equals(brew.getRecipeName())) {
-                        volume = volume + brew.getAllInVolume();
-                    }
-                }
-                brewMapYear.put(recipe,volume);
-            }
-            request.setAttribute("brewVolumeMapYear", brewMapYear);
-            
-            //All Time List
-            brewListAllTime = brewDB.getAll();
-            Set<String> currentRecipesAllTime = new HashSet<>();
-            Map<String, Double> brewMapAllTime = new HashMap<>();
-            
-            for (Brew brew : brewListAllTime){
-                currentRecipesAllTime.add(brew.getRecipeName());
-            }
-            
-            for (String recipe : currentRecipesAllTime) {
-                
-                double volume = 0;
-                
-                for (Brew brew : brewListAllTime) {
-                    
-                    if (recipe.equals(brew.getRecipeName())) {
-                        volume = volume + brew.getAllInVolume();
-                    }
-                }
-                brewMapAllTime.put(recipe,volume);
-            }
-            request.setAttribute("brewVolumeMapAllTime", brewMapAllTime);
-            
-        } catch (BrewDBException ex) {
-            Logger.getLogger(ReportProductionServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // ---------------------------- END Loss During Production CHART -----------------------
         
         getServletContext().getRequestDispatcher("/WEB-INF/reportsProduction.jsp").forward(request, response);
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> method. This method is not used on the reports page.
      *
      * @param request servlet request
      * @param response servlet response
