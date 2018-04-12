@@ -155,7 +155,6 @@
                                                 <th>Brew 2</th>
                                                 <th>Brew 3</th>
                                                 <th>Brand</th>
-                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -167,7 +166,6 @@
                                                 <td><input type="number" name="newSvBrew2" value="${sv.brew2}"></td>
                                                 <td><input type="number" name="newSvBrew3" value="${sv.brew3}"></td>
                                                 <td><input type="text" name="newSvBrand" value="${sv.brand}"></td>
-                                                <td><input type="text" name="newSvStatus" value="${sv.status}"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -193,7 +191,6 @@
                                                 <th>Brew 2</th>
                                                 <th>Brew 3</th>
                                                 <th>Brand</th>
-                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -205,7 +202,6 @@
                                                 <td><input type="number" name="newFvBrew2" value="${fv.brew2}"></td>
                                                 <td><input type="number" name="newFvBrew3" value="${fv.brew3}"></td>
                                                 <td><input type="text" name="newFvBrand" value="${fv.brand}"></td>
-                                                <td><input type="text" name="newFvStatus" value="${fv.status}"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -236,7 +232,6 @@
                                             <th>Brew 2</th>
                                             <th>Brew 3</th>
                                             <th>Brand</th>
-                                            <th>Status</th>
                                                 <c:if test="${role == 1}">
                                                 <th></th>
                                                 </c:if>
@@ -252,7 +247,6 @@
                                                 <td>${sv.brew2}</td>
                                                 <td>${sv.brew3}</td>
                                                 <td>${sv.brand}</td>
-                                                <td>${sv.status}</td>
                                                 <c:if test="${role == 1}">
                                                     <td>
                                                         <form action="tankFarm?action=editSV" method="POST">
@@ -282,7 +276,6 @@
                                             <th>Brew 2</th>
                                             <th>Brew 3</th>
                                             <th>Brand</th>
-                                            <th>Status</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -296,7 +289,6 @@
                                                 <td>${fv.brew2}</td>
                                                 <td>${fv.brew3}</td>
                                                 <td>${fv.brand}</td>
-                                                <td>${fv.status}</td>
                                                 <c:if test="${role == 1}">
                                                     <td>
                                                         <form action="tankFarm?action=editFV" method="POST">

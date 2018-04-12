@@ -134,12 +134,23 @@ public class TankFarmServlet extends HttpServlet
         if (action!=null && action.equals("updateSV")) {
             String svId = request.getParameter("newSvId");
             String svVol = request.getParameter("newSvVolume");
+            if (svVol == "") {
+                svVol = "0";
+            }
             String svCap = request.getParameter("newSvCapacity");
             String svBrew1 = request.getParameter("newSvBrew1");
+            if (svBrew1 == "") {
+                svBrew1 = "0";
+            }
             String svBrew2 = request.getParameter("newSvBrew2");
+            if (svBrew2 == "") {
+                svBrew2 = "0";
+            }
             String svBrew3 = request.getParameter("newSvBrew3");
+            if (svBrew3 == "") {
+                svBrew3 = "0";
+            }
             String svBrand = request.getParameter("newSvBrand");
-            String svStatus = request.getParameter("newSvStatus");
             
             Sv sv = new Sv(Integer.parseInt(svId),Integer.parseInt(svCap));
             sv.setVolume(Double.parseDouble(svVol));
@@ -147,7 +158,6 @@ public class TankFarmServlet extends HttpServlet
             sv.setBrew2(Integer.parseInt(svBrew2));
             sv.setBrew3(Integer.parseInt(svBrew3));
             sv.setBrand(svBrand);
-            sv.setStatus(svStatus.toUpperCase().charAt(0));
             try {
                 tankDB.updateSV(sv);
             } catch (BrewDBException ex) {
@@ -159,12 +169,23 @@ public class TankFarmServlet extends HttpServlet
         if (action!=null && action.equals("updateFV")) {
             String fvId = request.getParameter("newFvId");
             String fvVol = request.getParameter("newFvVolume");
+            if (fvVol == "") {
+                fvVol = "0";
+            }
             String fvCap = request.getParameter("newFvCapacity");
             String fvBrew1 = request.getParameter("newFvBrew1");
+            if (fvBrew1 == "") {
+                fvBrew1 = "0";
+            }
             String fvBrew2 = request.getParameter("newFvBrew2");
+            if (fvBrew2 == "") {
+                fvBrew2 = "0";
+            }
             String fvBrew3 = request.getParameter("newFvBrew3");
+            if (fvBrew3 == "") {
+                fvBrew3 = "0";
+            }
             String fvBrand = request.getParameter("newFvBrand");
-            String fvStatus = request.getParameter("newFvStatus");
             
             Fv fv = new Fv(Integer.parseInt(fvId),Integer.parseInt(fvCap));
             fv.setVolume(Double.parseDouble(fvVol));
@@ -172,7 +193,6 @@ public class TankFarmServlet extends HttpServlet
             fv.setBrew2(Integer.parseInt(fvBrew2));
             fv.setBrew3(Integer.parseInt(fvBrew3));
             fv.setBrand(fvBrand);
-            fv.setStatus(fvStatus.toUpperCase().charAt(0));
             try {
                 tankDB.updateFV(fv);
             } catch (BrewDBException ex) {
