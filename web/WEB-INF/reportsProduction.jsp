@@ -45,7 +45,7 @@
         
         <c:forEach var="production" items="${prodItemListWeek}">
             productionData.addRows([
-                ['${production.productionType}', ${production.quantity}]
+                ['${production.key}', ${production.value}]
             ]);
         </c:forEach>
         
